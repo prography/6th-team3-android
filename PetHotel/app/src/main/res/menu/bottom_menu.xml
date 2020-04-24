@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_my_reservations"
+        android:title="Reservations"
+        android:icon="@drawable/ic_event_note_black_24dp"
+        />
+
+    <item
+        android:id="@+id/menu_my_page"
+        android:title="My Page"
+        android:icon="@drawable/ic_person_black_24dp"/>
+
+    <item
+        android:id="@+id/menu_places"
+        android:title="Places"
+        android:icon="@drawable/ic_airport_shuttle_black_24dp"/>
+
+    <item
+        android:id="@+id/menu_likes"
+        android:title="Favorites"
+        android:icon="@drawable/ic_favorite_black_24dp"/>
+
+</menu>
