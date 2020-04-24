@@ -10,43 +10,43 @@
 
 
 
-<!--&lt;!&ndash;    refer to : https://material.io/develop/android/theming/color/ &ndash;&gt;-->
-    <style name="PetHotelTheme" parent="Theme.MaterialComponents">
+<!--&lt;!&ndash;&lt;!&ndash;    refer to : https://material.io/develop/android/theming/color/ &ndash;&gt;&ndash;&gt;-->
+<!--    <style name="PetHotelTheme" parent="Theme.MaterialComponents">-->
 
-<!-- colorPrimary : 앱에서 가장 흔히 디스플레이 되는 색. 기본 Action Bar 색-->
-        <item name="colorPrimary"></item>
-<!-- colorPrimaryVariant : Primary 색에서 tone 이 약간 다른 색. -->
-        <item name="colorPrimaryVariant"></item>
-<!-- colorOnPrimary : Primary 색 위에 올라가도 잘 보이는 색. 예를들어 짙은 보라가 Primary 이면
-그 위에 올라가는 텍스트는 흰색이 더 눈에 잘 띈다. 이때 흰색이 이에 해당한다. -->
-        <item name="colorOnPrimary"></item>
-<!-- colorPrimaryDark : Primary 색 보다 조금 짙은 색       -->
-        <item name="colorPrimaryDark"></item>
-<!-- colorAccent : colorPrimary 의 보색인 경우가 많다. -->
-        <item name="colorAccent"></item>
+<!--&lt;!&ndash; colorPrimary : 앱에서 가장 흔히 디스플레이 되는 색. 기본 Action Bar 색&ndash;&gt;-->
+<!--        <item name="colorPrimary"></item>-->
+<!--&lt;!&ndash; colorPrimaryVariant : Primary 색에서 tone 이 약간 다른 색. &ndash;&gt;-->
+<!--        <item name="colorPrimaryVariant"></item>-->
+<!--&lt;!&ndash; colorOnPrimary : Primary 색 위에 올라가도 잘 보이는 색. 예를들어 짙은 보라가 Primary 이면-->
+<!--그 위에 올라가는 텍스트는 흰색이 더 눈에 잘 띈다. 이때 흰색이 이에 해당한다. &ndash;&gt;-->
+<!--        <item name="colorOnPrimary"></item>-->
+<!--&lt;!&ndash; colorPrimaryDark : Primary 색 보다 조금 짙은 색       &ndash;&gt;-->
+<!--        <item name="colorPrimaryDark"></item>-->
+<!--&lt;!&ndash; colorAccent : colorPrimary 의 보색인 경우가 많다. &ndash;&gt;-->
+<!--        <item name="colorAccent"></item>-->
 
-<!--colorSecondary : 브랜드의 두 번째 색. 보통 Primary 의 accented complement (보색)
-으로 설정한다. -->
-        <item name="colorSecondary"></item>
-<!--colorSecondaryVariant : secondaryColor 에서 tone 이 약간 다른 것. -->
-        <item name="colorSecondaryVariant"></item>
-<!--colorOnSecondary : secondary 색 위에 올라가도 잘 보이는 색 -->
-        <item name="colorOnSecondary"></item>
+<!--&lt;!&ndash;colorSecondary : 브랜드의 두 번째 색. 보통 Primary 의 accented complement (보색)-->
+<!--으로 설정한다. &ndash;&gt;-->
+<!--        <item name="colorSecondary"></item>-->
+<!--&lt;!&ndash;colorSecondaryVariant : secondaryColor 에서 tone 이 약간 다른 것. &ndash;&gt;-->
+<!--        <item name="colorSecondaryVariant"></item>-->
+<!--&lt;!&ndash;colorOnSecondary : secondary 색 위에 올라가도 잘 보이는 색 &ndash;&gt;-->
+<!--        <item name="colorOnSecondary"></item>-->
 
-<!-- colorOnError : 에러를 나타내는 색 위에 올라가는 색. -->
-        <item name="colorOnError"></item>
-<!-- colorError : 에러를 나타내는 색 -->
-        <item name="colorError"></item>
+<!--&lt;!&ndash; colorOnError : 에러를 나타내는 색 위에 올라가는 색. &ndash;&gt;-->
+<!--        <item name="colorOnError"></item>-->
+<!--&lt;!&ndash; colorError : 에러를 나타내는 색 &ndash;&gt;-->
+<!--        <item name="colorError"></item>-->
 
-        <item name="colorOnPrimarySurface"></item>
-        <item name="colorPrimarySurface"></item>
+<!--        <item name="colorOnPrimarySurface"></item>-->
+<!--        <item name="colorPrimarySurface"></item>-->
 
-<!-- colorSurface : 컴포넌트들의 표면 색. ex) cards, sheets, menus / default : white-->
-        <item name="colorSurface"></item>
-<!-- colorOnSurface : surface 색 위에 올라가는 것들의 색. default : black -->
-        <item name="colorOnSurface"></item>
-<!--        <item name="android:colorBackground"></item>-->
-<!--        <item name="elevationOverlayColor"></item>-->
-    </style>
+<!--&lt;!&ndash; colorSurface : 컴포넌트들의 표면 색. ex) cards, sheets, menus / default : white&ndash;&gt;-->
+<!--        <item name="colorSurface"></item>-->
+<!--&lt;!&ndash; colorOnSurface : surface 색 위에 올라가는 것들의 색. default : black &ndash;&gt;-->
+<!--        <item name="colorOnSurface"></item>-->
+<!--&lt;!&ndash;        <item name="android:colorBackground"></item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="elevationOverlayColor"></item>&ndash;&gt;-->
+<!--    </style>-->
 
 </resources>
