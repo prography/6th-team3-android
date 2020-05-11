@@ -84,6 +84,11 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
 
 
+    // Login - Kakao
+    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.27.0'
+    // Login - Google
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
