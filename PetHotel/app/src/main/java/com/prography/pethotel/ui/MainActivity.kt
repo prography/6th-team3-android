@@ -1,8 +1,9 @@
-package com.prography.pethotel
+package com.prography.pethotel.ui
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.prography.pethotel.R
 
 
 class MainActivity : AppCompatActivity() {
@@ -11,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Toast.makeText(this, "Sample Toast", Toast.LENGTH_LONG).show()
+
 
     }
 
