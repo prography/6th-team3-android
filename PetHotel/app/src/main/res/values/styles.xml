@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -10,8 +10,8 @@
 
 
 
-<!-- refer to : https://material.io/develop/android/theming/color/ &ndash;&gt;-->
-    <style name="PetHotelTheme" parent="Theme.MaterialComponents">
+<!--&lt;!&ndash; refer to : https://material.io/develop/android/theming/color/ &ndash;&gt;&ndash;&gt;-->
+<!--    <style name="PetHotelTheme" parent="Theme.MaterialComponents">-->
 
 <!--&lt;!&ndash; colorPrimary : 앱에서 가장 흔히 디스플레이 되는 색. 기본 Action Bar 색&ndash;&gt;-->
 <!--        <item name="colorPrimary"></item>-->
@@ -47,6 +47,6 @@
 <!--        <item name="colorOnSurface"></item>-->
 <!--&lt;!&ndash;        <item name="android:colorBackground"></item>&ndash;&gt;-->
 <!--&lt;!&ndash;        <item name="elevationOverlayColor"></item>&ndash;&gt;-->
-    </style>
+<!--    </style>-->
 
 </resources>

@@ -8,6 +8,6 @@ class LoginRegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.register_fragment)
+        setContentView(R.layout.register_user_info_fragment)
     }
 }

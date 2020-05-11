@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.RegisterUserInfoFragment"
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_register_user_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_medium"
+        android:layout_marginTop="@dimen/margin_2x"
+        android:layout_marginBottom="@dimen/margin_1x"
+        android:text="@string/enter_user_info_title" />
+
+
+
+    <ImageView
+        android:id="@+id/img_register_user_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/kakao_default_profile_image"
+        android:layout_marginBottom="@dimen/margin_2x"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_register_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_enter_username_title" />
+
+    <EditText
+        android:id="@+id/et_register_name"
+        android:layout_marginStart="@dimen/margin_1x"
+        android:layout_marginEnd="@dimen/margin_1x"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/register_enter_username_hint"
+        android:autofillHints="사용자 이름"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_register_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_enter_email_title"
+        android:layout_marginTop="@dimen/margin_1x"/>
+
+
+
+    <EditText
+        android:id="@+id/et_register_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="@string/register_enter_email_hint"
+        android:layout_marginStart="@dimen/margin_1x"
+        android:layout_marginEnd="@dimen/margin_1x"
+        android:autofillHints="이메일"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tv_register_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_enter_phone_number_title"
+        android:layout_marginTop="@dimen/margin_1x"
+        />
+
+
+    <EditText
+        android:id="@+id/et_register_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:layout_marginStart="@dimen/margin_1x"
+        android:layout_marginEnd="@dimen/margin_1x"
+        android:hint="@string/register_enter_phone_number_hint"
+        android:autofillHints="휴대폰번호"/>
+
+    <TextView
+        android:id="@+id/tv_register_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_enter_password_title"
+        android:layout_marginTop="@dimen/margin_1x"
+        />
+
+
+    <EditText
+        android:id="@+id/et_register_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/register_enter_password_hint"
+        android:layout_marginStart="@dimen/margin_1x"
+        android:layout_marginEnd="@dimen/margin_1x"
+        android:autofillHints="비밀번호"/>
+
+
+
+    <TextView
+        android:id="@+id/tv_register_password_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_check_password_title"
+        android:layout_marginTop="@dimen/margin_1x"/>
+
+    <EditText
+        android:id="@+id/et_register_password_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/register_check_password_hint"
+        android:layout_marginStart="@dimen/margin_1x"
+        android:layout_marginEnd="@dimen/margin_1x"
+        android:autofillHints="비밀번호 확인"/>
+
+
+
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/margin_2x"
+        android:layout_marginBottom="@dimen/margin_2x"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_register_previous_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/previous_screen"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/margin_1x"
+           />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_register_next_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            android:text="@string/next_screen"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</ScrollView>
