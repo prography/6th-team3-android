@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_navigation"
+    app:startDestination="@id/loginRegisterActivity">
+
+    <activity
+        android:id="@+id/loginRegisterActivity"
+        android:name="com.prography.pethotel.ui.LoginRegisterActivity"
+        android:label="activity_login_register"
+        tools:layout="@layout/activity_login_register" />
+    <fragment
+        android:id="@+id/registerUserInfoFragment"
+        android:name="com.prography.pethotel.ui.RegisterUserInfoFragment"
+        android:label="register_user_info_fragment"
+        tools:layout="@layout/register_user_info_fragment" >
+        <action
+            android:id="@+id/action_registerUserInfoFragment_to_registerPetInfo"
+            app:destination="@id/registerPetInfo" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerPetInfo"
+        android:name="com.prography.pethotel.ui.RegisterPetInfo"
+        android:label="register_pet_info_fragment"
+        tools:layout="@layout/register_pet_info_fragment" >
+        <action
+            android:id="@+id/action_registerPetInfo_to_registerPetInfoDetailFragment"
+            app:destination="@id/registerPetInfoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerPetInfoDetailFragment"
+        android:name="com.prography.pethotel.ui.RegisterPetInfoDetailFragment"
+        android:label="register_pet_info_detail_fragment"
+        tools:layout="@layout/register_pet_info_detail_fragment" />
+</navigation>

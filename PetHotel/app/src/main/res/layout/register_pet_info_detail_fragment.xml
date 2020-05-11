@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    tools:context=".ui.RegisterPetInfoDetailFragment">
+
+<!--    동적으로 추가하는 방법에 대해서 더 생각해보기 -->
+    <include layout="@layout/pet_info_layout"/>
+
+</LinearLayout>
