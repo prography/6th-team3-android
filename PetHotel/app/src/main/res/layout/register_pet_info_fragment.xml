@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.RegisterPetInfo">
+
+
+<!--    강아지가 몇마리인지에 따라서 pet_info_layout.xml 의
+레이아웃이 동적으로 추가되도록 한다. -->
+
+
+<!--    강아지가 몇마리인지 물어보는 필드 -->
+
+
+<!--    강아지 정보 채워넣는 필드. 등록번호와 강아지 사진 입력  -->
+
+
+<!--    건너뛰기 버튼 -->
+
+<!--    작성 완료 버튼 -->
+
+
+</FrameLayout>

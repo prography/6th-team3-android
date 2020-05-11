@@ -9,4 +9,17 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="enter_user_info_title">회원 정보 입력</string>
+    <string name="register_check_password_title">비밀번호확인</string>
+    <string name="register_check_password_hint">비밀번호를 확인해 주세요</string>
+    <string name="previous_screen">이전화면</string>
+    <string name="next_screen">다음</string>
+    <string name="register_enter_password_hint">비밀번호를 입력해 주세요</string>
+    <string name="register_enter_password_title">비밀번호</string>
+    <string name="register_enter_phone_number_hint">휴대전화번호를 입력해 주세요</string>
+    <string name="register_enter_phone_number_title">휴대전화번호</string>
+    <string name="register_enter_email_hint">이메일을 입력해 주세요</string>
+    <string name="register_enter_email_title">이메일</string>
+    <string name="register_enter_username_hint">이름/닉네임을 입력해 주세요</string>
+    <string name="register_enter_username_title">이름/닉네임</string>
 </resources>
