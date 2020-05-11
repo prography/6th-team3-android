@@ -19,8 +19,6 @@ class RegisterPetInfoDetailFragment : Fragment() {
     }
 
     private lateinit var viewModel: RegisterPetInfoDetailViewModel
-    private lateinit var petInfoArrayList : ArrayList<PetInfo>
-    private lateinit var petDetailPagerAdapter: PetDetailPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,41 +32,11 @@ class RegisterPetInfoDetailFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(RegisterPetInfoDetailViewModel::class.java)
 
 
-        // 몇 마리 입력하는 건지 이전 화면에서 받아오기. 지금은 테스트용으로 하드코딩.
-
-        createEmptyPetInfoContainer(3)
-        petDetailPagerAdapter = PetDetailPagerAdapter(context, petInfoArrayList)
-        view_pager_register_pet_info_detail.adapter = petDetailPagerAdapter
-        view_pager_register_pet_info_detail.offscreenPageLimit = 1
-        view_pager_register_pet_info_detail.pageMargin = 30
+        // 몇 마리 입력하는 건지 이전 화면에서 받아오기
+        // 동적으로 레이아웃 추가할 수 있도록 하기 ?
 
     }
 
-    private fun createEmptyPetInfoContainer(numPets : Int){
-        for( i in 0..numPets){
-            petInfoArrayList.add(PetInfo())
-        }
-    }
-
-    private fun viewPagerEnterInfo(){
-        view_pager_register_pet_info_detail.addOnPageChangeListener(
-            ViewPagerOnPageSelected()
-        )
-    }
 
 }
 
-class ViewPagerOnPageSelected(private val pageSelected: (Int) -> Unit = {}) : ViewPager.OnPageChangeListener {
-
-    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-    }
-
-    override fun onPageSelected(position: Int) {
-
-    }
-
-    override fun onPageScrollStateChanged(state: Int) {
-
-    }
-}

@@ -6,9 +6,7 @@
     android:gravity="center_vertical"
     tools:context=".ui.RegisterPetInfoDetailFragment">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager_register_pet_info_detail"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"/>
+<!--    동적으로 추가하는 방법에 대해서 더 생각해보기 -->
+    <include layout="@layout/pet_info_layout"/>
 
 </LinearLayout>
