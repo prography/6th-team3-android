@@ -30,5 +30,5 @@
     <string name="my_page_my_review">내가 쓴 리뷰</string>
     <string name="my_page_alarm_setting">알림 설정</string>
     <string name="my_page_setting">설정</string>
-
+    <string name="register_auth_phone">인증하기</string>
 </resources>
