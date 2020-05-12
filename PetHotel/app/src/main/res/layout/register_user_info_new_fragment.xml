@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.RegisterUserInfoFragment"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_register_user_info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_medium"
+            android:layout_marginTop="@dimen/margin_2x"
+            android:layout_marginBottom="@dimen/margin_1x"
+            android:text="@string/enter_user_info_title" />
+
+
+
+        <ImageView
+            android:id="@+id/img_register_user_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/kakao_default_profile_image"
+            android:layout_marginBottom="@dimen/margin_2x"
+            />
+
+
+
+
+<!--        이메일 입력 필드 / 버튼 텍스트 : 중복 확인 -->
+        <include
+            android:id="@+id/register_user_email_layout"
+            layout="@layout/input_field_layout_with_button"/>
+<!--  이름 혹은 닉네임 입력 필드 / 버튼 텍스트 : 중복 확인 -->
+        <include
+            android:id="@+id/register_user_nickname_layout"
+            layout="@layout/input_field_layout_with_button"/>
+
+<!--       입력 값은 비밀번호 InputType.isPassword -->
+        <include
+            android:id="@+id/register_user_password_layout"
+            layout="@layout/input_field_layout"/>
+
+        <TextView
+            android:text="*비밀번호를 정확히 입력해 주세요"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+<!--       입력 값은 비밀번호 InputType.isPassword -->
+        <include
+            android:id="@+id/register_user_password_check_layout"
+            layout="@layout/input_field_layout"/>
+
+        <TextView
+            android:text="*비밀번호가 일치하지 않습니다."
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_register_next_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2x"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            android:text="@string/next_screen"/>
+
+    </LinearLayout>
+
+</ScrollView>
