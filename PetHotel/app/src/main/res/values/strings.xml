@@ -24,4 +24,11 @@
     <string name="register_enter_username_title">이름/닉네임</string>
     <string name="how_many_dogs_question">몇 마리의 반려견을 기르고 계신가요?</string>
     <string name="login_screen_welcome_message">마이펫밀리에 오신 것을 환영합니다!</string>
+    <string name="my_page_nickname">털실</string>
+    <string name="my_page_mypetmily">마이펫밀리</string>
+    <string name="my_page_my_pick">내가 찜한 곳</string>
+    <string name="my_page_my_review">내가 쓴 리뷰</string>
+    <string name="my_page_alarm_setting">알림 설정</string>
+    <string name="my_page_setting">설정</string>
+
 </resources>
