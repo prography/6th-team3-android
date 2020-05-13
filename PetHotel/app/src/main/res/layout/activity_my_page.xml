@@ -100,7 +100,7 @@
             layout="@layout/my_page_list_layout"/>
 
         <include
-            android:id="@+id/setting"
+            android:id="@+id/settings"
             layout="@layout/my_page_list_layout"/>
 
 

@@ -23,13 +23,13 @@ class MyPageActivity :AppCompatActivity() {
         notification_setting.img_list.setImageResource(
             R.drawable.ic_notifications_black_24dp
         )
-        setting.img_list.setImageResource(
+        settings.img_list.setImageResource(
             R.drawable.ic_settings_black_24dp
         )
         my_pick.tv_list.text = "내가 찜한 곳"
         my_review.tv_list.text = "내가 쓴 리뷰"
         notification_setting.tv_list.text="알림 설정"
-        setting.tv_list.text = "설정"
+        settings.tv_list.text = "설정"
 
     }
 }
