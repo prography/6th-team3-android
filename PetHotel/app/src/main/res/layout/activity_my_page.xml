@@ -32,22 +32,37 @@
             android:layout_height="wrap_content"
             android:textSize ="@dimen/text_size_medium"
             android:layout_marginTop="@dimen/margin_1x"
-            android:layout_marginBottom="@dimen/margin_1x"
+            android:layout_marginBottom="@dimen/margin_0.5x"
             android:text="@string/my_page_nickname"
             />
 
-        <TextView
-            android:id="@+id/tv_mypetmily"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize ="@dimen/text_size_medium"
-            android:layout_marginTop="@dimen/margin_1x"
-            android:layout_marginBottom="@dimen/margin_1x"
-            android:layout_marginLeft="@dimen/margin_1x"
-            android:layout_gravity="left"
-            android:text="@string/my_page_mypetmily"
-            />
+            android:gravity="left"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/tv_mypetmily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize ="@dimen/text_size_medium"
+                android:layout_marginTop="@dimen/margin_0.5x"
+                android:layout_marginBottom="@dimen/margin_0.5x"
+                android:layout_marginStart="@dimen/margin_1x"
+                android:layout_gravity="left"
+                android:text="@string/my_page_mypetmily"
+            />
+            <Button
+                android:id="@+id/btn_add_pet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_0.5x"
+                android:layout_marginBottom="@dimen/margin_0.5x"
+                android:layout_marginStart="@dimen/margin_1x"
+                android:text="추가하기"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,54 +80,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="@dimen/margin_1x"
+                android:layout_marginStart="@dimen/margin_1x"
                 app:srcCompat="@drawable/kakao_default_profile_image" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_my_pick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize ="@dimen/text_size_medium"
-            android:layout_marginTop="@dimen/margin_1x"
-            android:layout_marginBottom="@dimen/margin_1x"
-            android:layout_gravity="left"
-            android:text="@string/my_page_my_pick"
-            />
 
-        <TextView
-            android:id="@+id/tv_my_review"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize ="@dimen/text_size_medium"
-            android:layout_marginTop="@dimen/margin_1x"
-            android:layout_marginBottom="@dimen/margin_1x"
-            android:layout_gravity="left"
-            android:text="@string/my_page_my_review"
-            />
+        <!--       my page 밑 부분 항목        -->
+        <include
+            android:id="@+id/my_pick"
+            layout="@layout/my_page_list_layout"/>
 
-        <TextView
-            android:id="@+id/tv_alarm_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize ="@dimen/text_size_medium"
-            android:layout_marginTop="@dimen/margin_1x"
-            android:layout_marginBottom="@dimen/margin_1x"
-            android:layout_gravity="left"
-            android:text="@string/my_page_alarm_setting"
-            />
+        <include
+            android:id="@+id/my_review"
+            layout="@layout/my_page_list_layout"/>
 
-        <TextView
-            android:id="@+id/tv_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize ="@dimen/text_size_medium"
-            android:layout_marginTop="@dimen/margin_1x"
-            android:layout_marginBottom="@dimen/margin_1x"
-            android:layout_gravity="left"
-            android:text="@string/my_page_setting"
-            />
+        <include
+            android:id="@+id/notification_setting"
+            layout="@layout/my_page_list_layout"/>
+
+        <include
+            android:id="@+id/settings"
+            layout="@layout/my_page_list_layout"/>
+
 
 
 
