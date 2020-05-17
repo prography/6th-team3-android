@@ -31,7 +31,7 @@
         android:layout_width="313dp"
         android:layout_height="wrap_content"
         android:autofillHints="Your Email"
-        android:hint="@string/prompt_email"
+        android:hint="이메일"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         />
@@ -42,8 +42,8 @@
         android:layout_margin="@dimen/margin_1x"
         android:layout_width="313dp"
         android:layout_height="wrap_content"
-        android:autofillHints="Your Password"
-        android:hint="@string/prompt_password"
+        android:autofillHints="password"
+        android:hint="비밀번호"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
@@ -61,7 +61,7 @@
         android:layout_width="@dimen/login_button_width"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_1x"
-        android:text="LOGIN"/>
+        android:text="로그인"/>
 
     <Button
         android:id="@+id/btn_login_user_register"
@@ -69,7 +69,7 @@
         android:layout_width="@dimen/login_button_width"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_1x"
-        android:text="REGISTER"/>
+        android:text="회원가입"/>
 
 </LinearLayout>
 
@@ -82,10 +82,18 @@
     <!--        app:layout_constraintStart_toStartOf="parent"-->
     <!--        app:layout_constraintTop_toBottomOf="@+id/btn_kakao_login" />-->
 
-    <com.kakao.usermgmt.LoginButton
-        android:id="@+id/btn_login_social_kakao"
-        android:layout_marginTop="@dimen/margin_0_5x"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:text="간편 로그인"
+        android:layout_marginTop="@dimen/margin_2x"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+   <ImageButton
+       android:layout_margin="@dimen/margin_1x"
+       android:src="@drawable/kakao_login_btn_simple_medium"
+       android:background="@android:color/transparent"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"/>
 
 </LinearLayout>
