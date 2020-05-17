@@ -6,4 +6,16 @@
 
     <color name="defaultBackgroundColor">#03000000</color>
 
+    <color name="petHotelPrimary">#724926</color>
+    <color name="petHotelPrimaryDark">#3A1C02</color>
+    <color name="petHotelWhite">#FFFCF9</color>
+
+    <color name="petHotelSecondaryDark">#074776</color>
+    <color name="petHotelSecondary">#096FAD</color>
+
+    <color name="petHotelOnPrimary">#2D2D2D</color>
+    <color name="petHotelOnSurface">#2D2D2D</color>
+    <color name="petHotelError">#B00020</color>
+
+
 </resources>
