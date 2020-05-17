@@ -97,15 +97,12 @@
             layout="@layout/my_page_list_layout"/>
 
         <include
-            android:id="@+id/notification_setting"
+            android:id="@+id/notification_settings"
             layout="@layout/my_page_list_layout"/>
 
         <include
             android:id="@+id/settings"
             layout="@layout/my_page_list_layout"/>
-
-
-
 
 
     </LinearLayout>
