@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/tv_register_pet_how_many_pets_title"
-        android:textSize="@dimen/text_size_medium"
+        style="@style/phHeadline5"
         android:text="@string/how_many_dogs_question"
         android:padding="@dimen/padding_small_4dp"
         android:layout_width="wrap_content"
