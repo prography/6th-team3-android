@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:textSize ="@dimen/text_size_medium"
             android:layout_marginTop="@dimen/margin_1x"
-            android:layout_marginBottom="@dimen/margin_0.5x"
+            android:layout_marginBottom="@dimen/margin_0_5x"
             android:text="@string/my_page_nickname"
             />
 
@@ -46,19 +46,20 @@
                 android:id="@+id/tv_mypetmily"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:textSize ="@dimen/text_size_medium"
+                android:layout_marginTop="@dimen/margin_0_5x"
+                android:layout_marginBottom="@dimen/margin_0_5x"
                 android:layout_marginStart="@dimen/margin_1x"
-                android:layout_marginTop="@dimen/margin_0.5x"
-                android:layout_marginBottom="@dimen/margin_0.5x"
+                android:layout_gravity="left"
                 android:text="@string/my_page_mypetmily"
-                android:textSize="@dimen/text_size_medium" />
+            />
 
             <Button
                 android:id="@+id/btn_add_pet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_0.5x"
-                android:layout_marginBottom="@dimen/margin_0.5x"
+                android:layout_marginTop="@dimen/margin_0_5x"
+                android:layout_marginBottom="@dimen/margin_0_5x"
                 android:layout_marginStart="@dimen/margin_1x"
                 android:text="추가하기"/>
 
