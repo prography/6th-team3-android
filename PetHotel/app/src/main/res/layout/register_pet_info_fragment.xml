@@ -7,27 +7,38 @@
     android:gravity="center"
     tools:context=".ui.RegisterPetInfo">
 
+    <TextView
+        android:id="@+id/tv_register_user_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/phHeadline4"
+        android:layout_marginTop="@dimen/margin_2x"
+        android:layout_marginBottom="@dimen/margin_1x"
+        android:text="반려견 정보 입력" />
+
 
     <TextView
         android:id="@+id/tv_register_pet_how_many_pets_title"
         style="@style/phHeadline5"
         android:text="@string/how_many_dogs_question"
-        android:padding="@dimen/padding_small_4dp"
+        android:gravity="center"
+        android:padding="@dimen/default_padding_8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
 
     <EditText
         android:id="@+id/et_register_pet_how_many_pets"
-        android:layout_marginTop="@dimen/margin_2x"
+        style="@style/phEditText"
+        android:layout_margin="@dimen/margin_2x"
         android:inputType="number"
         android:layout_width="@dimen/number_input_edittext_width"
         android:layout_height="wrap_content"/>
 
 
     <com.google.android.material.button.MaterialButton
-        android:layout_marginTop="@dimen/margin_3x"
         android:text="정보 입력하기"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

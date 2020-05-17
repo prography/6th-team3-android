@@ -6,10 +6,15 @@
         <item name="colorPrimary">@color/petHotelPrimary</item>
         <item name="colorPrimaryDark">@color/petHotelPrimaryDark</item>
         <item name="colorAccent">@color/petHotelSecondary</item>
+        <item name="colorSecondary">@color/petHotelSecondary</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+
         <item name="materialButtonOutlinedStyle">@style/phOutlinedButtonStyle</item>
         <item name="materialButtonStyle">@style/phButtonStyle</item>
         <item name="buttonStyle">@style/phAppCompatButtonStyle</item>
         <item name="android:fontFamily">@font/notoserifkr_regular</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="phButtonTextAppearance" parent="TextAppearance.MaterialComponents.Button">
@@ -54,6 +59,7 @@
     <style name="phHeadline4" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="fontFamily">@font/notoserifkr_bold</item>
         <item name="android:fontFamily">@font/notoserifkr_bold</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="phHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
@@ -76,49 +82,10 @@
         <item name="android:fontFamily">@font/notoserifkr_semibold</item>
     </style>
 
-
-
-
-
-
-
-    <!--&lt;!&ndash; refer to : https://material.io/develop/android/theming/color/ &ndash;&gt;&ndash;&gt;-->
-<!--    <style name="PetHotelTheme" parent="Theme.MaterialComponents">-->
-
-<!--&lt;!&ndash; colorPrimary : 앱에서 가장 흔히 디스플레이 되는 색. 기본 Action Bar 색&ndash;&gt;-->
-<!--        <item name="colorPrimary"></item>-->
-<!--&lt;!&ndash; colorPrimaryVariant : Primary 색에서 tone 이 약간 다른 색. &ndash;&gt;-->
-<!--        <item name="colorPrimaryVariant"></item>-->
-<!--&lt;!&ndash; colorOnPrimary : Primary 색 위에 올라가도 잘 보이는 색. 예를들어 짙은 보라가 Primary 이면-->
-<!--그 위에 올라가는 텍스트는 흰색이 더 눈에 잘 띈다. 이때 흰색이 이에 해당한다. &ndash;&gt;-->
-<!--        <item name="colorOnPrimary"></item>-->
-<!--&lt;!&ndash; colorPrimaryDark : Primary 색 보다 조금 짙은 색       &ndash;&gt;-->
-<!--        <item name="colorPrimaryDark"></item>-->
-<!--&lt;!&ndash; colorAccent : colorPrimary 의 보색인 경우가 많다. &ndash;&gt;-->
-<!--        <item name="colorAccent"></item>-->
-
-<!--&lt;!&ndash;colorSecondary : 브랜드의 두 번째 색. 보통 Primary 의 accented complement (보색)-->
-<!--으로 설정한다. &ndash;&gt;-->
-<!--        <item name="colorSecondary"></item>-->
-<!--&lt;!&ndash;colorSecondaryVariant : secondaryColor 에서 tone 이 약간 다른 것. &ndash;&gt;-->
-<!--        <item name="colorSecondaryVariant"></item>-->
-<!--&lt;!&ndash;colorOnSecondary : secondary 색 위에 올라가도 잘 보이는 색 &ndash;&gt;-->
-<!--        <item name="colorOnSecondary"></item>-->
-
-<!--&lt;!&ndash; colorOnError : 에러를 나타내는 색 위에 올라가는 색. &ndash;&gt;-->
-<!--        <item name="colorOnError"></item>-->
-<!--&lt;!&ndash; colorError : 에러를 나타내는 색 &ndash;&gt;-->
-<!--        <item name="colorError"></item>-->
-
-<!--        <item name="colorOnPrimarySurface"></item>-->
-<!--        <item name="colorPrimarySurface"></item>-->
-
-<!--&lt;!&ndash; colorSurface : 컴포넌트들의 표면 색. ex) cards, sheets, menus / default : white&ndash;&gt;-->
-<!--        <item name="colorSurface"></item>-->
-<!--&lt;!&ndash; colorOnSurface : surface 색 위에 올라가는 것들의 색. default : black &ndash;&gt;-->
-<!--        <item name="colorOnSurface"></item>-->
-<!--&lt;!&ndash;        <item name="android:colorBackground"></item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="elevationOverlayColor"></item>&ndash;&gt;-->
-<!--    </style>-->
+    <style name="phEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:layout_margin">@dimen/margin_0_5x</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
 </resources>

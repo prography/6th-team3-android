@@ -14,4 +14,7 @@
     <dimen name="default_padding_8dp">8dp</dimen>
     <dimen name="padding_medium_24dp">24dp</dimen>
     <dimen name="margin_0_5x">4dp</dimen>
+    <dimen name="padding_large_16dp">16dp</dimen>
+    <dimen name="login_button_width">128dp</dimen>
+    <dimen name="place_info_image_dimen">150dp</dimen>
 </resources>

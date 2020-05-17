@@ -16,6 +16,16 @@
     <color name="petHotelOnPrimary">#2D2D2D</color>
     <color name="petHotelOnSurface">#2D2D2D</color>
     <color name="petHotelError">#B00020</color>
+    <color name="petHotelLightGrey">#CFCFCF</color>
 
+    <!-- Basic colors -->
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorTransparentWhite">#54FFFFFF</color>
+    <color name="colorTransparent">#00FFFFFF</color>
+    <color name="colorHalfTransparent">#20000000</color>
+    <color name="colorTransparentBlack">#6F000000</color>
+    <color name="matrixGrey">#747574</color>
+    <color name="colorDarkGrey">#2B2B2A</color>
+    <color name="colorBlack">#000000</color>
 
 </resources>
