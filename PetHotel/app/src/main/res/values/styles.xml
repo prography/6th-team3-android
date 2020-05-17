@@ -3,14 +3,86 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/petHotelPrimary</item>
+        <item name="colorPrimaryDark">@color/petHotelPrimaryDark</item>
+        <item name="colorAccent">@color/petHotelSecondary</item>
+        <item name="materialButtonOutlinedStyle">@style/phOutlinedButtonStyle</item>
+        <item name="materialButtonStyle">@style/phButtonStyle</item>
+        <item name="buttonStyle">@style/phAppCompatButtonStyle</item>
+        <item name="android:fontFamily">@font/notoserifkr_regular</item>
+    </style>
+
+    <style name="phButtonTextAppearance" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/notoserifkr_semibold</item>
+        <item name="android:fontFamily">@font/notoserifkr_semibold</item>
+
+    </style>
+
+    <style name="phButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.TextButton</item>
+        <item name="android:textAppearance">@style/phButtonTextAppearance</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Button.TextButton" parent="">
+        <item name="colorPrimary">@color/petHotelSecondary</item>
+    </style>
+
+    <style name="phTextButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.TextButton</item>
+        <item name="android:textAppearance">@style/phButtonTextAppearance</item>
+<!--        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>-->
+    </style>
+
+
+    <style name="phOutlinedButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.TextButton</item>
+        <item name="android:textAppearance">@style/phButtonTextAppearance</item>
+<!--        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>-->
+    </style>
+
+    <style name="phAppCompatButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/custom_button_selector</item>
+        <item name="android:textAppearance">@style/phButtonTextAppearance</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="phHeadline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/notoserifkr_bold</item>
+        <item name="android:fontFamily">@font/notoserifkr_bold</item>
+    </style>
+
+    <style name="phHeadline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/notoserifkr_bold</item>
+        <item name="android:fontFamily">@font/notoserifkr_bold</item>
+    </style>
+
+    <style name="phHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/notoserifkr_bold</item>
+        <item name="android:fontFamily">@font/notoserifkr_bold</item>
+    </style>
+
+    <style name="phTitle" parent="TextAppearance.AppCompat.Title">
+        <item name="fontFamily">@font/notoserifkr_black</item>
+        <item name="android:fontFamily">@font/notoserifkr_black</item>
+    </style>
+
+    <style name="phBody1" parent="TextAppearance.AppCompat.Body1">
+        <item name="fontFamily">@font/notoserifkr_light</item>
+        <item name="android:fontFamily">@font/notoserifkr_light</item>
+    </style>
+
+    <style name="phBody2" parent="TextAppearance.AppCompat.Body2">
+        <item name="fontFamily">@font/notoserifkr_semibold</item>
+        <item name="android:fontFamily">@font/notoserifkr_semibold</item>
     </style>
 
 
 
-<!--&lt;!&ndash; refer to : https://material.io/develop/android/theming/color/ &ndash;&gt;&ndash;&gt;-->
+
+
+
+
+    <!--&lt;!&ndash; refer to : https://material.io/develop/android/theming/color/ &ndash;&gt;&ndash;&gt;-->
 <!--    <style name="PetHotelTheme" parent="Theme.MaterialComponents">-->
 
 <!--&lt;!&ndash; colorPrimary : 앱에서 가장 흔히 디스플레이 되는 색. 기본 Action Bar 색&ndash;&gt;-->
