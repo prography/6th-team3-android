@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.prography.pethotel.R
 import kotlinx.android.synthetic.main.activity_my_page.*
-import kotlinx.android.synthetic.main.my_page_list_layout.*
 import kotlinx.android.synthetic.main.my_page_list_layout.view.*
 import kotlinx.android.synthetic.main.my_page_list_layout.view.img_list
 
@@ -20,7 +19,7 @@ class MyPageActivity :AppCompatActivity() {
         my_review.img_list.setImageResource(
             R.drawable.ic_edit_black_24dp
         )
-        notification_setting.img_list.setImageResource(
+        notification_settings.img_list.setImageResource(
             R.drawable.ic_notifications_black_24dp
         )
         settings.img_list.setImageResource(
@@ -28,7 +27,7 @@ class MyPageActivity :AppCompatActivity() {
         )
         my_pick.tv_list.text = "내가 찜한 곳"
         my_review.tv_list.text = "내가 쓴 리뷰"
-        notification_setting.tv_list.text="알림 설정"
+        notification_settings.tv_list.text="알림 설정"
         settings.tv_list.text = "설정"
 
     }

@@ -46,13 +46,13 @@
                 android:id="@+id/tv_mypetmily"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize ="@dimen/text_size_medium"
+                android:layout_gravity="left"
+                android:layout_marginStart="@dimen/margin_1x"
                 android:layout_marginTop="@dimen/margin_0.5x"
                 android:layout_marginBottom="@dimen/margin_0.5x"
-                android:layout_marginStart="@dimen/margin_1x"
-                android:layout_gravity="left"
                 android:text="@string/my_page_mypetmily"
-            />
+                android:textSize="@dimen/text_size_medium" />
+
             <Button
                 android:id="@+id/btn_add_pet"
                 android:layout_width="wrap_content"
@@ -96,15 +96,12 @@
             layout="@layout/my_page_list_layout"/>
 
         <include
-            android:id="@+id/notification_setting"
+            android:id="@+id/notification_settings"
             layout="@layout/my_page_list_layout"/>
 
         <include
             android:id="@+id/settings"
             layout="@layout/my_page_list_layout"/>
-
-
-
 
 
     </LinearLayout>
