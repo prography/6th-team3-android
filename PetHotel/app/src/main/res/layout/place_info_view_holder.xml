@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/white_round_corner_rect"
+    android:padding="@dimen/default_padding_8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/place_info_image"
+        android:layout_width="@dimen/place_info_image_dimen"
+        android:layout_height="@dimen/place_info_image_dimen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="centerCrop"
+        tools:src="@tools:sample/backgrounds/scenic"
+        />
+
+    <TextView
+        android:id="@+id/place_info_name"
+        style="@style/phTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_1x"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/place_info_category"
+        app:layout_constraintStart_toEndOf="@+id/place_info_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@sample/hotels.json/data/name" />
+
+    <TextView
+        android:id="@+id/place_info_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_1x"
+        tools:text="Hotel"
+        app:layout_constraintBottom_toTopOf="@+id/place_info_address"
+        app:layout_constraintStart_toEndOf="@+id/place_info_image"
+        app:layout_constraintTop_toBottomOf="@+id/place_info_name" />
+
+    <TextView
+        android:id="@+id/place_info_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_1x"
+        tools:text="@sample/hotels.json/data/address"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/place_info_image"
+        app:layout_constraintTop_toBottomOf="@+id/place_info_category" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
