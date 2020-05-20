@@ -7,9 +7,9 @@ import androidx.lifecycle.LiveData
 
 class MyPickViewModel(application: Application) : AndroidViewModel(application){
 //    private val model = MyPickModel(application)
-//    private val petplaces = model.getMyPickHotels()
+//    private val petplaces = model.getMyPickPlace()
 //
-//    fun getHotels(): LiveData<List<PetPlace>>{
+//    fun getPetPlace(): LiveData<List<PetPlace>>{
 //        return this.petplaces
 //    }
 }
