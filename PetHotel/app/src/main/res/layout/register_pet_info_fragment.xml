@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".ui.RegisterPetInfo">
+    tools:context=".ui.register.RegisterPetInfo">
 
     <TextView
         android:id="@+id/tv_register_user_info_title"
@@ -36,10 +36,28 @@
         android:layout_height="wrap_content"/>
 
 
+
+    <RelativeLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <com.google.android.material.button.MaterialButton
-        android:text="정보 입력하기"
+        android:id="@+id/btn_register_pet_enter_info"
+        android:text="정보입력"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_register_pet_skip"
+        android:text="건너뛰기"
+        android:layout_toEndOf="@id/btn_register_pet_enter_info"
+        android:layout_marginStart="@dimen/margin_2x"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
 
 </LinearLayout>

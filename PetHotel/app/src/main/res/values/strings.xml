@@ -22,8 +22,8 @@
     <string name="register_enter_email_title">이메일</string>
     <string name="register_enter_username_hint">이름/닉네임을 입력해 주세요</string>
     <string name="register_enter_username_title">이름/닉네임</string>
-    <string name="how_many_dogs_question">몇 마리의 반려견을 기르고 계신가요?</string>
-    <string name="login_screen_welcome_message">애견호텔 안심예약 서비스\n마이펫밀리</string>
+    <string name="how_many_dogs_question">몇 마리의 반려견을\n 기르고 계신가요?</string>
+    <string name="login_screen_welcome_message">애견호텔 안심예약은\n마이펫밀리</string>
     <string name="my_page_nickname">털실</string>
     <string name="my_page_mypetmily">마이펫밀리</string>
     <string name="my_page_my_pick">내가 찜한 곳</string>

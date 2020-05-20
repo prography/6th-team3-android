@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_navigation"
-    app:startDestination="@id/loginRegisterActivity">
+    app:startDestination="@id/loginRegisterFragment">
 
     <activity
         android:id="@+id/loginRegisterActivity"
-        android:name="com.prography.pethotel.ui.LoginRegisterActivity"
+        android:name="com.prography.pethotel.ui.register.LoginRegisterActivity"
         android:label="activity_login_register"
         tools:layout="@layout/activity_login_register"/>
 
     <fragment
         android:id="@+id/registerUserInfoFragment"
-        android:name="com.prography.pethotel.ui.RegisterUserInfoFragment"
+        android:name="com.prography.pethotel.ui.register.RegisterUserInfoFragment"
         android:label="register_user_info_fragment"
         tools:layout="@layout/register_user_info_fragment" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerPetInfo"
-        android:name="com.prography.pethotel.ui.RegisterPetInfo"
+        android:name="com.prography.pethotel.ui.register.RegisterPetInfo"
         android:label="register_pet_info_fragment"
         tools:layout="@layout/register_pet_info_fragment" >
         <action
@@ -31,12 +31,17 @@
     </fragment>
     <fragment
         android:id="@+id/registerPetInfoDetailFragment"
-        android:name="com.prography.pethotel.ui.RegisterPetInfoDetailFragment"
+        android:name="com.prography.pethotel.ui.register.RegisterPetInfoDetailFragment"
         android:label="register_pet_info_detail_fragment"
-        tools:layout="@layout/register_pet_info_detail_fragment" />
+        tools:layout="@layout/register_pet_info_detail_fragment" >
+        <argument
+            android:name="numOfPets"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/registerAuthPhoneFragment"
-        android:name="com.prography.pethotel.ui.RegisterAuthPhoneFragment"
+        android:name="com.prography.pethotel.ui.register.RegisterAuthPhoneFragment"
         android:label="RegisterAuthPhoneFragment" >
         <action
             android:id="@+id/action_registerAuthPhoneFragment_to_registerPetInfo"
@@ -44,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginRegisterFragment"
-        android:name="com.prography.pethotel.ui.LoginRegisterFragment"
+        android:name="com.prography.pethotel.ui.register.LoginRegisterFragment"
         android:label="login_register_fragment"
         tools:layout="@layout/login_register_fragment" >
         <action

@@ -1,4 +1,4 @@
-package com.prography.pethotel.ui
+package com.prography.pethotel.ui.register.viewmodels
 
 import androidx.lifecycle.ViewModel
 

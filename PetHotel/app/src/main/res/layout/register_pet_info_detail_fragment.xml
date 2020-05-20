@@ -3,10 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    tools:context=".ui.RegisterPetInfoDetailFragment">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/defaultBackgroundColor"
+    tools:context=".ui.register.RegisterPetInfoDetailFragment">
 
 <!--    동적으로 추가하는 방법에 대해서 더 생각해보기 -->
-    <include layout="@layout/pet_info_layout"/>
+<!--    <include layout="@layout/pet_detail_layout"/>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_register_pet_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="horizontal"
+        tools:listitem="@layout/pet_detail_layout"/>
 
 </LinearLayout>

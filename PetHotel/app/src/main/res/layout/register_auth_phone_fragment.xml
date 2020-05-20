@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+
+<LinearLayout
     android:orientation="vertical"
-    android:padding="@dimen/default_padding_8dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,13 +22,97 @@
         android:layout_height="wrap_content"/>
 
 
-    <include
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/register_enter_phone_number"
-        layout="@layout/input_field_layout_with_button"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_0_5x"
+        android:padding="@dimen/padding_small_4dp">
 
-    <include
+        <TextView
+            android:id="@+id/enter_phone_number_title_field"
+            style="@style/phTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_0_5x"
+            android:layout_marginTop="@dimen/margin_0_5x"
+            android:layout_marginBottom="@dimen/margin_0_5x"
+            android:text="휴대전화번호"
+            app:layout_constraintBottom_toTopOf="@+id/enter_phone_number_edit_text_field"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/enter_phone_number_button_field"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="인증번호\n받기"
+            app:layout_constraintBottom_toBottomOf="@+id/enter_phone_number_edit_text_field"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/enter_phone_number_edit_text_field" />
+
+        <EditText
+            android:id="@+id/enter_phone_number_edit_text_field"
+            style="@style/phEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/margin_0_5x"
+            android:hint="예) 01012341234"
+            android:inputType="phone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enter_phone_number_title_field" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/register_auth_phone"
-        layout="@layout/input_field_layout_with_button"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_0_5x"
+        android:padding="@dimen/padding_small_4dp">
+
+    <TextView
+        android:id="@+id/auth_phone_number_title_field"
+        style="@style/phTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_0_5x"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        android:layout_marginBottom="@dimen/margin_0_5x"
+        android:text="인증번호 확인"
+        app:layout_constraintBottom_toTopOf="@+id/auth_phone_number_edit_text_field"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/auth_phone_number_button_field"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="인증하기"
+            app:layout_constraintBottom_toBottomOf="@+id/auth_phone_number_edit_text_field"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/auth_phone_number_edit_text_field" />
+
+        <EditText
+            android:id="@+id/auth_phone_number_edit_text_field"
+            style="@style/phEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/margin_0_5x"
+            android:hint="예) 123456"
+            android:inputType="phone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/auth_phone_number_title_field" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <TextView
@@ -57,4 +147,17 @@
         android:text="앱 PUSH 알림에 동의합니다. (선택)" />
 
 
+
+    <Button
+        android:id="@+id/btn_register_auth_phone_next_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_gravity="center"
+        android:text="다음"
+        />
+
+
 </LinearLayout>
+
+</ScrollView>
