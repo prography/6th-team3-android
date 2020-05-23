@@ -1,4 +1,4 @@
-package com.prography.pethotel.ui
+package com.prography.pethotel.ui.mypage
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
