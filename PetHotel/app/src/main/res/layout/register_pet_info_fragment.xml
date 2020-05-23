@@ -32,6 +32,7 @@
         style="@style/phEditText"
         android:layout_margin="@dimen/margin_2x"
         android:inputType="number"
+        android:hint="1"
         android:layout_width="@dimen/number_input_edittext_width"
         android:layout_height="wrap_content"/>
 

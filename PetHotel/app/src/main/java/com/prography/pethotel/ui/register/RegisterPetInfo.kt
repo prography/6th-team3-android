@@ -35,11 +35,15 @@ class RegisterPetInfo : Fragment() {
         viewModel = ViewModelProviders.of(this).get(RegisterPetInfoViewModel::class.java)
 
         var numOfPets = 1
-        et_register_pet_how_many_pets.setText("1") // default 로 1마리, NumberFormatException 방지
+        //et_register_pet_how_many_pets.setText() // default 로 1마리, NumberFormatException 방지
 
         et_register_pet_how_many_pets.addTextChangedListener(
             afterTextChanged = {
-                numOfPets = it.toString().toInt()
+                numOfPets = if(it.toString().isBlank()){
+                    0
+                }else{
+                    it.toString().toInt()
+                }
             }
         )
         btn_register_pet_enter_info.setOnClickListener {

@@ -1,4 +1,4 @@
-package com.prography.pethotel.ui
+package com.prography.pethotel.ui.places
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -10,10 +10,6 @@ import android.view.ViewGroup
 import com.prography.pethotel.R
 
 class PlaceInfoFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = PlaceInfoFragment()
-    }
 
     private lateinit var viewModel: PlaceInfoViewModel
 
