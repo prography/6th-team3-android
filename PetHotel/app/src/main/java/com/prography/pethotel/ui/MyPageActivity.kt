@@ -3,7 +3,7 @@ package com.prography.pethotel.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.prography.pethotel.R
-import kotlinx.android.synthetic.main.activity_my_page.*
+import kotlinx.android.synthetic.main.fragment_my_page.*
 import kotlinx.android.synthetic.main.my_page_list_layout.view.*
 import kotlinx.android.synthetic.main.my_page_list_layout.view.img_list
 
@@ -11,7 +11,7 @@ class MyPageActivity :AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_page)
+        setContentView(R.layout.fragment_my_page)
 
         my_pick.img_list.setImageResource(
            R.drawable.ic_favorite_black_24dp

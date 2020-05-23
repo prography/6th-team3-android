@@ -1,4 +1,20 @@
 package com.prography.pethotel.ui
 
-class MyReviewFragment {
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.prography.pethotel.R
+
+class MyReviewFragment : Fragment(){
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        return inflater.inflate(R.layout.my_page_review_fragment, container, false)
+    }
 }
