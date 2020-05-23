@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/monitor"
+    app:startDestination="@id/monitorFragment">
+
+    <fragment
+        android:id="@+id/monitorFragment"
+        android:name="com.prography.pethotel.ui.monitor.MonitorFragment"
+        android:label="fragment_monitor"
+        tools:layout="@layout/fragment_monitor" >
+        <action
+            android:id="@+id/action_monitorFragment_to_monitorDetailFragment"
+            app:destination="@id/monitorDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/monitorDetailFragment"
+        android:name="com.prography.pethotel.ui.monitor.MonitorDetailFragment"
+        android:label="fragment_monitor_detail"
+        tools:layout="@layout/fragment_monitor_detail" />
+</navigation>

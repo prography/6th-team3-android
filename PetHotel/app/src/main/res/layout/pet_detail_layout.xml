@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_1x"
+    android:background="@drawable/white_round_corner_rect"
+    android:paddingBottom="@dimen/padding_large_16dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:elevation="8dp">
+
+
+    <ImageView
+        android:id="@+id/img_register_pet_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:padding="@dimen/padding_large_16dp"
+        app:srcCompat="@drawable/kakao_default_profile_image" />
+
+    <TextView
+        android:id="@+id/tv_register_pet_name_title"
+        style="@style/phBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="반려견이름"
+        android:layout_marginTop="@dimen/margin_1x"
+        />
+
+    <EditText
+        android:id="@+id/et_register_pet_name"
+        style="@style/phEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="예) 털실이"
+        android:inputType="textPersonName"
+         />
+
+
+
+    <TextView
+        android:id="@+id/tv_register_pet_number_title"
+        style="@style/phBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="동물등록번호"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        />
+
+
+    <EditText
+        android:id="@+id/et_register_pet_number"
+        style="@style/phEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="예) 410123412341234"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/tv_register_pet_birth_year"
+        style="@style/phBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="태어난 년도"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        />
+
+    <EditText
+        android:id="@+id/et_register_pet_birth_year"
+        style="@style/phEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="예) 2010"
+        android:inputType="date"
+        />
+
+
+</LinearLayout>

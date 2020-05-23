@@ -1,4 +1,4 @@
-package com.prography.pethotel.ui
+package com.prography.pethotel.ui.places
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -9,25 +9,21 @@ import android.view.ViewGroup
 
 import com.prography.pethotel.R
 
-class RegisterPetInfo : Fragment() {
+class PlaceInfoFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RegisterPetInfo()
-    }
-
-    private lateinit var viewModel: RegisterPetInfoViewModel
+    private lateinit var viewModel: PlaceInfoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.register_pet_info_fragment, container, false)
+        return inflater.inflate(R.layout.place_info_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(RegisterPetInfoViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProviders.of(this).get(PlaceInfoViewModel::class.java)
+     
     }
 
 }
