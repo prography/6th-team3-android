@@ -75,8 +75,38 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="예) 2010"
-        android:inputType="date"
+        android:inputType="date" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/check_register_pet_number"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text="등록번호 확인"/>
+
+
+    <ImageButton
+        android:id="@+id/register_pet_number_checked"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/check_register_pet_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_1x"
+        android:visibility="invisible"
+        android:background="@color/colorTransparent"
+        android:src="@drawable/ic_check_circle_black_24dp"
         />
+<!--   동물 등록 번호가 확인되면 체크 박스가 나타나도록 한다. -->
+
+    </RelativeLayout>
 
 
 </LinearLayout>

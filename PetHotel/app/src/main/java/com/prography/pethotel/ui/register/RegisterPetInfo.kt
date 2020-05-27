@@ -1,5 +1,6 @@
 package com.prography.pethotel.ui.register
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 
 import com.prography.pethotel.R
+import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.register.RegisterPetInfoDirections
 import com.prography.pethotel.ui.register.viewmodels.RegisterPetInfoViewModel
 import kotlinx.android.synthetic.main.register_pet_info_fragment.*
@@ -56,6 +58,11 @@ class RegisterPetInfo : Fragment() {
                     numOfPets
                 )
             findNavController().navigate(action)
+        }
+
+        btn_register_pet_skip.setOnClickListener {
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
