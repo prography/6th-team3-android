@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MyPageActivity">
+        <activity android:name=".ui.mypage.MyPageFragment">
 
         </activity>
     </application>

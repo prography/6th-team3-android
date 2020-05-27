@@ -1,4 +1,4 @@
-package com.prography.pethotel.ui
+package com.prography.pethotel.ui.mypage
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.prography.pethotel.R
 
-class MyPickFragment : Fragment(){
+class MyReviewFragment : Fragment(){
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-            return inflater.inflate(R.layout.my_page_my_pick_fragment, container, false)
-        }
-}
 
+        return inflater.inflate(R.layout.my_page_review_fragment, container, false)
+    }
+}

@@ -1,20 +1,26 @@
-package com.prography.pethotel.ui
+package com.prography.pethotel.ui.mypage
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.prography.pethotel.R
 import kotlinx.android.synthetic.main.fragment_my_page.*
 import kotlinx.android.synthetic.main.my_page_list_layout.view.*
-import kotlinx.android.synthetic.main.my_page_list_layout.view.img_list
 
-class MyPageActivity :AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_my_page)
+class MyPageFragment : Fragment() {
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_my_page, container, false)
 
         my_pick.img_list.setImageResource(
-           R.drawable.ic_favorite_black_24dp
+            R.drawable.ic_favorite_black_24dp
         )
         my_review.img_list.setImageResource(
             R.drawable.ic_edit_black_24dp
@@ -30,5 +36,8 @@ class MyPageActivity :AppCompatActivity() {
         notification_setting.tv_list.text="알림 설정"
         settings.tv_list.text = "설정"
 
+
+        return view
     }
+
 }
