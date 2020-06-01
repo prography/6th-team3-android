@@ -27,6 +27,12 @@
         tools:layout_editor_absoluteX="78dp"
         tools:layout_editor_absoluteY="51dp" />
 
+    <ImageView
+        android:id="@+id/front_img"
+        tools:src="@drawable/mily_happy"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
     <EditText
         android:id="@+id/et_login_username"
         style="@style/phEditText"

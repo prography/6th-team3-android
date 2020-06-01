@@ -1,5 +1,6 @@
 package com.prography.pethotel.ui.register
 
+import android.graphics.drawable.AnimationDrawable
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -35,6 +36,11 @@ class LoginRegisterFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(LoginRegisterViewModel::class.java)
         // TODO: Use the ViewModel
+
+        //start front image animation
+        front_img.setBackgroundResource(R.drawable.mily_animated)
+        val animationDrawable =  front_img.background as AnimationDrawable
+        animationDrawable.start()
 
         btn_login_user_login.setOnClickListener {
             //로그인 화면으로 이동한다.

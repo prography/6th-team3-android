@@ -17,7 +17,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:padding="@dimen/padding_large_16dp"
-        app:srcCompat="@drawable/kakao_default_profile_image" />
+        app:srcCompat="@drawable/pet_profile_placeholder" />
 
     <TextView
         android:id="@+id/tv_register_pet_name_title"

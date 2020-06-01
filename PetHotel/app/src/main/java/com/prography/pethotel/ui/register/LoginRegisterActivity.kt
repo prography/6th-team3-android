@@ -15,6 +15,8 @@ class LoginRegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login_register)
 
         // TODO network checking! Base Activity 만들어서 네트워크 확인하기.
+
+
     }
 
 }

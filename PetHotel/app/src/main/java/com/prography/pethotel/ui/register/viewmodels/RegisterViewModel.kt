@@ -6,7 +6,7 @@ import com.prography.pethotel.models.UserInfo
 
 class RegisterViewModel : ViewModel() {
 
-    val _userInfo : MutableLiveData<UserInfo> = MutableLiveData()
+    val userInfoLiveData : MutableLiveData<UserInfo> = MutableLiveData()
 
     
 }

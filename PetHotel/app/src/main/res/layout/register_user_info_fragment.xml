@@ -26,25 +26,41 @@
             android:text="@string/enter_user_info_title" />
 
 
+        <!--        이메일 입력 필드 / 버튼 텍스트 : 중복 확인 -->
 
         <ImageView
             android:id="@+id/img_register_user_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/kakao_default_profile_image"
-            android:layout_marginBottom="@dimen/margin_1x"
-            />
+            android:scaleType="centerCrop"
+            android:src="@drawable/pet_profile_placeholder" />
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/btn_upload_user_image"
+                android:src="@drawable/ic_file_upload_black_24dp"
+                android:padding="@dimen/default_padding_8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
+            <ImageView
+                android:id="@+id/btn_take_user_photo"
+                android:padding="@dimen/default_padding_8dp"
+                android:src="@drawable/ic_photo_camera_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-        <!--        이메일 입력 필드 / 버튼 텍스트 : 중복 확인 -->
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/register_user_email_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_0_5x"
             android:padding="@dimen/padding_small_4dp">
 
             <TextView
@@ -90,7 +106,6 @@
             android:id="@+id/register_user_nickname_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_0_5x"
             android:padding="@dimen/padding_small_4dp">
 
             <TextView
@@ -136,7 +151,6 @@
             android:id="@+id/register_user_password_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_0_5x"
             android:padding="@dimen/padding_small_4dp">
 
             <TextView
@@ -178,7 +192,6 @@
             android:id="@+id/register_user_password_check_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_0_5x"
             android:padding="@dimen/padding_small_4dp">
 
             <TextView
@@ -222,7 +235,7 @@
             android:id="@+id/btn_register_next_screen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_2x"
+            android:layout_marginTop="@dimen/margin_0_5x"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
             android:text="@string/next_screen"/>
 
