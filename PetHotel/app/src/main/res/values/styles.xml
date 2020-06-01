@@ -1,7 +1,8 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/petHotelPrimary</item>
         <item name="colorPrimaryDark">@color/petHotelPrimaryDark</item>
@@ -9,7 +10,6 @@
         <item name="colorSecondary">@color/petHotelSecondary</item>
         <item name="colorOnSecondary">@android:color/white</item>
         <item name="colorOnPrimary">@android:color/white</item>
-
         <item name="materialButtonOutlinedStyle">@style/phOutlinedButtonStyle</item>
         <item name="materialButtonStyle">@style/phButtonStyle</item>
         <item name="buttonStyle">@style/phAppCompatButtonStyle</item>

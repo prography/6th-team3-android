@@ -87,6 +87,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
+    // Retrofit Coroutines Support
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$kotlin_coroutines_adapter_version"
+
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
