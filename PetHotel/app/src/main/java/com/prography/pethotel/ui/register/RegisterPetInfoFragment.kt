@@ -1,24 +1,30 @@
 package com.prography.pethotel.ui.register
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import com.bumptech.glide.Glide
 
 import com.prography.pethotel.R
 import com.prography.pethotel.ui.MainActivity
+import com.prography.pethotel.ui.register.utils.BaseFragment
 import com.prography.pethotel.utils.TAG_PET_DETAIL
+import com.prography.pethotel.utils.TAG_PHOTO
+import kotlinx.android.synthetic.main.fragment_register_pet_info.*
 import kotlinx.android.synthetic.main.fragment_register_pet_info.view.*
+import kotlinx.android.synthetic.main.fragment_register_pet_info.view.pet_info_input_layout
 import kotlinx.android.synthetic.main.pet_detail_layout.view.*
 import kotlinx.android.synthetic.main.pet_detail_layout.view.btn_erase_pet_card
 
 
-class RegisterPetInfoFragment : Fragment() {
+class RegisterPetInfoFragment : BaseFragment() {
 
     private var numPets : Int = 0
 
@@ -80,12 +86,14 @@ class RegisterPetInfoFragment : Fragment() {
 
             // TODO 사진 앨범에서 가져오기 버튼 클릭 리스너
             btn_upload_pet_image.setOnClickListener {
-
+                Log.d(TAG_PHOTO, "${this.tag}")
+                getAlbum(view= this)
             }
 
             // TODO 사진 촬영하기 버튼 클릭 리스너
             btn_take_pet_photo.setOnClickListener {
-
+                Log.d(TAG_PHOTO, "${this.tag}")
+                takePhoto(view= this)
             }
 
             btn_erase_pet_card.setOnClickListener {
@@ -112,9 +120,28 @@ class RegisterPetInfoFragment : Fragment() {
         return true
     }
 
-    private fun removeCard(view : View, viewGroup: ViewGroup, tag : String){
-        val viewToBeRemoved = view.findViewWithTag<LinearLayout>(tag)
-        viewGroup.removeView(viewToBeRemoved)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+
+
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
+            myView = pet_info_input_layout.findViewWithTag<LinearLayout>(myViewTag)
+            (myView as LinearLayout?)?.img_register_pet_image?.setImageURI(Uri.parse(currentPhotoPath))
+
+        } else if (requestCode == REQUEST_TAKE_ALBUM && resultCode == Activity.RESULT_OK) {
+            myView = pet_info_input_layout.findViewWithTag<LinearLayout>(myViewTag)
+            if (data != null) {
+                currentPhotoPath = data.data.toString()
+
+                (myView as LinearLayout?)?.img_register_pet_image?.let {
+                    Glide.with(requireContext())
+                        .load(Uri.parse(currentPhotoPath))
+                        .into(it)
+                }
+            }
+
+        }
     }
 
     companion object {
