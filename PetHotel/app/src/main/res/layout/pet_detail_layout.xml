@@ -6,11 +6,30 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_1x"
     android:background="@drawable/white_round_corner_rect"
-    android:paddingBottom="@dimen/padding_large_16dp"
+    android:paddingBottom="@dimen/default_padding_8dp"
     android:orientation="vertical"
     android:gravity="center"
     android:elevation="8dp">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_pet_card_title"
+            android:textStyle="bold"
+            android:text="@string/pet_no"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/btn_erase_pet_card"
+            android:src="@drawable/ic_clear_black_24dp"
+            android:padding="@dimen/default_padding_8dp"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/img_register_pet_image"
@@ -18,6 +37,28 @@
         android:layout_height="150dp"
         android:padding="@dimen/padding_large_16dp"
         app:srcCompat="@drawable/pet_profile_placeholder" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/btn_upload_pet_image"
+            android:src="@drawable/ic_file_upload_black_24dp"
+            android:padding="@dimen/default_padding_8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/btn_take_pet_photo"
+            android:padding="@dimen/default_padding_8dp"
+            android:src="@drawable/ic_photo_camera_black_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_register_pet_name_title"
@@ -79,13 +120,13 @@
 
 
     <RelativeLayout
+        android:layout_margin="@dimen/margin_0_5x"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     <Button
         android:id="@+id/check_register_pet_number"
         style="?attr/materialButtonOutlinedStyle"
-        android:layout_marginTop="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -105,7 +146,6 @@
         android:src="@drawable/ic_check_circle_black_24dp"
         />
 <!--   동물 등록 번호가 확인되면 체크 박스가 나타나도록 한다. -->
-
     </RelativeLayout>
 
 

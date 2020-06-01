@@ -34,7 +34,7 @@ class RegisterAuthPhoneFragment : Fragment() {
         // TODO: Use the ViewModel
 
         btn_register_auth_phone_next_screen.setOnClickListener {
-            findNavController().navigate(R.id.action_registerAuthPhoneFragment_to_registerPetInfo)
+            findNavController().navigate(R.id.action_registerAuthPhoneFragment_to_registerPetInfoFragment)
         }
     }
 

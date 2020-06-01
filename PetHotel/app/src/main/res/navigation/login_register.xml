@@ -21,31 +21,12 @@
             app:destination="@id/registerAuthPhoneFragment" />
     </fragment>
     <fragment
-        android:id="@+id/registerPetInfo"
-        android:name="com.prography.pethotel.ui.register.RegisterPetInfo"
-        android:label="register_pet_info_fragment"
-        tools:layout="@layout/register_pet_info_fragment" >
-        <action
-            android:id="@+id/action_registerPetInfo_to_registerPetInfoDetailFragment"
-            app:destination="@id/registerPetInfoDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/registerPetInfoDetailFragment"
-        android:name="com.prography.pethotel.ui.register.RegisterPetInfoDetailFragment"
-        android:label="register_pet_info_detail_fragment"
-        tools:layout="@layout/register_pet_info_detail_fragment" >
-        <argument
-            android:name="numOfPets"
-            app:argType="integer"
-            android:defaultValue="0" />
-    </fragment>
-    <fragment
         android:id="@+id/registerAuthPhoneFragment"
         android:name="com.prography.pethotel.ui.register.RegisterAuthPhoneFragment"
         android:label="RegisterAuthPhoneFragment" >
         <action
-            android:id="@+id/action_registerAuthPhoneFragment_to_registerPetInfo"
-            app:destination="@id/registerPetInfo" />
+            android:id="@+id/action_registerAuthPhoneFragment_to_registerPetInfoFragment"
+            app:destination="@id/registerPetInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginRegisterFragment"
@@ -56,5 +37,10 @@
             android:id="@+id/action_loginRegisterFragment_to_registerUserInfoFragment"
             app:destination="@id/registerUserInfoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/registerPetInfoFragment"
+        android:name="com.prography.pethotel.ui.register.RegisterPetInfoFragment"
+        android:label="fragment_register_pet_info"
+        tools:layout="@layout/fragment_register_pet_info" />
 
 </navigation>
