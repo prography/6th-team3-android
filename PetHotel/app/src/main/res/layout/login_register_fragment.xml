@@ -70,6 +70,7 @@
         android:layout_width="@dimen/login_button_width"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_1x"
+        android:textStyle="bold"
         android:text="로그인"/>
 
     <Button
@@ -78,6 +79,7 @@
         android:layout_width="@dimen/login_button_width"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_1x"
+        android:textStyle="bold"
         android:text="회원가입"/>
 
 </LinearLayout>
@@ -95,15 +97,27 @@
     <TextView
         android:text="간편 로그인"
         android:layout_marginTop="@dimen/margin_2x"
+        android:layout_marginBottom="@dimen/margin_0_5x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-   <ImageButton
-       android:layout_margin="@dimen/margin_1x"
-       android:src="@drawable/kakao_login_btn_simple_medium"
-       android:background="@android:color/transparent"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"/>
+<!--   <ImageButton-->
+<!--       android:layout_margin="@dimen/margin_1x"-->
+<!--       android:src="@drawable/kakao_login_btn_simple_medium"-->
+<!--       android:background="@android:color/transparent"-->
+<!--       android:layout_width="wrap_content"-->
+<!--       android:layout_height="wrap_content"/>-->
+
+    <Button
+        android:id="@+id/btn_kakao_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/kakaoBlack"
+        android:drawableLeft="@drawable/kakao_talk_small"
+        android:text="카카오톡"
+        android:textStyle="bold"
+        android:backgroundTint="@color/kakaoGold"
+        />
 
 </LinearLayout>
 

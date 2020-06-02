@@ -67,15 +67,18 @@ class RegisterUserInfoFragment : BaseFragment() {
 
         btn_register_next_screen.setOnClickListener {
             //TODO register - 추후에 로직 구체화하기
-            if(!userInfo.email.isNullOrBlank()
-                && !userInfo.nickName.isNullOrBlank()
-                && !userInfo.password.isNullOrBlank()){
-                // 비밀번호 인증 화면으로 넘어간다.
-                viewModel.userInfoLiveData.value = userInfo
-                findNavController().navigate(R.id.action_registerUserInfoFragment_to_registerAuthPhoneFragment)
-            }else{
-                Toast.makeText(context, "정보를 입력해 주세요.", Toast.LENGTH_LONG).show()
-            }
+//            if(!userInfo.email.isNullOrBlank()
+//                && !userInfo.nickName.isNullOrBlank()
+//                && !userInfo.password.isNullOrBlank()){
+//                // 비밀번호 인증 화면으로 넘어간다.
+//                viewModel.userInfoLiveData.value = userInfo
+//                findNavController().navigate(R.id.action_registerUserInfoFragment_to_registerAuthPhoneFragment)
+//            }else{
+//                Toast.makeText(context, "정보를 입력해 주세요.", Toast.LENGTH_LONG).show()
+//            }
+            // 비밀번호 인증 화면으로 넘어간다.
+            viewModel.userInfoLiveData.value = userInfo
+            findNavController().navigate(R.id.action_registerUserInfoFragment_to_registerAuthPhoneFragment)
 
         }
 

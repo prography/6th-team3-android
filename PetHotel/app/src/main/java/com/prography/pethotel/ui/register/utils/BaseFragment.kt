@@ -35,7 +35,7 @@ open class BaseFragment : Fragment(){
     var myViewTag : String = ""
     var currentPhotoPath = ""
 
-    fun createImageFile() : File{
+    private fun createImageFile() : File{
         // Create an image file name
         val timeStamp =
             SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())

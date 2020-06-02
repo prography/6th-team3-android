@@ -28,4 +28,8 @@
     <color name="colorDarkGrey">#2B2B2A</color>
     <color name="colorBlack">#000000</color>
 
+<!--    social login colors -->
+    <color name="kakaoGold">#FBDA14</color>
+    <color name="kakaoBlack">#13110D</color>
+
 </resources>

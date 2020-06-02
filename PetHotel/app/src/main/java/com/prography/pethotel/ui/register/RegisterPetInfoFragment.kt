@@ -27,6 +27,9 @@ import kotlinx.android.synthetic.main.pet_detail_layout.view.btn_erase_pet_card
 class RegisterPetInfoFragment : BaseFragment() {
 
     private var numPets : Int = 0
+    companion object {
+        const val LAYOUT_ID_ : String = "layout_id_"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,6 +102,7 @@ class RegisterPetInfoFragment : BaseFragment() {
             btn_erase_pet_card.setOnClickListener {
                 val viewGroup = view.parent as ViewGroup
                 viewGroup.removeView(view)
+                // TODO reset numPets in increasing order, starting from 1
                 --numPets;
                 for(x in 1 .. numPets) {
                     val view = viewGroup.findViewWithTag<LinearLayout>(LAYOUT_ID_ + x)
@@ -123,11 +127,13 @@ class RegisterPetInfoFragment : BaseFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-
-
         if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
             myView = pet_info_input_layout.findViewWithTag<LinearLayout>(myViewTag)
-            (myView as LinearLayout?)?.img_register_pet_image?.setImageURI(Uri.parse(currentPhotoPath))
+            (myView as LinearLayout?)?.img_register_pet_image?.setImageURI(
+                Uri.parse(
+                    currentPhotoPath
+                )
+            )
 
         } else if (requestCode == REQUEST_TAKE_ALBUM && resultCode == Activity.RESULT_OK) {
             myView = pet_info_input_layout.findViewWithTag<LinearLayout>(myViewTag)
@@ -140,12 +146,7 @@ class RegisterPetInfoFragment : BaseFragment() {
                         .into(it)
                 }
             }
-
         }
-    }
-
-    companion object {
-        const val LAYOUT_ID_ : String = "layout_id_"
     }
 
 }
