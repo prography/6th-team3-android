@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_1x"
-            android:text="전달사항" />
+            android:text="추가 전달사항" />
 
         <!--    TODO 반려견 별로 전달 사항 기입할 수 있도록 하기
          동적으로 추가한다. -->

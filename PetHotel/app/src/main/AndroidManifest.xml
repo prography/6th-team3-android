@@ -43,7 +43,6 @@
 <!--             </intent-filter>-->
         </activity>
 
-        <activity android:name=".ui.mypage.MyPageFragment"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

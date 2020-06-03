@@ -18,12 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/check_if_using_user_info"
         android:text="기존 회원 정보 사용 "
         android:textColor="@color/petHotelSecondaryDark"
-        android:textAppearance="?attr/textAppearanceBody1"
-        android:padding="@dimen/default_padding_8dp"
         android:layout_gravity="end"
         android:layoutDirection="rtl"
         android:textAlignment="textEnd"
@@ -43,7 +41,7 @@
     <EditText
         style="@style/phEditText"
         android:id="@+id/et_reservation_detail_user_name"
-        android:text="털실 맘"
+        android:hint="예) 털실맘"
         android:ems="10"
         android:inputType="textPersonName"
         android:layout_width="wrap_content"
@@ -62,7 +60,7 @@
     <EditText
         style="@style/phEditText"
         android:id="@+id/et_reservation_detail_user_email"
-        android:text="sarahan@gmail.com"
+        android:hint="예) OOO@gmail.com"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:layout_width="wrap_content"
@@ -81,7 +79,7 @@
     <EditText
         style="@style/phEditText"
         android:id="@+id/et_reservation_detail_user_phone"
-        android:text="01012341234"
+        android:hint="예) 01012341234"
         android:ems="10"
         android:inputType="phone"
         android:layout_width="wrap_content"
