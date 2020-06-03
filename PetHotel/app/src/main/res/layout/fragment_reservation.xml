@@ -6,33 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.reservation.ReservationFragment">
 
-    <TextView
-        android:id="@+id/reserve_hotel_title"
-        style="@style/phHeadline5"
+
+    <include layout="@layout/reservation_main_layout"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_reservation_basic_info_selected_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="애견호텔예약"
-        android:layout_marginTop="@dimen/margin_1x"
+        android:src="@drawable/ic_baseline_arrow_forward_24"
+        android:layout_marginEnd="@dimen/margin_1x"
         android:layout_marginBottom="@dimen/margin_1x"
-        app:layout_constraintBottom_toTopOf="@+id/datePicker"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.285" />
-
-<!--    Time picker 작은 것 없는지 ? 아니면 Dialog 로 처리해도 될거같은데 흠 ... -->
-
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

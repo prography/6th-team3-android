@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:paddingStart="@dimen/padding_large_16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:text="날짜 및 시간"
+        style="@style/phTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:padding="@dimen/default_padding_8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--            enter hotel -->
+        <TextView
+            android:id="@+id/tv_hotel_enter_title"
+            android:text="입실"
+            android:layout_marginTop="@dimen/margin_0_5x"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/margin_1x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--            TODO : make this date time a string placeholder -->
+        <TextView
+            android:id="@+id/tv_hotel_enter_date"
+            android:background="@drawable/white_round_corner_rect"
+            android:elevation="4dp"
+            android:paddingStart="@dimen/default_padding_8dp"
+            android:paddingEnd="@dimen/default_padding_8dp"
+            android:layout_toEndOf="@id/tv_hotel_enter_title"
+            android:text="2020/06/03"
+            android:layout_marginTop="@dimen/margin_0_5x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:id="@+id/tv_hotel_enter_time"
+            android:background="@drawable/white_round_corner_rect"
+            android:elevation="4dp"
+            android:paddingStart="@dimen/default_padding_8dp"
+            android:paddingEnd="@dimen/default_padding_8dp"
+            android:layout_marginStart="@dimen/margin_1x"
+            android:layout_marginTop="@dimen/margin_0_5x"
+            android:text="18:00"
+            android:layout_toEndOf="@id/tv_hotel_enter_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--            exit hotel -->
+
+        <TextView
+            android:id="@+id/tv_hotel_exit_title"
+            android:text="퇴실"
+            android:layout_marginTop="@dimen/margin_1x"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/margin_1x"
+            android:layout_below="@id/tv_hotel_enter_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_hotel_exit_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_hotel_enter_date"
+            android:layout_marginTop="@dimen/margin_1x"
+            android:layout_toEndOf="@id/tv_hotel_exit_title"
+            android:layout_marginBottom="@dimen/margin_0_5x"
+            android:background="@drawable/white_round_corner_rect"
+            android:elevation="4dp"
+            android:paddingStart="@dimen/default_padding_8dp"
+            android:paddingEnd="@dimen/default_padding_8dp"
+            android:text="2020/06/05" />
+
+        <TextView
+            android:id="@+id/tv_hotel_exit_time"
+            android:background="@drawable/white_round_corner_rect"
+            android:elevation="4dp"
+            android:paddingStart="@dimen/default_padding_8dp"
+            android:paddingEnd="@dimen/default_padding_8dp"
+            android:layout_marginStart="@dimen/margin_1x"
+            android:layout_marginTop="@dimen/margin_1x"
+            android:text="18:00"
+            android:layout_below="@id/tv_hotel_enter_time"
+            android:layout_toEndOf="@id/tv_hotel_exit_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

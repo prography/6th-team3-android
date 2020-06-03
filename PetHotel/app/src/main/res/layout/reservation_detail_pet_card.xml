@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_reservation_detail_pet_name"
+        android:text="털실이"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_reservation_detail_user_msg"
+        android:layout_below="@id/tv_reservation_detail_pet_name"
+        android:background="@drawable/default_container"
+        android:padding="@dimen/padding_small_4dp"
+        android:hint="전달 사항을 기입해 주세요"
+        android:gravity="start|top"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
+</RelativeLayout>

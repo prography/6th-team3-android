@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
-    <color name="defaultBackgroundColor">#03000000</color>
+    <color name="defaultBackgroundColor">#1D000000</color>
 
     <color name="petHotelPrimary">#724926</color>
     <color name="petHotelPrimaryDark">#3A1C02</color>

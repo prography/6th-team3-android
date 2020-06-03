@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/white_round_corner_rect"
+    android:elevation="4dp"
+    android:padding="@dimen/padding_large_16dp"
+    android:layout_margin="@dimen/margin_0_5x"
+    android:layout_width="wrap_content"
+    android:layout_height="160dp">
+
+    <ImageView
+        android:id="@+id/img_reservation_hotel_image"
+        android:src="@drawable/hotel_placeholer"
+        android:layout_centerVertical="true"
+        android:layout_width="120dp"
+        android:layout_height="120dp"/>
+
+    <TextView
+        android:id="@+id/tv_reservation_hotel_name"
+        android:layout_toEndOf="@id/img_reservation_hotel_image"
+        android:text="호텔 이름"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_reservation_hotel_address"
+        android:layout_below="@id/tv_reservation_hotel_name"
+        android:layout_toEndOf="@id/img_reservation_hotel_image"
+        android:text="서울시 용산구 후암동"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_reservation_hotel_distance"
+        android:layout_below="@id/tv_reservation_hotel_address"
+        android:layout_toEndOf="@id/img_reservation_hotel_image"
+        android:text="5km"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

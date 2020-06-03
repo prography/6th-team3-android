@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="none"
     tools:context=".ui.register.RegisterUserInfoFragment"
     >
 
@@ -89,6 +90,7 @@
             <EditText
                 android:id="@+id/email_edit_text_field"
                 style="@style/phEditText"
+                android:ems="10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_1x"
@@ -139,6 +141,7 @@
                 android:layout_marginStart="@dimen/margin_1x"
                 android:layout_marginTop="@dimen/margin_0_5x"
                 android:hint="예) 털실맘"
+                android:ems="10"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/nickname_title_field"
                 app:layout_constraintTop_toBottomOf="@+id/nickname_title_field" />
@@ -173,6 +176,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_1x"
                 android:layout_marginTop="@dimen/margin_0_5x"
+                android:ems="10"
                 android:hint="********"
                 android:inputType="textPassword"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -215,6 +219,7 @@
                 android:layout_marginStart="@dimen/margin_1x"
                 android:layout_marginTop="@dimen/margin_0_5x"
                 android:hint="********"
+                android:ems="10"
                 android:inputType="textPassword"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/password_check_title_field"

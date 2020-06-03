@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.reservation.ReservationDetailFragment">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.reservation.ReservationDetailFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
+<LinearLayout
+    android:orientation="vertical"
+    android:paddingStart="@dimen/padding_large_16dp"
+    android:paddingEnd="@dimen/padding_large_16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="예약 디테일 화면" />
+        style="@style/phTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전달사항" />
 
-</FrameLayout>
+<!--    TODO 반려견 별로 전달 사항 기입할 수 있도록 하기 -->
+
+    <include layout="@layout/reservation_detail_pet_card"/>
+
+    <include layout="@layout/reservation_detail_pet_card"/>
+
+
+</LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_reservation_detail_info_selected_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_1x"
+        android:layout_marginBottom="@dimen/margin_1x"
+        android:src="@drawable/ic_check_white_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
