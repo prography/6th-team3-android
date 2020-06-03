@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="알림">
+        <SwitchPreferenceCompat
+            android:key="switch_preference"
+            android:title="알림 설정"
+            android:summary="push 알림을 포함한 모든 알림"
+            android:defaultValue="true"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="일반 설정">
+
+        <Preference
+            android:key="text"
+            android:title="로그아웃"
+            />
+        <Preference
+            android:key="text"
+            android:title="개인 정보 접근 권한"
+            />
+
+    </PreferenceCategory>
+</PreferenceScreen>

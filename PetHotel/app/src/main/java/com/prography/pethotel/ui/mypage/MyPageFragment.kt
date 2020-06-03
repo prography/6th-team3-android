@@ -26,15 +26,11 @@ class MyPageFragment : Fragment() {
         view.my_review.img_list.setImageResource(
             R.drawable.ic_edit_black_24dp
         )
-        view.notification_setting.img_list.setImageResource(
-            R.drawable.ic_notifications_black_24dp
-        )
         view.settings.img_list.setImageResource(
             R.drawable.ic_settings_black_24dp
         )
         view.my_pick.tv_list.text = "내가 찜한 곳"
         view.my_review.tv_list.text = "내가 쓴 리뷰"
-        view.notification_setting.tv_list.text="알림 설정"
         view.settings.tv_list.text = "설정"
 
         return view
