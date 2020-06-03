@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:orientation="vertical"
+    android:padding="@dimen/padding_large_16dp"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            style="@style/phTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_1x"
+            android:text="전달사항" />
+
+        <!--    TODO 반려견 별로 전달 사항 기입할 수 있도록 하기
+         동적으로 추가한다. -->
+
+        <include layout="@layout/reservation_detail_pet_card"/>
+
+        <include layout="@layout/reservation_detail_pet_card"/>
+
+
+</LinearLayout>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:scrollbars="none"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/defaultBackgroundColor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/reservation_detail_check_user_info_layout"
+            android:layout_marginBottom="@dimen/margin_1x"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <include layout="@layout/reservation_detail_deliver_msg_layout"
+            android:layout_marginBottom="@dimen/margin_1x"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+
+
+    </LinearLayout>
+
+</ScrollView>
