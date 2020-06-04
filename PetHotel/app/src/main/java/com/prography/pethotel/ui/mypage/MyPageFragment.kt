@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.prography.pethotel.R
 import kotlinx.android.synthetic.main.fragment_my_page.*
 import kotlinx.android.synthetic.main.fragment_my_page.view.*
+import kotlinx.android.synthetic.main.login_register_fragment.*
 import kotlinx.android.synthetic.main.my_page_list_layout.view.*
 
 
@@ -34,6 +36,27 @@ class MyPageFragment : Fragment() {
         view.settings.tv_list.text = "설정"
 
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+
+        my_pick.setOnClickListener {
+            //내가 찜한 곳으로 이동한다.
+            findNavController().navigate(R.id.action_myPageFragment_to_myPickFragment)
+        }
+
+        my_review.setOnClickListener {
+            //나의 리뷰로 이동한다.
+            findNavController().navigate(R.id.action_myPageFragment_to_myReviewFragment)
+        }
+
+        settings.setOnClickListener {
+            //환경 설정으로 이동한다.
+            findNavController().navigate(R.id.action_myPageFragment_to_settingsFragment)
+        }
+
     }
 
 }

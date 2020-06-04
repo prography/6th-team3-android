@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_myPageFragment_to_myReviewFragment"
             app:destination="@id/myReviewFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPickFragment"
@@ -27,4 +30,8 @@
         android:name="com.prography.pethotel.ui.mypage.MyReviewFragment"
         android:label="my_page_review_fragment"
         tools:layout="@layout/my_page_review_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.prography.pethotel.ui.mypage.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
