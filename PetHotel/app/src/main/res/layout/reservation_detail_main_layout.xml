@@ -18,11 +18,19 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
-        <include layout="@layout/reservation_detail_deliver_msg_layout"
+        <include layout="@layout/reservation_detail_check_hotel_layout"
             android:layout_marginBottom="@dimen/margin_1x"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
+        <include layout="@layout/reservation_checklist_layout"
+            android:layout_marginBottom="@dimen/margin_1x"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+        <include layout="@layout/reservation_detail_deliver_msg_layout"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
 
 
     </LinearLayout>

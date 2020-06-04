@@ -12,12 +12,30 @@
         tools:layout="@layout/fragment_reservation" >
         <action
             android:id="@+id/action_reservationFragment_to_reservationDetailFragment"
-            app:destination="@id/reservationDetailFragment" />
+            app:destination="@id/reservationDetailFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/reservationDetailFragment"
         android:name="com.prography.pethotel.ui.reservation.ReservationDetailFragment"
         android:label="fragment_reservation_detail"
-        tools:layout="@layout/fragment_reservation_detail" />
+        tools:layout="@layout/fragment_reservation_detail" >
+        <action
+            android:id="@+id/action_reservationDetailFragment_to_reservationDoneFragment"
+            app:destination="@id/reservationDoneFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/reservationDoneFragment"
+        android:name="com.prography.pethotel.ui.reservation.ReservationDoneFragment"
+        android:label="fragment_reservation_done"
+        tools:layout="@layout/fragment_reservation_done" >
+        <action
+            android:id="@+id/action_reservationDoneFragment_to_reservationFragment2"
+            app:popUpTo="@id/reservationFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/reservationFragment" />
+    </fragment>
+<!--https://developer.android.com/guide/navigation/navigation-navigate#pop-->
 </navigation>

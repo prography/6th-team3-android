@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_large_16dp"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:text="추가 서비스"
+        android:layout_marginBottom="@dimen/margin_1x"
+        style="@style/phTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <CheckBox android:id="@+id/checkbox_salon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:outlineProvider="bounds"
+        android:text="미용"
+        />
+
+    <CheckBox android:id="@+id/checkbox_health_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:outlineProvider="bounds"
+        android:text="건강 검진"
+        />
+
+<!--    TODO 플러스 버튼을 누르면 동적으로 레이아웃을 추가하도록 한다. -->
+    <ImageButton
+        android:layout_gravity="center"
+        android:backgroundTint="@color/petHotelLightGrey"
+        android:src="@drawable/ic_add_white_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+</LinearLayout>

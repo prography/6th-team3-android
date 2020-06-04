@@ -7,7 +7,8 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:id="@+id/main_toolbar"
         android:background="@color/petHotelPrimaryDark"
         android:layout_width="match_parent"
@@ -17,29 +18,28 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            >
 
             <ImageView
                 android:src="@drawable/pet"
                 android:layout_gravity="center_vertical"
-                android:layout_width="35dp"
-                android:layout_height="35dp"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
 
             <TextView
+                android:id="@+id/main_toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="My Petmily"
                 android:textColor="@android:color/white"
                 style="@style/phHeadline5"
                 android:textStyle="italic"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="12dp"
                 android:layout_gravity="center_vertical"
                 />
         </LinearLayout>
 
-
-    </androidx.appcompat.widget.Toolbar>
-
+    </com.google.android.material.appbar.MaterialToolbar>
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -54,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_menu"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:backgroundTint="@android:color/white"
         />
 
