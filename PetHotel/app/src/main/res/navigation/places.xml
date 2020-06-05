@@ -9,5 +9,19 @@
         android:id="@+id/placeInfoFragment"
         android:name="com.prography.pethotel.ui.places.PlaceInfoFragment"
         android:label="place_info_fragment"
-        tools:layout="@layout/place_info_fragment" />
+        tools:layout="@layout/place_info_fragment" >
+        <action
+            android:id="@+id/action_placeInfoFragment_to_placeInfoDetailsFragment"
+            app:destination="@id/placeInfoDetailsFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/placeInfoDetailsFragment"
+        android:name="com.prography.pethotel.ui.places.PlaceInfoDetailsFragment"
+        android:label="fragment_place_info_details"
+        tools:layout="@layout/fragment_place_info_details" >
+        <argument
+            android:name="hotel"
+            app:argType="com.prography.pethotel.models.Hotel" />
+    </fragment>
 </navigation>

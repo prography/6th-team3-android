@@ -1,56 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/white_round_corner_rect"
-    android:padding="@dimen/default_padding_8dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="150dp"
+    android:elevation="4dp"
+    android:id="@+id/rv_place_info_container"
+    android:layout_margin="@dimen/margin_1x"
+    android:padding="@dimen/padding_small_4dp"
+    android:background="@drawable/white_round_corner_rect"
+    >
 
     <ImageView
         android:id="@+id/place_info_image"
-        android:layout_width="@dimen/place_info_image_dimen"
-        android:layout_height="@dimen/place_info_image_dimen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="centerCrop"
-        tools:src="@tools:sample/backgrounds/scenic"
-        />
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:layout_marginEnd="@dimen/margin_1x"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/round_corner_rect_grey"
+        android:src="@drawable/pet"
+         />
 
     <TextView
         android:id="@+id/place_info_name"
         style="@style/phTitle"
+        android:layout_marginTop="@dimen/margin_0_5x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_1x"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/place_info_category"
-        app:layout_constraintStart_toEndOf="@+id/place_info_image"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_toEndOf="@id/place_info_image"
         tools:text="@sample/hotels.json/data/name" />
-
-    <TextView
-        android:id="@+id/place_info_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_1x"
-        tools:text="Hotel"
-        app:layout_constraintBottom_toTopOf="@+id/place_info_address"
-        app:layout_constraintStart_toEndOf="@+id/place_info_image"
-        app:layout_constraintTop_toBottomOf="@+id/place_info_name" />
 
     <TextView
         android:id="@+id/place_info_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_1x"
-        tools:text="@sample/hotels.json/data/address"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/place_info_image"
-        app:layout_constraintTop_toBottomOf="@+id/place_info_category" />
+        android:layout_below="@id/place_info_name"
+        android:layout_toEndOf="@id/place_info_image"
+        tools:text="@sample/hotels.json/data/address" />
+
+    <TextView
+        android:id="@+id/tv_hotel_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/place_info_address"
+        android:layout_toEndOf="@id/place_info_image"
+        android:text="5km" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -1,0 +1,99 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/padding_large_16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:id="@+id/place_detail_name"
+        style="@style/phHeadline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="쿨쿨펫 애견호텔"
+        android:layout_margin="@dimen/margin_1x"
+        />
+
+    <TextView
+        android:id="@+id/place_detail_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="호텔/병원/미용"
+        android:layout_below="@id/place_detail_name"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        android:layout_marginStart="@dimen/margin_1x"
+        />
+
+    <TextView
+        android:id="@+id/place_detail_address"
+        android:text="경상북도 구미시 인동4길 12 (진평동) 1F 쿨쿨펫"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        android:layout_marginStart="@dimen/margin_1x"
+        android:layout_marginBottom="@dimen/margin_0_5x"
+        android:layout_below="@id/place_detail_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <LinearLayout
+        android:id="@+id/place_detail_img_btn_container"
+        android:layout_below="@id/place_detail_address"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:paddingStart="@dimen/padding_large_16dp"
+        android:paddingEnd="@dimen/padding_large_16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_place_detail_info"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="웹사이트"
+            android:layout_weight="1"
+            app:icon="@drawable/ic_info_black_24dp"
+
+            />
+
+        <Button
+            android:id="@+id/btn_place_detail_like"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="저장하기"
+            app:icon="@drawable/ic_favorite_black_24dp"
+            />
+
+        <Button
+            android:id="@+id/btn_place_detail_phone"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전화예약"
+            app:icon="@drawable/ic_local_phone_black_24dp" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_place_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_1x"
+        android:layout_below="@id/place_detail_img_btn_container"
+        android:text="@string/sample_hotel_description"
+        android:maxLines="10"
+        />
+
+<!--    오픈시간 정보, 주중 주말 가격 정보 넣기 -->
+    <include
+        layout="@layout/place_info_detail_time_etc_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_place_detail"
+        />
+
+
+</RelativeLayout>
