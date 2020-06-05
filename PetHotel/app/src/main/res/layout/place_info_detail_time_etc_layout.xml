@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingBottom="56dp"
+    android:paddingStart="@dimen/padding_large_16dp"
+    android:paddingTop="@dimen/padding_large_16dp"
+    android:paddingEnd="@dimen/padding_large_16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/title_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 영업시간"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/ic_baseline_access_time_24"
+        />
+
+    <TextView
+        android:id="@+id/title_week_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="평일  "
+        />
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_week_time"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="09:00 ~ 20:00" />-->
+
+    <TextView
+        android:id="@+id/title_sat_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="토요일  "
+         />
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_sat_time"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="09:00 ~ 18:00" />-->
+
+    <TextView
+        android:id="@+id/title_sun_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일요일  "
+        />
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_sun_time"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="09:00 ~ 18:00" />-->
+
+    <TextView
+        android:id="@+id/title_monitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 모니터링 제공 여부"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:drawableStart="@drawable/ic_baseline_tv_24"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_monitoring_contents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/title_neuter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:drawableStart="@drawable/ic_neuter"
+        android:text=" 중성화 필요 여부"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_neuter_needed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="필요함"
+        />
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/icon_price"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/margin_1x"-->
+<!--        android:src="@drawable/ic_korean_won" />-->
+
+
+
+        <TextView
+            android:id="@+id/title_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_korean_won"
+            android:layout_marginTop="@dimen/margin_1x"
+            android:text=" 호텔가격"
+            android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tv_week_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="평일  "
+        />
+
+    <TextView
+        android:id="@+id/tv_sat_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="토요일  "
+        />
+
+    <TextView
+        android:id="@+id/tv_sun_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일요일  "
+        />
+
+
+
+</LinearLayout>
