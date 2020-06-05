@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.mypage.MyPickFragment">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_my_pick"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-40dp"
-        tools:layout_editor_absoluteY="-198dp"
-        tools:listitem="@layout/place_info_view_holder" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/title_hotel_list"
+                android:layout_centerInParent="true"
+                android:text="내가 찜한 곳"
+                style="@style/phTitle"
+                android:textColor="@color/petHotelSecondaryDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </RelativeLayout>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_my_pick"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/place_info_view_holder" />
+
+
+</LinearLayout>
