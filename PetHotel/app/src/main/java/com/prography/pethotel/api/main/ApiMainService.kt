@@ -14,7 +14,7 @@ import retrofit2.http.Query
 //Retrofit 객체 생성하기
 
 // TODO 서버에서 base url 받기
-private const val BASE_URL = ""
+private const val BASE_URL = "http://mypetmily-release.ap-northeast-2.elasticbeanstalk.com/"
 
 private val retrofit
         = Retrofit.Builder()
@@ -26,10 +26,10 @@ private val retrofit
 
 interface HotelsApiService{
 
-    @GET("/api/hotels")
+    @GET("api/hotels")
     suspend fun getHotelList() : List<Hotel>
 
-    @GET("/api/hotels/{hotelId}")
+    @GET("api/hotels/{hotelId}")
     suspend fun getHotelById(@Path("hotelId") hotelId : Int) : Hotel
 }
 

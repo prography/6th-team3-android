@@ -20,7 +20,6 @@
     <style name="phButtonTextAppearance" parent="TextAppearance.MaterialComponents.Button">
         <item name="fontFamily">@font/notoserifkr_semibold</item>
         <item name="android:fontFamily">@font/notoserifkr_semibold</item>
-
     </style>
 
     <style name="phButtonStyle" parent="Widget.MaterialComponents.Button">
