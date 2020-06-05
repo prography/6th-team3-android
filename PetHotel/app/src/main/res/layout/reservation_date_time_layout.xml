@@ -36,7 +36,7 @@
             android:paddingStart="@dimen/default_padding_8dp"
             android:paddingEnd="@dimen/default_padding_8dp"
             android:layout_toEndOf="@id/tv_hotel_enter_title"
-            android:text="2020/06/03"
+            android:text="2020년 6월 3일"
             android:layout_marginTop="@dimen/margin_0_5x"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -50,7 +50,7 @@
             android:paddingEnd="@dimen/default_padding_8dp"
             android:layout_marginStart="@dimen/margin_1x"
             android:layout_marginTop="@dimen/margin_0_5x"
-            android:text="18:00"
+            android:text="18시 00분"
             android:layout_toEndOf="@id/tv_hotel_enter_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -79,7 +79,7 @@
             android:elevation="4dp"
             android:paddingStart="@dimen/default_padding_8dp"
             android:paddingEnd="@dimen/default_padding_8dp"
-            android:text="2020/06/05" />
+            android:text="2020년 6월 5일" />
 
         <TextView
             android:id="@+id/tv_hotel_exit_time"
@@ -89,7 +89,7 @@
             android:paddingEnd="@dimen/default_padding_8dp"
             android:layout_marginStart="@dimen/margin_1x"
             android:layout_marginTop="@dimen/margin_1x"
-            android:text="18:00"
+            android:text="18시 00분"
             android:layout_below="@id/tv_hotel_enter_time"
             android:layout_toEndOf="@id/tv_hotel_exit_date"
             android:layout_width="wrap_content"

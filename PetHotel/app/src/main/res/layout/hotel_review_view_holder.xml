@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_0_5x"
+    android:padding="@dimen/default_padding_8dp"
+    android:background="@drawable/white_round_corner_rect"
+    android:elevation="4dp">
+
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:max="5"
+        android:rating="4.5"
+        android:scaleX="0.6"
+        android:scaleY="0.6"
+        android:stepSize="0.5" />
+
+    <TextView
+        android:id="@+id/tv_review_hotel_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="호텔 이름" />
+
+    <TextView
+        android:id="@+id/tv_review_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="작성자" />
+
+    <TextView
+        android:id="@+id/tv_review_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="샘플 리뷰 입니다. "/>
+
+
+</LinearLayout>

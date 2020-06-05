@@ -3,13 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.monitor.MonitorFragment">
+    tools:context=".ui.reservation.DatePickerFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="24sp"
-        android:text="모니터링 화면\n\n준비중입니다!" />
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>
