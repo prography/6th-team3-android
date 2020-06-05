@@ -26,7 +26,7 @@ class MyPageFragment : Fragment() {
             R.drawable.ic_favorite_black_24dp
         )
         view.my_review.img_list.setImageResource(
-            R.drawable.ic_edit_black_24dp
+            R.drawable.ic_baseline_rate_review_black_24
         )
         view.settings.img_list.setImageResource(
             R.drawable.ic_settings_black_24dp
@@ -41,6 +41,10 @@ class MyPageFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        img_btn_user_edit.setOnClickListener {
+            //내 정보 수정 페이지로 이동한다.
+            findNavController().navigate(R.id.action_myPageFragment_to_userInfoEditFragment)
+        }
 
         my_pick.setOnClickListener {
             //내가 찜한 곳으로 이동한다.

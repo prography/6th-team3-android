@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_myPageFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_userInfoEditFragment"
+            app:destination="@id/userInfoEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPickFragment"
@@ -34,4 +37,12 @@
         android:id="@+id/settingsFragment"
         android:name="com.prography.pethotel.ui.mypage.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/userInfoEditFragment"
+        android:name="com.prography.pethotel.ui.mypage.UserInfoEditFragment"
+        android:label="UserInfoEditFragment" >
+        <action
+            android:id="@+id/action_userInfoEditFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
+    </fragment>
 </navigation>

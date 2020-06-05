@@ -1,4 +1,4 @@
-package com.prography.pethotel.ui.register
+package com.prography.pethotel.ui.mypage
 
 import android.app.Activity
 import android.content.Intent
@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.prography.pethotel.R
 import com.prography.pethotel.models.UserInfo
+import com.prography.pethotel.ui.register.RegisterUserInfoFragment
 import com.prography.pethotel.ui.register.utils.BaseFragment
 import com.prography.pethotel.ui.register.viewmodels.RegisterViewModel
 import com.prography.pethotel.utils.TAG_PHOTO
@@ -31,17 +32,15 @@ import kotlinx.android.synthetic.main.register_user_info_fragment.password_check
 import kotlinx.android.synthetic.main.register_user_info_fragment.password_edit_text_field
 import kotlinx.android.synthetic.main.register_user_info_fragment.tv_register_password_not_match
 
-
-class RegisterUserInfoFragment : BaseFragment() {
+class UserInfoEditFragment : BaseFragment() {
 
     companion object {
         fun newInstance() =
-            RegisterUserInfoFragment()
-
+            UserInfoEditFragment()
     }
 
     private lateinit var viewModel: RegisterViewModel
-//    private var currentPhotoPath = ""
+    //    private var currentPhotoPath = ""
     private var userInfo : UserInfo = UserInfo()
     private lateinit var userImage : ImageView
 
@@ -49,7 +48,7 @@ class RegisterUserInfoFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.register_user_info_fragment, container, false)
+        return inflater.inflate(R.layout.my_page_user_info_edit_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -86,8 +85,7 @@ class RegisterUserInfoFragment : BaseFragment() {
 //                Toast.makeText(context, "정보를 입력해 주세요.", Toast.LENGTH_LONG).show()
 //            }
             // 비밀번호 인증 화면으로 넘어간다.
-            viewModel.userInfoLiveData.value = userInfo
-            findNavController().navigate(R.id.action_registerUserInfoFragment_to_registerAuthPhoneFragment)
+            findNavController().navigate(R.id.action_userInfoEditFragment_to_myPageFragment)
 
         }
 
