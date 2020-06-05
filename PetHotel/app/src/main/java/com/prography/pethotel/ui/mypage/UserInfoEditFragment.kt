@@ -17,12 +17,10 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.prography.pethotel.R
 import com.prography.pethotel.models.UserInfo
-import com.prography.pethotel.ui.register.RegisterUserInfoFragment
 import com.prography.pethotel.ui.register.utils.BaseFragment
 import com.prography.pethotel.ui.register.viewmodels.RegisterViewModel
 import com.prography.pethotel.utils.TAG_PHOTO
 import kotlinx.android.synthetic.main.my_page_user_info_edit_fragment.*
-import kotlinx.android.synthetic.main.register_user_info_fragment.*
 import kotlinx.android.synthetic.main.register_user_info_fragment.btn_take_user_photo
 import kotlinx.android.synthetic.main.register_user_info_fragment.btn_upload_user_image
 import kotlinx.android.synthetic.main.register_user_info_fragment.email_edit_text_field
