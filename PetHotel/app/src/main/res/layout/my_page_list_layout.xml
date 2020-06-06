@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="textview"
-        style="@style/phBody2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/img_list"
         app:layout_constraintTop_toTopOf="parent" />

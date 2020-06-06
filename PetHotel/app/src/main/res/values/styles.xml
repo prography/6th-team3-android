@@ -13,13 +13,13 @@
         <item name="materialButtonOutlinedStyle">@style/phOutlinedButtonStyle</item>
         <item name="materialButtonStyle">@style/phButtonStyle</item>
         <item name="buttonStyle">@style/phAppCompatButtonStyle</item>
-        <item name="android:fontFamily">@font/notoserifkr_regular</item>
+        <item name="android:fontFamily">@font/nanum_barun_gothic</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="phButtonTextAppearance" parent="TextAppearance.MaterialComponents.Button">
-        <item name="fontFamily">@font/notoserifkr_semibold</item>
-        <item name="android:fontFamily">@font/notoserifkr_semibold</item>
+        <item name="fontFamily">@font/nanum_barun_gothic</item>
+        <item name="android:fontFamily">@font/nanum_barun_gothic</item>
     </style>
 
     <style name="phButtonStyle" parent="Widget.MaterialComponents.Button">
@@ -51,34 +51,34 @@
     </style>
 
     <style name="phHeadline3" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="fontFamily">@font/notoserifkr_bold</item>
-        <item name="android:fontFamily">@font/notoserifkr_bold</item>
+        <item name="fontFamily">@font/nanum_barun_gothic_bold</item>
+        <item name="android:fontFamily">@font/nanum_barun_gothic_bold</item>
     </style>
 
     <style name="phHeadline4" parent="TextAppearance.MaterialComponents.Headline4">
-        <item name="fontFamily">@font/notoserifkr_bold</item>
-        <item name="android:fontFamily">@font/notoserifkr_bold</item>
+        <item name="fontFamily">@font/nanum_barun_gothic_bold</item>
+        <item name="android:fontFamily">@font/nanum_barun_gothic_bold</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="phHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="fontFamily">@font/notoserifkr_bold</item>
-        <item name="android:fontFamily">@font/notoserifkr_bold</item>
+        <item name="fontFamily">@font/nanum_barun_gothic_bold</item>
+        <item name="android:fontFamily">@font/nanum_barun_gothic_bold</item>
     </style>
 
     <style name="phTitle" parent="TextAppearance.AppCompat.Title">
-        <item name="fontFamily">@font/notoserifkr_black</item>
-        <item name="android:fontFamily">@font/notoserifkr_black</item>
+        <item name="fontFamily">@font/nanum_barun_gothic_bold</item>
+        <item name="android:fontFamily">@font/nanum_barun_gothic_bold</item>
     </style>
 
     <style name="phBody1" parent="TextAppearance.AppCompat.Body1">
-        <item name="fontFamily">@font/notoserifkr_light</item>
-        <item name="android:fontFamily">@font/notoserifkr_light</item>
+        <item name="fontFamily">@font/nanum_barun_gothic_light</item>
+        <item name="android:fontFamily">@font/nanum_barun_gothic_light</item>
     </style>
 
     <style name="phBody2" parent="TextAppearance.AppCompat.Body2">
-        <item name="fontFamily">@font/notoserifkr_semibold</item>
-        <item name="android:fontFamily">@font/notoserifkr_semibold</item>
+        <item name="fontFamily">@font/nanum_barun_gothic_ultra_light</item>
+        <item name="android:fontFamily">@font/nanum_barun_gothic_ultra_light</item>
     </style>
 
     <style name="phEditText" parent="Widget.AppCompat.EditText">

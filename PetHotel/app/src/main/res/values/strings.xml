@@ -44,5 +44,6 @@
     <string name="lorem_ipsum_paragraph">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet eros mi. Suspendisse potenti. Nulla lorem purus, egestas et sem at, volutpat hendrerit nisl. Sed egestas risus felis, condimentum vehicula lorem maximus at. Nullam sodales semper dolor, eu venenatis urna cursus eget. Vivamus sit amet varius ex. Suspendisse vehicula sagittis ligula vel bibendum. Donec at augue lacus. Quisque sagittis imperdiet risus eget ullamcorper.
     </string>
+    <string name="head_my_petmily"><![CDATA[ My Petmily ]]></string>
 
 </resources>
