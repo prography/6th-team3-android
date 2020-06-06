@@ -1,5 +1,6 @@
 package com.prography.pethotel.ui.register
 
+import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 
 import com.prography.pethotel.R
+import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.register.viewmodels.LoginRegisterViewModel
 import kotlinx.android.synthetic.main.login_register_fragment.*
 
@@ -44,7 +46,8 @@ class LoginRegisterFragment : Fragment() {
 
         btn_login_user_login.setOnClickListener {
             //로그인 화면으로 이동한다.
-
+            startActivity(Intent(requireActivity(), MainActivity::class.java))
+            requireActivity().finish()
         }
 
         btn_login_user_register.setOnClickListener {

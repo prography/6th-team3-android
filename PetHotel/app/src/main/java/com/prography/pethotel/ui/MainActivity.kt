@@ -2,12 +2,14 @@ package com.prography.pethotel.ui
 
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.prography.pethotel.R
 import com.prography.pethotel.utils.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var mainLayout : LinearLayout
 
     private var currentNavController: LiveData<NavController>? = null
 
@@ -22,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        mainLayout = main_linear_container
 
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
@@ -74,6 +79,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
+    }
+
+    var backPressCount : Int = 0
+    override fun onBackPressed() {
+        backPressCount += 1
+        if(backPressCount == 1){
+            Snackbar.make(mainLayout, "한 번 더 누르시면 앱이 종료됩니다.", Snackbar.LENGTH_SHORT).show()
+        }else{
+            backPressCount = 0
+            finish()
+        }
     }
 
 }
