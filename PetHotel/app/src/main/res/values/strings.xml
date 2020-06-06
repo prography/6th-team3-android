@@ -41,4 +41,8 @@
 저희 쿨쿨펫 모든 스탭은 방문하는 아이들이 편안히 머물다 안전하게 돌아갈수있도록
 항상 최선을 다하겠습니다.</string>
 
+    <string name="lorem_ipsum_paragraph">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet eros mi. Suspendisse potenti. Nulla lorem purus, egestas et sem at, volutpat hendrerit nisl. Sed egestas risus felis, condimentum vehicula lorem maximus at. Nullam sodales semper dolor, eu venenatis urna cursus eget. Vivamus sit amet varius ex. Suspendisse vehicula sagittis ligula vel bibendum. Donec at augue lacus. Quisque sagittis imperdiet risus eget ullamcorper.
+    </string>
+
 </resources>
