@@ -53,7 +53,7 @@ class UserInfoEditFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(RegisterViewModel::class.java)
 
-        userImage = img_register_user_image
+        userImage = img_user_edit
 
         viewModel.userInfoLiveData.observe(viewLifecycleOwner, Observer {
             Log.d("REGISTER", "register viewmodel called $it")
@@ -63,11 +63,11 @@ class UserInfoEditFragment : BaseFragment() {
             password_check_edit_text_field.setText(it.password)
         })
 
-        btn_upload_user_image.setOnClickListener {
+        btn_upload_user_image_edit.setOnClickListener {
             getAlbum()
         }
 
-        btn_take_user_photo.setOnClickListener {
+        btn_take_user_photo_edit.setOnClickListener {
             takePhoto()
         }
 
@@ -87,9 +87,15 @@ class UserInfoEditFragment : BaseFragment() {
 
         }
 
+        btn_password_button_field.setOnClickListener {
+            password_edit_text_field.visibility = View.VISIBLE
+            password_check_title_field.visibility = View.VISIBLE
+            password_check_edit_text_field.visibility = View.VISIBLE
+            new_password_edit_text_field.visibility = View.VISIBLE
+        }
+
         setUpUserInfoInputListeners()
     }
-
 
     private fun setUpUserInfoInputListeners(){
         email_edit_text_field.addTextChangedListener(
