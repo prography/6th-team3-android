@@ -18,10 +18,11 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
-        <include layout="@layout/reservation_detail_check_hotel_layout"
-            android:layout_marginBottom="@dimen/margin_1x"
+        <include
+            layout="@layout/reservation_detail_check_hotel_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
+            android:layout_marginBottom="@dimen/margin_1x" />
 
         <include layout="@layout/reservation_checklist_layout"
             android:layout_marginBottom="@dimen/margin_1x"

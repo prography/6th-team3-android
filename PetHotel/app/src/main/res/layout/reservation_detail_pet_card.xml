@@ -26,6 +26,7 @@
         android:layout_below="@id/tv_reservation_detail_pet_name"
         android:background="@drawable/edit_text_background"
         android:padding="@dimen/default_padding_8dp"
+        android:layout_marginTop="@dimen/margin_1x"
         android:hint="전달 사항을 기입해 주세요"
         android:gravity="start|top"
         android:textSize="12sp"

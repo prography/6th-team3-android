@@ -20,8 +20,6 @@
 
         <include layout="@layout/reservation_detail_pet_card"/>
 
-        <include layout="@layout/reservation_detail_pet_card"/>
-
 
 </LinearLayout>
 

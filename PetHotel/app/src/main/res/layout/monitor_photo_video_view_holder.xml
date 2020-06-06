@@ -16,8 +16,7 @@
     <TextView
         android:id="@+id/monitor_photo_comment"
         android:layout_gravity="bottom"
-        android:paddingStart="@dimen/padding_small_4dp"
-        android:paddingEnd="@dimen/padding_small_4dp"
+        android:padding="@dimen/default_padding_8dp"
         android:background="@color/colorTransparentBlack"
         android:textColor="@color/colorWhite"
         android:text="#산책 #신난다"
@@ -26,8 +25,7 @@
 
     <TextView
         android:id="@+id/monitor_photo_date"
-        android:paddingStart="@dimen/padding_small_4dp"
-        android:paddingEnd="@dimen/padding_small_4dp"
+        android:padding="@dimen/default_padding_8dp"
         android:background="@color/colorTransparentBlack"
         android:textColor="@color/colorWhite"
         android:layout_gravity="bottom|end"

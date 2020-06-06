@@ -4,13 +4,15 @@
     android:orientation="vertical"
     android:background="@android:color/white"
     android:paddingStart="@dimen/padding_large_16dp"
-    android:paddingBottom="@dimen/default_padding_8dp"
+    android:paddingBottom="@dimen/padding_large_16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
         android:text="반려견 선택"
         style="@style/phTitle"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_marginBottom="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -25,9 +27,6 @@
 <!-- TODO 추후에 동적으로 추가하기. View pager 혹은 그냥 listview 로 띄우기 -->
         <include layout="@layout/reservation_pet_info_card"/>
 
-        <include layout="@layout/reservation_pet_info_card"/>
-
-        <include layout="@layout/reservation_pet_info_card"/>
 
     </LinearLayout>
 

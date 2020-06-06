@@ -22,6 +22,7 @@
         android:layout_below="@id/place_detail_name"
         android:layout_marginTop="@dimen/margin_0_5x"
         android:layout_marginStart="@dimen/margin_1x"
+        android:layout_marginBottom="@dimen/margin_1x"
         />
 
     <TextView
@@ -29,7 +30,7 @@
         android:text="경상북도 구미시 인동4길 12 (진평동) 1F 쿨쿨펫"
         android:layout_marginTop="@dimen/margin_0_5x"
         android:layout_marginStart="@dimen/margin_1x"
-        android:layout_marginBottom="@dimen/margin_0_5x"
+        android:layout_marginBottom="@dimen/margin_1x"
         android:layout_below="@id/place_detail_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

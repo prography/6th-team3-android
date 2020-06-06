@@ -26,7 +26,8 @@
     <TextView
         android:id="@+id/place_info_name"
         style="@style/phTitle"
-        android:layout_marginTop="@dimen/margin_0_5x"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_marginBottom="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/place_info_image"
@@ -36,6 +37,7 @@
         android:id="@+id/place_info_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_1x"
         android:layout_below="@id/place_info_name"
         android:layout_toEndOf="@id/place_info_image"
         tools:text="@sample/hotels.json/data/address" />

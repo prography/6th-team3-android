@@ -17,11 +17,13 @@
 
     <TextView
         android:id="@+id/tv_reservation_hotel_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_marginBottom="@dimen/margin_1x"
         android:layout_toEndOf="@id/img_reservation_hotel_image"
         android:text="호텔 이름"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_reservation_hotel_address"
@@ -35,6 +37,7 @@
         android:id="@+id/tv_reservation_hotel_distance"
         android:layout_below="@id/tv_reservation_hotel_address"
         android:layout_toEndOf="@id/img_reservation_hotel_image"
+        android:layout_marginTop="@dimen/margin_1x"
         android:text="5km"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

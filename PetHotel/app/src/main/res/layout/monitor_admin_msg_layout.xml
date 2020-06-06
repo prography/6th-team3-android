@@ -8,18 +8,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
     <TextView
         android:id="@+id/tv_msg_title"
-        android:drawableStart="@drawable/ic_baseline_mail_outline_24"
-        android:text=" 새로운 메시지 도착!"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_0_5x"
+        android:drawableStart="@drawable/ic_baseline_mail_outline_24"
+        android:gravity="center"
+        android:text=" 새로운 메시지 도착!"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_admin_msg_content"
         android:layout_below="@id/tv_msg_title"
         android:maxLines="3"
+        android:lineSpacingMultiplier="1.5"
         android:text="@string/lorem_ipsum_paragraph"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

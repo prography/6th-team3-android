@@ -27,6 +27,7 @@
         android:id="@+id/photo_video_title"
         android:text="사진 및 동영상"
         style="@style/phTitle"
+        android:layout_marginBottom="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -39,9 +40,10 @@
 
     <TextView
     android:id="@+id/checklist_title"
-        android:layout_marginTop="@dimen/margin_1x"
+    android:layout_marginTop="@dimen/margin_2x"
     android:text="체크리스트"
     style="@style/phTitle"
+    android:layout_marginBottom="@dimen/margin_1x"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
 
@@ -51,7 +53,8 @@
     <TextView
         android:id="@+id/admin_msg_title"
         android:text="메시지"
-        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_marginTop="@dimen/margin_2x"
+        android:layout_marginBottom="@dimen/margin_1x"
         style="@style/phTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

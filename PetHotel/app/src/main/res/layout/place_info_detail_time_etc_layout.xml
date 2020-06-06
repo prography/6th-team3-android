@@ -16,6 +16,8 @@
         android:layout_height="wrap_content"
         android:text=" 영업시간"
         android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/margin_1x"
         android:drawableStart="@drawable/ic_baseline_access_time_24"
         />
 
@@ -23,6 +25,7 @@
         android:id="@+id/title_week_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_0_5x"
         android:text="평일  "
         />
 
@@ -36,6 +39,7 @@
         android:id="@+id/title_sat_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_0_5x"
         android:text="토요일  "
          />
 
@@ -63,12 +67,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" 모니터링 제공 여부"
+        android:gravity="center"
         android:layout_marginTop="@dimen/margin_1x"
         android:drawableStart="@drawable/ic_baseline_tv_24"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_monitoring_contents"
+        android:layout_marginTop="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
@@ -78,6 +84,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_1x"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/margin_1x"
         android:drawableStart="@drawable/ic_neuter"
         android:text=" 중성화 필요 여부"
         android:textStyle="bold"/>
@@ -103,8 +111,10 @@
             android:id="@+id/title_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:drawableStart="@drawable/ic_korean_won"
             android:layout_marginTop="@dimen/margin_1x"
+            android:layout_marginBottom="@dimen/margin_1x"
             android:text=" 호텔가격"
             android:textStyle="bold" />
 
@@ -113,6 +123,7 @@
         android:id="@+id/tv_week_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_0_5x"
         android:text="평일  "
         />
 
@@ -120,6 +131,7 @@
         android:id="@+id/tv_sat_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_0_5x"
         android:text="토요일  "
         />
 
