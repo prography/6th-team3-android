@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@android:color/white"
-    android:paddingStart="@dimen/padding_large_16dp"
+    android:paddingStart="@dimen/default_padding_8dp"
     android:paddingBottom="@dimen/default_padding_8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">

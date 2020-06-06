@@ -39,7 +39,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/kakao_default_profile_image" />
+                android:src="@drawable/pet_profile_placeholder" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -244,7 +244,7 @@
                     style="@style/phEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     android:layout_marginStart="@dimen/margin_1x"
                     android:layout_marginTop="@dimen/margin_0_5x"
                     android:ems="10"
@@ -259,7 +259,7 @@
 
             <TextView
                 android:text="*비밀번호를 정확히 입력해 주세요"
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:textColor="@android:color/holo_red_dark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -280,7 +280,7 @@
                     style="@style/phTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     android:layout_marginStart="@dimen/margin_1x"
                     android:layout_marginTop="@dimen/margin_0_5x"
                     android:layout_marginBottom="@dimen/margin_0_5x"
@@ -295,7 +295,7 @@
                     style="@style/phEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     android:ems="10"
                     android:hint="비밀번호 확인"
                     android:inputType="textPassword"
@@ -309,7 +309,7 @@
                     style="@style/phEditText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     android:layout_marginStart="@dimen/margin_1x"
                     android:layout_marginTop="@dimen/margin_0_5x"
                     android:ems="10"
@@ -322,7 +322,7 @@
             <TextView
                 android:id="@+id/tv_register_password_not_match"
                 android:text="*비밀번호가 일치하지 않습니다."
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:textColor="@android:color/holo_red_dark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

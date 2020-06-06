@@ -46,7 +46,7 @@ class MyReviewAdapter(
 
         fun bind(hotelReview : HotelReview){
             itemView.tv_review_hotel_name.text = hotelReview.hotelName
-            itemView.tv_review_username.text = hotelReview.userName
+//            itemView.tv_review_username.text = hotelReview.userName
             itemView.tv_review_content.text = hotelReview.reviewContent
 
         }

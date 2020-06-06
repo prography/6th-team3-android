@@ -1,92 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.mypage.MyPageFragment">
 
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="none"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:padding="@dimen/padding_large_16dp"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/img_user_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/kakao_default_profile_image"
+                app:srcCompat="@drawable/pet_profile_placeholder"
                 tools:ignore="ContentDescription"
                 />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            >
 
             <TextView
                 android:id="@+id/tv_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize ="22sp"
-                android:layout_marginStart="188dp"
-                android:layout_marginTop="@dimen/margin_1x"
-                android:layout_marginBottom="@dimen/margin_0_5x"
+                android:textSize ="@dimen/text_size_medium"
+                style="@style/phTitle"
+                android:layout_centerInParent="true"
                 android:text="@string/my_page_nickname"
                 />
 
             <ImageButton
                 android:id="@+id/img_btn_user_edit"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="@dimen/margin_1x"
-                android:layout_marginBottom="@dimen/margin_0_5x"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_toEndOf="@id/tv_nickname"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/margin_0_5x"
                 android:backgroundTint="@color/colorTransparent"
                 app:srcCompat="@drawable/ic_baseline_edit_24" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="start"
+                android:padding="@dimen/padding_small_4dp"
+                android:gravity="start|center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_mypetmily"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize ="20sp"
-                    android:layout_marginTop="@dimen/margin_0_5x"
-                    android:layout_marginBottom="@dimen/margin_0_5x"
-                    android:layout_marginStart="@dimen/margin_1x"
-                    android:layout_gravity="start"
+                    style="@style/phTitle"
                     android:text="@string/my_page_mypetmily"
                     />
 
                 <ImageButton
                     android:id="@+id/img_btn_pet_edit"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:backgroundTint="@color/colorTransparent"
-                    android:layout_marginBottom="@dimen/margin_0_5x"
-                    app:srcCompat="@drawable/ic_baseline_add_black24"/>
+                    app:srcCompat="@drawable/ic_baseline_add_black24" />
 
             </LinearLayout>
 
@@ -125,11 +117,9 @@
                 android:id="@+id/my_review"
                 layout="@layout/my_page_list_layout"/>
 
-
             <include
                 android:id="@+id/settings"
                 layout="@layout/my_page_list_layout"/>
-
 
 
         </LinearLayout>
