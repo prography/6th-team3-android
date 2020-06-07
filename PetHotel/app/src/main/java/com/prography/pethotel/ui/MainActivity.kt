@@ -3,7 +3,9 @@ package com.prography.pethotel.ui
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -17,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mainLayout : LinearLayout
+    lateinit var mainLayout : CoordinatorLayout
 
     private var currentNavController: LiveData<NavController>? = null
 
