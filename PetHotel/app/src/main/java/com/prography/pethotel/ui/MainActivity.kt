@@ -1,9 +1,12 @@
 package com.prography.pethotel.ui
 
+import android.content.DialogInterface
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.LiveData
@@ -11,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.prography.pethotel.R
 import com.prography.pethotel.utils.setupWithNavController
@@ -83,15 +87,22 @@ class MainActivity : AppCompatActivity() {
         return currentNavController?.value?.navigateUp() ?: false
     }
 
-    var backPressCount : Int = 0
+
     override fun onBackPressed() {
-        backPressCount += 1
-        if(backPressCount == 1){
-            Snackbar.make(mainLayout, "한 번 더 누르시면 앱이 종료됩니다.", Snackbar.LENGTH_SHORT).show()
-        }else{
-            backPressCount = 0
-            finish()
+        val alertBuilder = MaterialAlertDialogBuilder(this)
+        alertBuilder.apply {
+            setTitle("종료하기")
+            setMessage("마이펫밀리를 종료하시겠습니까?")
+            setCancelable(true)
+            setPositiveButton("종료") { _, _ ->
+                finishAndRemoveTask()
+            }
+            setNeutralButton("취소") { dialog, _ ->
+                dialog.cancel()
+            }
         }
+        val alertDialog = alertBuilder.create()
+        alertDialog.show()
     }
 
 }

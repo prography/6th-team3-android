@@ -29,7 +29,6 @@
         android:layout_marginTop="@dimen/margin_1x"
         android:hint="전달 사항을 기입해 주세요"
         android:gravity="start|top"
-        android:textSize="12sp"
         android:layout_width="match_parent"
         android:layout_height="100dp"/>
 

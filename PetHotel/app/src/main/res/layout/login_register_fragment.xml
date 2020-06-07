@@ -14,6 +14,7 @@
     android:orientation="vertical"
     android:padding="@dimen/padding_small_4dp"
     android:background="@android:color/white"
+    android:layout_gravity="center"
     android:gravity="center"
     tools:context=".ui.register.LoginRegisterFragment">
 
@@ -38,7 +39,8 @@
         android:id="@+id/et_login_username"
         style="@style/phEditText"
         android:layout_margin="@dimen/margin_1x"
-        android:layout_width="313dp"
+        android:ems="15"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints="Your Email"
         android:hint="이메일"
@@ -50,7 +52,8 @@
         android:id="@+id/et_login_password"
         style="@style/phEditText"
         android:layout_margin="@dimen/margin_1x"
-        android:layout_width="313dp"
+        android:layout_width="wrap_content"
+        android:ems="15"
         android:layout_height="wrap_content"
         android:autofillHints="password"
         android:hint="비밀번호"

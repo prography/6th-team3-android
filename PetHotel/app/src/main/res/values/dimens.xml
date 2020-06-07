@@ -19,4 +19,5 @@
     <dimen name="place_info_image_dimen">150dp</dimen>
     <dimen name="image_border_curvature">30dp</dimen>
     <dimen name="default_image_size">150dp</dimen>
+    <dimen name="layout_elevation_default">2dp</dimen>
 </resources>

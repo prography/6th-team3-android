@@ -10,7 +10,7 @@ import java.util.*
 
 
 class TimePickerFragment(
-    var dateTimeViewModel: DateTimeViewModel,
+    private var dateTimeViewModel: DateTimeViewModel,
     private val isEnter: Boolean
 ) : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 

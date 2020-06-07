@@ -1,37 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
+<!--<ScrollView-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:scrollbars="none"-->
+<!--    >-->
+
+<LinearLayout
+    android:backgroundTint="@color/colorTransparent"
+    android:background="@drawable/top_corner_round_background"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:scrollbars="none"
-    >
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:background="@color/defaultBackgroundColor"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-       <include layout="@layout/reservation_date_time_layout"
-           android:layout_marginBottom="@dimen/margin_1x"
-           android:layout_height="wrap_content"
+       <include layout="@layout/checkin_checkout_layout"
+           android:layout_margin="@dimen/margin_1x"
+           android:layout_height="100dp"
            android:layout_width="match_parent"/>
 
+    <View
+        android:background="@color/colorHalfTransparent"
+        android:scaleX="0.9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
         <include layout="@layout/reservation_pet_info_layout"
-            android:layout_marginBottom="@dimen/margin_1x"
+            android:layout_marginTop="@dimen/margin_1x"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"/>
 
+    <View
+        android:background="@color/colorHalfTransparent"
+        android:scaleX="0.9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
         <include
             layout="@layout/reservation_hotel_info_layout"
+            android:layout_marginTop="@dimen/margin_1x"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
 
     </LinearLayout>
 
-</ScrollView>
+<!--</ScrollView>-->

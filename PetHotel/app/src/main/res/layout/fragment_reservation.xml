@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,16 +7,75 @@
     tools:context=".ui.reservation.ReservationFragment">
 
 
-    <include layout="@layout/reservation_main_layout"/>
+    <com.google.android.material.appbar.AppBarLayout
+        android:background="@color/petHotelLightGrey"
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            app:layout_scrollFlags="snap|exitUntilCollapsed|scroll"
+            app:expandedTitleMarginTop="156dp"
+            app:expandedTitleMarginStart="@dimen/margin_1x"
+            app:expandedTitleGravity="top"
+            app:contentScrim="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:text="애견호텔 예약하기"
+                android:layout_gravity="bottom"
+                style="@style/phHeadline5"
+                android:layout_margin="@dimen/margin_2x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+<!--            <ImageView-->
+<!--                android:id="@+id/deals_toolbar_image"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:background="@drawable/mily_sleepy"-->
+<!--                app:layout_collapseMode="pin" />-->
+
+<!--            <androidx.appcompat.widget.Toolbar-->
+<!--                app:layout_collapseMode="pin"-->
+<!--                app:title="애견호텔 예약"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?actionBarSize"/>-->
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@drawable/top_corner_round_background"
+        app:behavior_overlapTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/reservation_main_layout"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_2x"
+            />
+
+
+    </androidx.core.widget.NestedScrollView>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_reservation_basic_info_selected_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
         android:src="@drawable/ic_baseline_arrow_forward_24"
         android:layout_marginEnd="@dimen/margin_1x"
         android:layout_marginBottom="@dimen/margin_1x"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

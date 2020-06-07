@@ -14,7 +14,8 @@
         style="@style/phTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_0_5x"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_marginBottom="@dimen/margin_1x"
         android:text="내가 작성한 리뷰" />
 
     <androidx.recyclerview.widget.RecyclerView

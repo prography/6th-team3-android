@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <TextView
+        android:id="@+id/one"
+        style="@style/phTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="날짜를 선택해 주세요"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/ci_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:text="체크인"
+        android:textColor="@color/matrixGrey"
+        app:layout_constraintStart_toStartOf="@+id/tv_hotel_enter_date"
+        app:layout_constraintTop_toBottomOf="@+id/one" />
+
+
+    <TextView
+        android:id="@+id/co_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="체크아웃"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:textColor="@color/matrixGrey"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/one" />
+
+    <TextView
+        android:id="@+id/tv_hotel_enter_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="JAN 01"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tv_hotel_exit_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JUN 23"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_hotel_enter_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="18:00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_hotel_enter_date" />
+
+    <TextView
+        android:id="@+id/tv_hotel_exit_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="18:00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_hotel_exit_date" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

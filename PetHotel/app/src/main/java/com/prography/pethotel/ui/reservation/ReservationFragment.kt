@@ -29,6 +29,8 @@ class ReservationFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
+
         dateTimeViewModel = ViewModelProviders.of(requireActivity()).get(DateTimeViewModel::class.java)
 
         if(dateTimeViewModel.dateTime.value == null){
@@ -39,7 +41,6 @@ class ReservationFragment : Fragment() {
         observeDateTime()
 
         fab_reservation_basic_info_selected_ok.setOnClickListener {
-
             findNavController().navigate(R.id.action_reservationFragment_to_reservationDetailFragment)
         }
 

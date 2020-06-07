@@ -49,12 +49,14 @@ class RegisterPetInfoFragment : BaseFragment() {
         view.btn_add_pet_done.setOnClickListener{
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
+            requireActivity().finish()
         }
 
         // 건너뛰기 버튼 클릭 시 필드 비어있어도 그냥 메인 화면으로 넘어가기
         view.btn_skip_pet_register.setOnClickListener {
             val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
+            requireActivity().finish()
         }
         return view
     }

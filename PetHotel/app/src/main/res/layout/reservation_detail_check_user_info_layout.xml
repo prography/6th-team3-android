@@ -43,7 +43,6 @@
         android:id="@+id/et_reservation_detail_user_name"
         android:hint="예) 털실맘"
         android:ems="10"
-        android:padding="@dimen/default_padding_8dp"
         android:inputType="textPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -63,7 +62,6 @@
         android:id="@+id/et_reservation_detail_user_email"
         android:hint="예) OOO@gmail.com"
         android:ems="10"
-        android:padding="@dimen/default_padding_8dp"
         android:inputType="textEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -84,7 +82,6 @@
         android:hint="예) 01012341234"
         android:ems="10"
         android:inputType="phone"
-        android:padding="@dimen/default_padding_8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

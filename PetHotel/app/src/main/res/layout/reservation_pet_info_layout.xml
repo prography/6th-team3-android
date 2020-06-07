@@ -9,7 +9,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:text="반려견 선택"
+        android:text="반려견을 선택해 주세요"
         style="@style/phTitle"
         android:layout_marginTop="@dimen/margin_1x"
         android:layout_marginBottom="@dimen/margin_1x"

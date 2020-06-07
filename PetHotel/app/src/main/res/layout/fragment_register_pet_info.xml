@@ -15,7 +15,8 @@
 
         <TextView
             android:text="반려견 정보 입력"
-            android:layout_margin="@dimen/margin_0_5x"
+            android:layout_marginTop="@dimen/margin_2x"
+            android:layout_marginBottom="@dimen/margin_1x"
             style="@style/phHeadline5"
             android:layout_gravity="center"
             android:layout_width="wrap_content"

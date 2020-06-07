@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<RelativeLayout android:background="@drawable/white_round_corner_rect"
+<FrameLayout
+    android:background="@drawable/round_background"
     android:padding="@dimen/default_padding_8dp"
     android:layout_margin="@dimen/margin_0_5x"
-    android:elevation="4dp"
-    android:layout_width="wrap_content"
-    android:layout_height="160dp"
+    android:elevation="@dimen/layout_elevation_default"
+    android:layout_width="@dimen/default_image_size"
+    android:layout_height="@dimen/default_image_size"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
             android:id="@+id/img_reserve_pet_image"
             android:src="@drawable/mily_happy"
+            android:layout_gravity="center"
             android:layout_width="100dp"
             android:layout_height="100dp"/>
 
         <TextView
             android:id="@+id/tv_reserve_pet_name"
             android:text="털실이"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/img_reserve_pet_image"
+            style="@style/phBody2"
+            android:layout_gravity="bottom|center"
+            android:layout_marginTop="@dimen/margin_1x"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-    </RelativeLayout>
+    </FrameLayout>
