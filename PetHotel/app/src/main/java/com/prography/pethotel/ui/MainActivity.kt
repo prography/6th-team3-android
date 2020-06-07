@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mainLayout : CoordinatorLayout
+    lateinit var mainLayout : LinearLayout
 
     private var currentNavController: LiveData<NavController>? = null
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<ScrollView
+<androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
@@ -15,13 +15,6 @@
     android:padding="@dimen/padding_large_16dp"
     android:orientation="vertical"
     tools:context=".ui.monitor.MonitorFragment">
-
-<!--    <TextView-->
-<!--        android:gravity="center"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:textSize="24sp"-->
-<!--        android:text="모니터링 화면\n\n준비중입니다!" />-->
 
     <TextView
         android:id="@+id/photo_video_title"
@@ -64,4 +57,4 @@
 
 </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

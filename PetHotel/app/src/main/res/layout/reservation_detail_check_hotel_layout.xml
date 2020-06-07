@@ -20,12 +20,12 @@
     <TextView
         android:text="호텔 이름"
         android:textStyle="bold"
+        android:layout_marginBottom="@dimen/margin_0_5x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:text="멍멍 애견호텔"
-        android:textSize="18sp"
         android:layout_marginTop="@dimen/margin_0_5x"
         android:layout_marginBottom="@dimen/margin_0_5x"
         android:layout_width="wrap_content"
@@ -34,13 +34,13 @@
     <TextView
         android:text="호텔 위치"
         android:textStyle="bold"
+        android:layout_marginBottom="@dimen/margin_0_5x"
         android:layout_marginTop="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:text="서울시 용산구 후암동 두텁바위로 33길 33"
-        android:textSize="18sp"
         android:layout_marginTop="@dimen/margin_0_5x"
         android:layout_marginBottom="@dimen/margin_0_5x"
         android:layout_width="wrap_content"
@@ -49,6 +49,7 @@
     <TextView
         android:text="예약 일시"
         android:textStyle="bold"
+        android:layout_marginBottom="@dimen/margin_0_5x"
         android:layout_marginTop="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -63,7 +64,6 @@
         android:text="입실"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/margin_0_5x"
-        android:textSize="18sp"
         android:layout_marginBottom="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -72,7 +72,6 @@
     <TextView
         android:id="@+id/tv_enter_date_time_check"
         android:text="2020-06-03-18:00"
-        android:textSize="18sp"
         android:layout_toEndOf="@id/tv_enter"
         android:layout_marginTop="@dimen/margin_0_5x"
         android:layout_marginStart="@dimen/margin_1x"
@@ -85,7 +84,6 @@
         android:layout_below="@id/tv_enter"
         android:text="퇴실"
         android:textStyle="bold"
-        android:textSize="18sp"
         android:layout_marginBottom="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -100,7 +98,7 @@
             android:layout_marginBottom="@dimen/margin_0_5x"
             android:layout_toEndOf="@id/tv_exit"
             android:text="2020-06-05-18:00"
-            android:textSize="18sp" />
+            />
 
     </RelativeLayout>
 
