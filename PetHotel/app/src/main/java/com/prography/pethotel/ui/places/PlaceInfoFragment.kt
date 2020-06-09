@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.prography.pethotel.R
 import com.prography.pethotel.models.Hotel
@@ -40,6 +42,13 @@ class PlaceInfoFragment : Fragment() {
         val placeInfoAdapter = PlaceListAdapter(requireContext(), hotelList)
         rv_place_info.apply {
             adapter = placeInfoAdapter
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+
+        val popularPlaceListAdapter = PopularPlaceListAdapter(requireContext(), hotelList)
+        rv_popular_place_info.apply {
+            adapter = popularPlaceListAdapter
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
         }

@@ -41,7 +41,7 @@
         tools:text="@sample/hotels.json/data/address" />
 
     <TextView
-        android:id="@+id/tv_hotel_distance"
+        android:id="@+id/place_info_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/place_info_address"

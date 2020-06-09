@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/margin_1x"
+    android:layout_width="@dimen/place_card_size"
+    android:layout_height="@dimen/place_card_size"
+    android:background="@drawable/white_round_corner_rect"
+    android:elevation="@dimen/layout_elevation_default">
+
+    <ImageView
+        android:id="@+id/place_info_image"
+        android:layout_width="@dimen/place_card_size"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/detail_scrim_gradient" />
+
+    <TextView
+        android:id="@+id/place_info_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="My Awesome Hotel"
+        app:layout_constraintStart_toStartOf="@+id/place_info_address"
+        app:layout_constraintTop_toBottomOf="@+id/place_info_image" />
+
+    <TextView
+        android:id="@+id/place_info_distance"
+        style="@style/phBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:drawableStart="@drawable/ic_running_dog"
+        android:gravity="center"
+        android:text=" 5km"
+        app:layout_constraintBottom_toBottomOf="@+id/place_info_address"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/place_info_address"
+        style="@style/phBody2"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:maxLines="2"
+        android:text="서울시 용산구 후암동 두텁바위로 33길 33"
+        android:textColor="@color/matrixGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
