@@ -21,6 +21,7 @@
     <CheckBox
         android:id="@+id/check_if_using_user_info"
         android:text="기존 회원 정보 사용 "
+        style="@style/phBody2"
         android:textColor="@color/petHotelSecondaryDark"
         android:layout_gravity="end"
         android:layoutDirection="rtl"
@@ -32,7 +33,7 @@
     <TextView
         android:id="@+id/tv_reservation_detail_user_name"
         android:text="성함"
-        android:textStyle="bold"
+        style="@style/phBody2"
         android:layout_marginStart="@dimen/margin_0_5x"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -50,6 +51,7 @@
     <TextView
         android:id="@+id/tv_reservation_detail_user_email"
         android:text="이메일"
+        style="@style/phBody2"
         android:layout_marginTop="@dimen/margin_1x"
         android:layout_marginStart="@dimen/margin_0_5x"
         android:textStyle="bold"
@@ -69,7 +71,7 @@
     <TextView
         android:id="@+id/tv_reservation_detail_user_phone"
         android:text="전화번호"
-        android:textStyle="bold"
+        style="@style/phBody2"
         android:layout_marginTop="@dimen/margin_1x"
         android:layout_marginStart="@dimen/margin_0_5x"
         android:layout_height="wrap_content"

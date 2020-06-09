@@ -38,8 +38,8 @@ class ReservationDetailFragment : Fragment() {
 
         val data = dateTimeViewModel.dateTime.value
         if(data != null){
-            tv_enter_date_time_check.text = "${data.enterDate} - ${data.enterTime}"
-            tv_exit_date_time_check.text = "${data.exitDate} - ${data.exitTime}"
+            tv_enter_date_time_check.text = "${data.enterDate} ${data.enterTime}"
+            tv_exit_date_time_check.text = "${data.exitDate} ${data.exitTime}"
         }
 
         fab_reservation_detail_info_selected_ok.setOnClickListener {

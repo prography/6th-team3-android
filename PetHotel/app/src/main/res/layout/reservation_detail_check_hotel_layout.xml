@@ -4,6 +4,8 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="@dimen/padding_large_16dp"
     android:background="@android:color/white"
@@ -19,7 +21,7 @@
 
     <TextView
         android:text="호텔 이름"
-        android:textStyle="bold"
+        style="@style/phBody2"
         android:layout_marginBottom="@dimen/margin_0_5x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -33,7 +35,7 @@
 
     <TextView
         android:text="호텔 위치"
-        android:textStyle="bold"
+        style="@style/phBody2"
         android:layout_marginBottom="@dimen/margin_0_5x"
         android:layout_marginTop="@dimen/margin_1x"
         android:layout_width="wrap_content"
@@ -48,58 +50,67 @@
 
     <TextView
         android:text="예약 일시"
-        android:textStyle="bold"
+        style="@style/phBody2"
         android:layout_marginBottom="@dimen/margin_0_5x"
         android:layout_marginTop="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="56dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="213dp">
 
-    <TextView
-        android:id="@+id/tv_enter"
-        android:text="입실"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/margin_0_5x"
-        android:layout_marginBottom="@dimen/margin_1x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="체크인"
+            style="@style/phBody2"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_enter_date_time_check"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_enter_date_time_check" />
 
 
-    <TextView
-        android:id="@+id/tv_enter_date_time_check"
-        android:text="2020-06-03-18:00"
-        android:layout_toEndOf="@id/tv_enter"
-        android:layout_marginTop="@dimen/margin_0_5x"
-        android:layout_marginStart="@dimen/margin_1x"
-        android:layout_marginBottom="@dimen/margin_0_5x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/tv_exit"
-        android:layout_below="@id/tv_enter"
-        android:text="퇴실"
-        android:textStyle="bold"
-        android:layout_marginBottom="@dimen/margin_1x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_enter"
+            android:text="체크아웃"
+            style="@style/phBody2"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_exit_date_time_check"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_exit_date_time_check" />
 
         <TextView
             android:id="@+id/tv_exit_date_time_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_enter_date_time_check"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/margin_1x"
-            android:layout_marginBottom="@dimen/margin_0_5x"
             android:layout_toEndOf="@id/tv_exit"
             android:text="2020-06-05-18:00"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_enter_date_time_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tv_enter"
+            android:text="2020-06-03-18:00"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

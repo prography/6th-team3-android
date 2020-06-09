@@ -23,10 +23,10 @@ class DateTimeViewModel : ViewModel(){
 
     fun initDateTime(){
         val c : Calendar = Calendar.getInstance()
-        val enterDate = "${c.get(Calendar.YEAR)}년 ${c.get(Calendar.MONTH) + 1}월 ${c.get(Calendar.DAY_OF_MONTH)}일"
-        val exitDate = "${c.get(Calendar.YEAR)}년 ${c.get(Calendar.MONTH)+ 1}월 ${c.get(Calendar.DAY_OF_MONTH)}일"
-        val enterTime = "${c.get(Calendar.HOUR_OF_DAY)}시 00분"
-        val exitTime = "${c.get(Calendar.HOUR_OF_DAY)}시 00분"
+        val enterDate = "${c.get(Calendar.YEAR)}/${c.get(Calendar.MONTH) + 1}/${c.get(Calendar.DAY_OF_MONTH)}"
+        val exitDate = "${c.get(Calendar.YEAR)}/${c.get(Calendar.MONTH)+ 1}/${c.get(Calendar.DAY_OF_MONTH)}"
+        val enterTime = "${c.get(Calendar.HOUR_OF_DAY)}:00"
+        val exitTime = "${c.get(Calendar.HOUR_OF_DAY)}:00"
 
         dateTime.value = ReservationDateTime(enterTime = enterTime, exitTime =  exitTime,
         enterDate = enterDate, exitDate = exitDate)

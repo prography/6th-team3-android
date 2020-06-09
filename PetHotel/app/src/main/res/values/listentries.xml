@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="hotel_selection_list_title">
+        <item>단골 호텔</item>
+        <item>가장 가까운 호텔</item>
+        <item>가장 저렴한 호텔</item>
+    </string-array>
+</resources>

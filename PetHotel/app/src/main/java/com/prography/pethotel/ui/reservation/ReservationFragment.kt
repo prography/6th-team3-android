@@ -10,8 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.prography.pethotel.R
-import kotlinx.android.synthetic.main.fragment_reservation.*
 import kotlinx.android.synthetic.main.reservation_date_time_layout.*
+import kotlinx.android.synthetic.main.reservation_main_layout.*
 
 class ReservationFragment : Fragment() {
 
@@ -40,7 +40,7 @@ class ReservationFragment : Fragment() {
         setClickListeners()
         observeDateTime()
 
-        fab_reservation_basic_info_selected_ok.setOnClickListener {
+        btn_reservation_basic_info_selected_ok.setOnClickListener {
             findNavController().navigate(R.id.action_reservationFragment_to_reservationDetailFragment)
         }
 

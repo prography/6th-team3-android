@@ -25,7 +25,7 @@ class DatePickerFragment(
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        val date = "${year}년 ${month+1}월 ${dayOfMonth}일"
+        val date = "${year}/${month+1}/${dayOfMonth}"
         if(isEnter){
             dateTimeViewModel.setEnterDate(date)
 

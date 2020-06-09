@@ -26,7 +26,16 @@ class TimePickerFragment(
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        val time = "${hourOfDay}시 ${minute}분"
+
+        var min: String = (if(minute == 0){
+                "00"
+            }else if(minute < 10){
+                "0${minute}"
+            } else{
+                minute.toString()
+            })
+
+        val time = "${hourOfDay}:${min}"
 
         if(isEnter){
             dateTimeViewModel.setEnterTime(time)

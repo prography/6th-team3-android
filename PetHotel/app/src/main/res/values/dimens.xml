@@ -20,4 +20,5 @@
     <dimen name="image_border_curvature">30dp</dimen>
     <dimen name="default_image_size">150dp</dimen>
     <dimen name="layout_elevation_default">2dp</dimen>
+    <dimen name="padding_x_large_56dp">56dp</dimen>
 </resources>

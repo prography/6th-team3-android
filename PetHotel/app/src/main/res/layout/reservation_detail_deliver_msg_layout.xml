@@ -2,7 +2,10 @@
 
 <LinearLayout
     android:orientation="vertical"
-    android:padding="@dimen/padding_large_16dp"
+    android:paddingTop="@dimen/padding_large_16dp"
+    android:paddingEnd="@dimen/padding_large_16dp"
+    android:paddingStart="@dimen/padding_large_16dp"
+    android:paddingBottom="72dp"
     android:background="@android:color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

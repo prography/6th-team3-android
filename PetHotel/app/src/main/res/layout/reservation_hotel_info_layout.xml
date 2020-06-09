@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@android:color/white"
-    android:paddingStart="@dimen/padding_large_16dp"
-    android:paddingBottom="@dimen/default_padding_8dp"
+    android:padding="@dimen/padding_large_16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
         <TextView
-        android:text="애견호텔"
+        android:text="애견호텔을 선택해 주세요"
         android:layout_marginTop="@dimen/margin_1x"
         android:layout_marginBottom="@dimen/margin_1x"
         style="@style/phTitle"
@@ -21,12 +20,61 @@
         android:id="@+id/reserve_hotel_info_container"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/padding_large_16dp">
+        android:layout_height="match_parent"
+            >
 
         <!--        TODO 호텔 정보 띄워주기 -->
+<!--                <include layout="@layout/reservation_hotel_info_card"/>-->
+<!-- TODO move to 단골 리스트 -->
+                <TextView
+                    android:text="단골 호텔"
+                    android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:padding="@dimen/padding_large_16dp"
+                    style="@style/phBody2"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-                <include layout="@layout/reservation_hotel_info_card"/>
+<!--   TODO move to near by hotels -->
+                <TextView
+                    android:text="가장 가까운 호텔"
+                    android:padding="@dimen/padding_large_16dp"
+                    style="@style/phBody2"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+<!--    TODO move to cheapest hotels -->
+                <TextView
+                    android:text="가장 저렴한 호텔"
+                    android:padding="@dimen/padding_large_16dp"
+                    android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:gravity="center_vertical"
+                    style="@style/phBody2"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="요즘 뜨는 호텔"
+                    android:padding="@dimen/padding_large_16dp"
+                    android:drawableEnd="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:gravity="center_vertical"
+                    style="@style/phBody2"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
