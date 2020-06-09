@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/place_detail_app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="@dimen/place_detail_appbar_size"
         >
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -23,6 +23,7 @@
 
 
 <!--            가게 사진 swiping 되도록 넣기 -->
+
             <ImageView
                 android:id="@+id/place_detail_toolbar_image"
                 android:layout_width="match_parent"
@@ -36,6 +37,7 @@
                 android:background="@drawable/detail_scrim_gradient"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+
 
 <!--            <androidx.appcompat.widget.Toolbar-->
 <!--                android:id="@+id/detail_toolbar"-->
@@ -64,6 +66,28 @@
             />
 
     </androidx.core.widget.NestedScrollView>
+
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="@dimen/fab_margin"-->
+<!--        app:layout_anchor="@id/place_detail_app_bar_layout"-->
+<!--        app:layout_anchorGravity="bottom|end"-->
+<!--        />-->
+
+    <Button
+        android:id="@+id/btn_reserve_now"
+        android:text="바로예약"
+        android:backgroundTint="@color/colorWhite"
+        style="?attr/materialButtonOutlinedStyle"
+        app:layout_anchor="@id/place_detail_app_bar_layout"
+        app:layout_anchorGravity="bottom|end"
+        android:elevation="8dp"
+        android:layout_margin="@dimen/margin_1x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

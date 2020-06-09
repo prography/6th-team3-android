@@ -22,4 +22,8 @@
     <dimen name="layout_elevation_default">2dp</dimen>
     <dimen name="padding_x_large_56dp">56dp</dimen>
     <dimen name="place_card_size">260dp</dimen>
+    <dimen name="place_detail_appbar_size">250dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

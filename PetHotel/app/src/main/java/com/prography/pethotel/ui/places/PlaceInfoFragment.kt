@@ -40,14 +40,14 @@ class PlaceInfoFragment : Fragment() {
         makeDummyHotelInfo()
 
         val placeInfoAdapter = PlaceListAdapter(requireContext(), hotelList)
-        rv_place_info.apply {
+        rv_popular_place_info.apply {
             adapter = placeInfoAdapter
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
         val popularPlaceListAdapter = PopularPlaceListAdapter(requireContext(), hotelList)
-        rv_popular_place_info.apply {
+        rv_place_info.apply {
             adapter = popularPlaceListAdapter
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())

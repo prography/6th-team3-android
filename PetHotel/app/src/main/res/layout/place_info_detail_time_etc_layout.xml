@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" 영업시간"
-        android:textStyle="bold"
+        style="@style/phTitle"
         android:gravity="center"
         android:layout_marginBottom="@dimen/margin_1x"
         android:drawableStart="@drawable/ic_baseline_access_time_24"
@@ -25,6 +25,7 @@
         android:id="@+id/title_week_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/phBody2"
         android:layout_marginBottom="@dimen/margin_0_5x"
         android:text="평일  "
         />
@@ -40,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_0_5x"
+        style="@style/phBody2"
         android:text="토요일  "
          />
 
@@ -54,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="일요일  "
+        style="@style/phBody2"
         />
 
 <!--    <TextView-->
@@ -62,6 +65,60 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        android:text="09:00 ~ 18:00" />-->
 
+
+    <View
+        android:background="@color/colorHalfTransparent"
+        android:scaleX="0.9"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/title_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:drawableStart="@drawable/ic_korean_won"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_marginBottom="@dimen/margin_1x"
+        android:text=" 호텔가격"
+        style="@style/phTitle" />
+
+
+    <TextView
+        android:id="@+id/tv_week_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_0_5x"
+        android:text="평일  "
+        style="@style/phBody2"
+        />
+
+    <TextView
+        android:id="@+id/tv_sat_price"
+        style="@style/phBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_0_5x"
+        android:text="토요일  "
+        />
+
+    <TextView
+        android:id="@+id/tv_sun_price"
+        style="@style/phBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일요일  "
+        />
+
+
+    <View
+        android:background="@color/colorHalfTransparent"
+        android:scaleX="0.9"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
     <TextView
         android:id="@+id/title_monitor"
         android:layout_width="wrap_content"
@@ -69,8 +126,9 @@
         android:text=" 모니터링 제공 여부"
         android:gravity="center"
         android:layout_marginTop="@dimen/margin_1x"
+        style="@style/phTitle"
         android:drawableStart="@drawable/ic_baseline_tv_24"
-        android:textStyle="bold" />
+         />
 
     <TextView
         android:id="@+id/tv_monitoring_contents"
@@ -79,6 +137,14 @@
         android:layout_height="wrap_content"
         />
 
+
+    <View
+        android:background="@color/colorHalfTransparent"
+        android:scaleX="0.9"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
     <TextView
         android:id="@+id/title_neuter"
         android:layout_width="wrap_content"
@@ -86,15 +152,17 @@
         android:layout_marginTop="@dimen/margin_1x"
         android:gravity="center"
         android:layout_marginBottom="@dimen/margin_1x"
+        style="@style/phTitle"
         android:drawableStart="@drawable/ic_neuter"
         android:text=" 중성화 필요 여부"
-        android:textStyle="bold"/>
+        />
 
     <TextView
         android:id="@+id/tv_neuter_needed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="필요함"
+        style="@style/phBody2"
         />
 
 
@@ -107,40 +175,6 @@
 
 
 
-        <TextView
-            android:id="@+id/title_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:drawableStart="@drawable/ic_korean_won"
-            android:layout_marginTop="@dimen/margin_1x"
-            android:layout_marginBottom="@dimen/margin_1x"
-            android:text=" 호텔가격"
-            android:textStyle="bold" />
-
-
-    <TextView
-        android:id="@+id/tv_week_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_0_5x"
-        android:text="평일  "
-        />
-
-    <TextView
-        android:id="@+id/tv_sat_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_0_5x"
-        android:text="토요일  "
-        />
-
-    <TextView
-        android:id="@+id/tv_sun_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="일요일  "
-        />
 
 
 

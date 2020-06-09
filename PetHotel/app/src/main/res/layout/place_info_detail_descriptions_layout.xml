@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/place_detail_name"
-        style="@style/phHeadline5"
+        style="@style/phTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="쿨쿨펫 애견호텔"
@@ -19,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="호텔/병원/미용"
+        style="@style/phBody2"
         android:layout_below="@id/place_detail_name"
         android:layout_marginTop="@dimen/margin_0_5x"
         android:layout_marginStart="@dimen/margin_1x"
@@ -31,6 +32,7 @@
         android:layout_marginTop="@dimen/margin_0_5x"
         android:layout_marginStart="@dimen/margin_1x"
         android:layout_marginBottom="@dimen/margin_1x"
+        style="@style/phBody2"
         android:layout_below="@id/place_detail_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -38,21 +40,21 @@
 
     <LinearLayout
         android:id="@+id/place_detail_img_btn_container"
-        android:layout_below="@id/place_detail_address"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:paddingStart="@dimen/padding_large_16dp"
-        android:paddingEnd="@dimen/padding_large_16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/place_detail_address"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/padding_large_16dp"
+        android:paddingEnd="@dimen/padding_large_16dp">
 
         <Button
             android:id="@+id/btn_place_detail_info"
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="웹사이트"
             android:layout_weight="1"
+            android:text="웹사이트"
             app:icon="@drawable/ic_info_black_24dp"
 
             />
@@ -60,19 +62,18 @@
         <Button
             android:id="@+id/btn_place_detail_like"
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="저장하기"
-            app:icon="@drawable/ic_favorite_black_24dp"
-            />
+            app:icon="@drawable/ic_favorite_black_24dp" />
 
         <Button
             android:id="@+id/btn_place_detail_phone"
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="전화예약"
             app:icon="@drawable/ic_local_phone_black_24dp" />
     </LinearLayout>
@@ -83,6 +84,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_1x"
+        android:lineSpacingMultiplier="1.5"
+        style="@style/phBody2"
         android:layout_below="@id/place_detail_img_btn_container"
         android:text="@string/sample_hotel_description"
         android:maxLines="10"

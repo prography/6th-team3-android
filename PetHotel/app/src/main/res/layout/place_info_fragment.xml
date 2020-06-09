@@ -14,7 +14,6 @@
     android:layout_height="match_parent"
     >
 
-
 <!--      filter 할 수 있는 아이콘 제공 -->
 
       <RelativeLayout
@@ -55,12 +54,12 @@
       <TextView
           android:layout_margin="@dimen/margin_1x"
           style="@style/phTitle"
-          android:text="가까운 애견호텔"
+          android:text="인기 애견호텔"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
 
       <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_place_info"
+        android:id="@+id/rv_popular_place_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/place_info_view_holder_2" />
@@ -68,16 +67,15 @@
       <TextView
           android:layout_margin="@dimen/margin_1x"
           style="@style/phTitle"
-          android:text="인기 애견호텔"
+          android:text="가까운 애견호텔"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
 
       <!--리뷰 순서대로 띄워주기 -->
       <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/rv_popular_place_info"
+          android:id="@+id/rv_place_info"
           android:layout_width="match_parent"
           android:layout_height="match_parent"/>
-
 
 </LinearLayout>
 
