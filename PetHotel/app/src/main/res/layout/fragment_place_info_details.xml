@@ -17,7 +17,7 @@
             android:id="@+id/place_detail_collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimary"
+            app:contentScrim="@color/colorWhite"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             >
 
@@ -58,9 +58,12 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/top_corner_round_background"
+        app:behavior_overlapTop="24dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <include layout="@layout/place_info_detail_descriptions_layout"
+            android:layout_marginTop="@dimen/margin_2x"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             />
@@ -82,10 +85,10 @@
         android:text="바로예약"
         android:backgroundTint="@color/colorWhite"
         style="?attr/materialButtonOutlinedStyle"
-        app:layout_anchor="@id/place_detail_app_bar_layout"
-        app:layout_anchorGravity="bottom|end"
+        app:layout_anchor="@id/nestedScrollView"
+        app:layout_anchorGravity="top|end"
         android:elevation="8dp"
-        android:layout_margin="@dimen/margin_1x"
+        android:layout_marginEnd="@dimen/margin_2x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
