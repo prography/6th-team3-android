@@ -23,7 +23,7 @@ class MyPickListAdapter (
 
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPickListAdapter.MyPickListViewHolder {
-            val view = LayoutInflater.from(context).inflate(R.layout.my_page_my_pick_view_holder, parent, false)
+            val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder, parent, false)
 
             return MyPickListAdapter.MyPickListViewHolder(view)
         }

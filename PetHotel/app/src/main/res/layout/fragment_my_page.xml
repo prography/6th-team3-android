@@ -89,7 +89,6 @@
                 android:orientation="horizontal">
 
                 <include layout="@layout/my_page_pet_layout"
-                    android:layout_marginBottom="@dimen/margin_1x"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"/>
 

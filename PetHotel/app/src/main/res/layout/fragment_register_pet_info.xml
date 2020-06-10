@@ -11,22 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:padding="@dimen/padding_large_16dp"
         tools:context=".ui.register.RegisterPetInfoFragment">
 
         <TextView
-            android:text="반려견 정보 입력"
+            android:text="반려견 정보를 입력해 주세요."
             android:layout_marginTop="@dimen/margin_2x"
             android:layout_marginBottom="@dimen/margin_1x"
-            style="@style/phHeadline5"
-            android:layout_gravity="center"
+            style="@style/phTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:text="*정보 입력 후 등록번호 확인을 눌러주세요."
             android:textColor="@color/petHotelSecondaryDark"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/margin_0_5x"
+            android:layout_marginBottom="@dimen/margin_1x"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -43,13 +42,14 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btn_add_pet_input_field"
                 android:src="@drawable/ic_add_white_24dp"
                 android:layout_margin="@dimen/margin_1x"
-                android:backgroundTint="@color/petHotelSecondary"
+                app:borderWidth="0dp"
+                android:backgroundTint="@color/petHotelLightGrey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -58,6 +58,7 @@
                 android:src="@drawable/ic_check_white_24dp"
                 app:backgroundTint="@color/petHotelPrimary"
                 android:layout_margin="@dimen/margin_1x"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -65,11 +66,21 @@
 
 
         <Button
+            android:id="@+id/btn_register_full_info_done"
+            android:text="반려견 정보입력 완료"
+            android:layout_marginStart="@dimen/margin_2x"
+            android:layout_marginEnd="@dimen/margin_2x"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
             android:id="@+id/btn_skip_pet_register"
-            android:layout_gravity="center"
             style="?attr/materialButtonOutlinedStyle"
-            android:text="건너뛰기"
-            android:layout_width="wrap_content"
+            android:text="건너뛰고 가입완료"
+            android:layout_marginStart="@dimen/margin_2x"
+            android:layout_marginEnd="@dimen/margin_2x"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>

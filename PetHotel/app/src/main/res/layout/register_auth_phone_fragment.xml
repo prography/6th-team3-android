@@ -11,25 +11,26 @@
 
 <LinearLayout
     android:orientation="vertical"
+    android:padding="@dimen/padding_large_16dp"
+    android:layout_gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <TextView
-        android:layout_marginTop="@dimen/margin_2x"
-        style="@style/phHeadline5"
-        android:layout_gravity="center_horizontal"
-        android:text="휴대전화 인증"
-        android:layout_width="wrap_content"
+        style="@style/phTitle"
+        android:layout_marginBottom="@dimen/margin_2x"
+        android:lineSpacingMultiplier="1.5"
+        android:text="휴대전화 번호를 인증해 주세요. \n예약을 보다 편리하게 진행하실 수 있습니다."
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/register_enter_phone_number"
+        android:layout_marginBottom="@dimen/margin_1x"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_0_5x"
-        android:padding="@dimen/padding_small_4dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/enter_phone_number_title_field"
@@ -75,8 +76,8 @@
         android:id="@+id/register_auth_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_0_5x"
-        android:padding="@dimen/padding_small_4dp">
+        android:layout_marginBottom="@dimen/margin_1x"
+        >
 
     <TextView
         android:id="@+id/auth_phone_number_title_field"
@@ -119,16 +120,16 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-        android:layout_margin="@dimen/margin_1x"
-        android:text="이용 약관"
-        style="@style/phHeadline5"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+<!--    <TextView-->
+<!--        android:layout_margin="@dimen/margin_1x"-->
+<!--        android:text="이용 약관"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
 
     <RadioButton
         android:id="@+id/radioButton2"
+        style="@style/phBody2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="이용 약관에 동의합니다. (필수)" />
@@ -137,29 +138,47 @@
         android:id="@+id/radioButton3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/phBody2"
         android:text="개인정보 취급 방침에 동의합니다. (필수)" />
 
     <RadioButton
         android:id="@+id/radioButton4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/phBody2"
         android:text="마케팅 활용에 동의합니다. (선택)" />
 
     <RadioButton
         android:id="@+id/radioButton5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/phBody2"
         android:text="앱 PUSH 알림에 동의합니다. (선택)" />
 
 
 
     <Button
-        android:id="@+id/btn_register_auth_phone_next_screen"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_register_auth_phone_skip_pet_info"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_1x"
+        android:layout_marginStart="@dimen/margin_2x"
+        android:layout_marginEnd="@dimen/margin_2x"
         android:layout_gravity="center"
-        android:text="다음"
+        android:text="회원가입 완료하기"
+        />
+
+
+
+    <Button
+        android:id="@+id/btn_register_auth_phone_next_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_2x"
+        android:layout_marginEnd="@dimen/margin_2x"
+        android:layout_gravity="center"
+        style="?attr/materialButtonOutlinedStyle"
+        android:text="반려견 정보 등록하기"
         />
 
 

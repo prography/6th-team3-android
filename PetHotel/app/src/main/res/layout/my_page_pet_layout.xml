@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@android:color/white"
-    android:paddingStart="@dimen/default_padding_8dp"
-    android:paddingBottom="@dimen/default_padding_8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -19,9 +17,9 @@
         <!-- TODO 추후에 동적으로 추가하기. View pager 혹은 그냥 listview 로 띄우기 -->
         <include layout="@layout/reservation_pet_info_card"/>
 
-        <include layout="@layout/reservation_pet_info_card"/>
+<!--        <include layout="@layout/reservation_pet_info_card"/>-->
 
-        <include layout="@layout/reservation_pet_info_card"/>
+<!--        <include layout="@layout/reservation_pet_info_card"/>-->
 
     </LinearLayout>
 

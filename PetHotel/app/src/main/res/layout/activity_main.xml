@@ -14,17 +14,19 @@
 
 <com.google.android.material.appbar.MaterialToolbar
     android:id="@+id/main_toolbar"
-    android:background="@color/colorWhite"
+    android:background="@null"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:background="@null"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         >
 
         <ImageView
+            android:padding="2dp"
             android:src="@drawable/ic_pet_paw"
             android:layout_gravity="center_vertical"
             android:layout_width="30dp"
@@ -64,6 +66,7 @@
         app:menu="@menu/bottom_menu"
         app:itemIconTint="@color/petHotelLightGrey"
         app:itemTextColor="@color/matrixGrey"
+        app:itemRippleColor="@color/petHotelSecondary"
         app:backgroundTint="@android:color/white"
         />
 

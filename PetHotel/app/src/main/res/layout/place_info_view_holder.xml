@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rv_place_info_container"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="240dp"
     android:layout_margin="@dimen/margin_1x"
     android:background="@drawable/white_round_corner_rect"
     android:elevation="@dimen/layout_elevation_default">
@@ -33,28 +33,32 @@
 
     <TextView
         android:id="@+id/place_info_address"
+        style="@style/phBody2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/phBody2"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:maxLines="2"
         android:textColor="@color/matrixGrey"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/place_info_name"
+        app:layout_constraintTop_toBottomOf="@+id/place_info_name"
         tools:text="@sample/hotels.json/data/address" />
 
     <TextView
         android:id="@+id/place_info_distance"
+        style="@style/phBody2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/phBody2"
-        android:textColor="@color/matrixGrey"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
         android:drawableStart="@drawable/ic_running_dog"
         android:gravity="center"
         android:text=" 5km"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textColor="@color/matrixGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/place_info_image" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

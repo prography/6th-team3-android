@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_1x"
     android:background="@drawable/white_round_corner_rect"
-    android:paddingBottom="@dimen/default_padding_8dp"
+    android:padding="@dimen/padding_large_16dp"
     android:orientation="vertical"
     android:gravity="center"
-    android:elevation="8dp">
+    android:layout_margin="@dimen/margin_0_5x"
+    android:elevation="@dimen/layout_elevation_default">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -61,68 +61,67 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_register_pet_name_title"
-        style="@style/phBody2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="반려견이름"
-        android:layout_marginTop="@dimen/margin_1x"
-        />
+<!--    <TextView-->
+<!--        android:id="@+id/tv_register_pet_name_title"-->
+<!--        style="@style/phBody2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="반려견이름"-->
+<!--        android:layout_marginTop="@dimen/margin_1x"-->
+<!--        />-->
 
     <EditText
         android:id="@+id/et_register_pet_name"
         style="@style/phEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="예) 털실이"
+        android:hint="반려견 이름"
         android:inputType="textPersonName"
          />
 
-    <TextView
-        android:id="@+id/tv_register_pet_birth_year"
-        style="@style/phBody2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="태어난 년도"
-        android:layout_marginTop="@dimen/margin_1x"
-        />
+<!--    <TextView-->
+<!--        android:id="@+id/tv_register_pet_birth_year"-->
+<!--        style="@style/phBody2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="태어난 년도"-->
+<!--        android:layout_marginTop="@dimen/margin_1x"-->
+<!--        />-->
 
     <EditText
         android:id="@+id/et_register_pet_birth_year"
         style="@style/phEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="예) 2010"
+        android:hint="반려견 생일  예)2020"
         android:inputType="date" />
 
 
-    <TextView
-        android:id="@+id/tv_register_pet_number_title"
-        style="@style/phBody2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="동물등록번호"
-        android:layout_marginTop="@dimen/margin_1x"
-        />
+<!--    <TextView-->
+<!--        android:id="@+id/tv_register_pet_number_title"-->
+<!--        style="@style/phBody2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="동물등록번호"-->
+<!--        android:layout_marginTop="@dimen/margin_1x"-->
+<!--        />-->
 
 
     <EditText
         android:id="@+id/et_register_pet_number"
         style="@style/phEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="13"
-        android:hint="예) 410123412341234"
+        android:hint="동물등록번호 13자리"
         android:inputType="number" />
 
 
 
 
     <RelativeLayout
-        android:layout_margin="@dimen/margin_1x"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

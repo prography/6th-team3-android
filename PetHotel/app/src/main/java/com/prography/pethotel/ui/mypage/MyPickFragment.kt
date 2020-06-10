@@ -29,9 +29,9 @@ class MyPickFragment : Fragment() {
 
         makeDummyHotelInfo()
 
-        val MyPickAdapter = MyPickListAdapter(requireContext(), hotelList)
+        val myPickListAdapter = MyPickListAdapter(requireContext(), hotelList)
         rv_my_pick.apply {
-            adapter = MyPickAdapter
+            adapter = myPickListAdapter
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
         }
