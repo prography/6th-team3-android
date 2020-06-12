@@ -13,5 +13,3 @@ data class AnimalCheckResponse(
     val officeTel : String, //관할기관 연락처
     val aprGbNm : String //승인 여부
 )
-
-//서비스URL http://openapi.animal.go.kr/openapi/service/rest/animalInfoSrvc/animalInfo

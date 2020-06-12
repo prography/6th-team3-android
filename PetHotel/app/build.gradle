@@ -78,6 +78,7 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-simplexml:$retrofit_version"
 
     // -- Lifecycle Components (ViewModel, LiveData and ReactiveStreams)
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
