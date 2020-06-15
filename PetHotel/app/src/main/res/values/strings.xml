@@ -136,6 +136,9 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="add_search_result">메인 탭에 결과 추가하기</string>
+    <string name="cancel_add_search_result">해시태그 추가 취소하기</string>
+    <string name="add_search_result_complete">해시태그 추가 완료!</string>
 
 
 </resources>

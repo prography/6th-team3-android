@@ -1,82 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<androidx.core.widget.NestedScrollView
-    tools:context=".ui.places.PlaceInfoFragment"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
-
-<LinearLayout
-    android:orientation="vertical"
+<LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<com.google.android.material.tabs.TabLayout
+    android:id="@+id/place_tabs"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     >
 
-<!--      filter 할 수 있는 아이콘 제공 -->
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_popularity"
+            android:text="인기" />
 
-      <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="56dp">
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_map_position"
+            android:text="가까운" />
 
-            <ImageView
-                android:id="@+id/img_search_icon"
-                android:padding="@dimen/default_padding_8dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"
-                android:src="@drawable/ic_baseline_search_24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_discount"
+            android:text="저렴한" />
+    </com.google.android.material.tabs.TabLayout>
 
-            <TextView
-                android:id="@+id/title_hotel_list"
-                android:layout_centerInParent="true"
-                android:text="애견호텔 찾기"
-                style="@style/phTitle"
-                android:textColor="@color/petHotelSecondaryDark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-
-            <ImageView
-                android:id="@+id/img_filter_list_icon"
-                android:padding="@dimen/default_padding_8dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_baseline_filter_list_24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-      </RelativeLayout>
-
-
-      <TextView
-          android:layout_margin="@dimen/margin_1x"
-          style="@style/phTitle"
-          android:text="인기 애견호텔"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"/>
-
-      <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_popular_place_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/place_info_view_holder_2" />
-
-      <TextView
-          android:layout_margin="@dimen/margin_1x"
-          style="@style/phTitle"
-          android:text="가까운 애견호텔"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"/>
-
-      <!--리뷰 순서대로 띄워주기 -->
-      <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/rv_place_info"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"/>
+    <include layout="@layout/places_view_pager_layout"/>
 
 </LinearLayout>
-
-</androidx.core.widget.NestedScrollView>

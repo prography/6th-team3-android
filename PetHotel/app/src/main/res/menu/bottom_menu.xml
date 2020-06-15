@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <item
+        android:id="@+id/places"
+        android:title="장소"
+        android:icon="@drawable/ic_pet_hotel"/>
+
     <item
         android:id="@+id/reservation"
         android:title="예약"
@@ -8,18 +14,13 @@
         />
 
     <item
-        android:id="@+id/places"
-        android:title="장소"
-        android:icon="@drawable/ic_airport_shuttle_black_24dp"/>
+        android:id="@+id/monitor"
+        android:title="모니터링"
+        android:icon="@drawable/ic_videocam_black_24dp"/>
 
     <item
         android:id="@+id/my_page"
         android:title="마이페이지"
         android:icon="@drawable/ic_person_black_24dp"/>
-
-    <item
-        android:id="@+id/monitor"
-        android:title="모니터링"
-        android:icon="@drawable/ic_videocam_black_24dp"/>
 
 </menu>

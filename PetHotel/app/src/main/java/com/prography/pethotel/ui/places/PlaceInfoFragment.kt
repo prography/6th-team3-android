@@ -1,23 +1,43 @@
 package com.prography.pethotel.ui.places
 
+import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuItemCompat
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Observer
+import com.google.android.material.tabs.TabLayout
+import com.kakao.auth.authorization.AuthorizationResult
 
 import com.prography.pethotel.R
-import com.prography.pethotel.models.Hotel
+import com.prography.pethotel.ui.places.adapters.TabAdapter
+import com.prography.pethotel.ui.places.search.PlaceSearchResultActivity
+import com.prography.pethotel.ui.places.util.TabFragmentsViewModel
 import kotlinx.android.synthetic.main.place_info_fragment.*
+import kotlinx.android.synthetic.main.places_view_pager_layout.*
+import kotlinx.android.synthetic.main.search_custom_tab.*
+import kotlinx.android.synthetic.main.search_custom_tab.view.*
+import kotlinx.android.synthetic.main.search_custom_tab.view.tab_remove_button
 
 class PlaceInfoFragment : Fragment() {
 
     private lateinit var viewModel: PlaceInfoViewModel
-    private var hotelList : ArrayList<Hotel> = ArrayList()
+    private lateinit var tabFragmentsViewModel: TabFragmentsViewModel
+
+    lateinit var tabAdapter : TabAdapter
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,48 +49,100 @@ class PlaceInfoFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(PlaceInfoViewModel::class.java)
+        tabFragmentsViewModel = ViewModelProviders.of(this).get(TabFragmentsViewModel::class.java)
 
-        //recycler view 만들기
+        val mainToolbarTitle = requireActivity().findViewById<TextView>(R.id.main_toolbar_title)
+        mainToolbarTitle.visibility = View.GONE
 
-        //filtering 하는 기능 제공하기.
-        //1. near by places
-        //2.monitor providers
-        //3. price discounts (?)
 
-        makeDummyHotelInfo()
-
-        val placeInfoAdapter = PlaceListAdapter(requireContext(), hotelList)
-        rv_popular_place_info.apply {
-            adapter = placeInfoAdapter
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        //TODO 메서드로 분리하기
+        tabAdapter = TabAdapter(childFragmentManager,
+            FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+            tabFragmentsViewModel
+        )
+        place_view_pager.adapter = tabAdapter
+        place_tabs.setupWithViewPager(place_view_pager)
+        tabAdapter.apply {
+            addFragment(PopularPlaceFragment.newInstance(), "#인기")
+            addFragment(NearPlaceFragment.newInstance(), "#가까운")
+            addFragment(DiscountPlaceFragment.newInstance(), "#저렴한")
+        }
+        val icons = listOf<Int>(
+            R.drawable.ic_popularity,
+            R.drawable.ic_map_position,
+            R.drawable.ic_discount
+        )
+        for(x in 0 .. 2){
+            place_tabs.getTabAt(x)?.setIcon(icons[x])
         }
 
-        val popularPlaceListAdapter = PopularPlaceListAdapter(requireContext(), hotelList)
-        rv_place_info.apply {
-            adapter = popularPlaceListAdapter
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext())
-        }
+        //TODO 메서드로 분리하기
+//        tabFragmentsViewModel.tabFragments.observe(viewLifecycleOwner, Observer {
+//            Log.d(TAG, "onActivityCreated: ${it.size}")
+//                if(it.size > 3) {
+//                    for (x in 1..it.size) {
+//                        tabAdapter.addFragment(it[x].second, it[x].first)
+//                    }
+//                }
+//        })
     }
 
 
-    private fun makeDummyHotelInfo(){
-        if(hotelList.isNotEmpty()){
-            return
-        }else{
-            for(x in 0 .. 20){
-                hotelList.add(
-                    Hotel(x, "", "", "애견호텔 $x",
-                        "This is a dummy description #$x", "서울시 용산구 $x 길 $x ",
-                        "Dummy address detail #$x", "dummy zip code #$x",
-                        "30303040", "234234234", "09:00",
-                        "20:00", "09:00", "18:00",
-                        "09:00", "18:00", 10000, 20000, 20000,
-                        "010-1123-1231", true, true, 3, "www.dummylink.com")
-                )
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.actionbar_menu, menu)
+        val item = menu.findItem(R.id.menu_search)
+        val searchView = MenuItemCompat.getActionView(item) as SearchView
+        configureSearchView(searchView)
+    }
+
+
+    private lateinit var searchQuery : String
+
+    private fun configureSearchView(searchView: SearchView){
+        searchView.queryHint = "장소를 검색해 보세요"
+        val query = searchView.query
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+
+                //TODO 검색 진행하기
+                //데이터 갖고
+                //검색 화면으로 넘어가기
+
+                val intent = Intent(requireActivity(), PlaceSearchResultActivity::class.java)
+                intent.putExtra("QUERY", query)
+
+                if (!query.isNullOrEmpty()) {
+                    searchQuery = query
+                    startActivityForResult(intent, 1234)
+                }else{
+                    Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_LONG).show()
+                }
+
+                return true
             }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d(TAG, "onQueryTextChange: ${query}")
+                return true
+            }
+        })
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == Activity.RESULT_OK && requestCode == 1234){
+            //TODO Query text 갖고 탭에다가 추가하기
+            tabAdapter.addFragment(SearchResultFragment(), searchQuery)
         }
+    }
+
+    companion object {
+        private const val TAG = "PlaceInfoFragment"
     }
 
 }

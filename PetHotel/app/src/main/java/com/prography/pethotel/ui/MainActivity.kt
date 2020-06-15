@@ -11,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -26,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var mainLayout : LinearLayout
 
     private var currentNavController: LiveData<NavController>? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,10 +63,10 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav_main)
 
         val navGraphIds = listOf(
-            R.navigation.reservation,
             R.navigation.places,
-            R.navigation.my_page,
-            R.navigation.monitor
+            R.navigation.reservation,
+            R.navigation.monitor,
+            R.navigation.my_page
         )
 
         // Setup the bottom navigation view with a list of navigation graphs
@@ -85,24 +86,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
-    }
-
-
-    override fun onBackPressed() {
-        val alertBuilder = MaterialAlertDialogBuilder(this)
-        alertBuilder.apply {
-            setTitle("종료하기")
-            setMessage("마이펫밀리를 종료하시겠습니까?")
-            setCancelable(true)
-            setPositiveButton("종료") { _, _ ->
-                finishAndRemoveTask()
-            }
-            setNeutralButton("취소") { dialog, _ ->
-                dialog.cancel()
-            }
-        }
-        val alertDialog = alertBuilder.create()
-        alertDialog.show()
     }
 
 }

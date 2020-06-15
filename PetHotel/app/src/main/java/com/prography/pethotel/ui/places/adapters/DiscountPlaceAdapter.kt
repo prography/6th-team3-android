@@ -1,5 +1,4 @@
-package com.prography.pethotel.ui.places
-
+package com.prography.pethotel.ui.places.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -14,23 +13,26 @@ import com.prography.pethotel.R
 import com.prography.pethotel.models.Hotel
 import kotlinx.android.synthetic.main.place_info_view_holder.view.*
 
-class PopularPlaceListAdapter(
+class DiscountPlaceAdapter (
     val context: Context,
     private val hotelList : ArrayList<Hotel>
-) : ListAdapter<Hotel, PopularPlaceListAdapter.PopularPlaceViewHolder>(HotelDiffUtilCallback()){
+) : ListAdapter<Hotel, DiscountPlaceAdapter.DiscountPlaceViewHolder>(
+    HotelDiffUtilCallback()
+){
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularPlaceViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiscountPlaceViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder, parent, false)
 
-        return PopularPlaceViewHolder(view)
+        return DiscountPlaceViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int {
         return hotelList.size
     }
 
-    override fun onBindViewHolder(holder: PopularPlaceViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DiscountPlaceViewHolder, position: Int) {
         val hotel = hotelList[position]
         holder.bind(hotel)
 
@@ -40,7 +42,7 @@ class PopularPlaceListAdapter(
         }
     }
 
-    class PopularPlaceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class DiscountPlaceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(hotel : Hotel){
             itemView.place_info_name.text = hotel.hotelName
@@ -58,4 +60,5 @@ class PopularPlaceListAdapter(
             return oldItem == newItem
         }
     }
+
 }

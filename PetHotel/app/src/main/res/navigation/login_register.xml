@@ -18,7 +18,8 @@
         tools:layout="@layout/register_user_info_fragment" >
         <action
             android:id="@+id/action_registerUserInfoFragment_to_registerAuthPhoneFragment"
-            app:destination="@id/registerAuthPhoneFragment" />
+            app:destination="@id/registerAuthPhoneFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/registerAuthPhoneFragment"
@@ -26,7 +27,8 @@
         android:label="RegisterAuthPhoneFragment" >
         <action
             android:id="@+id/action_registerAuthPhoneFragment_to_registerPetInfoFragment"
-            app:destination="@id/registerPetInfoFragment" />
+            app:destination="@id/registerPetInfoFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/loginRegisterFragment"
@@ -35,7 +37,8 @@
         tools:layout="@layout/login_register_fragment" >
         <action
             android:id="@+id/action_loginRegisterFragment_to_registerUserInfoFragment"
-            app:destination="@id/registerUserInfoFragment" />
+            app:destination="@id/registerUserInfoFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/registerPetInfoFragment"

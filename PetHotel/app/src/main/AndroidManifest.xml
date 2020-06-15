@@ -17,10 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_mily"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.places.search.PlaceSearchResultActivity"></activity>
         <activity
             android:name=".ui.places.ScrollingActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.splash.SplashActivity">
 
             <!-- <intent-filter> -->

@@ -1,16 +1,20 @@
 package com.prography.pethotel.ui.places
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
+import androidx.fragment.app.Fragment
+import com.getbase.floatingactionbutton.FloatingActionsMenu
+import com.getbase.floatingactionbutton.FloatingActionsMenu.OnFloatingActionsMenuUpdateListener
 import com.prography.pethotel.R
 import com.prography.pethotel.models.Hotel
+import kotlinx.android.synthetic.main.floating_menu.*
 import kotlinx.android.synthetic.main.place_info_detail_descriptions_layout.*
 import kotlinx.android.synthetic.main.place_info_detail_time_etc_layout.*
+import kotlinx.android.synthetic.main.fragment_place_info_details.*
+
 
 
 class PlaceInfoDetailsFragment : Fragment() {
@@ -26,19 +30,23 @@ class PlaceInfoDetailsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+
+        initFloatingActionButtonMenu()
+
         val hotel : Hotel = arguments?.get("hotel") as Hotel
 
         place_detail_name.text = hotel.hotelName
         place_detail_address.text = hotel.addressDetail
-        btn_place_detail_info.setOnClickListener {
-            Toast.makeText(requireContext(), hotel.pageLink, Toast.LENGTH_SHORT).show()
-        }
-        btn_place_detail_like.setOnClickListener {
-            Toast.makeText(requireContext(), "저장되었습니다!", Toast.LENGTH_SHORT).show()
-        }
-        btn_place_detail_phone.setOnClickListener {
-            Toast.makeText(requireContext(), hotel.phoneNumber, Toast.LENGTH_SHORT).show()
-        }
+//        btn_place_detail_info.setOnClickListener {
+//
+//        }
+//        btn_place_detail_like.setOnClickListener {
+//            Toast.makeText(requireContext(), "저장되었습니다!", Toast.LENGTH_SHORT).show()
+//        }
+//        btn_place_detail_phone.setOnClickListener {
+//            Toast.makeText(requireContext(), hotel.phoneNumber, Toast.LENGTH_SHORT).show()
+//        }
         tv_place_detail.text = hotel.description
 
         val weekTime = "${hotel.weekOpenTime} ~ ${hotel.weekCloseTime}"
@@ -70,5 +78,31 @@ class PlaceInfoDetailsFragment : Fragment() {
         tv_sun_price.append("${hotel.sunPrice} 원")
     }
 
+
+    private fun initFloatingActionButtonMenu() {
+        val floatingActionsMenu = multiple_actions_menu
+
+        action_check_website.setOnClickListener {
+            floatingActionsMenu.collapse()
+        }
+
+        action_make_phone_call.setOnClickListener { floatingActionsMenu.collapse() }
+
+        action_reserve_now.setOnClickListener { floatingActionsMenu.collapse() }
+
+        action_save_like.setOnClickListener { floatingActionsMenu.collapse() }
+
+        floating_menu_background.setOnClickListener { floatingActionsMenu.collapse() }
+        floatingActionsMenu.setOnFloatingActionsMenuUpdateListener(object :
+            OnFloatingActionsMenuUpdateListener {
+            override fun onMenuExpanded() {
+                floating_menu_background.visibility = View.VISIBLE
+            }
+
+            override fun onMenuCollapsed() {
+                floating_menu_background.visibility = View.GONE
+            }
+        })
+    }
 
 }

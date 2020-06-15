@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -29,7 +30,10 @@ class ReservationFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
+        val mainToolbarTitle = requireActivity().findViewById<TextView>(R.id.main_toolbar_title)
+        if(mainToolbarTitle.visibility == View.GONE){
+            mainToolbarTitle.visibility = View.VISIBLE
+        }
 
         dateTimeViewModel = ViewModelProviders.of(requireActivity()).get(DateTimeViewModel::class.java)
 

@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
+    <!-- floating actions buttons -->
+    <color name="black">#000000</color>
+    <color name="half_black">#808080</color>
+
     <color name="defaultBackgroundColor">#14000000</color>
 
     <color name="petHotelPrimary">#724926</color>

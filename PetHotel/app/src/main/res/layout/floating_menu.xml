@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <View
+        android:id="@+id/floating_menu_background"
+        android:visibility="gone"
+        android:background="#55000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions_menu"
+        app:layout_anchorGravity="center_vertical|right"
+        app:fab_addButtonColorNormal="@color/petHotelSecondary"
+        app:fab_addButtonColorPressed="@color/petHotelSecondaryTransparent"
+        app:fab_addButtonPlusIconColor="@android:color/white"
+        app:fab_labelStyle="@style/menu_labels_style"
+        app:fab_expandDirection="up"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="@dimen/margin_1x"
+        android:layout_marginEnd="@dimen/margin_1x"
+        android:layout_marginStart="@dimen/margin_1x"
+        android:layout_gravity="bottom|end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_check_website"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_icon="@drawable/ic_info_black_24dp"
+            app:fab_colorNormal="@color/colorWhite"
+            app:fab_title="웹사이트"
+            app:fab_colorPressed="@color/half_black" />
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_make_phone_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_icon="@drawable/ic_local_phone_black_24dp"
+            app:fab_colorNormal="@color/colorWhite"
+            app:fab_title="전화예약"
+            app:fab_colorPressed="@color/half_black" />
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_reserve_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_icon="@drawable/ic_baseline_calendar_today_24"
+            app:fab_colorNormal="@color/colorWhite"
+            app:fab_title="바로예약"
+            app:fab_colorPressed="@color/half_black" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_save_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_icon="@drawable/ic_favorite_black_24dp"
+            app:fab_colorNormal="@color/colorWhite"
+            app:fab_title="저장 및 단골등록"
+            app:fab_colorPressed="@color/half_black" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+</RelativeLayout>

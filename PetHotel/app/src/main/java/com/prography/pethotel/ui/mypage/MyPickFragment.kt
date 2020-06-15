@@ -9,12 +9,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prography.pethotel.R
 import com.prography.pethotel.models.Hotel
+import com.prography.pethotel.utils.DummyData
 import kotlinx.android.synthetic.main.my_page_my_pick_fragment.*
 
 class MyPickFragment : Fragment() {
 
-    private lateinit var viewModel: MyPickViewModel
-    private var hotelList : ArrayList<Hotel> = ArrayList()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,11 +25,11 @@ class MyPickFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MyPickViewModel::class.java)
 
-        makeDummyHotelInfo()
 
-        val myPickListAdapter = MyPickListAdapter(requireContext(), hotelList)
+
+        // TODO 더미 데이터 실제 데이터로 바꾸기
+        val myPickListAdapter = MyPickListAdapter(requireContext(), DummyData.hotelDummyList)
         rv_my_pick.apply {
             adapter = myPickListAdapter
             setHasFixedSize(true)
@@ -37,24 +37,6 @@ class MyPickFragment : Fragment() {
         }
     }
 
-
-    private fun makeDummyHotelInfo(){
-        if(hotelList.isNotEmpty()){
-            return
-        }else{
-            for(x in 0 .. 5){
-                hotelList.add(
-                    Hotel(x, "", "", "애견호텔 $x",
-                        "This is a dummy description #$x", "서울시 용산구 $x 길 $x ",
-                        "Dummy address detail #$x", "dummy zip code #$x",
-                        "30303040", "234234234", "09:00",
-                        "20:00", "09:00", "18:00",
-                        "09:00", "18:00", 10000, 20000, 20000,
-                        "010-1123-1231", true, true, 3, "www.dummylink.com")
-                )
-            }
-        }
-    }
 
 }
 

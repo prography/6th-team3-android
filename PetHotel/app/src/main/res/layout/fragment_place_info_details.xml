@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="@color/colorWhite"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             >
 
 
@@ -80,17 +80,20 @@
 <!--        app:layout_anchorGravity="bottom|end"-->
 <!--        />-->
 
-    <Button
-        android:id="@+id/btn_reserve_now"
-        android:text="바로예약"
-        android:backgroundTint="@color/colorWhite"
-        style="?attr/materialButtonOutlinedStyle"
-        app:layout_anchor="@id/nestedScrollView"
-        app:layout_anchorGravity="top|end"
-        android:elevation="8dp"
-        android:layout_marginEnd="@dimen/margin_2x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/btn_reserve_now"-->
+<!--        android:backgroundTint="@color/petHotelSecondary"-->
+<!--        style="?attr/materialButtonOutlinedStyle"-->
+<!--        app:layout_anchor="@id/nestedScrollView"-->
+<!--        app:layout_anchorGravity="top|end"-->
+<!--        android:elevation="8dp"-->
+<!--        android:layout_marginEnd="@dimen/margin_2x"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
+
+
+<include layout="@layout/floating_menu"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

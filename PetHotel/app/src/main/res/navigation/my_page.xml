@@ -12,16 +12,20 @@
         tools:layout="@layout/fragment_my_page" >
         <action
             android:id="@+id/action_myPageFragment_to_myPickFragment"
-            app:destination="@id/myPickFragment" />
+            app:destination="@id/myPickFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_myPageFragment_to_myReviewFragment"
-            app:destination="@id/myReviewFragment" />
+            app:destination="@id/myReviewFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_myPageFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
         <action
             android:id="@+id/action_myPageFragment_to_userInfoEditFragment"
-            app:destination="@id/userInfoEditFragment" />
+            app:destination="@id/userInfoEditFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/myPickFragment"

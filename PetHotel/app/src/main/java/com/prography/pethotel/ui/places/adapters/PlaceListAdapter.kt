@@ -1,4 +1,4 @@
-package com.prography.pethotel.ui.places
+package com.prography.pethotel.ui.places.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorDestinationBuilder
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,13 +16,17 @@ import kotlinx.android.synthetic.main.place_info_view_holder.view.*
 class PlaceListAdapter(
     val context: Context,
     private val hotelList : ArrayList<Hotel>
-) : ListAdapter<Hotel, PlaceListAdapter.PlaceListViewHolder>(HotelDiffUtilCallback()){
+) : ListAdapter<Hotel, PlaceListAdapter.PlaceListViewHolder>(
+    HotelDiffUtilCallback()
+){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceListViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder_2, parent, false)
 
-        return PlaceListViewHolder(view)
+        return PlaceListViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int {

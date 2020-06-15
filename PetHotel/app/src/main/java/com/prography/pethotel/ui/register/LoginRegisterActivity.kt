@@ -22,21 +22,4 @@ class LoginRegisterActivity : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
-        val alertBuilder = MaterialAlertDialogBuilder(this)
-        alertBuilder.apply {
-            setTitle("종료하기")
-            setMessage("마이펫밀리를 종료하시겠습니까?")
-            setCancelable(true)
-            setPositiveButton("종료") { _, _ ->
-                finishAndRemoveTask()
-            }
-            setNeutralButton("취소") { dialog, _ ->
-                dialog.cancel()
-            }
-        }
-        val alertDialog = alertBuilder.create()
-        alertDialog.show()
-    }
-
 }

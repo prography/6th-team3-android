@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.prography.pethotel.R
 import com.prography.pethotel.models.Hotel
-import com.prography.pethotel.ui.places.PlaceListAdapter
 import kotlinx.android.synthetic.main.place_info_view_holder.view.*
 
 
@@ -22,10 +21,10 @@ class MyPickListAdapter (
     ) : ListAdapter<Hotel, MyPickListAdapter.MyPickListViewHolder>(HotelDiffUtilCallback()){
 
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPickListAdapter.MyPickListViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPickListViewHolder {
             val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder, parent, false)
 
-            return MyPickListAdapter.MyPickListViewHolder(view)
+            return MyPickListViewHolder(view)
         }
 
         override fun getItemCount(): Int {
