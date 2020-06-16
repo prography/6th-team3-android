@@ -29,5 +29,7 @@ data class Hotel(
     val monitorAvailable : Boolean,
     val isNeuteredOnly : Boolean,
     val maxDogSize : Int,
-    val pageLink : String
+    val pageLink : String,
+    var reviews : ArrayList<HotelReview>? = null
 ) : Parcelable
+// TODO 호텔 리뷰 서버에서 받은 것 호텔 정보들과 합쳐서 데이터 클래스 만들기. Transformations.map

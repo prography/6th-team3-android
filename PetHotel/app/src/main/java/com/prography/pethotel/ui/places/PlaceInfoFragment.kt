@@ -13,6 +13,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.kakao.auth.authorization.AuthorizationResult
 
@@ -26,10 +27,10 @@ import kotlinx.android.synthetic.main.search_custom_tab.*
 import kotlinx.android.synthetic.main.search_custom_tab.view.*
 import kotlinx.android.synthetic.main.search_custom_tab.view.tab_remove_button
 
+@Suppress("DEPRECATION")
 class PlaceInfoFragment : Fragment() {
 
     private lateinit var viewModel: PlaceInfoViewModel
-    private lateinit var tabFragmentsViewModel: TabFragmentsViewModel
 
     lateinit var tabAdapter : TabAdapter
 
@@ -48,8 +49,7 @@ class PlaceInfoFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(PlaceInfoViewModel::class.java)
-        tabFragmentsViewModel = ViewModelProviders.of(this).get(TabFragmentsViewModel::class.java)
+
 
         val mainToolbarTitle = requireActivity().findViewById<TextView>(R.id.main_toolbar_title)
         mainToolbarTitle.visibility = View.GONE
@@ -57,8 +57,7 @@ class PlaceInfoFragment : Fragment() {
 
         //TODO 메서드로 분리하기
         tabAdapter = TabAdapter(childFragmentManager,
-            FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
-            tabFragmentsViewModel
+            FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
         )
         place_view_pager.adapter = tabAdapter
         place_tabs.setupWithViewPager(place_view_pager)

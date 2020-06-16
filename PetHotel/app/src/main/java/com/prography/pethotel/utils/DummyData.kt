@@ -6,6 +6,7 @@ import com.prography.pethotel.ui.monitor.MonitorMedia
 
 class DummyData {
 
+
     companion object{
         val hotelDummyList : ArrayList<Hotel> = makeDummyHotelInfo()
 
@@ -20,19 +21,21 @@ class DummyData {
             }else{
                 for(x in 0 .. 20){
                     list.add(
-                        Hotel(x, "", "", "애견호텔 $x",
+                        Hotel(
+                            x, "", "", "애견호텔 $x",
                             "This is a dummy description #$x", "서울시 용산구 $x 길 $x ",
                             "Dummy address detail #$x", "dummy zip code #$x",
                             "30303040", "234234234", "09:00",
                             "20:00", "09:00", "18:00",
                             "09:00", "18:00", 10000, 20000, 20000,
-                            "010-1123-1231", true, true, 3, "www.dummylink.com")
+                            "010-1123-1231", true, true, 3,
+                            "www.dummylink.com"
+                        )
                     )
                 }
                 return list
             }
         }
-
 
         private fun makeDummyMediaList() : ArrayList<MonitorMedia>{
             var list = ArrayList<MonitorMedia>()

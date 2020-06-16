@@ -47,7 +47,7 @@ class DiscountPlaceAdapter (
         fun bind(hotel : Hotel){
             itemView.place_info_name.text = hotel.hotelName
             itemView.place_info_address.text = hotel.address
-            //distance 는 안함
+            // TODO distance 는 안함 - 구현해서 넣어야함. 
         }
     }
 

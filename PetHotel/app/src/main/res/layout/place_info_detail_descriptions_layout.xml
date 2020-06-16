@@ -8,11 +8,24 @@
     <TextView
         android:id="@+id/place_detail_name"
         style="@style/phTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="쿨쿨펫 애견호텔"
-        android:layout_margin="@dimen/margin_1x"
-        />
+        android:layout_margin="@dimen/margin_1x"/>
+
+    <TextView
+        android:id="@+id/user_average_rating"
+        android:text="@string/user_average_rating"
+        android:textStyle="italic"
+        android:textColor="@color/matrixGrey"
+        android:textSize="@dimen/text_size_rating"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:drawableStart="@drawable/ic_baseline_star_24"
+        android:layout_below="@id/place_detail_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/place_detail_category"
@@ -20,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="호텔/병원/미용"
         style="@style/phBody2"
-        android:layout_below="@id/place_detail_name"
+        android:layout_below="@id/user_average_rating"
         android:layout_marginTop="@dimen/margin_0_5x"
         android:layout_marginStart="@dimen/margin_1x"
         android:layout_marginBottom="@dimen/margin_1x"

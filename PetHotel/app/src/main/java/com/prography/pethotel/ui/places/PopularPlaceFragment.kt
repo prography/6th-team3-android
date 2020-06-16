@@ -5,14 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prography.pethotel.R
+import com.prography.pethotel.models.Hotel
 import com.prography.pethotel.ui.places.adapters.PopularPlaceAdapter
 import com.prography.pethotel.utils.DummyData
 import kotlinx.android.synthetic.main.fragment_popular_place.*
 
+@Suppress("DEPRECATION")
 class PopularPlaceFragment : Fragment() {
 
+
+    lateinit var placeInfoViewModel: PlaceInfoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +31,19 @@ class PopularPlaceFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        placeInfoViewModel = requireActivity().let {
+            ViewModelProviders.of(it).get(PlaceInfoViewModel::class.java)
+        }
+
+        placeInfoViewModel.hotelList.observe(viewLifecycleOwner, Observer {
+            val filteredArray = filterBy(FilterType.POPULARITY, it)
+            initList(hotelList = filteredArray)
+        })
+
+    }
+
+    private fun initList(hotelList : ArrayList<Hotel>){
+        //TODO change this part with real hotel data
         val popularPlaceListAdapter = PopularPlaceAdapter(requireContext(), DummyData.hotelDummyList)
         rv_popular_list.apply {
             adapter = popularPlaceListAdapter

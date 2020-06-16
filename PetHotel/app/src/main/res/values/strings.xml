@@ -139,6 +139,8 @@
     <string name="add_search_result">메인 탭에 결과 추가하기</string>
     <string name="cancel_add_search_result">해시태그 추가 취소하기</string>
     <string name="add_search_result_complete">해시태그 추가 완료!</string>
+    <string name="no_review_yet">아직 후기가 없습니다!</string>
+    <string name="user_average_rating"><![CDATA[ %d / 5.0 ]]></string>
 
 
 </resources>

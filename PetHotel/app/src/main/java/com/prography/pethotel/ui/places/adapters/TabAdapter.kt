@@ -9,8 +9,7 @@ import com.prography.pethotel.ui.places.util.TabFragmentsViewModel
 
 class TabAdapter(
     fragmentManager: FragmentManager,
-    behavior: Int,
-    var tabFragmentsViewModel: TabFragmentsViewModel
+    behavior: Int
 ) : FragmentStatePagerAdapter(
     fragmentManager, behavior
 ) {
@@ -29,16 +28,12 @@ class TabAdapter(
         fragmentList.add(fragment)
         fragmentTitleList.add(title)
 
-        tabFragmentsViewModel.addLiveData(fragment, title)
-
         notifyDataSetChanged()
     }
 
     fun removeFragment(position: Int) {
         fragmentList.removeAt(position)
         fragmentTitleList.removeAt(position)
-
-        tabFragmentsViewModel.removeLiveData(position)
 
         notifyDataSetChanged()
     }

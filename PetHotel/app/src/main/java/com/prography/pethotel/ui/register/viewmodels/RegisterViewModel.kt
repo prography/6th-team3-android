@@ -8,5 +8,4 @@ class RegisterViewModel : ViewModel() {
 
     val userInfoLiveData : MutableLiveData<UserInfo> = MutableLiveData()
 
-    
 }

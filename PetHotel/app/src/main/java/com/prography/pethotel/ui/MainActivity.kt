@@ -19,13 +19,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.prography.pethotel.R
+import com.prography.pethotel.ui.places.PlaceInfoViewModel
+import com.prography.pethotel.utils.DummyData
 import com.prography.pethotel.utils.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mainLayout : LinearLayout
+    private lateinit var mainLayout : LinearLayout
 
     private var currentNavController: LiveData<NavController>? = null
 
@@ -46,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {

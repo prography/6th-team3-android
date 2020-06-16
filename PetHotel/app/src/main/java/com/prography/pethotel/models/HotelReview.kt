@@ -14,3 +14,9 @@ data class HotelReview(
     val reviewContent : String,
     val rating : Int
 ) : Parcelable
+
+
+@Parcelize
+data class EmptyReview(
+    val noting : Int
+) : Parcelable
