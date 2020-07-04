@@ -21,19 +21,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_mily"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="018dfd19083580681fa1b9d6e5774f49" /> //네이티브 앱 키 설정
+
         <activity android:name=".ui.places.search.PlaceSearchResultActivity">
 
         </activity>
 
         <activity android:name=".ui.splash.SplashActivity">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
         </activity>
         <activity
             android:name=".ui.register.LoginRegisterActivity"

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_popular_place.*
 class PopularPlaceFragment : Fragment() {
 
 
-    lateinit var placeInfoViewModel: PlaceInfoViewModel
+    private lateinit var placeInfoViewModel: PlaceInfoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +31,8 @@ class PopularPlaceFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        //모든 Fragment 들이 하나의 place info data source 를 공유하면서 display 할 때
+        //filter 만 다르게 한다.
         placeInfoViewModel = requireActivity().let {
             ViewModelProviders.of(it).get(PlaceInfoViewModel::class.java)
         }
