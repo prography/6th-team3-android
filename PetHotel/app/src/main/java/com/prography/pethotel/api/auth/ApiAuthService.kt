@@ -4,20 +4,17 @@ import com.prography.pethotel.api.auth.request.KakaoRegisterBody
 import com.prography.pethotel.api.auth.request.LoginInfoBody
 import com.prography.pethotel.api.auth.request.RegisterPetBody
 import com.prography.pethotel.api.auth.request.RegisterUserInfo
-import com.prography.pethotel.api.auth.response.GeneralLoginResponse
-import com.prography.pethotel.api.auth.response.KakaoLoginResponse
-import com.prography.pethotel.api.auth.response.PostPetResponse
-import com.prography.pethotel.api.auth.response.RegistrationResponse
-import com.prography.pethotel.api.main.response.PetNumberResponse
+import com.prography.pethotel.api.auth.response.*
 import com.prography.pethotel.api.main.response.UserInfoResponse
 import com.prography.pethotel.utils.ANIMAL_NUM_BASE_URL
 import com.prography.pethotel.utils.BASE_URL
-import com.prography.pethotel.utils.SERVICE_KEY
+import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import retrofit2.http.*
-
+import retrofit2.http.Body
+import retrofit2.http.Header
 
 
 //GET https://api.mypetmily.net/hotels
@@ -29,16 +26,18 @@ private val authRetrofit
 
 private val publicApiRetrofit
         = Retrofit.Builder()
-    .addConverterFactory(SimpleXmlConverterFactory.create())
+    .addConverterFactory(TikXmlConverterFactory.create())
     .baseUrl(ANIMAL_NUM_BASE_URL)
     .build()
 
 interface AnimalNumberApiService{
 
     @GET("service/rest/animalInfoSrvc/animalInfo")
-    suspend fun getAnimalCheckResponse(@Query("dogregno") dog_reg_no : String,
-                                       @Query("ServiceKey") serviceKey : String = SERVICE_KEY
-    ) : PetNumberResponse
+    fun getAnimalCheckResponse(
+        @Query("ServiceKey") serviceKey : String,
+        @Query("dogregno") dog_reg_no : String,
+        @Query("rfid_cd") rfid_cd : String
+    ) : Call<PetNumResponse>
 
 }
 

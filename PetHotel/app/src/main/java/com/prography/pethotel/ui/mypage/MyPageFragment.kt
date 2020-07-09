@@ -1,5 +1,6 @@
 package com.prography.pethotel.ui.mypage
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,23 +8,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.prography.pethotel.R
+import com.prography.pethotel.utils.USER_TOKEN
 import kotlinx.android.synthetic.main.new_my_page_logged_in_layout.*
 import kotlinx.android.synthetic.main.new_my_page_not_logged_in_layout.*
 
 
 class MyPageFragment : Fragment() {
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        //TODO 로그인 되었으면 logged in layout, 안되어있으면 not logged in layout 띄우기
-        val view = inflater.inflate(R.layout.new_my_page_not_logged_in_layout, container, false)
 
+        val pref = requireActivity().getSharedPreferences(USER_TOKEN, Context.MODE_PRIVATE)
+        val token = pref.getString(USER_TOKEN, "")
 
+        if(token.isNullOrEmpty()){
+            val view = inflater.inflate(R.layout.new_my_page_not_logged_in_layout, container, false)
+        }else{
+
+        }
         return view
     }
 

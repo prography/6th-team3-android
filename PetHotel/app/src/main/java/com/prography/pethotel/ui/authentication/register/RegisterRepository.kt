@@ -5,16 +5,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.prography.pethotel.api.auth.PetmilyAuthApi
 import com.prography.pethotel.api.auth.request.*
+import com.prography.pethotel.api.auth.response.PetNumResponse
+import com.prography.pethotel.api.auth.response.PostPetResponse
 import com.prography.pethotel.api.auth.response.UserToken
-import com.prography.pethotel.api.main.response.PetNumberResponse
 import com.prography.pethotel.api.main.response.UserInfoResponse
 import com.prography.pethotel.models.GeneralUserInfo
 import com.prography.pethotel.models.PetInfo
+import com.prography.pethotel.utils.SERVICE_KEY
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.lang.Exception
-import java.security.spec.ECField
 
 private const val TAG = "RegisterRepository"
 
@@ -23,8 +27,8 @@ object RegisterRepository{
     private val coroutineScope  = CoroutineScope(Dispatchers.Main)
 
     /*동물등록번호 API 호출 시 오는 응답에 대한 라이브 데이터*/
-    private val _petInfo : MutableLiveData<PetNumberResponse> = MutableLiveData()
-    val petInfo : LiveData<PetNumberResponse>
+    private val _petInfo : MutableLiveData<PetNumResponse> = MutableLiveData()
+    val petInfo : LiveData<PetNumResponse>
         get() = _petInfo
 
     /* 회원가입시 발급되는 유저 토큰 */
@@ -42,22 +46,32 @@ object RegisterRepository{
     val userInfoResponse : LiveData<UserInfoResponse>
         get() = _userInfoRespone
 
+    /* 펫 POST 할 때의 응답 */
+    private val _registerPetResponse : MutableLiveData<PostPetResponse> = MutableLiveData()
+    val registerPetResponse : LiveData<PostPetResponse>
+        get() = _registerPetResponse
+
 
     /*공공 API 에서 유효한 동물등록 번호인지를 확인하는 메서드 */
-    fun checkPublicApiForPetInfo(dogRegNo : String, serviceKey : String){
-        try {
-            coroutineScope.launch {
-                val response
-                        = PetmilyAuthApi.publicApiRetrofitService.getAnimalCheckResponse(dog_reg_no = dogRegNo)
-                //응답을 확인한 후 응답 전체를 petInfo 에 저장한다.
-                _petInfo.value = response
+    fun checkPetNumber(dogNum : String){
+        val response = PetmilyAuthApi.publicApiRetrofitService.getAnimalCheckResponse(
+            dog_reg_no = dogNum,
+            serviceKey = SERVICE_KEY,
+            rfid_cd = dogNum
+        )
+        response.enqueue(object : Callback<PetNumResponse> {
+            override fun onFailure(call: Call<PetNumResponse>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
             }
-        }catch (e : Exception){
-            e.printStackTrace()
-        }
+
+            override fun onResponse(call: Call<PetNumResponse>, response: Response<PetNumResponse>) {
+                Log.d(TAG, "onResponse: ${response.raw()}")
+                _petInfo.value = response.body()
+            }
+        })
     }
 
-    fun registerPetInfo(userToken: UserToken, userId : Int, petInfoList: ArrayList<PetInfo>){
+    fun registerPetInfo(userToken: String, userId : Int, petInfoList: ArrayList<PetInfo>){
         val petDataList = ArrayList<PetData>()
         petInfoList.forEach {
             petDataList.add(PetData(it.birthYear?.toInt()!!, it.name!!, it.registrationNum!!))
@@ -70,8 +84,9 @@ object RegisterRepository{
         try{
             coroutineScope.launch {
                 val response = PetmilyAuthApi.authApiRetrofitService.registerPet(
-                    userToken.token, registerPetBody
+                    userToken, registerPetBody
                 )
+                _registerPetResponse.value = response
             }
         }catch (e : Exception){
             Log.d(TAG, "registerPetInfo: ${e.printStackTrace()}")
@@ -126,11 +141,11 @@ object RegisterRepository{
     }
 
 
-    fun getUser(userToken: UserToken){
+    fun getUser(userToken: String){
         try {
             coroutineScope.launch {
                 val response = PetmilyAuthApi.authApiRetrofitService.getUser(
-                    userToken.token
+                    userToken
                 )
                 _userInfoRespone.value = response
             }

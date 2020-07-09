@@ -46,9 +46,9 @@ class PlaceInfoViewModel : ViewModel() {
                 val hotels = response.data
 
                 _hotelList.value = hotels as ArrayList<HotelData>
-                hotels.forEach {
-                    getHotelImages(it)
-                }
+//                hotels.forEach {
+//                    getHotelImages(it)
+//                }
             }
         }catch (e : Exception){
             e.printStackTrace()

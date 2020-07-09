@@ -3,7 +3,6 @@ package com.prography.pethotel.ui.authentication
 import android.app.Activity
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.text.Editable
@@ -32,6 +31,7 @@ import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModelFactory
+import com.prography.pethotel.utils.LoginStateViewModel
 import com.prography.pethotel.utils.USER_TOKEN
 import kotlinx.android.synthetic.main.login_register_fragment.*
 
@@ -44,9 +44,12 @@ class LoginRegisterMainFragment : Fragment() {
         private const val TAG = "LoginRegisterMainFragment"
     }
 
-    private lateinit var viewModel: RegisterViewModel
+    private lateinit var registerViewModel: RegisterViewModel
 
     private lateinit var loginViewModel : LoginViewModel
+
+    private lateinit var loginStateViewModel: LoginStateViewModel
+
     private lateinit var userToken : UserToken
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +60,7 @@ class LoginRegisterMainFragment : Fragment() {
         if(token == ""){
 
         }else{
-            userToken = UserToken(token!!)
+//            userToken = UserToken(token!!)
         }
         Session.getCurrentSession().addCallback(sessionCallback)
     }
@@ -74,7 +77,10 @@ class LoginRegisterMainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(RegisterViewModel::class.java)
+
+        loginStateViewModel = ViewModelProvider(requireActivity()).get(LoginStateViewModel::class.java)
+
+        registerViewModel = ViewModelProvider(requireActivity()).get(RegisterViewModel::class.java)
 
         loginViewModel = ViewModelProvider(requireActivity(),
             LoginViewModelFactory()
@@ -209,9 +215,7 @@ class LoginRegisterMainFragment : Fragment() {
 
     /*로그인이 성공적이면 UI를 유저 정보를 활용해 업데이트 한다. */
     private fun updateUiWithUser(userToken: String) {
-
         Log.d(TAG, "updateUiWithUser: $userToken")
-
         val welcome = "환영합니다!"
         Toast.makeText(
             requireContext(),
@@ -219,8 +223,9 @@ class LoginRegisterMainFragment : Fragment() {
             Toast.LENGTH_LONG
         ).show()
 
-        val pref = requireActivity().getSharedPreferences(USER_TOKEN, MODE_PRIVATE)
-        pref.edit().putString(USER_TOKEN, userToken).apply()
+        loginStateViewModel.setUserToken(requireActivity(), userToken)
+//        val pref = requireActivity().getSharedPreferences(USER_TOKEN, MODE_PRIVATE)
+//        pref.edit().putString(USER_TOKEN, userToken).apply()
 
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)

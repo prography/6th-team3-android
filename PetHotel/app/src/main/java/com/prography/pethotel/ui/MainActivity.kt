@@ -1,32 +1,18 @@
 package com.prography.pethotel.ui
 
-import android.content.Context
-import android.content.DialogInterface
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
-import android.view.ContextThemeWrapper
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.*
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import com.prography.pethotel.R
 import com.prography.pethotel.ui.places.PlaceInfoViewModel
-import com.prography.pethotel.utils.DummyData
-import com.prography.pethotel.utils.USER_TOKEN
-import com.prography.pethotel.utils.setupWithNavController
+import com.prography.pethotel.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -37,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainLayout : LinearLayout
     private lateinit var placeInfoViewModel: PlaceInfoViewModel
+    private lateinit var loginStateViewModel: LoginStateViewModel
 
     private var currentNavController: LiveData<NavController>? = null
 
@@ -44,9 +31,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val pref = getSharedPreferences(USER_TOKEN, Context.MODE_PRIVATE)
-        val userToken = pref.getString(USER_TOKEN, "")
-        Log.d(TAG, "onCreate: $userToken")
+        loginStateViewModel = ViewModelProvider(this, LoginStateViewModelFactory())
+                                .get(LoginStateViewModel::class.java)
+
+        if(loginStateViewModel.isTokenValid(this)){
+            Toast.makeText(this, "또 오셨군요!", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(this, "토큰 없음!", Toast.LENGTH_SHORT).show()
+        }
 
         mainLayout = main_linear_container
 

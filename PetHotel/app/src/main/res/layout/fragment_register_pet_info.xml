@@ -53,14 +53,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_add_pet_done"
-                android:src="@drawable/ic_check_white_24dp"
-                app:backgroundTint="@color/petHotelPrimary"
-                android:layout_margin="@dimen/margin_1x"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:id="@+id/btn_add_pet_done"-->
+<!--                android:src="@drawable/ic_check_white_24dp"-->
+<!--                app:backgroundTint="@color/petHotelPrimary"-->
+<!--                android:layout_margin="@dimen/margin_1x"-->
+<!--                android:visibility="gone"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
 
         </LinearLayout>
 

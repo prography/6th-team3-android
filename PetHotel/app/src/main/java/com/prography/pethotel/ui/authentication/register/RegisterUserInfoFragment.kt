@@ -72,7 +72,7 @@ class RegisterUserInfoFragment : BaseFragment() {
 //            takePhoto()
 //        }
 
-        //이미회원이신가요? 로그인하기 클릭하면 넘어가는 로직
+
         btn_register_pet_info.setOnClickListener {
             registerUser(ENTER_PET)
         }
@@ -81,7 +81,7 @@ class RegisterUserInfoFragment : BaseFragment() {
            registerUser(NO_PET)
         }
 
-
+        //이미회원이신가요? 로그인하기 클릭하면 넘어가는 로직
         tv_login_from_register_screen.setOnClickListener {
             findNavController().navigate(R.id.action_registerUserInfoFragment_to_loginRegisterFragment)
         }

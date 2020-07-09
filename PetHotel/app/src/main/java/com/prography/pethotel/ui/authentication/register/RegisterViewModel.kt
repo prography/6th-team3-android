@@ -4,17 +4,17 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.kakao.usermgmt.response.UserResponse
 import com.prography.pethotel.api.auth.request.KakaoRegisterBody
+import com.prography.pethotel.api.auth.response.PetNumResponse
+import com.prography.pethotel.api.auth.response.PostPetResponse
 import com.prography.pethotel.api.auth.response.UserToken
-import com.prography.pethotel.api.main.response.PetNumberResponse
+import com.prography.pethotel.api.main.response.UserInfoResponse
 import com.prography.pethotel.models.GeneralUserInfo
 import com.prography.pethotel.models.PetInfo
-import com.prography.pethotel.utils.SERVICE_KEY
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import java.lang.Exception
 
 
 private const val TAG = "RegisterViewModel"
@@ -37,6 +37,10 @@ class RegisterViewModel : ViewModel() {
         Log.d(TAG, "setPetInfoToUser: $pets")
     }
 
+    fun getUserInfoResponse() : LiveData<UserInfoResponse>{
+        return RegisterRepository.userInfoResponse
+    }
+
     fun getRegisterStatus(): LiveData<Boolean> {
         return RegisterRepository.registerStatus
     }
@@ -45,8 +49,12 @@ class RegisterViewModel : ViewModel() {
         return RegisterRepository.userToken
     }
 
-    fun getPetNumberResponse() : LiveData<PetNumberResponse>{
+    fun getPetNumberResponse() : LiveData<PetNumResponse>{
         return RegisterRepository.petInfo
+    }
+
+    fun getRegisterPetResponse() : LiveData<PostPetResponse>{
+        return RegisterRepository.registerPetResponse
     }
 
     fun registerUserGeneral(generalUserInfo: GeneralUserInfo){
@@ -57,13 +65,17 @@ class RegisterViewModel : ViewModel() {
         RegisterRepository.kakaoRegister(kakaoRegisterBody)
     }
 
-    fun checkPetNumber(dogRegNo : String, serviceKey : String = SERVICE_KEY){
-        RegisterRepository.checkPublicApiForPetInfo(dogRegNo, serviceKey)
+    fun checkPetNumber(dogRegNo : String){
+        RegisterRepository.checkPetNumber(dogRegNo)
+    }
+
+    fun registerPetToUser(userToken: String, userId : Int, petList : ArrayList<PetInfo>){
+        RegisterRepository.registerPetInfo(userToken, userId, petList)
     }
 
     /*이미 회원가입 된 사용자의 정보를 리턴한다.
     * 여기에 둘지, 아니면 다른 곳으로 뺄지 고민중 ... */
-    fun getUser(userToken: UserToken){
+    fun getUser(userToken: String){
         RegisterRepository.getUser(userToken)
     }
 
