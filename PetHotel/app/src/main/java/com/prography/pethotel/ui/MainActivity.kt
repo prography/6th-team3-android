@@ -1,17 +1,21 @@
 package com.prography.pethotel.ui
 
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -21,20 +25,28 @@ import com.google.android.material.snackbar.Snackbar
 import com.prography.pethotel.R
 import com.prography.pethotel.ui.places.PlaceInfoViewModel
 import com.prography.pethotel.utils.DummyData
+import com.prography.pethotel.utils.USER_TOKEN
 import com.prography.pethotel.utils.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
+
+private const val TAG = "MainActivity"
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainLayout : LinearLayout
+    private lateinit var placeInfoViewModel: PlaceInfoViewModel
 
     private var currentNavController: LiveData<NavController>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val pref = getSharedPreferences(USER_TOKEN, Context.MODE_PRIVATE)
+        val userToken = pref.getString(USER_TOKEN, "")
+        Log.d(TAG, "onCreate: $userToken")
 
         mainLayout = main_linear_container
 
@@ -48,8 +60,12 @@ class MainActivity : AppCompatActivity() {
             setDisplayShowTitleEnabled(false)
         }
 
+        placeInfoViewModel = ViewModelProviders.of(this).get(PlaceInfoViewModel::class.java)
+        placeInfoViewModel.getHotelLists()
+        Log.d(TAG, "onCreate: From Main Activity")
     }
 
+    //TODO : 로그인 상태를 뷰모델로 유지해서 Main 의 프래그먼트들이 이에 해당하는 View 를 띄워주도록 한다.
 
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -90,6 +106,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
+    }
+
+    fun Fragment.getViewModelStoreOwner(): ViewModelStoreOwner = try {
+        requireActivity()
+    } catch (e: IllegalStateException) {
+        this
     }
 
 }

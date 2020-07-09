@@ -88,6 +88,7 @@
                 android:layout_height="wrap_content"/>
 
             <Button
+                android:id="@+id/btn_login_mypage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_1x"
@@ -104,6 +105,7 @@
                 android:layout_height="wrap_content"/>
 
             <Button
+                android:id="@+id/btn_register_mypage"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,9 +115,8 @@
                 android:text="일반 회원가입" />
 
             <Button
+                android:id="@+id/btn_kakao_login_mypage"
                 style="?attr/materialButtonOutlinedStyle"
-                android:backgroundTint="@color/kakaoGold"
-                android:textColor="@color/kakaoBlack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_2x"
@@ -123,30 +124,30 @@
                 android:text="카카오 간편 가입" />
 
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp">
+<!--            <FrameLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="200dp">-->
 
 
-                <ImageView
-                    android:layout_width="@dimen/default_image_size"
-                    android:layout_height="@dimen/default_image_size"
-                    android:layout_gravity="center_horizontal|bottom"
-                    android:src="@drawable/mily_excited" />
+<!--                <ImageView-->
+<!--                    android:layout_width="@dimen/default_image_size"-->
+<!--                    android:layout_height="@dimen/default_image_size"-->
+<!--                    android:layout_gravity="center_horizontal|bottom"-->
+<!--                    android:src="@drawable/mily_excited" />-->
 
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_chat"
-                    android:layout_gravity="end"
-                    android:paddingBottom="@dimen/padding_large_16dp"
-                    android:layout_marginEnd="@dimen/margin_1x"
-                    android:gravity="center"
-                    style="@style/phBody2"
-                    android:text="고마워요 주인님!"
-                    />
+<!--                <TextView-->
+<!--                    android:layout_width="120dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/ic_chat"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    android:paddingBottom="@dimen/padding_large_16dp"-->
+<!--                    android:layout_marginEnd="@dimen/margin_1x"-->
+<!--                    android:gravity="center"-->
+<!--                    style="@style/phBody2"-->
+<!--                    android:text="고마워요 주인님!"-->
+<!--                    />-->
 
-            </FrameLayout>
+<!--            </FrameLayout>-->
 
 
         </LinearLayout>

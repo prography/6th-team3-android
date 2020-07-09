@@ -6,8 +6,8 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_username">유효한 이메일이 아닙니다.</string>
+    <string name="invalid_password">비밀번호는 5글자 이상입니다.</string>
     <string name="login_failed">"Login failed"</string>
     <string name="enter_user_info_title">마이펫밀리의 멤버가 되어주세요</string>
     <string name="register_check_password_title">비밀번호확인</string>
@@ -32,9 +32,8 @@
     <string name="my_page_setting">설정</string>
     <string name="register_auth_phone">인증하기</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="pet_no">PET NO. %d</string>
+    <string name="pet_no">펫 카드 %d</string>
     <string name="sample_hotel_description">오랜 경험과 노하우를 바탕으로 오직 펫호텔.유치원을 독립적으로 운영하는 곳입니다.
 애견카페와는 달리 외부인 출입은 금지되며 전문스탭이 24시간 상주하며 케어합니다.
 5중안전장치,30대의CCTV,철저한 위생관리,개별룸과 개별CCTV등 최신장비가 설치되어 있습니다.\n\n
@@ -141,6 +140,9 @@
     <string name="add_search_result_complete">해시태그 추가 완료!</string>
     <string name="no_review_yet">아직 후기가 없습니다!</string>
     <string name="user_average_rating"><![CDATA[ %d / 5.0 ]]></string>
+    <string name="registration_fail_msg">회원가입 실패!ㅠㅠ</string>
+    <string name="enter_info_msg">정보를 입력해 주세요.</string>
+    <string name="animal_num_check_fail_msg">동물등록번호 확인 실패</string>
 
 
 </resources>

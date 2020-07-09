@@ -1,86 +1,80 @@
 package com.prography.pethotel.api.auth
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.prography.pethotel.models.LoginInfo
-import com.prography.pethotel.models.PetInfo
-import com.prography.pethotel.models.UserInfo
+import com.prography.pethotel.api.auth.request.KakaoRegisterBody
+import com.prography.pethotel.api.auth.request.LoginInfoBody
+import com.prography.pethotel.api.auth.request.RegisterPetBody
+import com.prography.pethotel.api.auth.request.RegisterUserInfo
+import com.prography.pethotel.api.auth.response.GeneralLoginResponse
+import com.prography.pethotel.api.auth.response.KakaoLoginResponse
+import com.prography.pethotel.api.auth.response.PostPetResponse
+import com.prography.pethotel.api.auth.response.RegistrationResponse
+import com.prography.pethotel.api.main.response.PetNumberResponse
+import com.prography.pethotel.api.main.response.UserInfoResponse
+import com.prography.pethotel.utils.ANIMAL_NUM_BASE_URL
+import com.prography.pethotel.utils.BASE_URL
+import com.prography.pethotel.utils.SERVICE_KEY
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
+import retrofit2.http.*
 
-private const val BASE_URL = "https://api.mypetmily.net/"
+
+
 //GET https://api.mypetmily.net/hotels
 private val authRetrofit
         = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL)
     .build()
 
+private val publicApiRetrofit
+        = Retrofit.Builder()
+    .addConverterFactory(SimpleXmlConverterFactory.create())
+    .baseUrl(ANIMAL_NUM_BASE_URL)
+    .build()
+
+interface AnimalNumberApiService{
+
+    @GET("service/rest/animalInfoSrvc/animalInfo")
+    suspend fun getAnimalCheckResponse(@Query("dogregno") dog_reg_no : String,
+                                       @Query("ServiceKey") serviceKey : String = SERVICE_KEY
+    ) : PetNumberResponse
+
+}
 
 interface  AuthApiService{
 
 
     //로그인 화면의 I세션 콜백으로 응답을 받는다.
     @GET("auth/kakao/login")
-    suspend fun kakaoLogin()
+    suspend fun kakaoLogin() : KakaoLoginResponse
 
-
-    //유저의 정보를 넘겨준다.
     @POST("user")
-    suspend fun kakaoRegister(@Body userInfo : UserInfo)
-//유저 인포는 Gson 컨버터로 인해 자동으로 JSON으로 시리얼라이즈 된다.
+    suspend fun kakaoRegister(@Body kakaoRegisterBody: KakaoRegisterBody) : RegistrationResponse
 
-//    {
-//        "userId": 2,
-//        "data": {
-//        "nickname": "털실맘",
-//        "phoneNumber": "010-1111-2222",
-//        "profileImage": "http://k.kakaocdn.net/dn/dNuqx8/btqEmMbuZcS/udnYZqfZRljOVTNxlBunp1/img_640x640.jpg"
-//    }
-//    }
+    @POST("auth/login")
+    suspend fun generalLogin(@Body loginInfo : LoginInfoBody) : GeneralLoginResponse
 
-//    @Headers("Authorization : === token === ") TODO 헤더 필요 없는거 아닌가?
-    @GET("auth/login")
-    suspend fun generalLogin(@Body loginInfo : LoginInfo)
-    //{
-    //	"email": "test@gmail.com",
-    //	"password": "testtest00"
-    //}
+    @POST("user")
+    suspend fun generalRegister(@Body registerUserInfo : RegisterUserInfo) : RegistrationResponse
 
-
-    @Headers("Authorization : ====token====")
     @GET("user")
-    suspend fun getUser() : UserInfo //GET 마이페이지
+    suspend fun getUser(@Header("Authorization") token : String) : UserInfoResponse //GET 마이페이지
 
-    @POST("user") //TODO 일반 회원가입이랑, 카카오랑 엔드포인트 같은데 요청 Body 가 다름
-    suspend fun generalRegister(userInfo : UserInfo) : String
-//    {
-//	"data": {
-//		"nickname": "test99",
-//		"phoneNumber": "010-3333-4444",
-//		"email": "test@gmail.com",
-//		"password": "testtest00"
-//	}
-//}
+    @POST("pet")
+    suspend fun registerPet(@Header("Authorization") token : String,
+                            @Body registerPetBody: RegisterPetBody) : PostPetResponse
 
-    //TODO 토큰 값 뭔지 확인하기
-    @Headers("Authorization : === token === ")
-    @POST("api/pet")
-    suspend fun registerPet(petInfo : PetInfo)
-//{
-//	"userId": 3, TODO 유저 아이디는 getUser() 로 받아오기
-//	"data": [
-//		{
-//			"petName": "털실이",
-//			"registerNumber": "410000000227825",
-//			"birthYear": 2019
-//		}
-//	]
-//}
+}
 
+
+object PetmilyAuthApi{
+    val publicApiRetrofitService : AnimalNumberApiService by lazy {
+        publicApiRetrofit.create(AnimalNumberApiService::class.java)
+    }
+
+    val authApiRetrofitService : AuthApiService by lazy {
+        authRetrofit.create(AuthApiService::class.java)
+    }
 }
 

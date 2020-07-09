@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prography.pethotel.R
-import com.prography.pethotel.models.Hotel
+import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.ui.places.adapters.PopularPlaceAdapter
 import com.prography.pethotel.utils.DummyData
 import kotlinx.android.synthetic.main.fragment_popular_place.*
@@ -41,12 +41,11 @@ class PopularPlaceFragment : Fragment() {
             val filteredArray = filterBy(FilterType.POPULARITY, it)
             initList(hotelList = filteredArray)
         })
-
     }
 
-    private fun initList(hotelList : ArrayList<Hotel>){
+    private fun initList(hotelList : ArrayList<HotelData>){
         //TODO change this part with real hotel data
-        val popularPlaceListAdapter = PopularPlaceAdapter(requireContext(), DummyData.hotelDummyList)
+        val popularPlaceListAdapter = PopularPlaceAdapter(requireContext(), hotelList)
         rv_popular_list.apply {
             adapter = popularPlaceListAdapter
             setHasFixedSize(true)

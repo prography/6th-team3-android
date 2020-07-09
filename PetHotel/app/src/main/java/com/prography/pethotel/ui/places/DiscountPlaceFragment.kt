@@ -9,12 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prography.pethotel.R
-import com.prography.pethotel.models.Hotel
+import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.ui.places.adapters.DiscountPlaceAdapter
-import com.prography.pethotel.ui.places.adapters.PopularPlaceAdapter
 import com.prography.pethotel.utils.DummyData
 import kotlinx.android.synthetic.main.fragment_discount_place.*
-import kotlinx.android.synthetic.main.fragment_popular_place.*
 
 
 @Suppress("DEPRECATION")
@@ -39,21 +37,21 @@ class DiscountPlaceFragment : Fragment() {
 
         placeInfoViewModel.hotelList.observe(viewLifecycleOwner, Observer {
             val filteredArray = filterBy(FilterType.PRICE, it)
+
             initList(hotelList = filteredArray)
         })
 
 
-        val discountPlaceAdapter = DiscountPlaceAdapter(requireContext(), DummyData.hotelDummyList)
-        rv_discount_list.apply {
-            adapter = discountPlaceAdapter
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext())
-        }
+//        val discountPlaceAdapter = DiscountPlaceAdapter(requireContext(), DummyData.hotelDummyList)
+//        rv_discount_list.apply {
+//            adapter = discountPlaceAdapter
+//            setHasFixedSize(true)
+//            layoutManager = LinearLayoutManager(requireContext())
+//        }
     }
 
-    private fun initList(hotelList : ArrayList<Hotel>){
-        //TODO change this part with real hotel data
-        val discountPlaceAdapter = DiscountPlaceAdapter(requireContext(), DummyData.hotelDummyList)
+    private fun initList(hotelList : ArrayList<HotelData>){
+        val discountPlaceAdapter = DiscountPlaceAdapter(requireContext(), hotelList)
         rv_discount_list.apply {
             adapter = discountPlaceAdapter
             setHasFixedSize(true)

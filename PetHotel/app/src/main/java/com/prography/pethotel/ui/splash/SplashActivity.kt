@@ -7,11 +7,11 @@ import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
 import com.prography.pethotel.R
-import com.prography.pethotel.ui.register.LoginRegisterActivity
+import com.prography.pethotel.ui.MainActivity
 
 class SplashActivity : AppCompatActivity() {
 
-    private val SPLASH_TIME_OUT : Long = 3000
+    private val SPLASH_TIMEOUT : Long = 3000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +23,9 @@ class SplashActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_splash)
 
-        Handler().postDelayed(Runnable {
-            startActivity(Intent(this@SplashActivity, LoginRegisterActivity::class.java))
+        Handler().postDelayed({
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
-        }, SPLASH_TIME_OUT)
+        }, SPLASH_TIMEOUT)
     }
 }

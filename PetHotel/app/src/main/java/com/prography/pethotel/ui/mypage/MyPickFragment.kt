@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prography.pethotel.R
-import com.prography.pethotel.models.Hotel
 import com.prography.pethotel.utils.DummyData
 import kotlinx.android.synthetic.main.my_page_my_pick_fragment.*
 

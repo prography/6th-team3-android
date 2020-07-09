@@ -1,7 +1,6 @@
 package com.prography.pethotel.ui.places.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +9,19 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.prography.pethotel.R
-import com.prography.pethotel.models.Hotel
+import com.prography.pethotel.api.main.response.HotelData
 import kotlinx.android.synthetic.main.place_info_view_holder.view.*
+
 
 class NearPlaceAdapter (
     val context: Context,
-    private val hotelList : ArrayList<Hotel>
-) : ListAdapter<Hotel, NearPlaceAdapter.NearPlaceViewHolder>(
+    private val hotelList : ArrayList<HotelData>
+) : ListAdapter<HotelData, NearPlaceAdapter.NearPlaceViewHolder>(
     HotelDiffUtilCallback()
 ){
 
@@ -45,19 +49,30 @@ class NearPlaceAdapter (
 
     class NearPlaceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(hotel : Hotel){
-            itemView.place_info_name.text = hotel.hotelName
+
+
+        fun bind(hotel : HotelData){
+            itemView.place_info_name.text = hotel.name
             itemView.place_info_address.text = hotel.address
             //distance 는 안함
+
+            if(!hotel.hotelImageLinks.isNullOrEmpty()){
+
+                Glide.with(itemView.context)
+                    .load(hotel.hotelImageLinks[0].link)
+                    .error(R.drawable.mily_excited)
+                    .transform(RoundedCorners(12))
+                    .into(itemView.place_info_image)
+            }
         }
     }
 
-    class HotelDiffUtilCallback : DiffUtil.ItemCallback<Hotel>() {
-        override fun areContentsTheSame(oldItem: Hotel, newItem: Hotel): Boolean {
-            return oldItem.hotelId == newItem.hotelId
+    class HotelDiffUtilCallback : DiffUtil.ItemCallback<HotelData>() {
+        override fun areContentsTheSame(oldItem: HotelData, newItem: HotelData): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        override fun areItemsTheSame(oldItem: Hotel, newItem: Hotel): Boolean {
+        override fun areItemsTheSame(oldItem: HotelData, newItem: HotelData): Boolean {
             return oldItem == newItem
         }
     }

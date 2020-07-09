@@ -5,32 +5,23 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.getbase.floatingactionbutton.FloatingActionsMenu.OnFloatingActionsMenuUpdateListener
 import com.prography.pethotel.R
-import com.prography.pethotel.models.EmptyReview
-import com.prography.pethotel.models.Hotel
+import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.models.HotelReview
 import com.prography.pethotel.ui.places.util.GenericRecyclerViewAdapter
 import com.prography.pethotel.utils.DummyData
 import kotlinx.android.synthetic.main.floating_menu.*
 import kotlinx.android.synthetic.main.place_info_detail_descriptions_layout.*
 import kotlinx.android.synthetic.main.place_info_detail_time_etc_layout.*
-import kotlinx.android.synthetic.main.fragment_place_info_details.*
 import kotlinx.android.synthetic.main.place_detail_review_view_holder.view.*
-import kotlinx.android.synthetic.main.place_info_view_holder.view.*
 
 
 class PlaceInfoDetailsFragment : Fragment() {
@@ -52,7 +43,7 @@ class PlaceInfoDetailsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val hotel : Hotel = arguments?.get("hotel") as Hotel
+        val hotel : HotelData = arguments?.get("hotel") as HotelData
         phoneNumber = hotel.phoneNumber
         hotelWebsite = hotel.pageLink
 
@@ -61,31 +52,31 @@ class PlaceInfoDetailsFragment : Fragment() {
 
 
 //        val list = hotel.reviews ?: arrayListOf(EmptyReview(0))
-        val list = hotel.reviews ?: DummyData.hotelReviews
+//        val list = hotel.review ?: DummyData.hotelReviews
 
-        val myAdapter = object : GenericRecyclerViewAdapter<Any>(list as ArrayList<Any>){
-            override fun getLayoutId(position: Int, obj: Any): Int {
-                return when(obj){
-                    is HotelReview -> R.layout.place_detail_review_view_holder
-                    else -> R.layout.no_review_layout
-                }
-            }
+//        val myAdapter = object : GenericRecyclerViewAdapter<Any>(list as ArrayList<Any>){
+//            override fun getLayoutId(position: Int, obj: Any): Int {
+//                return when(obj){
+//                    is HotelReview -> R.layout.place_detail_review_view_holder
+//                    else -> R.layout.no_review_layout
+//                }
+//            }
+//
+//            override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
+//                return HotelViewHolderFactory.create(view, viewType)
+//            }
+//        }
 
-            override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
-                return HotelViewHolderFactory.create(view, viewType)
-            }
-        }
-
-        rv_hotel_review.apply {
-            adapter = myAdapter
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        }
+//        rv_hotel_review.apply {
+//            adapter = myAdapter
+//            setHasFixedSize(true)
+//            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//        }
     }
 
 
-    private fun setHotelDataToView(hotel : Hotel){
-        place_detail_name.text = hotel.hotelName
+    private fun setHotelDataToView(hotel : HotelData){
+        place_detail_name.text = hotel.name
         place_detail_address.text = hotel.addressDetail
         tv_place_detail.text = hotel.description
 
@@ -113,9 +104,9 @@ class PlaceInfoDetailsFragment : Fragment() {
         }
         }
 
-        tv_week_price.append("${hotel.weekPrice} 원")
-        tv_sat_price.append("${hotel.satPrice} 원")
-        tv_sun_price.append("${hotel.sunPrice} 원")
+//        tv_week_price.append("${hotel.weekPrice} 원")
+//        tv_sat_price.append("${hotel.satPrice} 원")
+//        tv_sun_price.append("${hotel.sunPrice} 원")
     }
 
 

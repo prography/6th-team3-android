@@ -22,6 +22,6 @@
         tools:layout="@layout/fragment_place_info_details" >
         <argument
             android:name="hotel"
-            app:argType="com.prography.pethotel.models.Hotel" />
+            app:argType="com.prography.pethotel.api.main.response.HotelData" />
     </fragment>
 </navigation>

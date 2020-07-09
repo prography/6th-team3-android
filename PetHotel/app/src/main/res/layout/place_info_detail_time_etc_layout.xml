@@ -85,34 +85,33 @@
         android:text=" 호텔가격"
         style="@style/phTitle" />
 
+        <include layout="@layout/hotel_price_layout"/>
 
-<!--    TODO 대형견, 중형견, 소형견 나눠서 다시 만들기 -->
+<!--    <TextView-->
+<!--        android:id="@+id/tv_week_price"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="@dimen/margin_0_5x"-->
+<!--        android:text="평일  "-->
+<!--        style="@style/phBody2"-->
+<!--        />-->
 
-    <TextView
-        android:id="@+id/tv_week_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_0_5x"
-        android:text="평일  "
-        style="@style/phBody2"
-        />
+<!--    <TextView-->
+<!--        android:id="@+id/tv_sat_price"-->
+<!--        style="@style/phBody2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="@dimen/margin_0_5x"-->
+<!--        android:text="토요일  "-->
+<!--        />-->
 
-    <TextView
-        android:id="@+id/tv_sat_price"
-        style="@style/phBody2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_0_5x"
-        android:text="토요일  "
-        />
-
-    <TextView
-        android:id="@+id/tv_sun_price"
-        style="@style/phBody2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="일요일  "
-        />
+<!--    <TextView-->
+<!--        android:id="@+id/tv_sun_price"-->
+<!--        style="@style/phBody2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="일요일  "-->
+<!--        />-->
 
 
     <View

@@ -1,6 +1,6 @@
 package com.prography.pethotel.utils
 
-import com.prography.pethotel.models.Hotel
+import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.models.HotelReview
 import com.prography.pethotel.ui.monitor.MonitorMedia
 
@@ -8,30 +8,19 @@ class DummyData {
 
 
     companion object{
-        val hotelDummyList : ArrayList<Hotel> = makeDummyHotelInfo()
+        val hotelDummyList : ArrayList<HotelData> = makeDummyHotelInfo()
 
         val mediaList : ArrayList<MonitorMedia> = makeDummyMediaList()
 
         val hotelReviews : ArrayList<HotelReview> = makeDummyReviews()
 
-        private fun makeDummyHotelInfo() : ArrayList<Hotel>{
-            var list = ArrayList<Hotel>()
+        private fun makeDummyHotelInfo() : ArrayList<HotelData>{
+            var list = ArrayList<HotelData>()
             if(!hotelDummyList.isNullOrEmpty()){
                 return hotelDummyList
             }else{
                 for(x in 0 .. 20){
-                    list.add(
-                        Hotel(
-                            x, "", "", "애견호텔 $x",
-                            "This is a dummy description #$x", "서울시 용산구 $x 길 $x ",
-                            "Dummy address detail #$x", "dummy zip code #$x",
-                            "30303040", "234234234", "09:00",
-                            "20:00", "09:00", "18:00",
-                            "09:00", "18:00", 10000, 20000, 20000,
-                            "010-1123-1231", true, true, 3,
-                            "www.dummylink.com"
-                        )
-                    )
+
                 }
                 return list
             }

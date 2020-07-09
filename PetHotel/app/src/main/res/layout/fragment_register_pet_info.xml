@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="@dimen/padding_large_16dp"
-        tools:context=".ui.register.RegisterPetInfoFragment">
+        tools:context=".ui.authentication.register.RegisterPetInfoFragment">
 
         <TextView
             android:text="반려견 정보를 입력해 주세요."

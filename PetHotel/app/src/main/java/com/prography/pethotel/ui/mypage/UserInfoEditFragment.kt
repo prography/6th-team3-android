@@ -16,15 +16,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.prography.pethotel.R
-import com.prography.pethotel.models.UserInfo
-import com.prography.pethotel.ui.register.utils.BaseFragment
-import com.prography.pethotel.ui.register.viewmodels.RegisterViewModel
+import com.prography.pethotel.models.GeneralUserInfo
+import com.prography.pethotel.ui.authentication.utils.BaseFragment
+import com.prography.pethotel.ui.authentication.viewmodels.UserInfoViewModel
 import com.prography.pethotel.utils.TAG_PHOTO
 import kotlinx.android.synthetic.main.my_page_user_info_edit_fragment.*
-import kotlinx.android.synthetic.main.register_user_info_fragment.btn_take_user_photo
-import kotlinx.android.synthetic.main.register_user_info_fragment.btn_upload_user_image
 import kotlinx.android.synthetic.main.register_user_info_fragment.email_edit_text_field
-import kotlinx.android.synthetic.main.register_user_info_fragment.img_register_user_image
 import kotlinx.android.synthetic.main.register_user_info_fragment.nickname_edit_text_field
 import kotlinx.android.synthetic.main.register_user_info_fragment.password_check_edit_text_field
 import kotlinx.android.synthetic.main.register_user_info_fragment.password_edit_text_field
@@ -37,9 +34,9 @@ class UserInfoEditFragment : BaseFragment() {
             UserInfoEditFragment()
     }
 
-    private lateinit var viewModel: RegisterViewModel
+    private lateinit var viewModel: UserInfoViewModel
     //    private var currentPhotoPath = ""
-    private var userInfo : UserInfo = UserInfo()
+    private var userInfo : GeneralUserInfo = GeneralUserInfo()
     private lateinit var userImage : ImageView
 
     override fun onCreateView(
@@ -51,7 +48,7 @@ class UserInfoEditFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(UserInfoViewModel::class.java)
 
         userImage = img_user_edit
 

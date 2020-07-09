@@ -16,7 +16,7 @@
     android:background="@android:color/white"
     android:layout_gravity="center"
     android:gravity="center"
-    tools:context=".ui.register.LoginRegisterFragment">
+    tools:context=".ui.authentication.LoginRegisterMainFragment">
 
     <ImageView
         android:id="@+id/front_img"
@@ -39,11 +39,10 @@
     <EditText
         android:id="@+id/et_login_username"
         style="@style/phEditText"
-        android:layout_margin="@dimen/margin_1x"
-        android:ems="15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints="Your Email"
+        android:ems="16"
         android:hint="이메일"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
@@ -52,10 +51,9 @@
     <EditText
         android:id="@+id/et_login_password"
         style="@style/phEditText"
-        android:layout_margin="@dimen/margin_0_5x"
         android:layout_width="wrap_content"
-        android:ems="15"
         android:layout_height="wrap_content"
+        android:ems="16"
         android:autofillHints="password"
         android:hint="비밀번호"
         android:imeActionLabel="@string/action_sign_in_short"
@@ -85,13 +83,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/btn_login_user_login"
+            app:layout_constraintStart_toStartOf="@+id/btn_login_user_login"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:id="@+id/btn_login_user_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="로그인"
             android:layout_marginStart="@dimen/margin_2x"
             android:layout_marginEnd="@dimen/margin_2x"
+            android:layout_marginBottom="4dp"
+            android:enabled="false"
+            android:text="로그인"
+            app:layout_constraintBottom_toTopOf="@+id/btn_login_user_register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

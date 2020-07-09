@@ -5,13 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.prography.pethotel.R
-import com.prography.pethotel.models.Hotel
+import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.ui.places.util.GenericRecyclerViewAdapter
 import com.prography.pethotel.utils.DummyData
 import kotlinx.android.synthetic.main.fragment_search_result.*
@@ -38,10 +37,10 @@ class SearchResultFragment : Fragment() {
 
         val list = DummyData.hotelDummyList
 
-        val myAdapter = object : GenericRecyclerViewAdapter<Hotel>(list){
-            override fun getLayoutId(position: Int, obj: Hotel): Int {
+        val myAdapter = object : GenericRecyclerViewAdapter<HotelData>(list){
+            override fun getLayoutId(position: Int, obj: HotelData): Int {
                 return when(obj){
-                    is Hotel -> R.layout.place_info_view_holder
+                    is HotelData -> R.layout.place_info_view_holder
                     else -> R.layout.no_search_result_layout
                 }
             }
@@ -73,11 +72,11 @@ object ViewHolderFactory{
     }
 
     class PlaceInfoViewHolder(itemView: View)
-        : RecyclerView.ViewHolder(itemView), GenericRecyclerViewAdapter.Binder<Hotel>{
+        : RecyclerView.ViewHolder(itemView), GenericRecyclerViewAdapter.Binder<HotelData>{
 
-        override fun bind(data: Hotel) {
+        override fun bind(data: HotelData) {
             itemView.place_info_address.text = data.address
-            itemView.place_info_name.text = data.hotelName
+            itemView.place_info_name.text = data.name
 
             itemView.setOnClickListener {
                 val bundle = bundleOf("hotel" to data)
