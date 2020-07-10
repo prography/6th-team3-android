@@ -31,13 +31,6 @@ private val publicApiRetrofit
     .baseUrl(ANIMAL_NUM_BASE_URL)
     .build()
 
-
-private val kakaoRetrofit
-        =Retrofit.Builder()
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .baseUrl(BASE_URL)
-            .build()
-
 interface AnimalNumberApiService{
 
     @GET("service/rest/animalInfoSrvc/animalInfo")
@@ -64,18 +57,11 @@ interface  AuthApiService{
     suspend fun registerPet(@Header("Authorization") token : String,
                             @Body registerPetBody: RegisterPetBody) : PostPetResponse
 
-}
-
-
-interface KakaoApiService{
-
-//    @GET("auth/kakao/login")
-//    suspend fun kakaoLogin() : String
-
     @POST("user")
     suspend fun kakaoRegister(@Body kakaoRegisterBody: KakaoRegisterBody) : RegistrationResponse
 
 }
+
 
 
 object PetmilyAuthApi{
@@ -87,8 +73,5 @@ object PetmilyAuthApi{
         authRetrofit.create(AuthApiService::class.java)
     }
 
-    val kakaoApiRetrofitService : KakaoApiService by lazy{
-        kakaoRetrofit.create(KakaoApiService::class.java)
-    }
 }
 

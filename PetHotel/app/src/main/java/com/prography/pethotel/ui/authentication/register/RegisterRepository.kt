@@ -7,6 +7,7 @@ import com.prography.pethotel.api.auth.PetmilyAuthApi
 import com.prography.pethotel.api.auth.request.*
 import com.prography.pethotel.api.auth.response.PetNumResponse
 import com.prography.pethotel.api.auth.response.PostPetResponse
+import com.prography.pethotel.api.auth.response.RegistrationResponse
 import com.prography.pethotel.api.auth.response.UserToken
 import com.prography.pethotel.api.main.response.UserInfoResponse
 import com.prography.pethotel.models.GeneralUserInfo
@@ -40,6 +41,10 @@ object RegisterRepository{
     private val _registerStatus : MutableLiveData<Boolean> = MutableLiveData()
     val registerStatus : LiveData<Boolean>
         get() = _registerStatus
+
+    private val _kakaoRegisterResponse : MutableLiveData<RegistrationResponse> = MutableLiveData()
+    val kakaoRegisterResponse : LiveData<RegistrationResponse>
+        get() = _kakaoRegisterResponse
 
     /*유저 토큰으로 요청해서 받아오는 유저 정보*/
     private val _userInfoRespone : MutableLiveData<UserInfoResponse> = MutableLiveData()
@@ -126,14 +131,15 @@ object RegisterRepository{
         try {
             coroutineScope.launch {
                 val response =
-                    PetmilyAuthApi.kakaoApiRetrofitService.kakaoRegister(
+                    PetmilyAuthApi.authApiRetrofitService.kakaoRegister(
                         kakaoRegisterBody
                     )
                 Log.d(TAG, "kakaoRegister: $response")
                 /*카카오 회원가입 또한 동일한 register status, user token 객체에
                 * 데이터를 setting 한다 */
-                _registerStatus.value = response.status == "success"
-                _userToken.value = response.userToken
+                _kakaoRegisterResponse.value = response
+//                _registerStatus.value = response.status == "success"
+//                _userToken.value = response.userToken
             }
         }catch (e : Exception){
             Log.d(TAG, "kakaoRegister: ${e.printStackTrace()}")

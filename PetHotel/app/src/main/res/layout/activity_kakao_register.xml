@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.places.search.PlaceSearchResultActivity">
+    tools:context=".ui.authentication.kakao.KakaoRegisterActivity">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search_result_activity"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/kakao_register_nav_host_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/kakao_register"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

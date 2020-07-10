@@ -25,7 +25,6 @@ class MyPickFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
 
-
         // TODO 더미 데이터 실제 데이터로 바꾸기
         val myPickListAdapter = MyPickListAdapter(requireContext(), DummyData.hotelDummyList)
         rv_my_pick.apply {

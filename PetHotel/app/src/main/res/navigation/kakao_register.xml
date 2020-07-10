@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/kakao_register.xml"
+    app:startDestination="@id/kakaoRegisterFragment">
+    <fragment
+        android:id="@+id/kakaoRegisterFragment"
+        android:name="com.prography.pethotel.ui.authentication.kakao.KakaoRegisterFragment"
+        android:label="fragment_kakao_register"
+        tools:layout="@layout/fragment_kakao_register" >
+        <action
+            android:id="@+id/action_kakaoRegisterFragment_to_kakaoRegisterPetInfoFragment"
+            app:destination="@id/kakaoRegisterPetInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/kakaoRegisterPetInfoFragment"
+        android:name="com.prography.pethotel.ui.authentication.kakao.KakaoRegisterPetInfoFragment"
+        android:label="fragment_kakao_register_pet_info"
+        tools:layout="@layout/fragment_kakao_register_pet_info" />
+</navigation>

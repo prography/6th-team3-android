@@ -20,7 +20,6 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
 import com.kakao.util.exception.KakaoException
@@ -29,16 +28,13 @@ import com.prography.pethotel.R
 import com.prography.pethotel.api.auth.request.LoginInfoBody
 import com.prography.pethotel.api.auth.response.UserToken
 import com.prography.pethotel.ui.MainActivity
+import com.prography.pethotel.ui.authentication.kakao.KakaoLoginActivity
 import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModelFactory
-import com.prography.pethotel.utils.KAKAO_LOGIN_HTML_DATA_KEY
 import com.prography.pethotel.utils.LoginStateViewModel
 import com.prography.pethotel.utils.USER_TOKEN
 import kotlinx.android.synthetic.main.login_register_fragment.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class LoginRegisterMainFragment : Fragment() {
 
@@ -60,13 +56,13 @@ class LoginRegisterMainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val pref = requireActivity().getSharedPreferences(USER_TOKEN, MODE_PRIVATE)
-        val token = pref.getString(USER_TOKEN, "")
-        if(token == ""){
-
-        }else{
-//            userToken = UserToken(token!!)
-        }
+//        val pref = requireActivity().getSharedPreferences(USER_TOKEN, MODE_PRIVATE)
+//        val token = pref.getString(USER_TOKEN, "")
+//        if(token == ""){
+//
+//        }else{
+////            userToken = UserToken(token!!)
+//        }
         Session.getCurrentSession().addCallback(sessionCallback)
     }
 
@@ -117,7 +113,7 @@ class LoginRegisterMainFragment : Fragment() {
             else{
                 showLoginFailed(R.string.login_failed)
             }
-            requireActivity().setResult(Activity.RESULT_OK)
+            requireActivity().setResult(RESULT_OK)
             //Complete and destroy login activity once successful
             requireActivity().finish()
         })
@@ -150,6 +146,7 @@ class LoginRegisterMainFragment : Fragment() {
             setOnEditorActionListener{
                 _, actionId, _ ->
                 when(actionId){
+                    /* 여기서 왜 로그인을 호출했지 ....? */
                     EditorInfo.IME_ACTION_DONE -> loginViewModel.login(
                         loginInfoBody = LoginInfoBody(
                             et_login_username.text.toString(), et_login_password.text.toString()
@@ -243,10 +240,10 @@ class LoginRegisterMainFragment : Fragment() {
     /*로그인이 성공적이면 UI를 유저 정보를 활용해 업데이트 한다. */
     private fun updateUiWithUser(userToken: String) {
         Log.d(TAG, "updateUiWithUser: $userToken")
-        val welcome = "환영합니다!"
+        val welcome = "(일반로그인 성공) 환영합니다!"
         Toast.makeText(
             requireContext(),
-            "$welcome",
+            welcome,
             Toast.LENGTH_LONG
         ).show()
 

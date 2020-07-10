@@ -61,10 +61,6 @@ class RegisterViewModel : ViewModel() {
         RegisterRepository.generalRegister(generalUserInfo)
     }
 
-    fun registerUserKakao(kakaoRegisterBody: KakaoRegisterBody){
-        RegisterRepository.kakaoRegister(kakaoRegisterBody)
-    }
-
     fun checkPetNumber(dogRegNo : String){
         RegisterRepository.checkPetNumber(dogRegNo)
     }

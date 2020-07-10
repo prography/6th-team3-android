@@ -2,6 +2,7 @@ package com.prography.pethotel.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -35,9 +36,11 @@ class MainActivity : AppCompatActivity() {
                                 .get(LoginStateViewModel::class.java)
 
         if(loginStateViewModel.isTokenValid(this)){
-            Toast.makeText(this, "또 오셨군요!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "환영합니다!", Toast.LENGTH_SHORT).show()
         }else{
-            Toast.makeText(this, "토큰 없음!", Toast.LENGTH_SHORT).show()
+            val toast = Toast.makeText(this, "토큰없음!", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.show()
         }
 
         mainLayout = main_linear_container

@@ -26,14 +26,6 @@ class PlaceSearchResultActivity : AppCompatActivity(){
 
         val query = intent.getStringExtra("QUERY")
 
-        tv_add_hash_tag.setOnClickListener {
-            Toast.makeText(this, "추가되었습니다!", Toast.LENGTH_LONG).show()
-            val intent = Intent()
-            intent.putExtra("result", query)
-            setResult(Activity.RESULT_OK, intent)
-            finish()
-        }
-
 
         //TODO change the list with search result Array List
         val list = DummyData.hotelDummyList

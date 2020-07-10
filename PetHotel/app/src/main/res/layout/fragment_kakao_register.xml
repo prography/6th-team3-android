@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".ui.authentication.kakao.KakaoRegisterFragment"
+    >
+
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_register_user_info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_1x"
+            style="@style/phTitle"
+            android:layout_marginBottom="@dimen/margin_1x"
+            android:text="@string/enter_user_info_title" />
+
+
+        <!--        이메일 입력 필드 / 버튼 텍스트 : 중복 확인 -->
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/kakao_img_register_user_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="35dp"
+            android:src="@drawable/pet_profile_placeholder" />
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:padding="@dimen/padding_large_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_1x">
+
+
+            <EditText
+                android:id="@+id/kakao_email_edit_text_field"
+                style="@style/phEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="이메일"
+                android:inputType="textEmailAddress"
+                app:layout_constraintBottom_toTopOf="@+id/kakao_nickname_edit_text_field"
+                app:layout_constraintEnd_toEndOf="@+id/kakao_nickname_edit_text_field"
+                app:layout_constraintStart_toStartOf="@+id/kakao_nickname_edit_text_field"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/kakao_nickname_edit_text_field"
+                style="@style/phEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="11dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="성함"
+                app:layout_constraintBottom_toTopOf="@+id/kakao_phone_edit_text_field"
+                app:layout_constraintEnd_toEndOf="@+id/kakao_phone_edit_text_field"
+                app:layout_constraintStart_toStartOf="@+id/kakao_phone_edit_text_field" />
+
+            <EditText
+                android:id="@+id/kakao_phone_edit_text_field"
+                style="@style/phEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="11dp"
+                android:ems="10"
+                android:inputType="phone"
+                android:hint="휴대전화번호 ( - 생략 )"
+                app:layout_constraintBottom_toTopOf="@+id/kakao_password_edit_text_field"
+                app:layout_constraintEnd_toEndOf="@+id/kakao_password_edit_text_field"
+                app:layout_constraintStart_toStartOf="@+id/kakao_password_edit_text_field" />
+
+            <EditText
+                android:id="@+id/kakao_password_edit_text_field"
+                style="@style/phEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:ems="10"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                app:layout_constraintBottom_toTopOf="@+id/kakao_password_check_edit_text_field"
+                app:layout_constraintEnd_toEndOf="@+id/kakao_password_check_edit_text_field"
+                app:layout_constraintStart_toStartOf="@+id/kakao_password_check_edit_text_field" />
+
+            <EditText
+                android:id="@+id/kakao_password_check_edit_text_field"
+                style="@style/phEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:ems="10"
+                android:hint="비밀번호 확인"
+                android:inputType="textPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kakao_password_edit_text_field" />
+
+
+            <TextView
+                android:id="@+id/tv_kakao_register_password_not_match"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="*비밀번호가 일치하지 않습니다."
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/tv_register_already_member"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kakao_password_check_edit_text_field" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_kakao_register_pet_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="반려견 등록하기"
+            android:layout_marginEnd="@dimen/margin_2x"
+            android:layout_marginStart="@dimen/margin_2x"
+            />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_kakao_register_complete"
+            android:layout_marginEnd="@dimen/margin_2x"
+            android:layout_marginStart="@dimen/margin_2x"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="회원가입 완료"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+
+    </LinearLayout>
+
+</ScrollView>

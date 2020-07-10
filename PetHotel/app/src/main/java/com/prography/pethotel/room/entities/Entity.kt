@@ -32,6 +32,31 @@ class Hotel(
     @ColumnInfo(name = "pageLink") val pageLink : String
 )
 
+@Entity(
+    tableName = "price",
+    foreignKeys = [
+    ForeignKey(entity = Hotel::class,
+    parentColumns = ["id"],
+    childColumns = ["hotelId"]
+    )
+    ]
+)
+class Price(
+    @PrimaryKey @ColumnInfo(name = "id") val priceId : Int,
+    @ColumnInfo(name = "hotelId") val hotelId : Int,
+    @ColumnInfo(name = "createdAt") val createdAt: String,
+    @ColumnInfo(name = "updatedAt") val updatedAt: String,
+    @ColumnInfo(name = "day") val day : String? = null,
+    @ColumnInfo(name = "weight") val weight : Int? = null,
+    @ColumnInfo(name = "size") val size : Size? = null,
+    @ColumnInfo(name = "price") val price : Int? = null
+)
+
+@Entity(tableName = "size")
+enum class Size{
+    SMALL, MEDIUM, LARGE
+}
+
 @Entity(tableName = "hotelLike",
     foreignKeys = [
         ForeignKey(

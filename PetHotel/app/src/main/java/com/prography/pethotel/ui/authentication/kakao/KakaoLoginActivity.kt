@@ -1,4 +1,6 @@
-package com.prography.pethotel.ui.authentication
+@file:Suppress("DEPRECATION")
+
+package com.prography.pethotel.ui.authentication.kakao
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -17,17 +19,22 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.webkit.WebViewClientCompat
 import com.prography.pethotel.R
+import com.prography.pethotel.api.auth.response.Information
 import com.prography.pethotel.api.auth.response.KakaoLoginResponse
+import com.prography.pethotel.api.auth.response.KakaoRegistrationData
+import com.prography.pethotel.api.auth.response.KakaoRegistrationResponse
+import com.prography.pethotel.models.GeneralUserInfo
 import com.prography.pethotel.ui.MainActivity
+import com.prography.pethotel.ui.authentication.LoginRegisterActivity
 import com.prography.pethotel.ui.authentication.login.LoginViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModelFactory
 import com.prography.pethotel.ui.authentication.register.RegisterViewModel
-import com.prography.pethotel.utils.KAKAO_LOGIN_HTML_DATA_KEY
+import com.prography.pethotel.utils.IS_KAKAO_LOGIN
+import com.prography.pethotel.utils.KAKAO_REG_RESPONSE_KEY
 import com.prography.pethotel.utils.LoginStateViewModel
 import com.prography.pethotel.utils.LoginStateViewModelFactory
 import org.json.JSONObject
@@ -55,17 +62,35 @@ class KakaoLoginActivity : AppCompatActivity() {
         loginViewModel.kakaoLoginResponse.observe(this, Observer {
             Log.d(TAG, "onActivityCreated: KAKAO RESPONSE \n$it")
 
-            loginStateViewModel.setUserToken(this, it.token)
+            if(it.status =="success"){
+                loginStateViewModel.setUserToken(this, it.token)
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                Toast.makeText(this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, LoginRegisterActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        })
 
-            //GET User
-            registerViewModel.getUser(it.token)
-            registerViewModel.getUserInfoResponse().observe(this, Observer {
-                response ->
-                val userId = response.id
-
-            })
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        loginViewModel.kakaoRegistrationResponse.observe(this, Observer {
+            if(it.status =="success"){
+                registerViewModel.setUserInfo(
+                    GeneralUserInfo(
+                        nickName = it.data.information.nickname,
+                        email = it.data.information.email,
+                        userImagePath = it.data.information.profileImage
+                    )
+                )
+                val intent = Intent(this, KakaoRegisterActivity::class.java)
+                intent.putExtra(KAKAO_REG_RESPONSE_KEY, it)
+                startActivity(intent)
+            }else{
+                val intent = Intent(this, LoginRegisterActivity::class.java)
+                startActivity(intent)
+            }
             finish()
         })
 
@@ -78,7 +103,11 @@ class KakaoLoginActivity : AppCompatActivity() {
         webView.webViewClient = webViewClient
         webView.webChromeClient = ParentWebChromeClient(parentLayout, this)
 
-        webView.addJavascriptInterface(MyJavaScriptInterface(this, loginViewModel), "Android")
+        webView.addJavascriptInterface(
+            MyJavaScriptInterface(
+                this,
+                loginViewModel
+            ), "Android")
         // load test url
 //        webView.loadUrl("https://developers.kakao.com/docs/js/demos/custom-login")
 //        webView.loadData(data, "text/html", "UTF-8")
@@ -179,7 +208,7 @@ class KakaoLoginActivity : AppCompatActivity() {
 
         override fun onPageFinished(view: WebView?, url: String?) {
             /* 전송된 HTML 페이지에서 <pre> 태그 안에 있는 JSON 응답 값을 가져온다 */
-            view?.loadUrl("javascript:window.Android.getHtml(document.getElementsByTagName('pre')[0].innerHTML);");
+            view?.loadUrl("javascript:window.Android.getHtml(document.getElementsByTagName('pre')[0].innerHTML);")
         }
     }
 
@@ -238,15 +267,36 @@ class KakaoLoginActivity : AppCompatActivity() {
             val jsonObject = JSONObject(html)
             val status = jsonObject.getString("status")
             val message = jsonObject.getString("message")
-            val token = jsonObject.getJSONObject("data").getString("token")
-            Log.d(TAG, "getHtml: ${"$status, $message, $token"}")
+            val data = jsonObject.getJSONObject("data")
 
-            val kakaoLoginResponse = KakaoLoginResponse(
-                token = token,
-                message = message,
-                status = status
-            )
-            loginViewModel.setKakaoLoginResponse(kakaoLoginResponse)
+            Log.d(TAG, "getHtml: ${"$status, $message, $data"}")
+
+            if(message == IS_KAKAO_LOGIN){
+                val kakaoLoginResponse = KakaoLoginResponse(
+                    token = data.getString("token"),
+                    message = message,
+                    status = status
+                )
+                loginViewModel.setKakaoLoginResponse(kakaoLoginResponse)
+            }else{
+                val information = data.getJSONObject("information")
+                val nickname = information.getString("nickname")
+                val profileImage = information.getString("profileImage")
+                val email = information.getString("email")
+                val kakaoRegistrationResponse = KakaoRegistrationResponse(
+                    status = status,
+                    message = message,
+                    data = KakaoRegistrationData(
+                        userId = data.getInt("userId"),
+                        information = Information(
+                            nickname = nickname,
+                            profileImage = profileImage,
+                            email = email
+                        )
+                    )
+                )
+                loginViewModel.setKakaoRegistrationResponse(kakaoRegistrationResponse)
+            }
         }
     }
 

@@ -12,12 +12,12 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.prography.pethotel.R
 import com.prography.pethotel.models.GeneralUserInfo
 import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.authentication.utils.BaseFragment
+import com.prography.pethotel.ui.authentication.kakao.KakaoRegisterViewModel
 import com.prography.pethotel.utils.ENTER_PET
 import com.prography.pethotel.utils.NO_PET
 import com.prography.pethotel.utils.USER_TOKEN
@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.register_user_info_fragment.*
 private const val TAG = "RegisterUserInfoFragment"
 
 
+@Suppress("DEPRECATION")
 class RegisterUserInfoFragment : BaseFragment() {
 
     companion object {
@@ -34,8 +35,7 @@ class RegisterUserInfoFragment : BaseFragment() {
             RegisterUserInfoFragment()
 
     }
-
-    private lateinit var userInfoViewModel: RegisterViewModel
+    private lateinit var registerViewModel: RegisterViewModel
 //    private var currentPhotoPath = ""
     private var generalUserInfo : GeneralUserInfo = GeneralUserInfo()
     private lateinit var userImage : ImageView
@@ -50,19 +50,12 @@ class RegisterUserInfoFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        userInfoViewModel = ViewModelProvider(requireActivity())[RegisterViewModel::class.java]
+        registerViewModel = ViewModelProvider(requireActivity())[RegisterViewModel::class.java]
 
         userImage = img_register_user_image
 
         /*다시 입력 화면으로 돌아왔을 때 정보가 남아있도록 한다.*/
-        userInfoViewModel.userInfo.observe(viewLifecycleOwner, Observer {
-            Log.d("REGISTER", "register viewmodel called $it")
-            email_edit_text_field.setText(it.email)
-            nickname_edit_text_field.setText(it.nickName)
-            phone_edit_text_field.setText(it.phoneNumber)
-            password_edit_text_field.setText(it.password)
-            password_check_edit_text_field.setText(it.password)
-        })
+        observeUserInfo()
 
 //        btn_upload_user_image.setOnClickListener {
 //            getAlbum()
@@ -73,9 +66,11 @@ class RegisterUserInfoFragment : BaseFragment() {
 //        }
 
 
-        btn_register_pet_info.setOnClickListener {
-            registerUser(ENTER_PET)
-        }
+        /*펫 정보 입력하는 버튼 작동할때까지 press 안되게 하기 */
+        btn_register_pet_info.isEnabled = false
+//        btn_register_pet_info.setOnClickListener {
+//            registerUser(ENTER_PET)
+//        }
 
         btn_register_complete.setOnClickListener {
            registerUser(NO_PET)
@@ -89,20 +84,33 @@ class RegisterUserInfoFragment : BaseFragment() {
         setUpUserInfoInputListeners()
     }
 
+    private fun observeUserInfo(){
+
+        registerViewModel.userInfo.observe(viewLifecycleOwner, Observer {
+            Log.d("REGISTER", "register viewmodel called $it")
+            email_edit_text_field.setText(it.email)
+            nickname_edit_text_field.setText(it.nickName)
+            phone_edit_text_field.setText(it.phoneNumber)
+            password_edit_text_field.setText(it.password)
+            password_check_edit_text_field.setText(it.password)
+        })
+
+    }
+
     /*returns true if the registration was successful*/
     private fun registerUser(registerType : Int){
         if(!generalUserInfo.email.isNullOrBlank()
             && !generalUserInfo.nickName.isNullOrBlank()
             && !generalUserInfo.password.isNullOrBlank()){
 
-            userInfoViewModel.setUserInfo(generalUserInfo)
+            registerViewModel.setUserInfo(generalUserInfo)
 
-            userInfoViewModel.registerUserGeneral(generalUserInfo)
+            registerViewModel.registerUserGeneral(generalUserInfo)
 
-            userInfoViewModel.getRegisterStatus().observe(viewLifecycleOwner, Observer {
+            registerViewModel.getRegisterStatus().observe(viewLifecycleOwner, Observer {
                 Log.d(TAG, "onActivityCreated: register status = $it")
                 if(it == true){
-                    userInfoViewModel.getUserToken().observe(viewLifecycleOwner, Observer {
+                    registerViewModel.getUserToken().observe(viewLifecycleOwner, Observer {
                             userToken ->
                         Log.d(TAG, "onActivityCreated: $userToken")
 
@@ -167,7 +175,7 @@ class RegisterUserInfoFragment : BaseFragment() {
             if(!hasFocus && password.isNotEmpty()){
                 setUpPasswordCheckInputLister(password)
                 generalUserInfo.password = password
-                Log.d("REGISTER", userInfoViewModel.userInfo.toString())
+                Log.d("REGISTER", registerViewModel.userInfo.toString())
             }
         }
     }

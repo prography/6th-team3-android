@@ -9,6 +9,7 @@ import com.prography.pethotel.R
 import com.prography.pethotel.api.auth.request.LoginInfoBody
 import com.prography.pethotel.api.auth.response.GeneralLoginResponse
 import com.prography.pethotel.api.auth.response.KakaoLoginResponse
+import com.prography.pethotel.api.auth.response.KakaoRegistrationResponse
 import com.prography.pethotel.api.auth.response.UserToken
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,11 +34,23 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     val kakaoLoginResponse : LiveData<KakaoLoginResponse>
         get() = _kakaoLoginResponse
 
+    private val _kakaoRegistrationResponse : MutableLiveData<KakaoRegistrationResponse> = MutableLiveData()
+    val kakaoRegistrationResponse: LiveData<KakaoRegistrationResponse>
+        get() = _kakaoRegistrationResponse
+
     fun setKakaoLoginResponse(kakaoLoginResponse: KakaoLoginResponse){
         Log.d(TAG, "setKakaoLoginResponse: $kakaoLoginResponse")
 
         CoroutineScope(Dispatchers.Main).launch {
             _kakaoLoginResponse.value = kakaoLoginResponse
+        }
+    }
+
+    fun setKakaoRegistrationResponse(kakaoRegistrationResponse: KakaoRegistrationResponse){
+        Log.d(TAG, "setKakaoRegistrationResponse: $kakaoRegistrationResponse")
+
+        CoroutineScope(Dispatchers.Main).launch {
+            _kakaoRegistrationResponse.value = kakaoRegistrationResponse
         }
     }
 

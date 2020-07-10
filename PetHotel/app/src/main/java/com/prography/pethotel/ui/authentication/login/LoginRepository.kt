@@ -24,7 +24,6 @@ private const val TAG = "LoginRepository"
 
 class LoginRepository() {
 
-
     private val coroutineScope  = CoroutineScope(Dispatchers.Main)
 
     // in-memory cache of the loggedInUser object
@@ -86,10 +85,10 @@ class LoginRepository() {
 //    }
 
     fun generalLogin(loginInfoBody: LoginInfoBody){
-        var response : GeneralLoginResponse? = null
+        var response: GeneralLoginResponse?
 
         try {
-            val job = coroutineScope.launch {
+            coroutineScope.launch {
                 response =
                     PetmilyAuthApi.authApiRetrofitService.generalLogin(
                         loginInfoBody
