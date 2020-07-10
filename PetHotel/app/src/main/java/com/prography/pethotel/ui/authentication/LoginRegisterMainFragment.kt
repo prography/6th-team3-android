@@ -1,6 +1,7 @@
 package com.prography.pethotel.ui.authentication
 
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
@@ -31,9 +32,13 @@ import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModelFactory
+import com.prography.pethotel.utils.KAKAO_LOGIN_HTML_DATA_KEY
 import com.prography.pethotel.utils.LoginStateViewModel
 import com.prography.pethotel.utils.USER_TOKEN
 import kotlinx.android.synthetic.main.login_register_fragment.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginRegisterMainFragment : Fragment() {
 
@@ -117,6 +122,8 @@ class LoginRegisterMainFragment : Fragment() {
             requireActivity().finish()
         })
 
+
+
         /*첫 화면 밀리 애니메이션 띄우기*/
         front_img.setBackgroundResource(R.drawable.mily_animated)
         val animationDrawable =  front_img.background as AnimationDrawable
@@ -168,10 +175,26 @@ class LoginRegisterMainFragment : Fragment() {
 
         /* 카카오 세션을 오픈한다 */
         btn_kakao_login.setOnClickListener {
-            val session = Session.getCurrentSession()
-            session.addCallback(sessionCallback)
-            session.open(AuthType.KAKAO_LOGIN_ALL, requireActivity())
+//            val session = Session.getCurrentSession()
+//            session.addCallback(sessionCallback)
+//            session.open(AuthType.KAKAO_LOGIN_ALL, requireActivity())
+
+//            loginViewModel.kakaoLogin()
+
+            val intent = Intent(requireActivity(), KakaoLoginActivity::class.java)
+//            intent.putExtra(KAKAO_LOGIN_HTML_DATA_KEY, webViewData)
+//            startActivityForResult(intent, 1010)
+            startActivity(intent)
         }
+
+//        loginViewModel.kakaoLoginResponse.observe(viewLifecycleOwner, Observer {
+//            Log.d(TAG, "onActivityCreated: KAKAO RESPONSE \n$it")
+//
+//            loginStateViewModel.setUserToken(requireActivity(), it.token)
+//            val intent = Intent(requireActivity(), MainActivity::class.java)
+//            startActivity(intent)
+//            requireActivity().finish()
+//        })
 
         btn_login_user_register.setOnClickListener {
             //회원가입 화면으로 이동한다.
@@ -181,14 +204,15 @@ class LoginRegisterMainFragment : Fragment() {
 
     private val sessionCallback = object : ISessionCallback{
         override fun onSessionOpenFailed(exception: KakaoException?) {
-            Log.d(Companion.TAG, "onSessionOpenFailed: Kakao Login Failed!\n$exception")
+            Log.d(TAG, "onSessionOpenFailed: Kakao Login Failed!\n$exception")
         }
 
         override fun onSessionOpened() {
-            Log.d(Companion.TAG, "onSessionOpened: Kakko Login Success!")
+            Log.d(TAG, "onSessionOpened: Kakko Login Success!")
             //로그인 성공시 액세스 토큰, 리프레시 토큰 두 종류의 사용자 토큰을 받는다.
             //카카오 SDK가 토큰을 관리하는 기능을 갖고 있음.
             //Android 카카오 SDK는 토큰 관리를 위한 별도 설정이 필요하지 않아.
+
         }
     }
 
@@ -206,6 +230,9 @@ class LoginRegisterMainFragment : Fragment() {
             return
         }
         super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 1010 && resultCode == RESULT_OK){
+            Log.d(TAG, "onActivityResult: RESULT OK FROM KAKAO LOGIN ACTIVITY")
+        }
     }
 
     /*로그인이 실패하면 토스트를 띄운다 */

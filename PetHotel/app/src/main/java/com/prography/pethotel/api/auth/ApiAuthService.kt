@@ -12,6 +12,7 @@ import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -30,6 +31,13 @@ private val publicApiRetrofit
     .baseUrl(ANIMAL_NUM_BASE_URL)
     .build()
 
+
+private val kakaoRetrofit
+        =Retrofit.Builder()
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .build()
+
 interface AnimalNumberApiService{
 
     @GET("service/rest/animalInfoSrvc/animalInfo")
@@ -42,14 +50,6 @@ interface AnimalNumberApiService{
 }
 
 interface  AuthApiService{
-
-
-    //로그인 화면의 I세션 콜백으로 응답을 받는다.
-    @GET("auth/kakao/login")
-    suspend fun kakaoLogin() : KakaoLoginResponse
-
-    @POST("user")
-    suspend fun kakaoRegister(@Body kakaoRegisterBody: KakaoRegisterBody) : RegistrationResponse
 
     @POST("auth/login")
     suspend fun generalLogin(@Body loginInfo : LoginInfoBody) : GeneralLoginResponse
@@ -67,6 +67,17 @@ interface  AuthApiService{
 }
 
 
+interface KakaoApiService{
+
+//    @GET("auth/kakao/login")
+//    suspend fun kakaoLogin() : String
+
+    @POST("user")
+    suspend fun kakaoRegister(@Body kakaoRegisterBody: KakaoRegisterBody) : RegistrationResponse
+
+}
+
+
 object PetmilyAuthApi{
     val publicApiRetrofitService : AnimalNumberApiService by lazy {
         publicApiRetrofit.create(AnimalNumberApiService::class.java)
@@ -74,6 +85,10 @@ object PetmilyAuthApi{
 
     val authApiRetrofitService : AuthApiService by lazy {
         authRetrofit.create(AuthApiService::class.java)
+    }
+
+    val kakaoApiRetrofitService : KakaoApiService by lazy{
+        kakaoRetrofit.create(KakaoApiService::class.java)
     }
 }
 

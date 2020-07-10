@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.prography.pethotel.api.auth.PetmilyAuthApi
 import com.prography.pethotel.api.auth.request.LoginInfoBody
 import com.prography.pethotel.api.auth.response.GeneralLoginResponse
+import com.prography.pethotel.api.auth.response.KakaoLoginResponse
 import com.prography.pethotel.api.auth.response.UserToken
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -70,17 +71,19 @@ class LoginRepository() {
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    suspend fun kakaoLogin(){
-        try {
-            coroutineScope.launch {
-                val response =
-                    PetmilyAuthApi.authApiRetrofitService.kakaoLogin()
-                Log.d(TAG, "kakaoRegister: $response")
-            }
-        }catch (e : Exception){
-            Log.d(TAG, "kakaoRegister: ${e.printStackTrace()}")
-        }
-    }
+//    fun kakaoLogin(){
+//        try {
+//            coroutineScope.launch {
+//                val response =
+//                    PetmilyAuthApi.kakaoApiRetrofitService.kakaoLogin()
+//                Log.d(TAG, "카카오 로그인 테스트 kakaoRegister: $response")
+//                _kakaoLoginResponse.value = response
+//
+//            }
+//        }catch (e : Exception){
+//            Log.d(TAG, "kakaoRegister: ${e.printStackTrace()}")
+//        }
+//    }
 
     fun generalLogin(loginInfoBody: LoginInfoBody){
         var response : GeneralLoginResponse? = null

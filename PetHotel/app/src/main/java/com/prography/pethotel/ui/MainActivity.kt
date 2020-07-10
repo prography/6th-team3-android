@@ -57,8 +57,6 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate: From Main Activity")
     }
 
-    //TODO : 로그인 상태를 뷰모델로 유지해서 Main 의 프래그먼트들이 이에 해당하는 View 를 띄워주도록 한다.
-
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)

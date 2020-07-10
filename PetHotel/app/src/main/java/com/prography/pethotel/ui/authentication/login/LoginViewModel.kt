@@ -8,7 +8,11 @@ import android.util.Patterns
 import com.prography.pethotel.R
 import com.prography.pethotel.api.auth.request.LoginInfoBody
 import com.prography.pethotel.api.auth.response.GeneralLoginResponse
+import com.prography.pethotel.api.auth.response.KakaoLoginResponse
 import com.prography.pethotel.api.auth.response.UserToken
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 private const val TAG = "LoginViewModel"
@@ -23,6 +27,18 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     fun getLoginResponse() : LiveData<GeneralLoginResponse>{
         return loginRepository.loginResponse
+    }
+
+    private val _kakaoLoginResponse : MutableLiveData<KakaoLoginResponse> = MutableLiveData()
+    val kakaoLoginResponse : LiveData<KakaoLoginResponse>
+        get() = _kakaoLoginResponse
+
+    fun setKakaoLoginResponse(kakaoLoginResponse: KakaoLoginResponse){
+        Log.d(TAG, "setKakaoLoginResponse: $kakaoLoginResponse")
+
+        CoroutineScope(Dispatchers.Main).launch {
+            _kakaoLoginResponse.value = kakaoLoginResponse
+        }
     }
 
     fun login(loginInfoBody : LoginInfoBody) {
@@ -40,6 +56,10 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 //                LoginResult(error = R.string.login_failed)
 //        }
     }
+
+//    fun kakaoLogin(){
+//        loginRepository.kakaoLogin()
+//    }
 
     fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {

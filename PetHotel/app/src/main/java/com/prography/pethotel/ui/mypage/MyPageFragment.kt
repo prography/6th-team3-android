@@ -15,21 +15,22 @@ import kotlinx.android.synthetic.main.new_my_page_not_logged_in_layout.*
 
 class MyPageFragment : Fragment() {
 
+    private var myPageView : View? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-
         val pref = requireActivity().getSharedPreferences(USER_TOKEN, Context.MODE_PRIVATE)
         val token = pref.getString(USER_TOKEN, "")
 
-        if(token.isNullOrEmpty()){
-            val view = inflater.inflate(R.layout.new_my_page_not_logged_in_layout, container, false)
+        myPageView = if(token.isNullOrEmpty()){
+            inflater.inflate(R.layout.new_my_page_not_logged_in_layout, container, false)
         }else{
-
+            inflater.inflate(R.layout.new_my_page_logged_in_layout, container, false)
         }
-        return view
+        return myPageView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -39,7 +40,6 @@ class MyPageFragment : Fragment() {
         //TODO 예약 확인 navigation 만들기
 
         //TODO 로그아웃 로직 작성하기
-
     }
 
     fun setLoggedOutView(){

@@ -126,7 +126,7 @@ object RegisterRepository{
         try {
             coroutineScope.launch {
                 val response =
-                    PetmilyAuthApi.authApiRetrofitService.kakaoRegister(
+                    PetmilyAuthApi.kakaoApiRetrofitService.kakaoRegister(
                         kakaoRegisterBody
                     )
                 Log.d(TAG, "kakaoRegister: $response")

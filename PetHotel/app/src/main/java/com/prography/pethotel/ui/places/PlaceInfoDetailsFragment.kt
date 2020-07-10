@@ -147,8 +147,8 @@ class PlaceInfoDetailsFragment : Fragment() {
     }
 
     private fun startPhoneIntent(phoneNumber: String) {
-        val callIntent = Intent(Intent.ACTION_CALL)
-        callIntent.data = Uri.parse(phoneNumber)
+        val callIntent = Intent(Intent.ACTION_DIAL,
+                            Uri.fromParts("tel", phoneNumber, null))
 
         if(!isCallPermissionGranted()){
             requestCallPermission()

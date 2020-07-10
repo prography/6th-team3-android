@@ -57,7 +57,6 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }, SPLASH_TIMEOUT)
         }
-
         /* 유저 토큰이 있는지 확인하고, 없으면 로그인으로 있으면 메인으로 넘어간다. */
     }
 }
