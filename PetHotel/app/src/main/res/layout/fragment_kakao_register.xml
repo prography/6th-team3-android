@@ -21,9 +21,10 @@
             android:id="@+id/tv_register_user_info_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_1x"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_2x"
+            android:padding="@dimen/padding_large_16dp"
             style="@style/phTitle"
-            android:layout_marginBottom="@dimen/margin_1x"
             android:text="@string/enter_user_info_title" />
 
 

@@ -13,16 +13,17 @@
         android:layout_height="150dp"
         android:src="@drawable/mily_happy"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/splash_app_description"
+        app:layout_constraintStart_toStartOf="@+id/splash_app_description"
         app:layout_constraintTop_toTopOf="parent"
         />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/splash_app_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/phHeadline5"
+        android:textColor="@color/petHotelPrimaryDark"
         android:text="애견호텔 안심예약 서비스"
         android:layout_marginBottom="@dimen/margin_1x"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
@@ -30,11 +31,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/splash_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="마이펫밀리"
-        style="@style/phHeadline4"
+        android:text="@string/head_my_petmily"
+        android:textSize="52dp"
+        android:textColor="@color/petHotelPrimaryDark"
+        android:fontFamily="@font/kaushan_script_regular"
         android:layout_marginTop="@dimen/margin_1x"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"

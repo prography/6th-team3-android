@@ -5,9 +5,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.telephony.PhoneNumberUtils
+import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +29,7 @@ import kotlinx.android.synthetic.main.place_info_detail_time_etc_layout.*
 import kotlinx.android.synthetic.main.place_detail_review_view_holder.view.*
 
 
+private const val TAG = "PlaceInfoDetailsFragmen"
 class PlaceInfoDetailsFragment : Fragment() {
 
 
@@ -47,6 +53,7 @@ class PlaceInfoDetailsFragment : Fragment() {
         phoneNumber = hotel.phoneNumber
         hotelWebsite = hotel.pageLink
 
+        Log.d(TAG, "onActivityCreated: $phoneNumber\n$hotelWebsite")
         initFloatingActionButtonMenu()
         setHotelDataToView(hotel)
 
@@ -141,18 +148,26 @@ class PlaceInfoDetailsFragment : Fragment() {
     }
 
     private fun startOpenWebsiteIntent(hotelWebsite: String) {
-        val openWebsiteIntent = Intent(Intent.ACTION_VIEW)
-        openWebsiteIntent.data = Uri.parse(hotelWebsite)
-        startActivity(openWebsiteIntent)
+        if(URLUtil.isValidUrl(hotelWebsite)){
+            val openWebsiteIntent = Intent(Intent.ACTION_VIEW)
+            openWebsiteIntent.data = Uri.parse(hotelWebsite)
+            startActivity(openWebsiteIntent)
+        }else{
+            Toast.makeText(requireContext(), "웹사이트가 없습니다!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun startPhoneIntent(phoneNumber: String) {
-        val callIntent = Intent(Intent.ACTION_DIAL,
-                            Uri.fromParts("tel", phoneNumber, null))
-
+        val isValid = Patterns.PHONE.matcher(phoneNumber).matches()
+        if(!isValid){
+            Toast.makeText(requireContext(), "전화번호가 없습니다!", Toast.LENGTH_SHORT).show()
+            return
+        }
         if(!isCallPermissionGranted()){
             requestCallPermission()
         }else{
+            val callIntent = Intent(Intent.ACTION_DIAL,
+                Uri.fromParts("tel", phoneNumber, null))
             startActivity(callIntent)
         }
     }

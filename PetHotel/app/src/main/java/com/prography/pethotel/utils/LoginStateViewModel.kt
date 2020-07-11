@@ -35,4 +35,8 @@ class LoginStateViewModel (application: Application) :AndroidViewModel(applicati
         pref.edit().putString(USER_TOKEN, userToken).apply()
         userTokenState.value = TokenState.STORED
     }
+
+    fun updateTokenState(tokenState: TokenState){
+        userTokenState.value = tokenState
+    }
 }

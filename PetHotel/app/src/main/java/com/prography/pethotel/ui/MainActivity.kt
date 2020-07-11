@@ -9,9 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.prography.pethotel.R
+import com.prography.pethotel.ui.mypage.MyPageFragment
 import com.prography.pethotel.ui.places.PlaceInfoViewModel
 import com.prography.pethotel.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,8 +40,10 @@ class MainActivity : AppCompatActivity() {
                                 .get(LoginStateViewModel::class.java)
 
         if(loginStateViewModel.isTokenValid(this)){
+            loginStateViewModel.updateTokenState(TokenState.STORED)
             Toast.makeText(this, "환영합니다!", Toast.LENGTH_SHORT).show()
         }else{
+            loginStateViewModel.updateTokenState(TokenState.REMOVED)
             val toast = Toast.makeText(this, "토큰없음!", Toast.LENGTH_SHORT)
             toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
@@ -58,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         placeInfoViewModel = ViewModelProviders.of(this).get(PlaceInfoViewModel::class.java)
         placeInfoViewModel.getHotelLists()
         Log.d(TAG, "onCreate: From Main Activity")
+
     }
 
 
