@@ -33,8 +33,8 @@ private const val TAG = "PlaceInfoDetailsFragmen"
 class PlaceInfoDetailsFragment : Fragment() {
 
 
-    private lateinit var phoneNumber : String
-    private lateinit var hotelWebsite : String
+    private var phoneNumber : String? = ""
+    private var hotelWebsite : String? = ""
 
 
     override fun onCreateView(
@@ -53,7 +53,6 @@ class PlaceInfoDetailsFragment : Fragment() {
         phoneNumber = hotel.phoneNumber
         hotelWebsite = hotel.pageLink
 
-        Log.d(TAG, "onActivityCreated: $phoneNumber\n$hotelWebsite")
         initFloatingActionButtonMenu()
         setHotelDataToView(hotel)
 
@@ -147,7 +146,7 @@ class PlaceInfoDetailsFragment : Fragment() {
         })
     }
 
-    private fun startOpenWebsiteIntent(hotelWebsite: String) {
+    private fun startOpenWebsiteIntent(hotelWebsite: String? = "") {
         if(URLUtil.isValidUrl(hotelWebsite)){
             val openWebsiteIntent = Intent(Intent.ACTION_VIEW)
             openWebsiteIntent.data = Uri.parse(hotelWebsite)
@@ -157,10 +156,14 @@ class PlaceInfoDetailsFragment : Fragment() {
         }
     }
 
-    private fun startPhoneIntent(phoneNumber: String) {
+    private fun startPhoneIntent(phoneNumber: String? = "") {
+        if(phoneNumber.isNullOrEmpty()){
+            Toast.makeText(requireContext(), "전화번호가 없습니다!", Toast.LENGTH_SHORT).show()
+            return
+        }
         val isValid = Patterns.PHONE.matcher(phoneNumber).matches()
         if(!isValid){
-            Toast.makeText(requireContext(), "전화번호가 없습니다!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "전화번호가 유효하지 않습니다!", Toast.LENGTH_SHORT).show()
             return
         }
         if(!isCallPermissionGranted()){
