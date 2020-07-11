@@ -22,14 +22,16 @@ import com.prography.pethotel.R
 import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.models.HotelReview
 import com.prography.pethotel.ui.places.util.GenericRecyclerViewAdapter
-import com.prography.pethotel.utils.DummyData
+import com.prography.pethotel.utils.*
 import kotlinx.android.synthetic.main.floating_menu.*
+import kotlinx.android.synthetic.main.hotel_price_layout.*
 import kotlinx.android.synthetic.main.place_info_detail_descriptions_layout.*
 import kotlinx.android.synthetic.main.place_info_detail_time_etc_layout.*
 import kotlinx.android.synthetic.main.place_detail_review_view_holder.view.*
 
 
 private const val TAG = "PlaceInfoDetailsFragmen"
+
 class PlaceInfoDetailsFragment : Fragment() {
 
 
@@ -86,9 +88,10 @@ class PlaceInfoDetailsFragment : Fragment() {
         place_detail_address.text = hotel.addressDetail
         tv_place_detail.text = hotel.description
 
-        val weekTime = "${hotel.weekOpenTime} ~ ${hotel.weekCloseTime}"
-        val satTime = "${hotel.satOpenTime} ~ ${hotel.satCloseTime}"
-        val sunTime = "${hotel.sunOpenTime} ~ ${hotel.sunCloseTime}"
+        val weekTime = "${handleNullTimeStrings(hotel.weekOpenTime)} ~ ${handleNullTimeStrings(hotel.weekCloseTime)}"
+        val satTime = "${handleNullTimeStrings(hotel.satOpenTime)} ~ ${handleNullTimeStrings(hotel.satCloseTime)}"
+        val sunTime = "${handleNullTimeStrings(hotel.sunOpenTime)} ~ ${handleNullTimeStrings(hotel.sunCloseTime)}"
+
         title_week_time.append(weekTime)
         title_sat_time.append(satTime)
         title_sun_time.append(sunTime)
@@ -110,11 +113,107 @@ class PlaceInfoDetailsFragment : Fragment() {
         }
         }
 
-//        tv_week_price.append("${hotel.weekPrice} 원")
-//        tv_sat_price.append("${hotel.satPrice} 원")
-//        tv_sun_price.append("${hotel.sunPrice} 원")
+        /*호텔 가격 정보가 비어있지 않았다면 */
+
+        var smallCriteria : String? = ""
+        var mediumCriteria : String? = ""
+        var largeCriteria : String? = ""
+
+        if(!hotel.prices.isNullOrEmpty()){
+            hotel.prices.forEach {
+                p ->
+                    val day = p.day
+                    if(day == ALL_DAY){
+                        when(p.size){
+                            SMALL -> {
+                                if(smallCriteria.isNullOrEmpty()){
+                                    smallCriteria = convertGramToKilogram(p.weight)
+                                }
+                                sat_small_price.text = p.price.toString()
+                                sun_small_price.text = p.price.toString()
+                                week_small_price.text = p.price.toString()
+                            }
+                            MEDIUM -> {
+                                if(mediumCriteria.isNullOrEmpty()){
+                                    mediumCriteria = convertGramToKilogram(p.weight)
+                                }
+                                sat_medium_price.text = p.price.toString()
+                                sun_medium_price.text = p.price.toString()
+                                week_medium_price.text = p.price.toString()
+                            }
+                            LARGE -> {
+                                if(largeCriteria.isNullOrEmpty()){
+                                    largeCriteria = convertGramToKilogram(p.weight)
+                                }
+                                sat_large_price.text = p.price.toString()
+                                sun_large_price.text = p.price.toString()
+                                week_large_price.text = p.price.toString()
+                            }
+                         }
+                    }else{
+                        when (p.day) {
+                            WEEK_DAY -> {
+                                when(p.size){
+                                    /* 첫번째 검사에서 사이즈 기준 확인하기 */
+                                    SMALL -> {
+                                        if(smallCriteria.isNullOrEmpty()){
+                                            smallCriteria = convertGramToKilogram(p.weight)
+                                        }
+                                        week_small_price.text = p.price.toString()
+                                    }
+                                    MEDIUM -> {
+                                        if(mediumCriteria.isNullOrEmpty()){
+                                            mediumCriteria = convertGramToKilogram(p.weight)
+                                        }
+                                        week_medium_price.text = p.price.toString()
+                                    }
+                                    LARGE -> {
+                                        if(largeCriteria.isNullOrEmpty()){
+                                            largeCriteria = convertGramToKilogram(p.weight)
+                                        }
+                                        week_large_price.text = p.price.toString()
+                                    }
+                                }
+                            }
+                            SAT -> {
+                                when(p.size){
+                                    SMALL -> sat_small_price.text = p.price.toString()
+                                    MEDIUM -> sat_medium_price.text = p.price.toString()
+                                    LARGE -> sat_large_price.text = p.price.toString()
+                                }
+                            }
+                            SUN -> {
+                                when(p.size){
+                                    SMALL -> sun_small_price.text = p.price.toString()
+                                    MEDIUM -> sun_medium_price.text = p.price.toString()
+                                    LARGE -> sun_large_price.text = p.price.toString()
+                                }
+                            }
+                            else -> {
+                                Log.d(TAG, "setHotelDataToView: 호텔 데이터 에러")
+                            }
+                        }
+                    }
+                }
+            }
+
+        size_criteria.text = getString(R.string.size_criteria_string, smallCriteria, mediumCriteria, largeCriteria)
     }
 
+    private fun handleNullTimeStrings(time : String?) : String{
+        return if(time.isNullOrEmpty()){
+            "미정"
+        }else{
+            time
+        }
+    }
+
+    private fun convertGramToKilogram(weight : Int) : String{
+        if(weight == 0){
+            return "변동 가능"
+        }
+        return (weight / 1000.00f).toString()
+    }
 
     private fun initFloatingActionButtonMenu() {
         val floatingActionsMenu = multiple_actions_menu

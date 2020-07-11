@@ -8,6 +8,13 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
     defaultConfig {
         applicationId "com.prography.pethotel"
         minSdkVersion 24
@@ -51,7 +58,7 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.1.0'
 
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
-    implementation "androidx.fragment:fragment-testing:$fragment_version"
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
     // Navigation Components Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"

@@ -30,15 +30,14 @@ data class HotelData(
     val name: String,
     val pageLink: String,
     val phoneNumber: String,
-    val prices: List<String>,
-    //TODO fix this part when the price table is ready
-    val satCloseTime: String,
-    val satOpenTime: String,
-    val sunCloseTime: String,
-    val sunOpenTime: String,
+    val prices: List<HotelPrice>, //weekday sunday saturday all
+    val satCloseTime: String?,
+    val satOpenTime: String?,
+    val sunCloseTime: String?,
+    val sunOpenTime: String?,
     val updatedAt: String,
-    val weekCloseTime: String,
-    val weekOpenTime: String,
+    val weekCloseTime: String?,
+    val weekOpenTime: String?,
     val zipcode: String
 ) : Parcelable{
     var hotelImageLinks : List<HotelImage> = emptyList()
