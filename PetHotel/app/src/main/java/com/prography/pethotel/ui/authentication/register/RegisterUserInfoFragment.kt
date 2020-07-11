@@ -16,11 +16,13 @@ import androidx.navigation.fragment.findNavController
 import com.prography.pethotel.R
 import com.prography.pethotel.models.GeneralUserInfo
 import com.prography.pethotel.ui.MainActivity
+import com.prography.pethotel.ui.authentication.afterTextChanged
 import com.prography.pethotel.ui.authentication.utils.BaseFragment
 import com.prography.pethotel.ui.authentication.kakao.KakaoRegisterViewModel
 import com.prography.pethotel.utils.ENTER_PET
 import com.prography.pethotel.utils.NO_PET
 import com.prography.pethotel.utils.USER_TOKEN
+import kotlinx.android.synthetic.main.fragment_kakao_register.*
 import kotlinx.android.synthetic.main.register_user_info_fragment.*
 
 
@@ -65,12 +67,32 @@ class RegisterUserInfoFragment : BaseFragment() {
 //            takePhoto()
 //        }
 
+        /* 정확한 정보 입력을 감지한다. */
+        setListenersToFields()
 
         /*펫 정보 입력하는 버튼 작동할때까지 press 안되게 하기 */
         btn_register_pet_info.isEnabled = false
 //        btn_register_pet_info.setOnClickListener {
 //            registerUser(ENTER_PET)
 //        }
+
+
+        registerViewModel.registerFormState.observe(viewLifecycleOwner, Observer {
+            btn_register_complete.isEnabled = it.isDataValid
+
+            if(it.emailError != null){
+                email_edit_text_field.error = it.emailError
+            }
+            if(it.nicknameError != null){
+                nickname_edit_text_field.error = it.nicknameError
+            }
+            if(it.phoneNumberError != null){
+                phone_edit_text_field.error = it.phoneNumberError
+            }
+            if(it.passwordError != null){
+                password_check_edit_text_field.error = it.passwordError
+            }
+        })
 
         btn_register_complete.setOnClickListener {
            registerUser(NO_PET)
@@ -81,7 +103,7 @@ class RegisterUserInfoFragment : BaseFragment() {
             findNavController().navigate(R.id.action_registerUserInfoFragment_to_loginRegisterFragment)
         }
 
-        setUpUserInfoInputListeners()
+//        setUpUserInfoInputListeners()
     }
 
     private fun observeUserInfo(){
@@ -97,11 +119,73 @@ class RegisterUserInfoFragment : BaseFragment() {
 
     }
 
+    private fun setListenersToFields(){
+        email_edit_text_field.apply {
+            afterTextChanged {
+                registerViewModel.registerDataChanged(
+                    nickname = nickname_edit_text_field.text.toString(),
+                    email = email_edit_text_field.text.toString(),
+                    phone = phone_edit_text_field.text.toString(),
+                    password = password_edit_text_field.text.toString(),
+                    passwordCheck = password_check_edit_text_field.text.toString()
+                )
+            }
+        }
+        nickname_edit_text_field.apply {
+            afterTextChanged {
+                registerViewModel.registerDataChanged(
+                    nickname = nickname_edit_text_field.text.toString(),
+                    email = email_edit_text_field.text.toString(),
+                    phone = phone_edit_text_field.text.toString(),
+                    password = password_edit_text_field.text.toString(),
+                    passwordCheck = password_check_edit_text_field.text.toString()
+                )
+            }
+        }
+        phone_edit_text_field.apply {
+            afterTextChanged {
+                registerViewModel.registerDataChanged(
+                    nickname = nickname_edit_text_field.text.toString(),
+                    email = email_edit_text_field.text.toString(),
+                    phone = phone_edit_text_field.text.toString(),
+                    password = password_edit_text_field.text.toString(),
+                    passwordCheck = password_check_edit_text_field.text.toString()
+                )
+            }
+        }
+        password_edit_text_field.apply {
+            afterTextChanged {
+                registerViewModel.registerDataChanged(
+                    nickname = nickname_edit_text_field.text.toString(),
+                    email = email_edit_text_field.text.toString(),
+                    phone = phone_edit_text_field.text.toString(),
+                    password = password_edit_text_field.text.toString(),
+                    passwordCheck = password_check_edit_text_field.text.toString()
+                )
+            }
+        }
+        password_check_edit_text_field.apply {
+            afterTextChanged {
+                registerViewModel.registerDataChanged(
+                    nickname = nickname_edit_text_field.text.toString(),
+                    email = email_edit_text_field.text.toString(),
+                    phone = phone_edit_text_field.text.toString(),
+                    password = password_edit_text_field.text.toString(),
+                    passwordCheck = password_check_edit_text_field.text.toString()
+                )
+            }
+        }
+    }
+
     /*returns true if the registration was successful*/
     private fun registerUser(registerType : Int){
-        if(!generalUserInfo.email.isNullOrBlank()
-            && !generalUserInfo.nickName.isNullOrBlank()
-            && !generalUserInfo.password.isNullOrBlank()){
+
+            generalUserInfo = GeneralUserInfo(
+                nickName = nickname_edit_text_field.text.toString(),
+                email = email_edit_text_field.text.toString(),
+                phoneNumber = phone_edit_text_field.text.toString(),
+                password = password_edit_text_field.text.toString()
+            )
 
             registerViewModel.setUserInfo(generalUserInfo)
 
@@ -109,6 +193,7 @@ class RegisterUserInfoFragment : BaseFragment() {
 
             registerViewModel.getRegisterStatus().observe(viewLifecycleOwner, Observer {
                 Log.d(TAG, "onActivityCreated: register status = $it")
+
                 if(it == true){
                     registerViewModel.getUserToken().observe(viewLifecycleOwner, Observer {
                             userToken ->
@@ -136,10 +221,6 @@ class RegisterUserInfoFragment : BaseFragment() {
                         Toast.LENGTH_SHORT).show()
                 }
             })
-        }else{
-            //FAIL NO INPUT
-            Toast.makeText(context, getString(R.string.enter_info_msg), Toast.LENGTH_LONG).show()
-        }
     }
 
     private fun redirectToMainActivity(){
@@ -148,65 +229,65 @@ class RegisterUserInfoFragment : BaseFragment() {
         requireActivity().finish()
     }
 
-    private fun setUpUserInfoInputListeners(){
-        email_edit_text_field.addTextChangedListener(
-            afterTextChanged = {
-                generalUserInfo.email = it.toString()
-            }
-        )
+//    private fun setUpUserInfoInputListeners(){
+//        email_edit_text_field.addTextChangedListener(
+//            afterTextChanged = {
+//                generalUserInfo.email = it.toString()
+//            }
+//        )
+//
+//        nickname_edit_text_field.addTextChangedListener(
+//            afterTextChanged = {
+//                generalUserInfo.nickName = it.toString()
+//            }
+//        )
+//
+//        phone_edit_text_field.addTextChangedListener(
+//            afterTextChanged = {
+//                generalUserInfo.phoneNumber = it.toString()
+//            }
+//        )
+//        setUpPasswordInputListener()
+//    }
 
-        nickname_edit_text_field.addTextChangedListener(
-            afterTextChanged = {
-                generalUserInfo.nickName = it.toString()
-            }
-        )
+//    private fun setUpPasswordInputListener(){
+//        password_edit_text_field.setOnFocusChangeListener { v, hasFocus ->
+//            val password = password_edit_text_field.text.toString()
+//            if(!hasFocus && password.isNotEmpty()){
+//                setUpPasswordCheckInputLister(password)
+//                generalUserInfo.password = password
+//                Log.d("REGISTER", registerViewModel.userInfo.toString())
+//            }
+//        }
+//    }
 
-        phone_edit_text_field.addTextChangedListener(
-            afterTextChanged = {
-                generalUserInfo.phoneNumber = it.toString()
-            }
-        )
-        setUpPasswordInputListener()
-    }
+//    private fun setUpPasswordCheckInputLister(password: String) {
+//        password_check_edit_text_field.setOnFocusChangeListener { v, hasFocus ->
+//            if(hasFocus &&
+//                password.isEmpty()
+//            ){
+//                Toast.makeText(context, "사용하실 비밀번호를 먼저 입력해 주세요", Toast.LENGTH_LONG).show()
+//            }else if(hasFocus &&
+//                password.isNotEmpty()
+//            ){
+//                password_check_edit_text_field.addTextChangedListener(
+//                    onTextChanged = {
+//                            pw, _, _, _ -> checkPasswordMatch(password, pw.toString())
+//                        Log.d("REGISTER", pw.toString() + ", " + " Checking against " + password)
+//                    }
+//                )
+//            }
+//        }
+//    }
 
-    private fun setUpPasswordInputListener(){
-        password_edit_text_field.setOnFocusChangeListener { v, hasFocus ->
-            val password = password_edit_text_field.text.toString()
-            if(!hasFocus && password.isNotEmpty()){
-                setUpPasswordCheckInputLister(password)
-                generalUserInfo.password = password
-                Log.d("REGISTER", registerViewModel.userInfo.toString())
-            }
-        }
-    }
-
-    private fun setUpPasswordCheckInputLister(password: String) {
-        password_check_edit_text_field.setOnFocusChangeListener { v, hasFocus ->
-            if(hasFocus &&
-                password.isEmpty()
-            ){
-                Toast.makeText(context, "사용하실 비밀번호를 먼저 입력해 주세요", Toast.LENGTH_LONG).show()
-            }else if(hasFocus &&
-                password.isNotEmpty()
-            ){
-                password_check_edit_text_field.addTextChangedListener(
-                    onTextChanged = {
-                            pw, _, _, _ -> checkPasswordMatch(password, pw.toString())
-                        Log.d("REGISTER", pw.toString() + ", " + " Checking against " + password)
-                    }
-                )
-            }
-        }
-    }
-
-    private fun checkPasswordMatch(password : String, checkPassword : String){
-        if(password != checkPassword){
-            tv_register_password_not_match.visibility = View.VISIBLE
-        }else{
-            tv_register_password_not_match.text = "비밀번호가 일치합니다."
-            tv_register_password_not_match.setTextColor(resources.getColor(R.color.petHotelSecondary))
-        }
-    }
+//    private fun checkPasswordMatch(password : String, checkPassword : String){
+//        if(password != checkPassword){
+//            tv_register_password_not_match.visibility = View.VISIBLE
+//        }else{
+//            tv_register_password_not_match.text = "비밀번호가 일치합니다."
+//            tv_register_password_not_match.setTextColor(resources.getColor(R.color.petHotelSecondary))
+//        }
+//    }
 
 
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
