@@ -7,11 +7,11 @@
         android:title="장소"
         android:icon="@drawable/ic_pet_hotel"/>
 
-    <item
-        android:id="@+id/reservation"
-        android:title="예약"
-        android:icon="@drawable/ic_event_note_black_24dp"
-        />
+<!--    <item-->
+<!--        android:id="@+id/reservation"-->
+<!--        android:title="예약"-->
+<!--        android:icon="@drawable/ic_event_note_black_24dp"-->
+<!--        />-->
 
     <item
         android:id="@+id/monitor"

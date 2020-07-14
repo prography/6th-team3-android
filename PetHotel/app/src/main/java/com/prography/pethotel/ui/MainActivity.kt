@@ -26,7 +26,7 @@ private const val TAG = "MainActivity"
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mainLayout : LinearLayout
+//    private lateinit var mainLayout : LinearLayout
     private lateinit var placeInfoViewModel: PlaceInfoViewModel
     private lateinit var loginStateViewModel: LoginStateViewModel
 
@@ -49,17 +49,17 @@ class MainActivity : AppCompatActivity() {
             toast.show()
         }
 
-        mainLayout = main_linear_container
+//        mainLayout = main_linear_container
 
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
 
-        setSupportActionBar(main_toolbar)
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(false)
-            setDisplayShowTitleEnabled(false)
-        }
+//        setSupportActionBar(main_toolbar)
+//        supportActionBar?.apply {
+//            setDisplayHomeAsUpEnabled(false)
+//            setDisplayShowTitleEnabled(false)
+//        }
 
         placeInfoViewModel = ViewModelProviders.of(this).get(PlaceInfoViewModel::class.java)
         placeInfoViewModel.getHotelLists()
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
         val navGraphIds = listOf(
             R.navigation.places,
-            R.navigation.reservation,
+//            R.navigation.reservation,
             R.navigation.monitor,
             R.navigation.my_page
         )
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
         // Whenever the selected controller changes, setup the action bar.
         controller.observe(this, Observer { navController ->
-            setupActionBarWithNavController(navController)
+//            setupActionBarWithNavController(navController)
         })
         currentNavController = controller
     }

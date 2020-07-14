@@ -22,6 +22,7 @@ import com.prography.pethotel.R
 import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.models.HotelReview
 import com.prography.pethotel.ui.places.util.GenericRecyclerViewAdapter
+import com.prography.pethotel.ui.reservation.ReservationActivity
 import com.prography.pethotel.utils.*
 import kotlinx.android.synthetic.main.floating_menu.*
 import kotlinx.android.synthetic.main.hotel_price_layout.*
@@ -202,7 +203,7 @@ class PlaceInfoDetailsFragment : Fragment() {
 
     private fun handleNullTimeStrings(time : String?) : String{
         return if(time.isNullOrEmpty()){
-            "미정"
+            "변동 가능"
         }else{
             time
         }
@@ -210,7 +211,7 @@ class PlaceInfoDetailsFragment : Fragment() {
 
     private fun convertGramToKilogram(weight : Int) : String{
         if(weight == 0){
-            return "변동 가능"
+            return "없음"
         }
         return (weight / 1000.00f).toString()
     }
@@ -228,7 +229,12 @@ class PlaceInfoDetailsFragment : Fragment() {
             floatingActionsMenu.collapse()
         }
 
-        action_reserve_now.setOnClickListener { floatingActionsMenu.collapse() }
+        /* 해당 호텔 정보를 갖고 예약 화면으로 넘어간다 */
+        action_reserve_now.setOnClickListener {
+            val intent = Intent(requireActivity(), ReservationActivity::class.java)
+            requireActivity().startActivity(intent)
+            floatingActionsMenu.collapse()
+        }
 
         action_save_like.setOnClickListener { floatingActionsMenu.collapse() }
 

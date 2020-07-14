@@ -26,20 +26,20 @@ class MonitorFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val mainToolbarTitle = requireActivity().findViewById<TextView>(R.id.main_toolbar_title)
-        if(mainToolbarTitle.visibility == View.GONE){
-            mainToolbarTitle.visibility = View.VISIBLE
-        }
+//        val mainToolbarTitle = requireActivity().findViewById<TextView>(R.id.main_toolbar_title)
+//        if(mainToolbarTitle.visibility == View.GONE){
+//            mainToolbarTitle.visibility = View.VISIBLE
+//        }
 
 
-        photoAdapter = PhotoAdapter(requireContext(), DummyData.mediaList)
-
-        monitor_view_pager.apply {
-            setPadding(40, 0, 40, 0)
-            clipToPadding = false
-            pageMargin = 25
-            adapter = photoAdapter
-        }
+//        photoAdapter = PhotoAdapter(requireContext(), DummyData.mediaList)
+//
+//        monitor_view_pager.apply {
+//            setPadding(40, 0, 40, 0)
+//            clipToPadding = false
+//            pageMargin = 25
+//            adapter = photoAdapter
+//        }
     }
 
 }

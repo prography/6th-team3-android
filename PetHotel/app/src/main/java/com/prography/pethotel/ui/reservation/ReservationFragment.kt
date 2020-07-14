@@ -30,11 +30,6 @@ class ReservationFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val mainToolbarTitle = requireActivity().findViewById<TextView>(R.id.main_toolbar_title)
-        if(mainToolbarTitle.visibility == View.GONE){
-            mainToolbarTitle.visibility = View.VISIBLE
-        }
-
         dateTimeViewModel = ViewModelProviders.of(requireActivity()).get(DateTimeViewModel::class.java)
 
         if(dateTimeViewModel.dateTime.value == null){
@@ -81,7 +76,6 @@ class ReservationFragment : Fragment() {
             tv_hotel_exit_time.text = it.exitTime
         })
     }
-
 
 
 }

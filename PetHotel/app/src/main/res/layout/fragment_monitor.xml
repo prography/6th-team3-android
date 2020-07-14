@@ -4,57 +4,41 @@
 <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:scrollbars="none"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
-<LinearLayout
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/padding_large_16dp"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     tools:context=".ui.monitor.MonitorFragment">
 
+<!--    <androidx.constraintlayout.widget.Guideline-->
+<!--        android:id="@+id/gl_title"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintGuide_percent=".15"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
+
     <TextView
-        android:id="@+id/photo_video_title"
-        android:text="사진 및 동영상"
         style="@style/phTitle"
-        android:layout_marginBottom="@dimen/margin_1x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <!-- 사진 및 동영상을 admin 에서 받아온다.  -->
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/monitor_view_pager"
-        android:layout_width="wrap_content"
-        android:layout_height="308dp"/>
-
-
-    <TextView
-    android:id="@+id/checklist_title"
-    android:layout_marginTop="@dimen/margin_2x"
-    android:text="체크리스트"
-    style="@style/phTitle"
-    android:layout_marginBottom="@dimen/margin_1x"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
-
-    <!--    체크리스트를 띄워서 admin 과 연결한다. -->
-    <include layout="@layout/monitor_checklist_layout"/>
-
-    <TextView
-        android:id="@+id/admin_msg_title"
-        android:text="메시지"
+        android:lineSpacingMultiplier="1.2"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/margin_2x"
-        android:layout_marginBottom="@dimen/margin_1x"
-        style="@style/phTitle"
+        android:layout_marginStart="@dimen/margin_1x"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingTop="@dimen/default_padding_8dp"
+        android:paddingBottom="@dimen/padding_large_16dp"
+        android:id="@+id/label_monitor_title"
+        android:text="마이펫 모니터링\n잘 지내는지 확인해보세요."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-<!--   메시지 박스를 띄워준다. -->
-    <include layout="@layout/monitor_admin_msg_layout"/>
 
-</LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

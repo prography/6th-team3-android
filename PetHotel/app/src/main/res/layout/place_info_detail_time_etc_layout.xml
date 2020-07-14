@@ -85,7 +85,9 @@
         android:text=" 호텔가격"
         style="@style/phTitle" />
 
-        <include layout="@layout/hotel_price_layout"/>
+    <include layout="@layout/hotel_price_layout"/>
+
+    <include layout="@layout/new_hotel_price_layout"/>
 
 <!--    <TextView-->
 <!--        android:id="@+id/tv_week_price"-->

@@ -51,8 +51,8 @@ class PlaceInfoFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
 
-        val mainToolbarTitle = requireActivity().findViewById<TextView>(R.id.main_toolbar_title)
-        mainToolbarTitle.visibility = View.GONE
+//        val mainToolbarTitle = requireActivity().findViewById<TextView>(R.id.main_toolbar_title)
+//        mainToolbarTitle.visibility = View.GONE
 
 
         //TODO 메서드로 분리하기
@@ -66,14 +66,14 @@ class PlaceInfoFragment : Fragment() {
             addFragment(NearPlaceFragment.newInstance(), "#가까운")
             addFragment(DiscountPlaceFragment.newInstance(), "#저렴한")
         }
-        val icons = listOf<Int>(
-            R.drawable.ic_popularity,
-            R.drawable.ic_map_position,
-            R.drawable.ic_discount
-        )
-        for(x in 0 .. 2){
-            place_tabs.getTabAt(x)?.setIcon(icons[x])
-        }
+//        val icons = listOf<Int>(
+//            R.drawable.ic_popularity,
+//            R.drawable.ic_map_position,
+//            R.drawable.ic_discount
+//        )
+//        for(x in 0 .. 2){
+//            place_tabs.getTabAt(x)?.setIcon(icons[x])
+//        }
 
         //TODO 메서드로 분리하기
 //        tabFragmentsViewModel.tabFragments.observe(viewLifecycleOwner, Observer {
@@ -88,56 +88,56 @@ class PlaceInfoFragment : Fragment() {
 
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
-        inflater.inflate(R.menu.actionbar_menu, menu)
-        val item = menu.findItem(R.id.menu_search)
-        val searchView = MenuItemCompat.getActionView(item) as SearchView
-        configureSearchView(searchView)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//        menu.clear()
+//        inflater.inflate(R.menu.actionbar_menu, menu)
+//        val item = menu.findItem(R.id.menu_search)
+//        val searchView = MenuItemCompat.getActionView(item) as SearchView
+//        configureSearchView(searchView)
+//    }
 
 
-    private lateinit var searchQuery : String
-
-    private fun configureSearchView(searchView: SearchView){
-        searchView.queryHint = "장소를 검색해 보세요"
-        val query = searchView.query
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-
-
-                //TODO 검색 진행하기
-                //데이터 갖고
-                //검색 화면으로 넘어가기
-
-                val intent = Intent(requireActivity(), PlaceSearchResultActivity::class.java)
-                intent.putExtra("QUERY", query)
-
-                if (!query.isNullOrEmpty()) {
-                    searchQuery = query
-                    startActivityForResult(intent, 1234)
-                }else{
-                    Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_LONG).show()
-                }
-
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                Log.d(TAG, "onQueryTextChange: ${query}")
-                return true
-            }
-        })
-    }
+//    private lateinit var searchQuery : String
+//
+//    private fun configureSearchView(searchView: SearchView){
+//        searchView.queryHint = "장소를 검색해 보세요"
+//        val query = searchView.query
+//
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//
+//
+//                //TODO 검색 진행하기
+//                //데이터 갖고
+//                //검색 화면으로 넘어가기
+//
+//                val intent = Intent(requireActivity(), PlaceSearchResultActivity::class.java)
+//                intent.putExtra("QUERY", query)
+//
+//                if (!query.isNullOrEmpty()) {
+//                    searchQuery = query
+//                    startActivityForResult(intent, 1234)
+//                }else{
+//                    Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_LONG).show()
+//                }
+//
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                Log.d(TAG, "onQueryTextChange: ${query}")
+//                return true
+//            }
+//        })
+//    }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(resultCode == Activity.RESULT_OK && requestCode == 1234){
-            //TODO Query text 갖고 탭에다가 추가하기
-            tabAdapter.addFragment(SearchResultFragment(), searchQuery)
-        }
+//        if(resultCode == Activity.RESULT_OK && requestCode == 1234){
+//            //TODO Query text 갖고 탭에다가 추가하기
+//            tabAdapter.addFragment(SearchResultFragment(), searchQuery)
+//        }
     }
 
     companion object {

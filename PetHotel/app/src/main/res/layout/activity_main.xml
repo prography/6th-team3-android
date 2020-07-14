@@ -12,40 +12,40 @@
     tools:context=".ui.MainActivity"
     >
 
-<com.google.android.material.appbar.MaterialToolbar
-    android:id="@+id/main_toolbar"
-    android:background="@null"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<!--<com.google.android.material.appbar.MaterialToolbar-->
+<!--    android:id="@+id/main_toolbar"-->
+<!--    android:background="@null"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content">-->
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:background="@null"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+<!--    <LinearLayout-->
+<!--        android:orientation="horizontal"-->
+<!--        android:background="@null"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        >-->
 
-        <ImageView
-            android:padding="2dp"
-            android:src="@drawable/ic_pet_paw"
-            android:layout_gravity="center_vertical"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
+<!--        <ImageView-->
+<!--            android:padding="2dp"-->
+<!--            android:src="@drawable/ic_pet_paw"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"/>-->
 
-        <TextView
-            android:id="@+id/main_toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_0_5x"
-            android:fontFamily="@font/kaushan_script_regular"
-            android:paddingEnd="@dimen/padding_small_4dp"
-            android:text="@string/head_my_petmily"
-            android:textColor="@color/petHotelPrimaryDark"
-            android:textStyle="bold" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/main_toolbar_title"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:layout_marginStart="@dimen/margin_0_5x"-->
+<!--            android:fontFamily="@font/kaushan_script_regular"-->
+<!--            android:paddingEnd="@dimen/padding_small_4dp"-->
+<!--            android:text="@string/head_my_petmily"-->
+<!--            android:textColor="@color/petHotelPrimaryDark"-->
+<!--            android:textStyle="bold" />-->
+<!--    </LinearLayout>-->
 
-</com.google.android.material.appbar.MaterialToolbar>
+<!--</com.google.android.material.appbar.MaterialToolbar>-->
 
 
 

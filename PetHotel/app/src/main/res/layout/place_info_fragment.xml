@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<LinearLayout android:layout_height="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_title"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        style="@style/phTitle"
+        android:lineSpacingMultiplier="1.2"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/margin_2x"
+        android:layout_marginBottom="@dimen/margin_1x"
+        android:layout_marginStart="@dimen/margin_1x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/gl_title"
+        android:id="@+id/label_place_title"
+        android:text="마이펫에게 딱 맞는 \n애견호텔을 찾아보세요."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_title"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:orientation="vertical">
 
 <com.google.android.material.tabs.TabLayout
     android:id="@+id/place_tabs"
@@ -16,22 +46,21 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_popularity"
             android:text="인기" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_map_position"
             android:text="가까운" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_discount"
             android:text="저렴한" />
     </com.google.android.material.tabs.TabLayout>
 
     <include layout="@layout/places_view_pager_layout"/>
 
 </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
