@@ -1,4 +1,4 @@
-package com.prography.pethotel.ui.authentication.kakao
+package com.prography.pethotel.ui.mypage
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 
 import com.prography.pethotel.R
 import com.prography.pethotel.api.auth.response.PetNumResponse
@@ -21,14 +22,14 @@ import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.ui.authentication.utils.BaseFragment
 import com.prography.pethotel.utils.TAG_PET_DETAIL
 import com.prography.pethotel.utils.USER_TOKEN
-import kotlinx.android.synthetic.main.fragment_kakao_register_pet_info.view.*
+import kotlinx.android.synthetic.main.fragment_register_pet_info.view.*
 import kotlinx.android.synthetic.main.pet_detail_layout.view.*
 import kotlinx.android.synthetic.main.pet_detail_layout.view.btn_erase_pet_card
 
 
-private const val TAG = "KakaoRegisterPetInfoFra"
+private const val TAG = "RegisterPetInfoFragment"
 
-class KakaoRegisterPetInfoFragment : BaseFragment() {
+class RegisterPetInfoFragment : BaseFragment() {
 
     private var numPets : Int = 0
     companion object {
@@ -45,35 +46,27 @@ class KakaoRegisterPetInfoFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_kakao_register_pet_info, container, false)
+        val view =  inflater.inflate(R.layout.fragment_register_pet_info, container, false)
+        view.pet_info_input_layout.addView(createPetInfoInputFieldLayout(container))
 
-        view.kakao_pet_info_input_layout.addView(createPetInfoInputFieldLayout(container))
-
-        view.kakao_btn_add_pet_input_field.setOnClickListener {
-            view.kakao_pet_info_input_layout.addView(createPetInfoInputFieldLayout(container))
+        view.btn_add_pet_input_field.setOnClickListener {
+            numPets += 1;
+            view.pet_info_input_layout.addView(createPetInfoInputFieldLayout(container))
         }
 
-        view.kakao_btn_register_full_info_done.setOnClickListener{
-
+        view.btn_register_full_info_done.setOnClickListener{
             registerPetInfoToUser(petList)
 
             registerViewModel.getRegisterPetResponse().observe(viewLifecycleOwner, Observer {
                 if(it.status == "success"){
-                    val intent = Intent(context, MainActivity::class.java)
-                    startActivity(intent)
-                    requireActivity().finish()
+                    Toast.makeText(requireContext(), "펫 등록 성공!", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_registerPetInfoFragment2_to_myPageFragment)
                 }else{
-                    Toast.makeText(requireContext(), "펫 등록 실패", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "펫 등록 실패!", Toast.LENGTH_SHORT).show()
                 }
             })
         }
 
-        // 건너뛰기 버튼 클릭 시 필드 비어있어도 그냥 메인 화면으로 넘어가기
-        view.kakao_btn_skip_pet_register.setOnClickListener {
-            val intent = Intent(context, MainActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
-        }
         return view
     }
 
@@ -86,12 +79,9 @@ class KakaoRegisterPetInfoFragment : BaseFragment() {
 
     /* pet 카드를 하나 증가시킨다. 타이틀을 +1하고, 해당 뷰에 클릭 리스너를 달아준다. */
     private fun createPetInfoInputFieldLayout(container : ViewGroup?) : View{
-        ++numPets
-
-        val view =
-            LayoutInflater.from(context).inflate(R.layout.pet_detail_layout, container, false)
+        numPets += 1
+        val view = LayoutInflater.from(context).inflate(R.layout.pet_detail_layout, container, false)
         view.tag = LAYOUT_ID_ + numPets
-        view.tv_pet_card_title.text = getString(R.string.pet_no, numPets)
         setOnClickListenerOnPetCard(view)
         return view
     }
@@ -109,8 +99,8 @@ class KakaoRegisterPetInfoFragment : BaseFragment() {
 
                 /*필드 중 하나라도 비어있으면 정보 입력 하세요 토스트 */
                 if(name.isEmpty() ||
-                    num.isEmpty() ||
-                    birthYear.isEmpty()){
+                        num.isEmpty() ||
+                        birthYear.isEmpty()){
                     Toast.makeText(requireContext(), getString(R.string.enter_info_msg), Toast.LENGTH_SHORT).show()
                 }
                 else {
@@ -132,7 +122,7 @@ class KakaoRegisterPetInfoFragment : BaseFragment() {
                             Toast.makeText(requireContext(), "환영해요 ${name}!❤", Toast.LENGTH_SHORT)
                                 .show()
 
-                            /* 동물등록번호 확인이 실패하면 토스트 */
+                        /* 동물등록번호 확인이 실패하면 토스트 */
                         }else{
                             Toast.makeText(
                                 requireContext(),
@@ -144,6 +134,15 @@ class KakaoRegisterPetInfoFragment : BaseFragment() {
                 }
             }
 
+//            btn_upload_pet_image.setOnClickListener {
+//                Log.d(TAG_PHOTO, "${this.tag}")
+//                getAlbum(view= this)
+//            }
+//
+//            btn_take_pet_photo.setOnClickListener {
+//                Log.d(TAG_PHOTO, "${this.tag}")
+//                takePhoto(view= this)
+//            }
 
             /*유저가 펫카드를 지우는 경우의 메서드.
             * 뷰그룹에서 카드를 remove 하고,
@@ -151,19 +150,12 @@ class KakaoRegisterPetInfoFragment : BaseFragment() {
             * 유저 모델에서도 지워진 펫에대한 업데이트를 진행한다.
             */
             btn_erase_pet_card.setOnClickListener {
+                numPets -= 1
                 val viewGroup = view.parent as ViewGroup
                 viewGroup.removeView(view)
-                --numPets
-                /* pet 이 하나 감소한 상태이므로, 펫 마리수를
-                인덱스로 사용할 수 있다.*/
-                petList.removeAt(numPets)
                 /* pet list 에 대한 내용을 유저에게 업데이트 */
                 registerViewModel.setPetInfoToUser(petList)
 
-                for(x in 1 .. numPets) {
-                    val view = viewGroup.findViewWithTag<LinearLayout>(LAYOUT_ID_ + x)
-                    view?.tv_pet_card_title?.text = getString(R.string.pet_no, numPets)
-                }
             }
         }
     }
@@ -193,7 +185,34 @@ class KakaoRegisterPetInfoFragment : BaseFragment() {
                 registerViewModel.registerPetToUser(userToken = token, userId = it.id, petList = petList)
             }
         })
-
     }
+
+    //Returns True if the number is registered
+
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
+//            myView = pet_info_input_layout.findViewWithTag<LinearLayout>(myViewTag)
+//            (myView as LinearLayout?)?.img_register_pet_image?.setImageURI(
+//                Uri.parse(
+//                    currentPhotoPath
+//                )
+//            )
+//
+//        } else if (requestCode == REQUEST_TAKE_ALBUM && resultCode == Activity.RESULT_OK) {
+//            myView = pet_info_input_layout.findViewWithTag<LinearLayout>(myViewTag)
+//            if (data != null) {
+//                currentPhotoPath = data.data.toString()
+//
+//                (myView as LinearLayout?)?.img_register_pet_image?.let {
+//                    Glide.with(requireContext())
+//                        .load(Uri.parse(currentPhotoPath))
+//                        .into(it)
+//                }
+//            }
+//        }
+//    }
 
 }

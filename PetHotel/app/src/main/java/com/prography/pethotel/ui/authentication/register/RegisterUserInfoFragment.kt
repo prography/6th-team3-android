@@ -71,10 +71,8 @@ class RegisterUserInfoFragment : BaseFragment() {
         setListenersToFields()
 
         /*펫 정보 입력하는 버튼 작동할때까지 press 안되게 하기 */
-        btn_register_pet_info.isEnabled = false
-//        btn_register_pet_info.setOnClickListener {
-//            registerUser(ENTER_PET)
-//        }
+//        btn_register_pet_info.isEnabled = false
+
 
 
         registerViewModel.registerFormState.observe(viewLifecycleOwner, Observer {
@@ -95,7 +93,7 @@ class RegisterUserInfoFragment : BaseFragment() {
         })
 
         btn_register_complete.setOnClickListener {
-           registerUser(NO_PET)
+           registerUser()
         }
 
         //이미회원이신가요? 로그인하기 클릭하면 넘어가는 로직
@@ -178,7 +176,7 @@ class RegisterUserInfoFragment : BaseFragment() {
     }
 
     /*returns true if the registration was successful*/
-    private fun registerUser(registerType : Int){
+    private fun registerUser(){
 
             generalUserInfo = GeneralUserInfo(
                 nickName = nickname_edit_text_field.text.toString(),
@@ -206,14 +204,7 @@ class RegisterUserInfoFragment : BaseFragment() {
                         Log.d(TAG, "onActivityCreated: $e")
                     })
                     //different redirection based on register type
-                    when(registerType){
-                        NO_PET -> {
-                            redirectToMainActivity()
-                        }
-                        ENTER_PET -> {
-                            findNavController().navigate(R.id.action_registerUserInfoFragment_to_registerPetInfoFragment)
-                        }
-                    }
+                    redirectToMainActivity()
                 }else{
                     //FAIL REGISTRATION
                     Toast.makeText(requireContext(),

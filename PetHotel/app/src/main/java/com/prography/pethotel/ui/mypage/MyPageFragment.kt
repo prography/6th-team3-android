@@ -86,6 +86,11 @@ class MyPageFragment : Fragment() {
 //    }
 
     private fun setLoggedInView(view : View){
+
+        view.mypage_register_pet.setOnClickListener {
+            findNavController().navigate(R.id.action_myPageFragment_to_registerPetInfoFragment2)
+        }
+
         view.mypage_edit_user_pet_info.setOnClickListener {
             //내 정보 수정 페이지로 이동한다.
 //            findNavController().navigate(R.id.action_myPageFragment_to_userInfoEditFragment)

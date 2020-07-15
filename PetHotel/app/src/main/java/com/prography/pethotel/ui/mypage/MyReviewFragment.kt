@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prography.pethotel.R
-import com.prography.pethotel.models.HotelReview
+import com.prography.pethotel.ui.mypage.adapters.MyReviewAdapter
 import com.prography.pethotel.utils.DummyData
 import kotlinx.android.synthetic.main.my_page_review_fragment.*
 
@@ -29,7 +29,11 @@ class MyReviewFragment : Fragment(){
         super.onActivityCreated(savedInstanceState)
 
         //실제 리뷰로 바꾸기
-        myReviewAdapter = MyReviewAdapter(requireContext(), DummyData.hotelReviews)
+        myReviewAdapter =
+            MyReviewAdapter(
+                requireContext(),
+                DummyData.hotelReviews
+            )
 
         rv_my_review.apply {
             adapter = myReviewAdapter

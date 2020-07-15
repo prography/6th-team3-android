@@ -92,6 +92,7 @@ object RegisterRepository{
                     userToken, registerPetBody
                 )
                 _registerPetResponse.value = response
+                Log.d(TAG, "registerPetInfo: $response")
             }
         }catch (e : Exception){
             Log.d(TAG, "registerPetInfo: ${e.printStackTrace()}")

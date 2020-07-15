@@ -301,15 +301,15 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_register_pet_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="반려견 등록하기"
-            android:layout_marginEnd="@dimen/margin_2x"
-            android:layout_marginStart="@dimen/margin_2x"
-            />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btn_register_pet_info"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:text="반려견 등록하기"-->
+<!--            android:layout_marginEnd="@dimen/margin_2x"-->
+<!--            android:layout_marginStart="@dimen/margin_2x"-->
+<!--            />-->
 
 
         <com.google.android.material.button.MaterialButton

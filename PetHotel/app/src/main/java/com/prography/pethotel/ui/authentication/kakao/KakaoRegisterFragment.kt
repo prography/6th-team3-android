@@ -122,7 +122,7 @@ class KakaoRegisterFragment : Fragment() {
 
 
         /*펫 정보 입력 버튼은 API 고쳐질때까지 disable */
-        btn_kakao_register_pet_info.isEnabled = false
+//        btn_kakao_register_pet_info.isEnabled = false
         //TODO 펫 정보 입력하는거 고치기
     }
 

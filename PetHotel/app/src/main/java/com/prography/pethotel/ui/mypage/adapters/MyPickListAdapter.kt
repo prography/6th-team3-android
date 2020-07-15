@@ -1,4 +1,4 @@
-package com.prography.pethotel.ui.mypage
+package com.prography.pethotel.ui.mypage.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -17,13 +17,17 @@ import kotlinx.android.synthetic.main.place_info_view_holder.view.*
 class MyPickListAdapter (
     val context: Context,
     private val hotelList : ArrayList<HotelData>
-    ) : ListAdapter<HotelData, MyPickListAdapter.MyPickListViewHolder>(HotelDiffUtilCallback()){
+    ) : ListAdapter<HotelData, MyPickListAdapter.MyPickListViewHolder>(
+    HotelDiffUtilCallback()
+){
 
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPickListViewHolder {
             val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder, parent, false)
 
-            return MyPickListViewHolder(view)
+            return MyPickListViewHolder(
+                view
+            )
         }
 
         override fun getItemCount(): Int {

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prography.pethotel.R
+import com.prography.pethotel.ui.mypage.adapters.MyPickListAdapter
 import com.prography.pethotel.utils.DummyData
 import kotlinx.android.synthetic.main.my_page_my_pick_fragment.*
 
@@ -26,7 +27,11 @@ class MyPickFragment : Fragment() {
 
 
         // TODO 더미 데이터 실제 데이터로 바꾸기
-        val myPickListAdapter = MyPickListAdapter(requireContext(), DummyData.hotelDummyList)
+        val myPickListAdapter =
+            MyPickListAdapter(
+                requireContext(),
+                DummyData.hotelDummyList
+            )
         rv_my_pick.apply {
             adapter = myPickListAdapter
             setHasFixedSize(true)

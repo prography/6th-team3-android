@@ -17,26 +17,9 @@
         android:label="register_user_info_fragment"
         tools:layout="@layout/register_user_info_fragment" >
         <action
-            android:id="@+id/action_registerUserInfoFragment_to_registerAuthPhoneFragment"
-            app:destination="@id/registerAuthPhoneFragment"
-            app:enterAnim="@anim/fragment_open_enter" />
-        <action
-            android:id="@+id/action_registerUserInfoFragment_to_registerPetInfoFragment"
-            app:destination="@id/registerPetInfoFragment"
-            app:enterAnim="@anim/fragment_open_enter" />
-        <action
             android:id="@+id/action_registerUserInfoFragment_to_loginRegisterFragment"
             app:destination="@id/loginRegisterFragment"
             app:enterAnim="@anim/nav_default_pop_exit_anim" />
-    </fragment>
-    <fragment
-        android:id="@+id/registerAuthPhoneFragment"
-        android:name="com.prography.pethotel.ui.authentication.register.RegisterAuthPhoneFragment"
-        android:label="RegisterAuthPhoneFragment" >
-        <action
-            android:id="@+id/action_registerAuthPhoneFragment_to_registerPetInfoFragment"
-            app:destination="@id/registerPetInfoFragment"
-            app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/loginRegisterFragment"
@@ -48,10 +31,5 @@
             app:destination="@id/registerUserInfoFragment"
             app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
-    <fragment
-        android:id="@+id/registerPetInfoFragment"
-        android:name="com.prography.pethotel.ui.authentication.register.RegisterPetInfoFragment"
-        android:label="fragment_register_pet_info"
-        tools:layout="@layout/fragment_register_pet_info" />
 
 </navigation>

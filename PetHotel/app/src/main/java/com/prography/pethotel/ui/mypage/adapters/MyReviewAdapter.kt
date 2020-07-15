@@ -1,4 +1,4 @@
-package com.prography.pethotel.ui.mypage
+package com.prography.pethotel.ui.mypage.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -14,7 +14,9 @@ import kotlinx.android.synthetic.main.hotel_review_view_holder.view.*
 class MyReviewAdapter(
     private val context: Context,
     private val hotelReviewList : ArrayList<HotelReview>
-) : ListAdapter<HotelReview, MyReviewAdapter.MyReviewViewHolder>(MyReviewDiffUtilCallback()){
+) : ListAdapter<HotelReview, MyReviewAdapter.MyReviewViewHolder>(
+    MyReviewDiffUtilCallback()
+){
 
 
     override fun getItemCount(): Int {
@@ -23,7 +25,9 @@ class MyReviewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyReviewViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.hotel_review_view_holder, parent, false)
-        return MyReviewViewHolder(view)
+        return MyReviewViewHolder(
+            view
+        )
     }
 
     override fun onBindViewHolder(holder: MyReviewViewHolder, position: Int) {
