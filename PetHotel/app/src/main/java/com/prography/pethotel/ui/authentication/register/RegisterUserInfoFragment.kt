@@ -70,11 +70,6 @@ class RegisterUserInfoFragment : BaseFragment() {
         /* 정확한 정보 입력을 감지한다. */
         setListenersToFields()
 
-        /*펫 정보 입력하는 버튼 작동할때까지 press 안되게 하기 */
-//        btn_register_pet_info.isEnabled = false
-
-
-
         registerViewModel.registerFormState.observe(viewLifecycleOwner, Observer {
             btn_register_complete.isEnabled = it.isDataValid
 
@@ -92,8 +87,14 @@ class RegisterUserInfoFragment : BaseFragment() {
             }
         })
 
+        /*회원가입 완료 클릭시, 어느 한 필드라도 비어있으면 토스트를 띄운다.
+        * 만약 모든 필드가 기입되어 있으면 서버로 회원가입을 진행한다. */
         btn_register_complete.setOnClickListener {
-           registerUser()
+            if(isInputFieldNullOrBlank()){
+                Toast.makeText(requireContext(), "정보를 올바르게 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }else{
+                registerUser()
+            }
         }
 
         //이미회원이신가요? 로그인하기 클릭하면 넘어가는 로직
@@ -101,11 +102,17 @@ class RegisterUserInfoFragment : BaseFragment() {
             findNavController().navigate(R.id.action_registerUserInfoFragment_to_loginRegisterFragment)
         }
 
-//        setUpUserInfoInputListeners()
+    }
+
+    private fun isInputFieldNullOrBlank() : Boolean{
+        return (email_edit_text_field.text.isNullOrBlank() ||
+                nickname_edit_text_field.text.isNullOrBlank() ||
+                password_edit_text_field.text.isNullOrBlank() ||
+                password_check_edit_text_field.text.isNullOrBlank() ||
+                phone_edit_text_field.text.isNullOrBlank())
     }
 
     private fun observeUserInfo(){
-
         registerViewModel.userInfo.observe(viewLifecycleOwner, Observer {
             Log.d("REGISTER", "register viewmodel called $it")
             email_edit_text_field.setText(it.email)
@@ -175,9 +182,7 @@ class RegisterUserInfoFragment : BaseFragment() {
         }
     }
 
-    /*returns true if the registration was successful*/
     private fun registerUser(){
-
             generalUserInfo = GeneralUserInfo(
                 nickName = nickname_edit_text_field.text.toString(),
                 email = email_edit_text_field.text.toString(),
@@ -193,6 +198,7 @@ class RegisterUserInfoFragment : BaseFragment() {
                 Log.d(TAG, "onActivityCreated: register status = $it")
 
                 if(it == true){
+                    Log.d(TAG, "registerUser: 회원가입 성공")
                     registerViewModel.getUserToken().observe(viewLifecycleOwner, Observer {
                             userToken ->
                         Log.d(TAG, "onActivityCreated: $userToken")
@@ -207,9 +213,12 @@ class RegisterUserInfoFragment : BaseFragment() {
                     redirectToMainActivity()
                 }else{
                     //FAIL REGISTRATION
+                    Log.d(TAG, "registerUser: 회원가입 실패")
                     Toast.makeText(requireContext(),
                         getString(R.string.registration_fail_msg),
                         Toast.LENGTH_SHORT).show()
+                    /* TODO toast 말고 다른 메커니즘으로 변경하기
+                    *   성공시에도 오류 토스트가 뜨는 희안한 상황...  */
                 }
             })
     }
@@ -220,65 +229,6 @@ class RegisterUserInfoFragment : BaseFragment() {
         requireActivity().finish()
     }
 
-//    private fun setUpUserInfoInputListeners(){
-//        email_edit_text_field.addTextChangedListener(
-//            afterTextChanged = {
-//                generalUserInfo.email = it.toString()
-//            }
-//        )
-//
-//        nickname_edit_text_field.addTextChangedListener(
-//            afterTextChanged = {
-//                generalUserInfo.nickName = it.toString()
-//            }
-//        )
-//
-//        phone_edit_text_field.addTextChangedListener(
-//            afterTextChanged = {
-//                generalUserInfo.phoneNumber = it.toString()
-//            }
-//        )
-//        setUpPasswordInputListener()
-//    }
-
-//    private fun setUpPasswordInputListener(){
-//        password_edit_text_field.setOnFocusChangeListener { v, hasFocus ->
-//            val password = password_edit_text_field.text.toString()
-//            if(!hasFocus && password.isNotEmpty()){
-//                setUpPasswordCheckInputLister(password)
-//                generalUserInfo.password = password
-//                Log.d("REGISTER", registerViewModel.userInfo.toString())
-//            }
-//        }
-//    }
-
-//    private fun setUpPasswordCheckInputLister(password: String) {
-//        password_check_edit_text_field.setOnFocusChangeListener { v, hasFocus ->
-//            if(hasFocus &&
-//                password.isEmpty()
-//            ){
-//                Toast.makeText(context, "사용하실 비밀번호를 먼저 입력해 주세요", Toast.LENGTH_LONG).show()
-//            }else if(hasFocus &&
-//                password.isNotEmpty()
-//            ){
-//                password_check_edit_text_field.addTextChangedListener(
-//                    onTextChanged = {
-//                            pw, _, _, _ -> checkPasswordMatch(password, pw.toString())
-//                        Log.d("REGISTER", pw.toString() + ", " + " Checking against " + password)
-//                    }
-//                )
-//            }
-//        }
-//    }
-
-//    private fun checkPasswordMatch(password : String, checkPassword : String){
-//        if(password != checkPassword){
-//            tv_register_password_not_match.visibility = View.VISIBLE
-//        }else{
-//            tv_register_password_not_match.text = "비밀번호가 일치합니다."
-//            tv_register_password_not_match.setTextColor(resources.getColor(R.color.petHotelSecondary))
-//        }
-//    }
 
 
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

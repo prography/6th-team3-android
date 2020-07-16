@@ -140,7 +140,7 @@
     <string name="add_search_result_complete">해시태그 추가 완료!</string>
     <string name="no_review_yet">아직 후기가 없습니다!</string>
     <string name="user_average_rating"><![CDATA[ %d / 5.0 ]]></string>
-    <string name="registration_fail_msg">회원가입 실패!ㅠㅠ</string>
+    <string name="registration_fail_msg">해당 닉네임 혹은 이메일을 사용하실 수 없습니다!</string>
     <string name="enter_info_msg">정보를 입력해 주세요.</string>
     <string name="animal_num_check_fail_msg">동물등록번호 확인 실패</string>
     <string name="size_criteria_string">소형견 기준 ~%s kg\n중형견 기준 ~%s kg\n대형견 기준 ~%s kg</string>

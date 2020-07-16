@@ -4,24 +4,33 @@ import com.prography.pethotel.api.auth.request.KakaoRegisterBody
 import com.prography.pethotel.api.auth.request.LoginInfoBody
 import com.prography.pethotel.api.auth.request.RegisterPetBody
 import com.prography.pethotel.api.auth.request.RegisterUserInfo
-import com.prography.pethotel.api.auth.response.*
+import com.prography.pethotel.api.auth.response.GeneralLoginResponse
+import com.prography.pethotel.api.auth.response.PetNumResponse
+import com.prography.pethotel.api.auth.response.PostPetResponse
+import com.prography.pethotel.api.auth.response.RegistrationResponse
 import com.prography.pethotel.api.main.response.UserInfoResponse
 import com.prography.pethotel.utils.ANIMAL_NUM_BASE_URL
 import com.prography.pethotel.utils.BASE_URL
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.*
-import retrofit2.http.Body
-import retrofit2.http.Header
 
 
 //GET https://api.mypetmily.net/hotels
+
+private val authApiInterceptor = HttpLoggingInterceptor().apply {
+    level = HttpLoggingInterceptor.Level.BODY
+}
+private val okClient = OkHttpClient.Builder().addInterceptor(authApiInterceptor).build()
+
 private val authRetrofit
         = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
+    .client(okClient)
     .baseUrl(BASE_URL)
     .build()
 
@@ -48,7 +57,7 @@ interface  AuthApiService{
     suspend fun generalLogin(@Body loginInfo : LoginInfoBody) : GeneralLoginResponse
 
     @POST("user")
-    suspend fun generalRegister(@Body registerUserInfo : RegisterUserInfo) : RegistrationResponse
+    fun generalRegister(@Body registerUserInfo : RegisterUserInfo) : Call<RegistrationResponse>
 
     @GET("user")
     suspend fun getUser(@Header("Authorization") token : String) : UserInfoResponse //GET 마이페이지

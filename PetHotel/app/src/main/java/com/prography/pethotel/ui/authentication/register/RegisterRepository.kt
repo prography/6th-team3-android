@@ -3,6 +3,7 @@ package com.prography.pethotel.ui.authentication.register
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.kakao.usermgmt.response.model.User
 import com.prography.pethotel.api.auth.PetmilyAuthApi
 import com.prography.pethotel.api.auth.request.*
 import com.prography.pethotel.api.auth.response.PetNumResponse
@@ -113,18 +114,32 @@ object RegisterRepository{
                 )
             )
         Log.d(TAG, "generalRegister: ${generalUserInfo}")
-        try {
-            coroutineScope.launch {
-                val response
-                        = PetmilyAuthApi.authApiRetrofitService.generalRegister(registerInfo)
-                Log.d(TAG, "generalLogin: $response")
-                //결과에 따라서 응답 상태를 다르게 설정한다.
-                _registerStatus.value = response.status == "success"
-                _userToken.value = response.userToken
+
+        val registerCall = PetmilyAuthApi.authApiRetrofitService.generalRegister(registerInfo)
+
+        val callback = object : Callback<RegistrationResponse>{
+            override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+                call.cancel()
+                _registerStatus.value = false
+                _userToken.value = UserToken("")
             }
-        }catch (e : Exception){
-            e.printStackTrace()
+
+            override fun onResponse(
+                call: Call<RegistrationResponse>,
+                response: Response<RegistrationResponse>
+            ) {
+                Log.d(TAG, "onResponse: ${response.body()}")
+                if(response.body() == null || !response.isSuccessful){
+                    _registerStatus.value = false
+                    _userToken.value = UserToken("")
+                }else{
+                    _registerStatus.value = response.body()!!.status == "success"
+                    _userToken.value = response.body()!!.userToken
+                }
+            }
         }
+        registerCall.enqueue(callback)
     }
 
     /*카카오 회원가입. 유저 아이디와 유저 이메일, 전화번호, 프로필 사진을 서버로 전송한다. */
