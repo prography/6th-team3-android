@@ -87,7 +87,7 @@
 
     <include layout="@layout/hotel_price_layout"/>
 
-    <include layout="@layout/new_hotel_price_layout"/>
+    <include layout="@layout/hotel_price_layout_v2"/>
 
 <!--    <TextView-->
 <!--        android:id="@+id/tv_week_price"-->

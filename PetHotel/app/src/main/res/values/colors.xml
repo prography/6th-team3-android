@@ -10,6 +10,7 @@
 
     <color name="defaultBackgroundColor">#14000000</color>
 
+    <color name="petHotelBeige">#DAB393</color>
     <color name="petHotelPrimary">#724926</color>
     <color name="petHotelPrimaryDark">#3A1C02</color>
     <color name="petHotelWhite">#FFFCF9</color>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+        <View
+            android:id="@+id/view_background"
+            android:background="@color/petHotelSecondaryTransparent"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="200dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_card_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_card_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/place_detail_card"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/gl_card_top"
+            app:layout_constraintBottom_toTopOf="@id/gl_card_bottom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/margin_2x"
+            android:layout_marginEnd="@dimen/margin_2x"
+            android:layout_width="0dp"
+            android:layout_height="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/place_detail_name"
+                    style="@style/phTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="애견호텔이름"
+                    app:layout_constraintBottom_toTopOf="@+id/place_detail_address"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                     />
+
+                <TextView
+                    android:id="@+id/place_detail_address"
+                    style="@style/phBody2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="서울시 용산구 후암동 두텁바위로"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/user_average_rating"
+                    app:layout_constraintTop_toBottomOf="@+id/place_detail_name"
+                    />
+
+                <RatingBar
+                    android:id="@+id/user_average_rating"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:rating="4.5"
+                    android:stepSize="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/gl_inner_h"
+                    app:layout_constraintTop_toBottomOf="@+id/place_detail_address"
+                    />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_inner_h"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent=".7" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_inner_v"
+                    app:layout_constraintGuide_percent=".5"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_monitoring_contents"
+                    android:text="모니터링 "
+                    android:gravity="center"
+                    android:drawablePadding="@dimen/padding_small_4dp"
+                    android:drawableStart="@drawable/ic_baseline_tv_24"
+                    app:layout_constraintTop_toBottomOf="@id/gl_inner_h"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/gl_inner_v"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_neuter_needed"
+                    android:text="중성화 "
+                    android:gravity="center"
+                    android:drawableStart="@drawable/ic_neuter"
+                    android:drawablePadding="@dimen/padding_small_4dp"
+                    app:layout_constraintStart_toStartOf="@id/gl_inner_v"
+                    app:layout_constraintTop_toBottomOf="@id/gl_inner_h"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+<!--        호텔 가격 -->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.37" />
+
+        <TextView
+            android:id="@+id/tv_place_detail"
+            style="@style/phBody2"
+            android:lineSpacingMultiplier="1.2"
+            android:padding="@dimen/padding_medium_24dp"
+            tools:text="@string/sample_hotel_description"
+            app:layout_constraintTop_toBottomOf="@id/gl_desc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:maxLines="8"
+            android:ellipsize="end"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/label_price"
+        android:text="이용 가격"
+        style="@style/phTitle"
+        app:layout_constraintTop_toBottomOf="@id/tv_place_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <FrameLayout
+        app:layout_constraintTop_toBottomOf="@id/label_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <include
+            android:id="@+id/no_price_layout"
+            layout="@layout/hotel_price_no_info_layout"
+            android:visibility="gone"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_price"
+            android:padding="@dimen/default_padding_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_price_bottom"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".88"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+        <!--    TODO 리뷰 띄워주는 horizontal recyclerview -->
+        <!--    리뷰 10개 이상이면 더 보기를 클릭하도록 한다. -->
+        <!--    만약 후기가 없으면 이용 후기가 아직 없습니다! 로 뷰홀더를 바꾼다. -->
+
+    <include
+        layout="@layout/floating_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

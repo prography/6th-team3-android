@@ -30,7 +30,7 @@ data class HotelData(
     val name: String,
     val pageLink: String,
     val phoneNumber: String,
-    val prices: List<HotelPrice>, //weekday sunday saturday all
+    val prices: List<HotelPrice>?= emptyList(), //weekday sunday saturday all
     val satCloseTime: String?,
     val satOpenTime: String?,
     val sunCloseTime: String?,

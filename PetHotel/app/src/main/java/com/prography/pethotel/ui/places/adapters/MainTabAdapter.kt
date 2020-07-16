@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.prography.pethotel.ui.places.util.TabFragmentsViewModel
 
 
-class TabAdapter(
+class MainTabAdapter(
     fragmentManager: FragmentManager,
     behavior: Int
 ) : FragmentStatePagerAdapter(
@@ -52,6 +52,6 @@ class TabAdapter(
     }
 
     companion object {
-        private const val TAG = "TabAdapter"
+        private const val TAG = "MainTabAdapter"
     }
 }

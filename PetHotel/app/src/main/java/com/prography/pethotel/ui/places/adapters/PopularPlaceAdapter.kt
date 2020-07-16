@@ -25,7 +25,7 @@ class PopularPlaceAdapter(
 ){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularPlaceViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder_v3, parent, false)
 
         return PopularPlaceViewHolder(
             view
@@ -53,8 +53,10 @@ class PopularPlaceAdapter(
             itemView.place_info_name.text = hotel.name
             itemView.place_info_address.text = hotel.address
             //distance 는 안함
-            if(!hotel.hotelImageLinks.isNullOrEmpty()){
 
+            Log.d(TAG, "bind: 호텔 이미지 존재여부 ${hotel.hotelImageLinks.isNullOrEmpty()} ")
+
+            if(!hotel.hotelImageLinks.isNullOrEmpty()){
                 Glide.with(itemView.context)
                     .load(hotel.hotelImageLinks[0].link)
                     .error(R.drawable.mily_excited)

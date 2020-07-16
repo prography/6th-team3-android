@@ -1,38 +1,24 @@
 package com.prography.pethotel.ui.places
 
-import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.widget.SearchView
-import androidx.core.view.MenuItemCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.tabs.TabLayout
-import com.kakao.auth.authorization.AuthorizationResult
 
 import com.prography.pethotel.R
-import com.prography.pethotel.ui.places.adapters.TabAdapter
-import com.prography.pethotel.ui.places.search.PlaceSearchResultActivity
-import com.prography.pethotel.ui.places.util.TabFragmentsViewModel
-import kotlinx.android.synthetic.main.place_info_fragment.*
-import kotlinx.android.synthetic.main.places_view_pager_layout.*
-import kotlinx.android.synthetic.main.search_custom_tab.*
-import kotlinx.android.synthetic.main.search_custom_tab.view.*
-import kotlinx.android.synthetic.main.search_custom_tab.view.tab_remove_button
+import com.prography.pethotel.ui.places.adapters.MainTabAdapter
+import kotlinx.android.synthetic.main.place_info_fragment.place_tabs
+import kotlinx.android.synthetic.main.place_info_fragment_v2.*
+import kotlinx.android.synthetic.main.places_view_pager_layout.place_view_pager
 
 @Suppress("DEPRECATION")
 class PlaceInfoFragment : Fragment() {
 
     private lateinit var viewModel: PlaceInfoViewModel
 
-    lateinit var tabAdapter : TabAdapter
+    lateinit var tabAdapter : MainTabAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +30,7 @@ class PlaceInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.place_info_fragment, container, false)
+        return inflater.inflate(R.layout.place_info_fragment_v2, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -55,8 +41,13 @@ class PlaceInfoFragment : Fragment() {
 //        mainToolbarTitle.visibility = View.GONE
 
 
+        if(activity is AppCompatActivity){
+            (activity as AppCompatActivity).setSupportActionBar(place_toolbar)
+        }
+        (activity as AppCompatActivity).supportActionBar?.title = ""
+
         //TODO 메서드로 분리하기
-        tabAdapter = TabAdapter(childFragmentManager,
+        tabAdapter = MainTabAdapter(childFragmentManager,
             FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
         )
         place_view_pager.adapter = tabAdapter
@@ -66,14 +57,6 @@ class PlaceInfoFragment : Fragment() {
             addFragment(NearPlaceFragment.newInstance(), "#가까운")
             addFragment(DiscountPlaceFragment.newInstance(), "#저렴한")
         }
-//        val icons = listOf<Int>(
-//            R.drawable.ic_popularity,
-//            R.drawable.ic_map_position,
-//            R.drawable.ic_discount
-//        )
-//        for(x in 0 .. 2){
-//            place_tabs.getTabAt(x)?.setIcon(icons[x])
-//        }
 
         //TODO 메서드로 분리하기
 //        tabFragmentsViewModel.tabFragments.observe(viewLifecycleOwner, Observer {

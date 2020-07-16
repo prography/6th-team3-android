@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/popular_place"
+        android:title="인기"
+        />
+
+    <item
+        android:id="@+id/near_place"
+        android:title="가까운"
+        />
+
+    <item
+        android:id="@+id/cheap_place"
+        android:title="저렴한"
+        />
+
+
+</menu>

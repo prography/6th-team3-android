@@ -92,7 +92,7 @@
 <!--        android:layout_height="wrap_content"/>-->
 
 
-<include layout="@layout/floating_menu"/>
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
