@@ -1,6 +1,7 @@
 package com.prography.pethotel.ui.places
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -21,6 +22,7 @@ import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.api.main.response.HotelPrice
 import com.prography.pethotel.ui.places.adapters.PriceAdapter
 import com.prography.pethotel.ui.reservation.ReservationActivity
+import com.prography.pethotel.utils.RESERVE_HOTEL_INFO_KEY
 import kotlinx.android.synthetic.main.floating_menu.*
 import kotlinx.android.synthetic.main.fragment_place_info_details_v2.*
 
@@ -49,7 +51,7 @@ class PlaceInfoDetailsFragment : Fragment() {
         phoneNumber = hotel.phoneNumber
         hotelWebsite = hotel.pageLink
 
-        /*FAB 초기화 하기 (누르면 여러개 나오는 FAB)*/
+        /* FAB 초기화 하기 (누르면 여러개 나오는 FAB)*/
         initFloatingActionButtonMenu()
 
         /*뷰에 호텔 정보 넣기 */
@@ -57,9 +59,7 @@ class PlaceInfoDetailsFragment : Fragment() {
 
         /*가격, 시간, 무게 관련 정보 리스트에 띄우기 */
         val priceList = hotel.prices ?: emptyList()
-
         Log.d(TAG, "onActivityCreated: $priceList")
-
         if(!priceList.isNullOrEmpty()){
             val priceAdapter = PriceAdapter(requireContext(), priceList as ArrayList<HotelPrice>)
             rv_price.apply {
@@ -70,6 +70,16 @@ class PlaceInfoDetailsFragment : Fragment() {
         }else{
             no_price_layout.visibility = View.VISIBLE
         }
+
+        /*호텔 정보를 예약 화면으로 넘긴다 */
+        action_reserve_now.setOnClickListener {
+            val intent = Intent(requireActivity(), ReservationActivity::class.java)
+            intent.putExtra(RESERVE_HOTEL_INFO_KEY, hotel)
+            requireActivity().startActivity(intent)
+            multiple_actions_menu.collapse()
+        }
+
+        /*리뷰 관련 기능은 일시적으로 커맨트 처리 */
 //        val list = hotel.reviews ?: arrayListOf(EmptyReview(0))
 //        val list = hotel.review ?: DummyData.hotelReviews
 //
@@ -94,6 +104,7 @@ class PlaceInfoDetailsFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun setHotelDataToView(hotel : HotelData){
         place_detail_name.text = hotel.name
         place_detail_address.text = hotel.addressDetail
@@ -115,6 +126,9 @@ class PlaceInfoDetailsFragment : Fragment() {
             tv_neuter_needed.append("필요없음")
         }
         }
+        week_op_time.text = "${hotel.weekOpenTime ?: "변동가능"}\n~\n${hotel.weekCloseTime ?: "변동가능"}"
+        sat_op_time.text = "${hotel.satOpenTime ?: "변동가능"}\n~\n${hotel.satCloseTime ?: "변동가능"}"
+        sun_op_time.text = "${hotel.sunOpenTime ?: "변동가능"}\n~\n${hotel.sunCloseTime ?: "변동가능"}"
     }
 
     private fun initFloatingActionButtonMenu() {
@@ -127,13 +141,6 @@ class PlaceInfoDetailsFragment : Fragment() {
 
         action_make_phone_call.setOnClickListener {
             startPhoneIntent(phoneNumber)
-            floatingActionsMenu.collapse()
-        }
-
-        /* 해당 호텔 정보를 갖고 예약 화면으로 넘어간다 */
-        action_reserve_now.setOnClickListener {
-            val intent = Intent(requireActivity(), ReservationActivity::class.java)
-            requireActivity().startActivity(intent)
             floatingActionsMenu.collapse()
         }
 

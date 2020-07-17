@@ -17,3 +17,5 @@ const val ALL_DAY = "all"
 const val SAT = "saturday"
 const val SUN = "sunday"
 const val WEEK_DAY = "weekday"
+
+const val RESERVE_HOTEL_INFO_KEY = "HOTEL_INFO_KEY"

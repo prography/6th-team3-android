@@ -1,80 +1,156 @@
 package com.prography.pethotel.ui.reservation
 
+import android.app.TimePickerDialog
+import android.app.TimePickerDialog.OnTimeSetListener
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.prography.pethotel.R
-import kotlinx.android.synthetic.main.reservation_date_time_layout.*
-import kotlinx.android.synthetic.main.reservation_main_layout.*
+import kotlinx.android.synthetic.main.fragment_reservation_main_v2.*
 
+
+private const val TAG = "ReservationFragment"
 class ReservationFragment : Fragment() {
 
-    private lateinit var dateTimeViewModel: DateTimeViewModel
+    lateinit var reservationViewModel: ReservationViewModel
+    var checkInDateTime : String? = ""
+    var checkOutDateTime : String? = ""
+
+    var inDate : String ?= ""
+    var outDate : String ?= ""
+    var inTime : String ?= ""
+    var outTime : String ?= ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reservation, container, false)
+        return inflater.inflate(R.layout.fragment_reservation_main_v2, container, false)
     }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        dateTimeViewModel = ViewModelProviders.of(requireActivity()).get(DateTimeViewModel::class.java)
-
-        if(dateTimeViewModel.dateTime.value == null){
-            dateTimeViewModel.initDateTime()
+        /* Activity 가 갖고 있는 뷰 모델을 Fragment 에서 사용한다 */
+        requireActivity().let {
+            //https://thdev.tech/androiddev/2020/07/13/Android-Fragment-ViewModel-Example/ 참고하기
+            reservationViewModel = ViewModelProviders.of(it)[ReservationViewModel::class.java]
         }
 
-        setClickListeners()
-        observeDateTime()
+        /* 호텔 이름을 상단에 띄운다 */
+        val hotelName = reservationViewModel.reservationInfo.value?.hotel?.name
+        if(!hotelName.isNullOrEmpty()){
+            reservation_hotel_name.text = getString(R.string.reservation_hotel_name, hotelName)
+        }else {
+            Log.d(TAG, "onActivityCreated: 예약화면으로 호텔 정보 불러오기 실패")
+        }
 
-        btn_reservation_basic_info_selected_ok.setOnClickListener {
-            findNavController().navigate(R.id.action_reservationFragment_to_reservationDetailFragment)
+        /* 날짜와 시간을 선택한 후 다음 화면으로 넘어간다. */
+        proceed_reservation_from_main.setOnClickListener {
+
+            if(isDateTimeValid(inDate, inTime, outDate, outTime)){
+                setDateTimeToViewModel(inDate, inTime, outDate, outTime)
+
+                findNavController().navigate(R.id.action_reservationFragment_to_reservationDetailFragment)
+            }else {
+                Toast.makeText(requireContext(), "날짜와 시간을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        /*달력에서 날짜를 가져온다 */
+        reservation_calendar.setOnRangeSelectedListener { widget, dates ->
+            Log.d(TAG, "onActivityCreated: $widget, $dates")
+            val checkInDate = dates[0]
+            val ciYear = checkInDate.year
+            val ciMonth = checkInDate.month
+            val ciDay = checkInDate.day
+
+            val checkOutDate = dates[dates.lastIndex]
+            val coYear = checkOutDate.year
+            val coMonth = checkOutDate.month
+            val coDay = checkOutDate.day
+            Log.d(TAG, "onActivityCreated: $checkInDate, $checkOutDate")
+
+            checkin_date.text = "${ciYear}/${ciMonth}/${ciDay}"
+            checkout_date.text = "${coYear}/${coMonth}/${coDay}"
+
+            inDate = "${ciYear}/${ciMonth}/${ciDay}"
+            outDate = "${coYear}/${coMonth}/${coDay}"
+        }
+
+        /* 체크인 시간을 다일로그에서 선택한다. */
+        checkin_time.setOnClickListener {
+            val cldr: Calendar = Calendar.getInstance()
+            val hour: Int = cldr.get(Calendar.HOUR_OF_DAY)
+            val minutes: Int = cldr.get(Calendar.MINUTE)
+            val picker = TimePickerDialog(
+                requireContext(),
+                OnTimeSetListener { view, hourOfDay, minute ->
+                    Log.d(TAG, "onActivityCreated: $view, $hourOfDay, $minute")
+                    val minString : String = if(minute == 0){
+                        minute.toString() + "0"
+                    }else{
+                        minute.toString()
+                    }
+                    checkin_time.text = "${hourOfDay}:${minString}"
+                    inTime = "${hourOfDay}:${minString}"
+                },
+                hour, minutes, true
+            )
+            picker.show()
+        }
+
+        /* 체크아웃 시간을 다일로그에서 선택한다 */
+        checkout_time.setOnClickListener {
+            val cldr: Calendar = Calendar.getInstance()
+            val hour: Int = cldr.get(Calendar.HOUR_OF_DAY)
+            val minutes: Int = cldr.get(Calendar.MINUTE)
+            val picker = TimePickerDialog(
+                requireContext(),
+                OnTimeSetListener { view, hourOfDay, minute ->
+                    Log.d(TAG, "onActivityCreated: $view, $hourOfDay, $minute")
+                    val minString : String = if(minute == 0){
+                        minute.toString() + "0"
+                    }else{
+                        minute.toString()
+                    }
+                    checkout_time.text = "${hourOfDay}:${minString}"
+                    outTime = "${hourOfDay}:${minString}"
+                },
+                hour, minutes, true
+            )
+            picker.show()
         }
 
     }
 
-    private fun setClickListeners(){
-        tv_hotel_enter_date.setOnClickListener{
-            //날짜 선택 다일로그 띄우기,
-            //선택된 날짜로 텍스트 업데이트 하기
-            val enterDatePicker = DatePickerFragment(dateTimeViewModel, true)
-            enterDatePicker.show(parentFragmentManager, "datePicker")
-        }
-        tv_hotel_exit_date.setOnClickListener {
-            val exitDatePicker = DatePickerFragment(dateTimeViewModel, false)
-            exitDatePicker.show(parentFragmentManager, "datePicker")
-        }
-        tv_hotel_enter_time.setOnClickListener {
-            val enterTimePicker = TimePickerFragment(dateTimeViewModel, true)
-            enterTimePicker.show(parentFragmentManager, "timePicker")
-        }
-        tv_hotel_exit_time.setOnClickListener {
-            val exitTimePicker = TimePickerFragment(dateTimeViewModel, false)
-            exitTimePicker.show(parentFragmentManager, "timePicker")
-        }
+    private fun isDateTimeValid(inDate: String?, inTime: String?, outDate: String?, outTime: String?): Boolean {
+        return !inDate.isNullOrEmpty() ||
+                !inTime.isNullOrEmpty() ||
+                !outDate.isNullOrEmpty() ||
+                !outTime.isNullOrEmpty()
     }
 
+    private fun setDateTimeToViewModel(
+        inDate: String?, inTime: String?,
+        outDate: String?, outTime: String?
+    ) {
+        checkInDateTime = "$inDate $inTime"
+        checkOutDateTime = "$outDate $outTime"
 
-    private fun observeDateTime(){
-        dateTimeViewModel.dateTime.observe(requireActivity(), Observer {
-            Log.d("VIEWMODEL", "observing ... ")
-            tv_hotel_enter_date.text = it.enterDate
-            tv_hotel_exit_date.text = it.exitDate
-            tv_hotel_enter_time.text = it.enterTime
-            tv_hotel_exit_time.text = it.exitTime
-        })
+        reservationViewModel.setReservationDateTime(
+            checkInDateTime!!, checkOutDateTime!!
+        )
     }
 
 

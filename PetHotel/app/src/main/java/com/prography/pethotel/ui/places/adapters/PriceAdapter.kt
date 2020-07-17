@@ -39,19 +39,23 @@ class PriceViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     @SuppressLint("SetTextI18n")
     fun bind(data: HotelPrice) {
 
-        itemView.weight.text = "${(data.weight/1000.00)}kg ~ "
-        itemView.price.text = "${data.price} 원"
+        itemView.weight.text = "~ ${(data.weight/1000.00)}kg"
+        itemView.price.text = "${data.price}￦"
 
-        if(!data.day.isNullOrEmpty()){
+        if(data.day != null){
             if(data.day == "all"){
                 itemView.day.text = "평일/주말"
             }else{
-                if(data.day == "weekday"){
-                    itemView.day.text = "평일"
-                }else if(data.day == "saturday"){
-                    itemView.day.text = "토요일"
-                }else if(data.day == "sunday"){
-                    itemView.day.text = "일요일"
+                when (data.day) {
+                    "weekday" -> {
+                        itemView.day.text = "평일"
+                    }
+                    "saturday" -> {
+                        itemView.day.text = "토요일"
+                    }
+                    "sunday" -> {
+                        itemView.day.text = "일요일"
+                    }
                 }
             }
         }

@@ -16,8 +16,8 @@
     <color name="petHotelWhite">#FFFCF9</color>
 
     <color name="petHotelSecondaryDark">#074776</color>
-    <color name="petHotelSecondary">#096FAD</color>
-    <color name="petHotelSecondaryTransparent">#80096FAD</color>
+    <color name="petHotelSecondary">#057EC8</color>
+    <color name="petHotelSecondaryTransparent">#65096FAD</color>
 
     <color name="petHotelOnPrimary">#2D2D2D</color>
     <color name="petHotelOnSurface">#2D2D2D</color>

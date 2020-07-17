@@ -144,6 +144,7 @@
     <string name="enter_info_msg">정보를 입력해 주세요.</string>
     <string name="animal_num_check_fail_msg">동물등록번호 확인 실패</string>
     <string name="size_criteria_string">소형견 기준 ~%s kg\n중형견 기준 ~%s kg\n대형견 기준 ~%s kg</string>
+    <string name="reservation_hotel_name">%s 예약을 진행합니다.</string>
 
 
 </resources>

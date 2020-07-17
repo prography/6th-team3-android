@@ -31,13 +31,13 @@ data class HotelData(
     val pageLink: String,
     val phoneNumber: String,
     val prices: List<HotelPrice>?= emptyList(), //weekday sunday saturday all
-    val satCloseTime: String?,
-    val satOpenTime: String?,
-    val sunCloseTime: String?,
-    val sunOpenTime: String?,
+    val satCloseTime: String?="변동가능",
+    val satOpenTime: String?="변동가능",
+    val sunCloseTime: String?="변동가능",
+    val sunOpenTime: String?="변동가능",
     val updatedAt: String,
-    val weekCloseTime: String?,
-    val weekOpenTime: String?,
+    val weekCloseTime: String? = "변동가능",
+    val weekOpenTime: String? = "변동가능",
     val zipcode: String
 ) : Parcelable{
     var hotelImageLinks : List<HotelImage> = emptyList()

@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="none"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     >
 
         <View
@@ -137,25 +144,131 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.37" />
 
+
+    <TextView
+        android:id="@+id/tv_place_detail"
+        style="@style/phBody2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lineSpacingMultiplier="1.2"
+        android:maxLines="8"
+        android:padding="@dimen/padding_medium_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_desc"
+        tools:text="@string/sample_hotel_description" />
+
+    <TextView
+        android:id="@+id/label_op_time"
+        style="@style/phTitle"
+        app:layout_constraintTop_toBottomOf="@id/tv_place_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="24dp"
+        android:text="영업 시간"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/time_container"
+        android:layout_marginTop="@dimen/margin_1x"
+        app:layout_constraintTop_toBottomOf="@id/label_op_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+
         <TextView
-            android:id="@+id/tv_place_detail"
-            style="@style/phBody2"
-            android:lineSpacingMultiplier="1.2"
-            android:padding="@dimen/padding_medium_24dp"
-            tools:text="@string/sample_hotel_description"
-            app:layout_constraintTop_toBottomOf="@id/gl_desc"
+            android:id="@+id/label_weekday"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/gl_inner_33"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="0dp"
-            android:maxLines="8"
-            android:ellipsize="end"
+            android:text="평일"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/week_op_time"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/label_weekday"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/gl_inner_33"
+            android:text="00\n ~\n00"
+            android:layout_marginTop="@dimen/margin_0_5x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/label_sat"
+            android:text="토요일"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/gl_inner_33"
+            app:layout_constraintEnd_toStartOf="@id/gl_inner_66"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/sat_op_time"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/label_sat"
+            app:layout_constraintStart_toStartOf="@id/gl_inner_33"
+            app:layout_constraintEnd_toStartOf="@id/gl_inner_66"
+            android:text="00\n ~\n00"
+            android:layout_marginTop="@dimen/margin_0_5x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/label_sun"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/gl_inner_66"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="일요일"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/sun_op_time"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/label_sun"
+            app:layout_constraintStart_toStartOf="@id/gl_inner_66"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="00\n ~\n00"
+            android:layout_marginTop="@dimen/margin_0_5x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_inner_33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_inner_66"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.66" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_time"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 
     <TextView
         android:id="@+id/label_price"
         android:text="이용 가격"
         style="@style/phTitle"
-        app:layout_constraintTop_toBottomOf="@id/tv_place_detail"
+        app:layout_constraintTop_toBottomOf="@id/time_container"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="24dp"
         android:layout_width="wrap_content"
@@ -163,6 +276,7 @@
 
 
     <FrameLayout
+        android:id="@+id/rv_container"
         app:layout_constraintTop_toBottomOf="@id/label_price"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -195,11 +309,16 @@
         <!--    리뷰 10개 이상이면 더 보기를 클릭하도록 한다. -->
         <!--    만약 후기가 없으면 이용 후기가 아직 없습니다! 로 뷰홀더를 바꾼다. -->
 
+
     <include
         layout="@layout/floating_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_card_bottom"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

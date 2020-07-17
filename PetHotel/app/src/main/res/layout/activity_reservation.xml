@@ -7,13 +7,12 @@
     tools:context=".ui.reservation.ReservationActivity">
 
 
-    <fragment
-        android:id="@+id/login_register_nav_host_fragment"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/reservation_nav_host"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:navGraph="@navigation/reservation"/>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

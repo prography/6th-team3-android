@@ -40,11 +40,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
-    dataBinding {
-        enabled true
-    }
-
 }
 
 dependencies {
@@ -132,6 +127,9 @@ dependencies {
 
     //expandable FAB
     implementation 'com.getbase:floatingactionbutton:1.10.1'
+
+    //Calendar
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
