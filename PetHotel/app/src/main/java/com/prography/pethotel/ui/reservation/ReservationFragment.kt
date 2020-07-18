@@ -10,19 +10,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.prography.pethotel.R
+import com.prography.pethotel.api.main.response.HotelData
 import kotlinx.android.synthetic.main.fragment_reservation_main_v2.*
 
 
 private const val TAG = "ReservationFragment"
 class ReservationFragment : Fragment() {
 
-    lateinit var reservationViewModel: ReservationViewModel
-    var checkInDateTime : String? = ""
-    var checkOutDateTime : String? = ""
+    /* Activity 가 갖고 있는 뷰 모델을 Fragment 에서 사용한다 */
+    private val reservationViewModel: ReservationViewModel by activityViewModels{
+        object : ViewModelProvider.Factory{
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T
+            = ReservationViewModel() as T
+        }
+    }
+
+    private var checkInDateTime : String? = ""
+    private var checkOutDateTime : String? = ""
 
     var inDate : String ?= ""
     var outDate : String ?= ""
@@ -34,6 +44,7 @@ class ReservationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_reservation_main_v2, container, false)
     }
 
@@ -41,15 +52,14 @@ class ReservationFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        /* Activity 가 갖고 있는 뷰 모델을 Fragment 에서 사용한다 */
-        requireActivity().let {
-            //https://thdev.tech/androiddev/2020/07/13/Android-Fragment-ViewModel-Example/ 참고하기
-            reservationViewModel = ViewModelProviders.of(it)[ReservationViewModel::class.java]
-        }
-
         /* 호텔 이름을 상단에 띄운다 */
-        val hotelName = reservationViewModel.reservationInfo.value?.hotel?.name
-        if(!hotelName.isNullOrEmpty()){
+        val hotel : HotelData = arguments?.get("hotel") as HotelData
+        val hotelName = hotel.name
+
+        /* 디스플레이 되는 날짜를 현재 날짜로 초기화 한다. */
+        initDateTimeText()
+
+        if(hotelName.isNotEmpty()){
             reservation_hotel_name.text = getString(R.string.reservation_hotel_name, hotelName)
         }else {
             Log.d(TAG, "onActivityCreated: 예약화면으로 호텔 정보 불러오기 실패")
@@ -57,14 +67,17 @@ class ReservationFragment : Fragment() {
 
         /* 날짜와 시간을 선택한 후 다음 화면으로 넘어간다. */
         proceed_reservation_from_main.setOnClickListener {
-
             if(isDateTimeValid(inDate, inTime, outDate, outTime)){
                 setDateTimeToViewModel(inDate, inTime, outDate, outTime)
-
-                findNavController().navigate(R.id.action_reservationFragment_to_reservationDetailFragment)
+                findNavController().navigate(R.id.action_reservationFragment2_to_reservationDetailFragment2)
             }else {
                 Toast.makeText(requireContext(), "날짜와 시간을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        /* 만약 취소하기를 누르면 이전 화면으로 돌아가고, reservation 정보는 초기화된다. */
+        cancel_reservation_from_main.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         /*달력에서 날짜를 가져온다 */
@@ -134,7 +147,18 @@ class ReservationFragment : Fragment() {
 
     }
 
-    private fun isDateTimeValid(inDate: String?, inTime: String?, outDate: String?, outTime: String?): Boolean {
+    private fun initDateTimeText() {
+        val cal = Calendar.getInstance()
+        checkin_date.text = "${cal.get(Calendar.YEAR)}/${cal.get(Calendar.MONTH)}/${cal.get(Calendar.DAY_OF_MONTH)}"
+        checkout_date.text = "${cal.get(Calendar.YEAR)}/${cal.get(Calendar.MONTH)}/${cal.get(Calendar.DAY_OF_MONTH)}"
+
+        checkin_time.text = "${cal.get(Calendar.HOUR_OF_DAY)}:${cal.get(Calendar.MINUTE)}"
+        checkout_time.text = "${cal.get(Calendar.HOUR_OF_DAY)}:${cal.get(Calendar.MINUTE)}"
+    }
+
+    private fun isDateTimeValid(inDate: String?, inTime: String?,
+                                outDate: String?, outTime: String?): Boolean {
+        //TODO 호텔의 영업시간과 맞는지 확인할 것
         return !inDate.isNullOrEmpty() ||
                 !inTime.isNullOrEmpty() ||
                 !outDate.isNullOrEmpty() ||
@@ -152,6 +176,5 @@ class ReservationFragment : Fragment() {
             checkInDateTime!!, checkOutDateTime!!
         )
     }
-
 
 }

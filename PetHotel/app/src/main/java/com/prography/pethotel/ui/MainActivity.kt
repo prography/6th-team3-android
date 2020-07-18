@@ -84,7 +84,6 @@ class MainActivity : AppCompatActivity() {
 
         val navGraphIds = listOf(
             R.navigation.places,
-//            R.navigation.reservation,
             R.navigation.monitor,
             R.navigation.my_page
         )

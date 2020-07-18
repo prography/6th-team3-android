@@ -58,15 +58,6 @@ class PlaceInfoFragment : Fragment() {
             addFragment(DiscountPlaceFragment.newInstance(), "#저렴한")
         }
 
-        //TODO 메서드로 분리하기
-//        tabFragmentsViewModel.tabFragments.observe(viewLifecycleOwner, Observer {
-//            Log.d(TAG, "onActivityCreated: ${it.size}")
-//                if(it.size > 3) {
-//                    for (x in 1..it.size) {
-//                        tabAdapter.addFragment(it[x].second, it[x].first)
-//                    }
-//                }
-//        })
     }
 
 

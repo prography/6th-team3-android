@@ -14,15 +14,15 @@ import android.view.ViewGroup
 import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.getbase.floatingactionbutton.FloatingActionsMenu.OnFloatingActionsMenuUpdateListener
 import com.prography.pethotel.R
 import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.api.main.response.HotelPrice
 import com.prography.pethotel.ui.places.adapters.PriceAdapter
-import com.prography.pethotel.ui.reservation.ReservationActivity
-import com.prography.pethotel.utils.RESERVE_HOTEL_INFO_KEY
 import kotlinx.android.synthetic.main.floating_menu.*
 import kotlinx.android.synthetic.main.fragment_place_info_details_v2.*
 
@@ -73,9 +73,8 @@ class PlaceInfoDetailsFragment : Fragment() {
 
         /*호텔 정보를 예약 화면으로 넘긴다 */
         action_reserve_now.setOnClickListener {
-            val intent = Intent(requireActivity(), ReservationActivity::class.java)
-            intent.putExtra(RESERVE_HOTEL_INFO_KEY, hotel)
-            requireActivity().startActivity(intent)
+            val bundle = bundleOf("hotel" to hotel)
+            findNavController().navigate(R.id.action_placeInfoDetailsFragment_to_reservationFragment2, bundle)
             multiple_actions_menu.collapse()
         }
 

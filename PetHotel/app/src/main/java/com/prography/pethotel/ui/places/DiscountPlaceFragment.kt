@@ -35,9 +35,9 @@ class DiscountPlaceFragment : Fragment() {
             ViewModelProviders.of(it).get(PlaceInfoViewModel::class.java)
         }
 
-        placeInfoViewModel.hotelList.observe(viewLifecycleOwner, Observer {
-            val filteredArray = filterBy(FilterType.PRICE, it)
+        placeInfoViewModel.hotelList.observe(viewLifecycleOwner, Observer { list ->
 
+            val filteredArray = filterBy(FilterType.PRICE, list)
             initList(hotelList = filteredArray)
         })
 

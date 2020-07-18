@@ -23,7 +23,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.reservation.ReservationActivity"></activity>
         <activity android:name=".ui.authentication.kakao.KakaoRegisterActivity" />
         <activity android:name=".ui.authentication.kakao.KakaoLoginActivity" />
 
@@ -32,22 +31,22 @@
             android:value="018dfd19083580681fa1b9d6e5774f49" /> <!-- 네이티브 앱 키 설정 -->
         <activity android:name=".ui.places.search.PlaceSearchResultActivity" />
         <activity android:name=".ui.splash.SplashActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.authentication.LoginRegisterActivity"
             android:label="@string/app_name">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
 
 
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
         </activity>
         <activity android:name=".ui.MainActivity">
 

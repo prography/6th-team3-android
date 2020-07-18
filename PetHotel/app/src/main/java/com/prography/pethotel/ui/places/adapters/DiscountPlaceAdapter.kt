@@ -13,7 +13,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.prography.pethotel.R
 import com.prography.pethotel.api.main.response.HotelData
-import kotlinx.android.synthetic.main.place_info_view_holder.view.*
+import com.prography.pethotel.api.main.response.HotelPrice
+import kotlinx.android.synthetic.main.place_info_view_holder_v3.view.*
 
 class DiscountPlaceAdapter (
     val context: Context,
@@ -23,7 +24,7 @@ class DiscountPlaceAdapter (
 ){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiscountPlaceViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder_v3, parent, false)
 
         return DiscountPlaceViewHolder(
             view
@@ -49,15 +50,29 @@ class DiscountPlaceAdapter (
         fun bind(hotel : HotelData){
             itemView.place_info_name.text = hotel.name
             itemView.place_info_address.text = hotel.address
-            // TODO distance 는 안함 - 구현해서 넣어야함.
-            if(!hotel.hotelImageLinks.isNullOrEmpty()){
 
+            if(hotel.prices.isNullOrEmpty()){
+                itemView.place_info_price.text = "가격정보없음"
+            }else{
+                itemView.place_info_price.text =
+                    "최저 ${getLowestPrice(hotel.prices as ArrayList<HotelPrice>)}원 부터"
+            }
+
+            if(!hotel.hotelImageLinks.isNullOrEmpty()){
                 Glide.with(itemView.context)
                     .load(hotel.hotelImageLinks[0].link)
                     .error(R.drawable.mily_excited)
+                    .placeholder(R.drawable.mily_sleepy)
                     .transform(RoundedCorners(12))
                     .into(itemView.place_info_image)
             }
+        }
+
+        private fun getLowestPrice(prices : ArrayList<HotelPrice>) : Int{
+            prices.sortBy {
+                it.price
+            }
+            return prices[0].price
         }
     }
 

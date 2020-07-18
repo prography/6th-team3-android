@@ -30,6 +30,9 @@ class ReservationDetailFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
 
+        fab_reservation_detail_info_selected_ok.setOnClickListener {
+             findNavController().navigate(R.id.action_reservationDetailFragment2_to_reservationDoneFragment2)
+        }
     }
 
 }

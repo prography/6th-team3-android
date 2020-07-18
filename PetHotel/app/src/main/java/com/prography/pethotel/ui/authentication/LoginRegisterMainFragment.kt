@@ -120,11 +120,6 @@ class LoginRegisterMainFragment : Fragment() {
 
 
 
-        /*첫 화면 밀리 애니메이션 띄우기*/
-        front_img.setBackgroundResource(R.drawable.mily_animated)
-        val animationDrawable =  front_img.background as AnimationDrawable
-        animationDrawable.start()
-
         /*이메일 확인*/
         et_login_username.apply {
             afterTextChanged {

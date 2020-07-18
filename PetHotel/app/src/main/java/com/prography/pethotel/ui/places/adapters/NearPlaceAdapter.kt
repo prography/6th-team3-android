@@ -26,7 +26,7 @@ class NearPlaceAdapter (
 ){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NearPlaceViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder_v3, parent, false)
 
         return NearPlaceViewHolder(
             view
