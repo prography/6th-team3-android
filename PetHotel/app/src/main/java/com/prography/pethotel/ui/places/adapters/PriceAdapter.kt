@@ -39,7 +39,7 @@ class PriceViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     @SuppressLint("SetTextI18n")
     fun bind(data: HotelPrice) {
 
-        itemView.weight.text = "~ ${(data.weight/1000.00)}kg"
+        itemView.weight.text = "~ ${(data.weight?.div(1000.00))}kg"
         itemView.price.text = "${data.price}￦"
 
         if(data.day != null){

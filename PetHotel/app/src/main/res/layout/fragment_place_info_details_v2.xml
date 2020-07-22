@@ -16,7 +16,7 @@
 
         <View
             android:id="@+id/view_background"
-            android:background="#974A718C"
+            android:background="@color/petHotelLightGrey"
             android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -310,6 +310,7 @@
             android:padding="@dimen/default_padding_8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
     </FrameLayout>
 
 

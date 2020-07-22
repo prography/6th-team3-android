@@ -1,6 +1,7 @@
 package com.prography.pethotel.ui.places.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,8 @@ import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.api.main.response.HotelPrice
 import kotlinx.android.synthetic.main.place_info_view_holder_v3.view.*
 
+
+private const val TAG = "DiscountPlaceAdapter"
 class DiscountPlaceAdapter (
     val context: Context,
     private val hotelList : ArrayList<HotelData>
@@ -51,12 +54,23 @@ class DiscountPlaceAdapter (
             itemView.place_info_name.text = hotel.name
             itemView.place_info_address.text = hotel.address
 
-            if(hotel.prices.isNullOrEmpty()){
-                itemView.place_info_price.text = "가격정보없음"
+            if(hotel.distanceFromUser == Int.MAX_VALUE){
+                itemView.place_info_distance.text = ""
             }else{
+                itemView.place_info_distance.text = "${hotel.distanceFromUser}km"
+            }
+
+            if(hotel.prices.isNullOrEmpty()){
+                Log.d(TAG, "bind: 가격 정보 없음 ")
+
+                itemView.place_info_price.text = "가격정보없음"
+            } else{
+                Log.d(TAG, "bind: 가격 있음 => ${hotel.prices}")
+
                 itemView.place_info_price.text =
                     "최저 ${getLowestPrice(hotel.prices as ArrayList<HotelPrice>)}원 부터"
             }
+
 
             if(!hotel.hotelImageLinks.isNullOrEmpty()){
                 Glide.with(itemView.context)
@@ -68,7 +82,7 @@ class DiscountPlaceAdapter (
             }
         }
 
-        private fun getLowestPrice(prices : ArrayList<HotelPrice>) : Int{
+        private fun getLowestPrice(prices : ArrayList<HotelPrice>) : Int? {
             prices.sortBy {
                 it.price
             }

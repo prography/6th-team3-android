@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.prography.pethotel.R
 import com.prography.pethotel.api.main.response.HotelData
-import kotlinx.android.synthetic.main.place_info_view_holder.view.*
+import kotlinx.android.synthetic.main.place_info_view_holder_v3.view.*
 
 class PopularPlaceAdapter(
     val context: Context,
@@ -52,7 +52,12 @@ class PopularPlaceAdapter(
         fun bind(hotel : HotelData){
             itemView.place_info_name.text = hotel.name
             itemView.place_info_address.text = hotel.address
-            //distance 는 안함
+
+            if(hotel.distanceFromUser == Int.MAX_VALUE){
+                itemView.place_info_distance.text = ""
+            }else{
+                itemView.place_info_distance.text = "${hotel.distanceFromUser}km"
+            }
 
             Log.d(TAG, "bind: 호텔 이미지 존재여부 ${hotel.hotelImageLinks.isNullOrEmpty()} ")
 

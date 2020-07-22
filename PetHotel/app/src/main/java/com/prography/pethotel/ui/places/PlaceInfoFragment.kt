@@ -2,11 +2,13 @@ package com.prography.pethotel.ui.places
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
-
+import androidx.lifecycle.ViewModelProviders
 import com.prography.pethotel.R
 import com.prography.pethotel.ui.places.adapters.MainTabAdapter
 import kotlinx.android.synthetic.main.place_info_fragment.place_tabs
@@ -16,9 +18,9 @@ import kotlinx.android.synthetic.main.places_view_pager_layout.place_view_pager
 @Suppress("DEPRECATION")
 class PlaceInfoFragment : Fragment() {
 
-    private lateinit var viewModel: PlaceInfoViewModel
+    private lateinit var placeInfoViewModel: PlaceInfoViewModel
 
-    lateinit var tabAdapter : MainTabAdapter
+    private lateinit var tabAdapter : MainTabAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +38,7 @@ class PlaceInfoFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
+        placeInfoViewModel = ViewModelProviders.of(requireActivity())[PlaceInfoViewModel::class.java]
 //        val mainToolbarTitle = requireActivity().findViewById<TextView>(R.id.main_toolbar_title)
 //        mainToolbarTitle.visibility = View.GONE
 
@@ -53,9 +55,9 @@ class PlaceInfoFragment : Fragment() {
         place_view_pager.adapter = tabAdapter
         place_tabs.setupWithViewPager(place_view_pager)
         tabAdapter.apply {
-            addFragment(PopularPlaceFragment.newInstance(), "#인기")
-            addFragment(NearPlaceFragment.newInstance(), "#가까운")
-            addFragment(DiscountPlaceFragment.newInstance(), "#저렴한")
+            addFragment(PopularPlaceFragment(), "#인기")
+            addFragment(NearPlaceFragment(), "#가까운")
+            addFragment(DiscountPlaceFragment(), "#저렴한")
         }
 
     }

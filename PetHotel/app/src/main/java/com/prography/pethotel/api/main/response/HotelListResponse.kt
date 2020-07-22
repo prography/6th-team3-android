@@ -1,6 +1,7 @@
 package com.prography.pethotel.api.main.response
 
 import android.os.Parcelable
+import com.prography.pethotel.room.entities.Price
 import kotlinx.android.parcel.Parcelize
 
 
@@ -22,15 +23,15 @@ data class HotelData(
     val id: Int,
     val isNeuteredOnly: Boolean,
     val largeCriteria: Int,
-    val latitude: Double,
-    val longitude: Double,
+    val latitude: Double?= null,
+    val longitude: Double?= null,
     val maxDogSize: Int,
     val mediumCriteria: Int,
     val monitorAvailable: Boolean,
     val name: String,
-    val pageLink: String,
-    val phoneNumber: String,
-    val prices: List<HotelPrice>?= emptyList(), //weekday sunday saturday all
+    val pageLink: String ?= "",
+    val phoneNumber: String ?= "",
+    var prices: List<HotelPrice>,
     val satCloseTime: String?="변동가능",
     val satOpenTime: String?="변동가능",
     val sunCloseTime: String?="변동가능",
@@ -41,4 +42,5 @@ data class HotelData(
     val zipcode: String
 ) : Parcelable{
     var hotelImageLinks : List<HotelImage> = emptyList()
+    var distanceFromUser : Int = Int.MAX_VALUE
 }

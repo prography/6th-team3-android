@@ -17,11 +17,12 @@ import androidx.core.app.ActivityCompat
 
 class GPSTracker(
     val context: Context,
-    var location: Location?,
-    var latitude: Double,
-    var longitude: Double,
     var locationManager: LocationManager
 ) : Service(), LocationListener{
+
+    var location: Location?=null
+    var latitude: Double ?= 0.0
+    var longitude: Double ?= 0.0
 
     companion object{
         const val MIN_DISTANCE_CHANGE_FOR_UPDATES = 10.toFloat()
@@ -31,9 +32,6 @@ class GPSTracker(
 
     fun getUserLocation() : Location?{
         try{
-            locationManager = context.getSystemService(
-                Context.LOCATION_SERVICE
-            ) as LocationManager
             val isGPSEnabled = locationManager.isProviderEnabled(
                 LocationManager.GPS_PROVIDER
             )
@@ -97,14 +95,14 @@ class GPSTracker(
     }
 
 
-    fun getUserLatitude() : Double{
+    fun getUserLatitude() : Double?{
         if(location != null){
             latitude = location!!.latitude
         }
         return latitude
     }
 
-    fun getUserLongitude() : Double{
+    fun getUserLongitude() : Double?{
         if(location != null){
             longitude = location!!.longitude
         }

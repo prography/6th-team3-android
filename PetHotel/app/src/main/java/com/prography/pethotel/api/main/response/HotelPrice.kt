@@ -6,11 +6,11 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class HotelPrice(
     val createdAt: String,
-    val day: String,
-    val hotelId: Int,
+    val day: String ?= null,
     val id: Int,
-    val price: Int,
-    val size: String,
-    val updatedAt: String,
-    val weight: Int
+    val hotelId: Int,
+    val price: Int ?= Int.MAX_VALUE,
+    val size: String ?= null,
+    val updatedAt: String?= null,
+    val weight: Int?= null
 ) : Parcelable

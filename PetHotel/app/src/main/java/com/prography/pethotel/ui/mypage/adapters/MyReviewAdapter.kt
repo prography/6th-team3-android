@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.prography.pethotel.R
-import com.prography.pethotel.models.HotelReview
+import com.prography.pethotel.api.main.response.HotelReviewData
 import kotlinx.android.synthetic.main.hotel_review_view_holder.view.*
 
 class MyReviewAdapter(
     private val context: Context,
-    private val hotelReviewList : ArrayList<HotelReview>
-) : ListAdapter<HotelReview, MyReviewAdapter.MyReviewViewHolder>(
+    private val hotelReviewList : ArrayList<HotelReviewData>
+) : ListAdapter<HotelReviewData, MyReviewAdapter.MyReviewViewHolder>(
     MyReviewDiffUtilCallback()
 ){
 
@@ -34,13 +34,13 @@ class MyReviewAdapter(
         holder.bind(hotelReviewList[position])
     }
 
-    class MyReviewDiffUtilCallback : DiffUtil.ItemCallback<HotelReview>() {
-        override fun areItemsTheSame(oldItem: HotelReview, newItem: HotelReview): Boolean {
+    class MyReviewDiffUtilCallback : DiffUtil.ItemCallback<HotelReviewData>() {
+        override fun areItemsTheSame(oldItem: HotelReviewData, newItem: HotelReviewData): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: HotelReview, newItem: HotelReview): Boolean {
-            return oldItem.reviewContent == newItem.reviewContent
+        override fun areContentsTheSame(oldItem: HotelReviewData, newItem: HotelReviewData): Boolean {
+            return oldItem.content == newItem.content
         }
 
     }
@@ -48,10 +48,14 @@ class MyReviewAdapter(
 
     class MyReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(hotelReview : HotelReview){
-            itemView.tv_review_hotel_name.text = hotelReview.hotelName
-//            itemView.tv_review_username.text = hotelReview.userName
-            itemView.tv_review_content.text = hotelReview.reviewContent
+        fun bind(hotelReview : HotelReviewData){
+
+            //TODO 호텔 이름이랑 유저 이름 가져오기
+//            itemView.tv_review_hotel_name.text =
+
+//            itemView.tv_review_username.text =
+
+            itemView.tv_review_content.text = hotelReview.content
 
         }
     }

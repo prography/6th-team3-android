@@ -9,13 +9,6 @@ const val SERVICE_KEY = "9S61H90rZjHQDvx+2XRcGZBkBQCsfsCWJGjtZZM7DWr/+WjrkFlHtHq
 const val IS_KAKAO_LOGIN = "Success Kakao Login"
 const val KAKAO_REG_RESPONSE_KEY = "KakaoKey"
 
-const val SMALL = "SMALL"
-const val MEDIUM = "MEDIUM"
-const val LARGE = "LARGE"
-
-const val ALL_DAY = "all"
-const val SAT = "saturday"
-const val SUN = "sunday"
-const val WEEK_DAY = "weekday"
-
-const val RESERVE_HOTEL_INFO_KEY = "HOTEL_INFO_KEY"
+const val USER_LOCATION = "location"
+const val USER_LAT = "user_lat"
+const val USER_LONG = "user_long"

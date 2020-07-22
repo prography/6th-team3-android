@@ -7,7 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     app:cardElevation="4dp"
-    android:layout_margin="4dp"
+    android:layout_marginStart="@dimen/margin_1x"
+    android:layout_marginEnd="@dimen/margin_1x"
+    android:layout_marginTop="@dimen/margin_0_5x"
+    android:layout_marginBottom="@dimen/margin_0_5x"
     xmlns:tools="http://schemas.android.com/tools"
     >
 
@@ -31,6 +34,7 @@
         app:layout_constraintEnd_toEndOf="@id/gl_center_h"
         tools:src="@drawable/hotel_sample_background_light"
         android:scaleType="centerCrop"
+        android:src="@drawable/hotel_sample_background_light"
         android:layout_width="0dp"
         android:layout_height="0dp"/>
     <View
@@ -47,7 +51,7 @@
     <RatingBar
         android:id="@+id/place_info_rate"
         android:stepSize="0.5"
-        android:rating="4.5"
+        android:rating="5"
         android:layout_marginStart="@dimen/margin_1x"
         app:layout_constraintTop_toBottomOf="@id/gl_h"
         app:layout_constraintStart_toEndOf="@id/gl_center_h"

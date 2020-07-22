@@ -1,5 +1,6 @@
 package com.prography.pethotel.ui.places
 
+import android.location.Location
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,15 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.prography.pethotel.api.main.MainApi
 import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.api.main.response.HotelImage
-import com.prography.pethotel.api.main.response.HotelImageResponse
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.lang.Exception
+import kotlinx.coroutines.*
 
 
 private const val TAG = "PlaceInfoViewModel"
@@ -25,7 +18,6 @@ class PlaceInfoViewModel : ViewModel() {
     private val viewModelJob = Job()
     private val uiScope  = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-
     private val _hotelList = MutableLiveData<ArrayList<HotelData>>()
     val hotelList : LiveData<ArrayList<HotelData>>
         get() = _hotelList
@@ -34,20 +26,20 @@ class PlaceInfoViewModel : ViewModel() {
     val hotelImages : LiveData<ArrayList<HotelImage>>
         get() = _hotelImages
 
-//    init {
-//        getHotelLists()
-//    }
+    init {
+        getHotelLists()
 
+    }
     fun getHotelLists(){
         Log.d(TAG, "getHotelLists")
         try {
             uiScope.launch {
                 val response = MainApi.petHotelRetrofitService.getHotelList()
                 val hotels = response.data
-
                 _hotelList.value = hotels as ArrayList<HotelData>
 //                hotels.forEach {
 //                    getHotelImages(it)
+//                    delay(500)
 //                }
             }
         }catch (e : Exception){
@@ -55,6 +47,26 @@ class PlaceInfoViewModel : ViewModel() {
         }
     }
 
+    fun setDistanceToHotelList(lat : Double, long : Double){
+        Log.d(TAG, "setDistanceToHotelList: ")
+        val result = FloatArray(3)
+
+        _hotelList.value?.forEach {
+            hotelData ->
+            if(hotelData.longitude != null && hotelData.latitude != null){
+                Location.distanceBetween(
+                    lat, long,
+                    hotelData.longitude, hotelData.latitude, result
+                )
+                Log.d(TAG, "setDistanceToHotelList: ${result[0]}")
+                hotelData.distanceFromUser = (result[0] / 1000).toInt()
+            }else{
+                hotelData.distanceFromUser = Int.MAX_VALUE //거리 정보 없음
+            }
+            Log.d(TAG, "setDistanceToHotelList: ${hotelData.distanceFromUser}")
+        }
+
+    }
 
     private fun getHotelImages(hotelData: HotelData){
         Log.d(TAG, "getHotelImages")

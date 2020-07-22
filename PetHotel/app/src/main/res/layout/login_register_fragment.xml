@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/top"
-        app:layout_constraintVertical_bias="0.85" />
+        app:layout_constraintVertical_bias="0.9" />
 
     <TextView
         android:id="@+id/app_main_logo"
@@ -128,6 +128,37 @@
 <!--       android:layout_width="wrap_content"-->
 <!--       android:layout_height="wrap_content"/>-->
 
+
+    <View
+        app:layout_constraintTop_toBottomOf="@id/btn_login_user_register"
+        app:layout_constraintBottom_toTopOf="@id/btn_kakao_login"
+        app:layout_constraintStart_toEndOf="@id/gl_start"
+        app:layout_constraintEnd_toStartOf="@id/gl_center_v"
+        android:background="@color/petHotelLightGrey"
+        android:layout_marginEnd="@dimen/margin_3x"
+        android:layout_width="0dp"
+        android:layout_height="1dp"/>
+
+    <View
+        app:layout_constraintTop_toBottomOf="@id/btn_login_user_register"
+        app:layout_constraintBottom_toTopOf="@id/btn_kakao_login"
+        app:layout_constraintStart_toEndOf="@id/gl_center_v"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        android:background="@color/petHotelLightGrey"
+        android:layout_marginStart="@dimen/margin_3x"
+        android:layout_width="0dp"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:text="간편가입"
+        android:textColor="@color/colorTransparentBlack"
+        app:layout_constraintTop_toBottomOf="@id/btn_login_user_register"
+        app:layout_constraintBottom_toTopOf="@id/btn_kakao_login"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintStart_toEndOf="@id/gl_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/btn_kakao_login"
         android:layout_width="0dp"
@@ -146,7 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_center_v"

@@ -1,30 +1,28 @@
 package com.prography.pethotel.ui
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.prography.pethotel.R
-import com.prography.pethotel.ui.mypage.MyPageFragment
 import com.prography.pethotel.ui.places.PlaceInfoViewModel
 import com.prography.pethotel.utils.*
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 private const val TAG = "MainActivity"
 
 @Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
 //    private lateinit var mainLayout : LinearLayout
     private lateinit var placeInfoViewModel: PlaceInfoViewModel
@@ -32,9 +30,17 @@ class MainActivity : AppCompatActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
 
+
+    /*location related */
+    private lateinit var locationManager : LocationManager
+
+    private lateinit var providers : List<String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         loginStateViewModel = ViewModelProvider(this, LoginStateViewModelFactory())
                                 .get(LoginStateViewModel::class.java)
@@ -49,24 +55,31 @@ class MainActivity : AppCompatActivity() {
             toast.show()
         }
 
-//        mainLayout = main_linear_container
 
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
 
-//        setSupportActionBar(main_toolbar)
-//        supportActionBar?.apply {
-//            setDisplayHomeAsUpEnabled(false)
-//            setDisplayShowTitleEnabled(false)
-//        }
+
+        getLocation()
 
         placeInfoViewModel = ViewModelProviders.of(this).get(PlaceInfoViewModel::class.java)
         placeInfoViewModel.getHotelLists()
         Log.d(TAG, "onCreate: From Main Activity")
 
+        val pref = getSharedPreferences(USER_LOCATION, Context.MODE_PRIVATE)
+        val lat = pref.getString(USER_LAT, "0.0")
+        val long = pref.getString(USER_LONG, "0.0")
+
+        placeInfoViewModel.hotelList.observe(this, Observer {
+            placeInfoViewModel.setDistanceToHotelList(lat!!.toDouble(), long!!.toDouble())
+        })
     }
 
+    override fun onStart() {
+        super.onStart()
+        requestLocationPermissionIfNotGranted()
+    }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
@@ -96,10 +109,7 @@ class MainActivity : AppCompatActivity() {
             intent = intent
         )
 
-        // Whenever the selected controller changes, setup the action bar.
-        controller.observe(this, Observer { navController ->
-//            setupActionBarWithNavController(navController)
-        })
+
         currentNavController = controller
     }
 
@@ -113,4 +123,86 @@ class MainActivity : AppCompatActivity() {
         this
     }
 
+
+    private fun getLocation(){
+        if (
+            !isLocationPermissionGranted()
+        ) {
+            requestLocationPermissionIfNotGranted()
+        }else{
+            Log.d(TAG, "onCreate: Permissions Granted!")
+        }
+    }
+
+    private fun isLocationPermissionGranted() : Boolean{
+        return (ActivityCompat.checkSelfPermission(this,
+            Manifest.permission.ACCESS_COARSE_LOCATION)
+        == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+        == PackageManager.PERMISSION_GRANTED)
+    }
+
+    private fun requestLocationPermission(){
+        ActivityCompat.requestPermissions(
+            this, arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ), 100
+        )
+    }
+
+    private fun requestLocationPermissionIfNotGranted(){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(
+                    this, Manifest.permission.ACCESS_FINE_LOCATION
+                ) &&
+                ActivityCompat.shouldShowRequestPermissionRationale(
+                    this, Manifest.permission.ACCESS_COARSE_LOCATION
+                )){
+                requestLocationPermission()
+                return
+            }else{
+                requestLocationPermission()
+                return
+            }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if(requestCode == 100 ){
+// If request is cancelled, the result arrays are empty.
+            if (grantResults.isNotEmpty()
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                if (ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+
+                    /*권한이 주어졌으면 위치 정보를 가져온다*/
+                    getLocation()
+
+                    val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
+                    Log.d(TAG, "onRequestPermissionsResult: $location")
+                    //위도, 경도 -> double 타입
+                    Log.d(TAG, "onRequestPermissionsResult: 위도 ${location.latitude}\n경도 ${location.longitude}")
+                    if(location != null) {
+                        val pref = getSharedPreferences(USER_LOCATION, Context.MODE_PRIVATE)
+                        val editor = pref.edit()
+                        editor.putString(USER_LONG, location.longitude.toString())
+                        editor.putString(USER_LAT, location.latitude.toString())
+                        editor.apply()
+                    }
+                }
+            }else{
+                Toast.makeText(this, "위치권한없음", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }

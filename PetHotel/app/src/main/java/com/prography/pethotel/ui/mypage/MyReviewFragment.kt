@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prography.pethotel.R
+import com.prography.pethotel.api.main.response.HotelReviewData
 import com.prography.pethotel.ui.mypage.adapters.MyReviewAdapter
 import com.prography.pethotel.utils.DummyData
 import kotlinx.android.synthetic.main.my_page_review_fragment.*
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.my_page_review_fragment.*
 class MyReviewFragment : Fragment(){
 
 
-    lateinit var myReviewAdapter : MyReviewAdapter
+    private lateinit var myReviewAdapter : MyReviewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,11 +29,14 @@ class MyReviewFragment : Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
+        //TODO 리뷰 GET 으로 가져오기
+
         //실제 리뷰로 바꾸기
         myReviewAdapter =
             MyReviewAdapter(
                 requireContext(),
-                DummyData.hotelReviews
+                ArrayList()
             )
 
         rv_my_review.apply {
@@ -41,6 +45,5 @@ class MyReviewFragment : Fragment(){
             layoutManager = LinearLayoutManager(requireContext())
         }
     }
-
 
 }

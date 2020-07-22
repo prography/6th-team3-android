@@ -1,7 +1,6 @@
 package com.prography.pethotel.utils
 
 import com.prography.pethotel.api.main.response.HotelData
-import com.prography.pethotel.models.HotelReview
 import com.prography.pethotel.ui.monitor.MonitorMedia
 
 class DummyData {
@@ -11,8 +10,6 @@ class DummyData {
         val hotelDummyList : ArrayList<HotelData> = makeDummyHotelInfo()
 
         val mediaList : ArrayList<MonitorMedia> = makeDummyMediaList()
-
-        val hotelReviews : ArrayList<HotelReview> = makeDummyReviews()
 
         private fun makeDummyHotelInfo() : ArrayList<HotelData>{
             var list = ArrayList<HotelData>()
@@ -45,49 +42,5 @@ class DummyData {
             }
         }
 
-
-        private fun makeDummyReviews() : ArrayList<HotelReview>{
-            var list = ArrayList<HotelReview>()
-            if(!hotelReviews.isNullOrEmpty()){
-                return hotelReviews
-            }else{
-                for(x in 1 .. 5){
-                    list.add(
-                        HotelReview(
-                            x,
-                            "2020-05-05",
-                            "2020-05-05",
-                            "${x}번 털실맘",
-                            "아무 호텔 넘버 $x",
-                            "This is a sample review. I will be changing this " +
-                                    "part with real data in $x days.",
-                            5
-                        )
-                    )
-                }
-                return list
-            }
-        }
-
     }
 }
-
-//    fun sss(){
-//        Log.d(PlaceInfoFragment.TAG, "onQueryTextSubmit: ${query}")
-//        // TODO 검색한 단어로 탭을 추가한다
-//        //X 버튼을 옆에 누어서 누르면 해당 탭이 사라지도록 한다.
-//        //검색 결과가 없을 경우의 화면을 만들어서 필요시 띄운다.
-//        tabAdapter.addFragment(SearchResultFragment(), "#${query}")
-//
-//        val cancelableTab = LayoutInflater.from(requireContext()).inflate(R.layout.search_custom_tab, null)
-//        cancelableTab.tab_text.text = "#${query}"
-//        cancelableTab.tab_remove_button.tag = "#${query}"
-//        cancelableTab.tab_remove_button.setOnClickListener {
-//            val tabPosition = tabAdapter.fragmentTitleList.indexOf(it.tag)
-//            tabAdapter.removeFragment(tabPosition)
-//            Toast.makeText(requireContext(), "CANCEL", Toast.LENGTH_SHORT).show()
-//        }
-//        val resultTab = place_tabs.getTabAt(tabAdapter.fragmentList.lastIndex)
-//        resultTab?.customView = cancelableTab
-////                place_tabs.selectTab(resultTab, true)
-//    }

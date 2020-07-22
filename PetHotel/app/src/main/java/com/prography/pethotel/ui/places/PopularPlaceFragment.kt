@@ -37,14 +37,14 @@ class PopularPlaceFragment : Fragment() {
             ViewModelProviders.of(it).get(PlaceInfoViewModel::class.java)
         }
 
-        placeInfoViewModel.hotelList.observe(viewLifecycleOwner, Observer {
-            val filteredArray = filterBy(FilterType.POPULARITY, it)
-            initList(hotelList = filteredArray)
+        placeInfoViewModel.hotelList.observe(viewLifecycleOwner, Observer {list ->
+            val subList = ArrayList(list)
+            //TODO rating 으로 필터링 해야하는데, 호텔 객체에 rate 필드가 없음
+            initList(hotelList = subList)
         })
     }
 
     private fun initList(hotelList : ArrayList<HotelData>){
-        //TODO change this part with real hotel data
         val popularPlaceListAdapter = PopularPlaceAdapter(requireContext(), hotelList)
         rv_popular_list.apply {
             adapter = popularPlaceListAdapter

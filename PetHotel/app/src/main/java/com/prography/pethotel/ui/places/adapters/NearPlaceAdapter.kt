@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.prography.pethotel.R
 import com.prography.pethotel.api.main.response.HotelData
-import kotlinx.android.synthetic.main.place_info_view_holder.view.*
+import com.prography.pethotel.api.main.response.HotelPrice
+import kotlinx.android.synthetic.main.place_info_view_holder_v3.view.*
 
 
 class NearPlaceAdapter (
@@ -54,7 +53,19 @@ class NearPlaceAdapter (
         fun bind(hotel : HotelData){
             itemView.place_info_name.text = hotel.name
             itemView.place_info_address.text = hotel.address
-            //distance 는 안함
+
+            if(hotel.distanceFromUser == Int.MAX_VALUE){
+                itemView.place_info_distance.text = ""
+            }else{
+                itemView.place_info_distance.text = "${hotel.distanceFromUser}km"
+            }
+
+            if(hotel.prices.isNullOrEmpty()){
+                itemView.place_info_price.text = "가격정보없음"
+            } else{
+                itemView.place_info_price.text =
+                    "최저 ${getLowestPrice(hotel.prices as ArrayList<HotelPrice>)}원 부터"
+            }
 
             if(!hotel.hotelImageLinks.isNullOrEmpty()){
 
@@ -64,6 +75,13 @@ class NearPlaceAdapter (
                     .transform(RoundedCorners(12))
                     .into(itemView.place_info_image)
             }
+        }
+
+        private fun getLowestPrice(prices : ArrayList<HotelPrice>) : Int? {
+            prices.sortBy {
+                it.price
+            }
+            return prices[0].price
         }
     }
 
