@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/white_round_corner_rect"
     android:padding="@dimen/padding_large_16dp"
     android:orientation="vertical"
     android:gravity="center"
     android:layout_margin="@dimen/margin_0_5x"
-    android:elevation="@dimen/layout_elevation_default">
+    app:cardElevation="6dp">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_large_16dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
 
     <ImageView
         android:id="@+id/btn_erase_pet_card"
@@ -142,3 +150,5 @@
 
 
 </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

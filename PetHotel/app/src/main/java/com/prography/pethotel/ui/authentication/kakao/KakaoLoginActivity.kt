@@ -35,8 +35,8 @@ import com.prography.pethotel.ui.authentication.login.LoginViewModelFactory
 import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.utils.IS_KAKAO_LOGIN
 import com.prography.pethotel.utils.KAKAO_REG_RESPONSE_KEY
-import com.prography.pethotel.utils.LoginStateViewModel
-import com.prography.pethotel.utils.LoginStateViewModelFactory
+import com.prography.pethotel.utils.AuthTokenViewModel
+import com.prography.pethotel.utils.AuthTokenViewModelFactory
 import org.json.JSONObject
 
 
@@ -47,7 +47,7 @@ class KakaoLoginActivity : AppCompatActivity() {
     private lateinit var webView: WebView
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var registerViewModel: RegisterViewModel
-    private lateinit var loginStateViewModel : LoginStateViewModel
+    private lateinit var authTokenViewModel : AuthTokenViewModel
 
     private var childWebViews = mutableListOf<WebView>() // 만들어진 popup 용 웹뷰들을 관리하기 위한 리스트.
 
@@ -56,14 +56,14 @@ class KakaoLoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_kakao_login)
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
-        loginStateViewModel = ViewModelProvider(this, LoginStateViewModelFactory())[LoginStateViewModel::class.java]
+        authTokenViewModel = ViewModelProvider(this, AuthTokenViewModelFactory())[AuthTokenViewModel::class.java]
         registerViewModel = ViewModelProviders.of(this)[RegisterViewModel::class.java]
 
         loginViewModel.kakaoLoginResponse.observe(this, Observer {
             Log.d(TAG, "onActivityCreated: KAKAO RESPONSE \n$it")
 
             if(it.status =="success"){
-                loginStateViewModel.setUserToken(this, it.token)
+                authTokenViewModel.setUserToken(this, it.token)
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()

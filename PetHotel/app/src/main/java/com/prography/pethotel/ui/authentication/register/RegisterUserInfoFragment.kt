@@ -19,6 +19,7 @@ import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.authentication.afterTextChanged
 import com.prography.pethotel.ui.authentication.utils.BaseFragment
 import com.prography.pethotel.ui.authentication.kakao.KakaoRegisterViewModel
+import com.prography.pethotel.utils.AuthTokenViewModel
 import com.prography.pethotel.utils.ENTER_PET
 import com.prography.pethotel.utils.NO_PET
 import com.prography.pethotel.utils.USER_TOKEN
@@ -38,6 +39,7 @@ class RegisterUserInfoFragment : BaseFragment() {
 
     }
     private lateinit var registerViewModel: RegisterViewModel
+
 //    private var currentPhotoPath = ""
     private var generalUserInfo : GeneralUserInfo = GeneralUserInfo()
     private lateinit var userImage : ImageView

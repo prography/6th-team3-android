@@ -8,16 +8,17 @@ import com.prography.pethotel.R
 import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModelFactory
-import com.prography.pethotel.utils.LoginStateViewModel
-import com.prography.pethotel.utils.LoginStateViewModelFactory
+import com.prography.pethotel.utils.AuthTokenViewModel
+import com.prography.pethotel.utils.AuthTokenViewModelFactory
 
+@Suppress("DEPRECATION")
 class LoginRegisterActivity : AppCompatActivity() {
 
     private lateinit var registerViewModel: RegisterViewModel
 
     private lateinit var loginViewModel: LoginViewModel
 
-    private lateinit var loginStateViewModel: LoginStateViewModel
+    private lateinit var authTokenViewModel: AuthTokenViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +26,8 @@ class LoginRegisterActivity : AppCompatActivity() {
 
         // TODO network checking! Base Activity 만들어서 네트워크 확인하기.
 
-        loginStateViewModel = ViewModelProvider(this, LoginStateViewModelFactory())
-                                .get(LoginStateViewModel::class.java)
+        authTokenViewModel = ViewModelProvider(this, AuthTokenViewModelFactory())
+                                .get(AuthTokenViewModel::class.java)
 
         registerViewModel = ViewModelProviders.of(this)[RegisterViewModel::class.java]
 

@@ -77,7 +77,7 @@ data class HotelLike(
 data class User(
     @PrimaryKey(autoGenerate = false) @ColumnInfo(name= "id")  val userId : Int,
     @ColumnInfo(name = "name") val userName : String,
-    @ColumnInfo(name = "email") val email : String,
+    @ColumnInfo(name = "phoneNumber") val phoneNumber : String,
     @ColumnInfo(name = "profileImage") val profileImage : String
 )
 
@@ -98,11 +98,9 @@ data class Pet(
     @ColumnInfo(name = "year") val petBirthYear : Int?= null,
     @ColumnInfo(name = "dog_reg_no") val dogRegisterNo : String?= null, //String?
     @ColumnInfo(name = "rfid_cd") val rfidCardNo : String?= null,
-    @ColumnInfo(name = "gender") val gender : Int,
+    @ColumnInfo(name = "gender") val gender : String,
     @ColumnInfo(name = "kind") val kind : String,
-    @ColumnInfo(name = "neuter_year") val neuteredYear : Int?= null,
-    @ColumnInfo(name = "createdAt") val createdAt : String,
-    @ColumnInfo(name = "updatedAt") val updatedAt : String,
+    @ColumnInfo(name = "is_neutered") val isNeutered : Boolean,
     @ColumnInfo(name = "ownerId", index = true) val ownerId : Int
  )
 
@@ -117,10 +115,6 @@ class UserAndAllPets{
     )
     var pets : List<Pet> = ArrayList()
 }
-// DAO 클래스 안에서 아래와 같이 쿼리를 날린다.
-//@Transaction
-//@Query(“SELECT * FROM Users”)
-//List<UserAndAllPets> getUsers();
 
 class Converters{
 

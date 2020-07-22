@@ -9,25 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.prography.pethotel.R
 import com.prography.pethotel.ui.authentication.LoginRegisterActivity
-import com.prography.pethotel.ui.authentication.kakao.KakaoLoginActivity
-import com.prography.pethotel.utils.LoginStateViewModel
-import com.prography.pethotel.utils.LoginStateViewModelFactory
+import com.prography.pethotel.utils.AuthTokenViewModel
 import com.prography.pethotel.utils.TokenState
-import kotlinx.android.synthetic.main.new_my_page_logged_in_layout.*
 import kotlinx.android.synthetic.main.new_my_page_logged_in_layout.view.*
-import kotlinx.android.synthetic.main.new_my_page_not_logged_in_layout.*
-import kotlinx.android.synthetic.main.new_my_page_not_logged_in_layout.view.*
 
 
 private const val TAG = "MyPageFragment"
 class MyPageFragment : Fragment() {
 
     private var myPageView : View? = null
-    private val loginStateViewModel: LoginStateViewModel by activityViewModels()
+    private val loginStateViewModel: AuthTokenViewModel by activityViewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +82,7 @@ class MyPageFragment : Fragment() {
     private fun setLoggedInView(view : View){
 
         view.mypage_register_pet.setOnClickListener {
-            findNavController().navigate(R.id.action_myPageFragment_to_registerPetInfoFragment2)
+            findNavController().navigate(R.id.action_myPageFragment_to_petInfoFragment)
         }
 
         view.mypage_edit_user_pet_info.setOnClickListener {

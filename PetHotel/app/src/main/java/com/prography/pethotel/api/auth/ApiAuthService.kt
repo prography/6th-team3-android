@@ -60,7 +60,7 @@ interface  AuthApiService{
     fun generalRegister(@Body registerUserInfo : RegisterUserInfo) : Call<RegistrationResponse>
 
     @GET("user")
-    suspend fun getUser(@Header("Authorization") token : String) : UserInfoResponse //GET 마이페이지
+    fun getUser(@Header("Authorization") token : String) : Call<UserInfoResponse> //GET 마이페이지
 
     @POST("pet")
     suspend fun registerPet(@Header("Authorization") token : String,

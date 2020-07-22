@@ -17,8 +17,8 @@ import com.prography.pethotel.api.auth.request.KakaoRegisterData
 import com.prography.pethotel.api.auth.response.KakaoRegistrationResponse
 import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.authentication.afterTextChanged
-import com.prography.pethotel.utils.LoginStateViewModel
-import com.prography.pethotel.utils.LoginStateViewModelFactory
+import com.prography.pethotel.utils.AuthTokenViewModel
+import com.prography.pethotel.utils.AuthTokenViewModelFactory
 import kotlinx.android.synthetic.main.fragment_kakao_register.*
 
 
@@ -26,7 +26,7 @@ private const val TAG = "KakaoRegisterFragment"
 class KakaoRegisterFragment : Fragment() {
 
     private lateinit var kakaoRegisterViewModel: KakaoRegisterViewModel
-    private lateinit var loginStateViewModel: LoginStateViewModel
+    private lateinit var loginStateViewModel: AuthTokenViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,8 +39,8 @@ class KakaoRegisterFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         kakaoRegisterViewModel = ViewModelProvider(requireActivity())[KakaoRegisterViewModel::class.java]
-        loginStateViewModel = ViewModelProvider(requireActivity(), LoginStateViewModelFactory())
-            .get(LoginStateViewModel::class.java)
+        loginStateViewModel = ViewModelProvider(requireActivity(), AuthTokenViewModelFactory())
+            .get(AuthTokenViewModel::class.java)
 
         kakaoRegisterViewModel.kakaoRegisterUserData.observe(viewLifecycleOwner, Observer {
             setRegistrationData(it)

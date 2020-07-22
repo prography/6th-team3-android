@@ -58,21 +58,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         // can be launched in a separate asynchronous job
         Log.d(TAG, "login: 뷰모델에서 로그인 중")
         loginRepository.generalLogin(loginInfoBody)
-
-//        if (result is Result.Success) {
-//            _loginResult.value =
-//                LoginResult(
-//                    success = UserToken(result.data.data.token)
-//                )
-//        } else {
-//            _loginResult.value =
-//                LoginResult(error = R.string.login_failed)
-//        }
     }
-
-//    fun kakaoLogin(){
-//        loginRepository.kakaoLogin()
-//    }
 
     fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {

@@ -164,15 +164,21 @@ object RegisterRepository{
 
 
     fun getUser(userToken: String){
-        try {
-            coroutineScope.launch {
-                val response = PetmilyAuthApi.authApiRetrofitService.getUser(
-                    userToken
-                )
-                _userInfoRespone.value = response
+        val getUserCall = PetmilyAuthApi.authApiRetrofitService.getUser(userToken)
+        val callback = object : Callback<UserInfoResponse>{
+            override fun onFailure(call: Call<UserInfoResponse>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+                Log.d(TAG, "onFailure: ${t.printStackTrace()}")
+                _userInfoRespone.value = null
             }
-        }catch (e : Exception){
-            Log.d(TAG, "getUser: ${e.printStackTrace()}")
+
+            override fun onResponse(
+                call: Call<UserInfoResponse>,
+                response: Response<UserInfoResponse>
+            ) {
+                _userInfoRespone.value = response.body()
+            }
         }
+        getUserCall.enqueue(callback)
     }
 }

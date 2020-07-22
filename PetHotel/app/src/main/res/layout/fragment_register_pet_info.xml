@@ -39,31 +39,30 @@
 
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btn_add_pet_input_field"
-                android:src="@drawable/ic_add_white_24dp"
-                android:layout_margin="@dimen/margin_1x"
-                app:borderWidth="0dp"
-                android:backgroundTint="@color/petHotelLightGrey"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_1x"
+                android:backgroundTint="@color/petHotelLightGrey"
+                android:src="@drawable/ic_add_white_24dp"
+                app:borderWidth="0dp" />
 
-<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--                android:id="@+id/btn_add_pet_done"-->
-<!--                android:src="@drawable/ic_check_white_24dp"-->
-<!--                app:backgroundTint="@color/petHotelPrimary"-->
-<!--                android:layout_margin="@dimen/margin_1x"-->
-<!--                android:visibility="gone"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"/>-->
+            <!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+            <!--                android:id="@+id/btn_add_pet_done"-->
+            <!--                android:src="@drawable/ic_check_white_24dp"-->
+            <!--                app:backgroundTint="@color/petHotelPrimary"-->
+            <!--                android:layout_margin="@dimen/margin_1x"-->
+            <!--                android:visibility="gone"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"/>-->
 
         </LinearLayout>
-
 
         <Button
             android:id="@+id/btn_register_full_info_done"

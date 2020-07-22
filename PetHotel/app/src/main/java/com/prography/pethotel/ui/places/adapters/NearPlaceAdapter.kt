@@ -54,7 +54,7 @@ class NearPlaceAdapter (
             itemView.place_info_name.text = hotel.name
             itemView.place_info_address.text = hotel.address
 
-            if(hotel.distanceFromUser == Int.MAX_VALUE){
+            if(hotel.distanceFromUser == Int.MAX_VALUE || hotel.distanceFromUser > 100){
                 itemView.place_info_distance.text = ""
             }else{
                 itemView.place_info_distance.text = "${hotel.distanceFromUser}km"
@@ -72,6 +72,7 @@ class NearPlaceAdapter (
                 Glide.with(itemView.context)
                     .load(hotel.hotelImageLinks[0].link)
                     .error(R.drawable.mily_excited)
+                    .placeholder(R.drawable.mily_sleepy)
                     .transform(RoundedCorners(12))
                     .into(itemView.place_info_image)
             }

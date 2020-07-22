@@ -1,10 +1,7 @@
 package com.prography.pethotel.ui.authentication
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -32,8 +29,7 @@ import com.prography.pethotel.ui.authentication.kakao.KakaoLoginActivity
 import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModelFactory
-import com.prography.pethotel.utils.LoginStateViewModel
-import com.prography.pethotel.utils.USER_TOKEN
+import com.prography.pethotel.utils.AuthTokenViewModel
 import kotlinx.android.synthetic.main.login_register_fragment.*
 
 class LoginRegisterMainFragment : Fragment() {
@@ -49,7 +45,7 @@ class LoginRegisterMainFragment : Fragment() {
 
     private lateinit var loginViewModel : LoginViewModel
 
-    private lateinit var loginStateViewModel: LoginStateViewModel
+    private lateinit var loginStateViewModel: AuthTokenViewModel
 
     private lateinit var userToken : UserToken
 
@@ -79,7 +75,7 @@ class LoginRegisterMainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        loginStateViewModel = ViewModelProvider(requireActivity()).get(LoginStateViewModel::class.java)
+        loginStateViewModel = ViewModelProvider(requireActivity()).get(AuthTokenViewModel::class.java)
 
         registerViewModel = ViewModelProvider(requireActivity()).get(RegisterViewModel::class.java)
 

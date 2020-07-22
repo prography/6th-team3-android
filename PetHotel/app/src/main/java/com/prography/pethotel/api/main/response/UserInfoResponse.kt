@@ -4,5 +4,6 @@ package com.prography.pethotel.api.main.response
 data class UserInfoResponse(
     val id: Int,
     val name: String,
-    val phoneNumber: String
+    val phoneNumber: String,
+    val profileImage : String
 )

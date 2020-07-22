@@ -6,6 +6,7 @@ import androidx.room.Delete
 import com.prography.pethotel.api.main.request.ReviewDeleteBody
 import com.prography.pethotel.api.main.request.ReviewPostBody
 import com.prography.pethotel.api.main.response.*
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -52,18 +53,18 @@ interface HotelsApiService{
     /* 호텔 리뷰 관련 API */
     @POST("reviews/{hotelId}")
     fun postHotelReview(@Path("hotelId") hotelId: Int,
-                        @Body reviewPostBody: ReviewPostBody) : PostReviewResponse
+                        @Body reviewPostBody: ReviewPostBody) : Call<PostReviewResponse>
 
     @GET("reviews/{hotelId}")
-    fun getHotelReviews(@Path("hotelId") hotelId: Int) : GetReviewResponse
+    fun getHotelReviews(@Path("hotelId") hotelId: Int) : Call<GetReviewResponse>
 
     @PUT("reviews/{hotelId}/{reviewId}")
     fun updateHotelReviewById(@Path("hotelId") hotelId: Int, @Path("reviewId") reviewId : Int
-                              , @Body reviewPostBody: ReviewPostBody) : UpdateReviewResponse
+                              , @Body reviewPostBody: ReviewPostBody) : Call<UpdateReviewResponse>
 
     @DELETE("reviews/{hotelId}/{reviewId}")
     fun deleteHotelReviewById(@Path("hotelId") hotelId: Int, @Path("reviewId") reviewId: Int,
-                              @Body reviewDeleteBody: ReviewDeleteBody) : DeleteReviewResponse
+                              @Body reviewDeleteBody: ReviewDeleteBody) : Call<DeleteReviewResponse>
 
 }
 
