@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/label_review_title"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.places.WriteReviewFragment">
+
+    <!--    title : () 호텔에 대한 후기를 작성합니다. -->
+
+    <!--    content : 후기 작성하기 -->
+
+    <!--    button 클릭 : API 로 후기 올리기 -->
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_review_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <TextView
+        android:id="@+id/label_review_title_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hotel_review_title"
+        style="@style/phTitle"
+        android:layout_marginStart="@dimen/margin_1_5x"
+        android:layout_marginBottom="@dimen/margin_1_5x"
+        app:layout_constraintBottom_toTopOf="@+id/gl_review_title"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <RatingBar
+        android:id="@+id/write_review_rating_bar"
+        app:layout_constraintTop_toBottomOf="@id/gl_review_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:stepSize="1"
+        android:rating="5"
+        android:layout_marginTop="@dimen/margin_1_5x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/et_review_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        style="@style/phEditText"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:layout_margin="@dimen/margin_1_5x"
+        android:hint="리뷰를 작성해주세요."
+        android:gravity="start"
+        app:layout_constraintBottom_toTopOf="@+id/gl_bottom_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/write_review_rating_bar"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_bottom_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <Button
+        android:id="@+id/btn_review_upload"
+        android:layout_marginTop="@dimen/margin_1_5x"
+        android:layout_marginStart="@dimen/margin_1_5x"
+        android:layout_marginEnd="@dimen/margin_1_5x"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="후기 업로드하기"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gl_bottom_et" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

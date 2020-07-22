@@ -12,7 +12,7 @@ import com.prography.pethotel.room.main.MainDao
 
 @Database(entities = [User::class, Pet::class, Hotel::class,
     HotelLike::class, Price::class, HotelReviewData::class],
-    version = 2,
+    version = 3,
     exportSchema = false)
 @TypeConverters(Converters::class)
 public abstract class AppDatabase : RoomDatabase() {

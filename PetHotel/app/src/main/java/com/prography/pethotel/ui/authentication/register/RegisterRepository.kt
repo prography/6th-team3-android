@@ -80,24 +80,36 @@ object RegisterRepository{
     fun registerPetInfo(userToken: String, userId : Int, petInfoList: ArrayList<PetInfo>){
         val petDataList = ArrayList<PetData>()
         petInfoList.forEach {
-            petDataList.add(PetData(it.birthYear?.toInt()!!, it.name!!, it.registrationNum!!))
+            petDataList.add(
+                PetData(
+                petName = it.name!!,
+                registerNumber = it.registrationNum!!,
+                birthYear = it.birthYear?.toInt()!!)
+            )
         }
 
         val registerPetBody = RegisterPetBody(
-            data = petDataList,
-            userId = userId
+            userId = userId,
+            data = petDataList as List<PetData>
         )
-        try{
-            coroutineScope.launch {
-                val response = PetmilyAuthApi.authApiRetrofitService.registerPet(
-                    userToken, registerPetBody
-                )
-                _registerPetResponse.value = response
-                Log.d(TAG, "registerPetInfo: $response")
+        val call = PetmilyAuthApi.authApiRetrofitService.registerPet(
+            userToken, registerPetBody
+        )
+        val callback = object : Callback<PostPetResponse>{
+            override fun onFailure(call: Call<PostPetResponse>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+                _registerPetResponse.value = null
             }
-        }catch (e : Exception){
-            Log.d(TAG, "registerPetInfo: ${e.printStackTrace()}")
+
+            override fun onResponse(
+                call: Call<PostPetResponse>,
+                response: Response<PostPetResponse>
+            ) {
+                Log.d(TAG, "onResponse: ${response.body()}")
+                _registerPetResponse.value = response.body()
+            }
         }
+        call.enqueue(callback)
     }
 
 

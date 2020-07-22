@@ -78,7 +78,8 @@ data class User(
     @PrimaryKey(autoGenerate = false) @ColumnInfo(name= "id")  val userId : Int,
     @ColumnInfo(name = "name") val userName : String,
     @ColumnInfo(name = "phoneNumber") val phoneNumber : String,
-    @ColumnInfo(name = "profileImage") val profileImage : String
+    @ColumnInfo(name = "profileImage") val profileImage : String,
+    @ColumnInfo(name = "userToken") val userToken : String
 )
 
 

@@ -16,15 +16,28 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.getbase.floatingactionbutton.FloatingActionsMenu.OnFloatingActionsMenuUpdateListener
 import com.prography.pethotel.R
+import com.prography.pethotel.api.main.MainApi
+import com.prography.pethotel.api.main.response.GetReviewResponse
 import com.prography.pethotel.api.main.response.HotelData
 import com.prography.pethotel.api.main.response.HotelPrice
+import com.prography.pethotel.api.main.response.HotelReviewData
+import com.prography.pethotel.room.AppDatabase
+import com.prography.pethotel.room.auth.AccountPropViewModelFactory
+import com.prography.pethotel.room.auth.AccountPropertiesViewModel
 import com.prography.pethotel.ui.places.adapters.PriceAdapter
+import com.prography.pethotel.ui.places.adapters.ReviewAdapter
+import com.prography.pethotel.utils.AuthTokenViewModel
+import com.prography.pethotel.utils.AuthTokenViewModelFactory
 import kotlinx.android.synthetic.main.floating_menu.*
 import kotlinx.android.synthetic.main.fragment_place_info_details_v2.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 private const val TAG = "PlaceInfoDetailsFragmen"
 
@@ -33,7 +46,6 @@ class PlaceInfoDetailsFragment : Fragment() {
 
     private var phoneNumber : String? = ""
     private var hotelWebsite : String? = ""
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,9 +59,65 @@ class PlaceInfoDetailsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val database = AppDatabase.getInstance(requireContext())
+        val accountDao = database.accountPropertiesDao
+
+
         val hotel : HotelData = arguments?.get("hotel") as HotelData
         phoneNumber = hotel.phoneNumber
         hotelWebsite = hotel.pageLink
+
+        var reviews: ArrayList<HotelReviewData>
+
+        val call = MainApi.petHotelRetrofitService.getHotelReviews(hotel.id)
+        val callback = object : Callback<GetReviewResponse>{
+            override fun onFailure(call: Call<GetReviewResponse>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+                no_review_layout.visibility = View.VISIBLE
+                user_average_rating.rating = 0.toFloat()
+            }
+            override fun onResponse(
+                call: Call<GetReviewResponse>,
+                response: Response<GetReviewResponse>
+            ) {
+                Log.d(TAG, "onResponse: ${response.body()}")
+                val response = response.body()
+
+                if (response != null) {
+                    if(response.data.isNullOrEmpty()){
+                        no_review_layout.visibility = View.VISIBLE
+                        user_average_rating.rating = 0.toFloat()
+                    }else{
+                        reviews = response.data as ArrayList<HotelReviewData>
+
+                        var ratingSum = 0
+                        var ratingAvg: Int
+                        reviews.forEach {
+                            ratingSum += it.rating
+                        }
+                        ratingAvg = ratingSum / response.data.size
+                        user_average_rating.rating = ratingAvg.toFloat()
+
+                        val reviewAdapter = ReviewAdapter(
+                            reviews = reviews,
+                            context = requireContext()
+                        )
+                        detail_rv_review.apply {
+                            adapter = reviewAdapter
+                            setHasFixedSize(true)
+                            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                        }
+                    }
+                }
+            }
+        }
+        call.enqueue(callback)
+
+//        tv_load_more_reviews.setOnClickListener {
+//            val reviewArray = reviews.toArray()
+//            val bundle = bundleOf("reviews" to reviewArray)
+//            findNavController().navigate(R.id.action_placeInfoDetailsFragment_to_moreReviewFragment, bundle)
+//        }
 
         /* FAB 초기화 하기 (누르면 여러개 나오는 FAB)*/
         initFloatingActionButtonMenu()
@@ -79,35 +147,35 @@ class PlaceInfoDetailsFragment : Fragment() {
         }
 
         /*리뷰 관련 기능은 일시적으로 커맨트 처리 */
-//        val list = hotel.reviews ?: arrayListOf(EmptyReview(0))
-//        val list = hotel.review ?: DummyData.hotelReviews
-//
-//        val myAdapter = object : GenericRecyclerViewAdapter<Any>(list as ArrayList<Any>){
-//            override fun getLayoutId(position: Int, obj: Any): Int {
-//                return when(obj){
-//                    is HotelReview -> R.layout.place_detail_review_view_holder
-//                    else -> R.layout.no_review_layout
-//                }
-//            }
-//
-//            override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
-//                return HotelViewHolderFactory.create(view, viewType)
-//            }
-//        }
-//
-//        rv_hotel_review.apply {
-//            adapter = myAdapter
-//            setHasFixedSize(true)
-//            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//        }
+
+        action_write_review.setOnClickListener {
+            val bundle = bundleOf("hotel" to hotel)
+            findNavController().navigate(R.id.action_placeInfoDetailsFragment_to_writeReviewFragment, bundle)
+            multiple_actions_menu.collapse()
+        }
     }
 
 
     @SuppressLint("SetTextI18n")
     private fun setHotelDataToView(hotel : HotelData){
+
         place_detail_name.text = hotel.name
-        place_detail_address.text = hotel.addressDetail
-        tv_place_detail.text = hotel.description
+
+        when {
+            hotel.address == null || hotel.addressDetail == null -> {
+                place_detail_address.text = "주소정보없음"
+            }
+            else -> {
+                place_detail_address.text = hotel.address + "\n" + hotel.addressDetail
+            }
+        }
+
+        /* 설명이 다섯 글자 미만이면 데이터가 올바르지 않은 것으로 처리한다. */
+        if(hotel.description.isEmpty() || hotel.description.length < 5){
+            tv_place_detail.text = "설명이 없습니다!"
+        }else{
+            tv_place_detail.text = hotel.description
+        }
 
         when {
             hotel.monitorAvailable -> {
@@ -145,7 +213,9 @@ class PlaceInfoDetailsFragment : Fragment() {
 
         action_save_like.setOnClickListener { floatingActionsMenu.collapse() }
 
+
         floating_menu_background.setOnClickListener { floatingActionsMenu.collapse() }
+
         floatingActionsMenu.setOnFloatingActionsMenuUpdateListener(object :
             OnFloatingActionsMenuUpdateListener {
             override fun onMenuExpanded() {
@@ -210,39 +280,3 @@ class PlaceInfoDetailsFragment : Fragment() {
         }
     }
 
-
-
-
-//object HotelViewHolderFactory{
-//
-//    fun create(view : View, viewType : Int) : RecyclerView.ViewHolder{
-//        return when(viewType){
-//            R.layout.place_detail_review_view_holder -> ReviewViewHolder(view)
-//            R.layout.no_review_layout -> NoResultViewHolder(view)
-//            else -> {
-//                ReviewViewHolder(view)
-//            }
-//        }
-//    }
-//
-//    class ReviewViewHolder(itemView: View)
-//        : RecyclerView.ViewHolder(itemView), GenericRecyclerViewAdapter.Binder<HotelReview>{
-//
-//        override fun bind(data: HotelReview) {
-//            itemView.tv_user_name.text = data.userName
-//            itemView.tv_user_review.text = data.reviewContent
-//            itemView.user_rating.rating = data.rating.toFloat()
-//        }
-//    }
-//
-//    class NoResultViewHolder(itemView: View)
-//        : RecyclerView.ViewHolder(itemView), GenericRecyclerViewAdapter.Binder<Any>{
-//
-//        override fun bind(data: Any) {
-//            // 데이터 없고 그냥 리뷰 없음 레이아웃만 띄워주기
-//        }
-//
-//    }
-//
-//    private const val TAG = "PlaceInfoDetailsFragment"
-//}

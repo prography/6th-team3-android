@@ -63,8 +63,8 @@ interface  AuthApiService{
     fun getUser(@Header("Authorization") token : String) : Call<UserInfoResponse> //GET 마이페이지
 
     @POST("pet")
-    suspend fun registerPet(@Header("Authorization") token : String,
-                            @Body registerPetBody: RegisterPetBody) : PostPetResponse
+    fun registerPet(@Header("Authorization") token : String,
+                            @Body registerPetBody: RegisterPetBody) : Call<PostPetResponse>
 
     @POST("user")
     suspend fun kakaoRegister(@Body kakaoRegisterBody: KakaoRegisterBody) : RegistrationResponse

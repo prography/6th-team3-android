@@ -53,7 +53,7 @@ class PopularPlaceAdapter(
             itemView.place_info_name.text = hotel.name
             itemView.place_info_address.text = hotel.address
 
-            if(hotel.distanceFromUser == Int.MAX_VALUE){
+            if(hotel.distanceFromUser == Int.MAX_VALUE || hotel.distanceFromUser > 100){
                 itemView.place_info_distance.text = ""
             }else{
                 itemView.place_info_distance.text = "${hotel.distanceFromUser}km"

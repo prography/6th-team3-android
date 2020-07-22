@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.mypage.UserInfoEditFragment">
+
+
+    <EditText
+        android:id="@+id/edit_user_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="이메일"
+        android:layout_marginTop="@dimen/margin_1_5x"
+        android:layout_marginStart="@dimen/margin_1_5x"
+        android:layout_marginEnd="@dimen/margin_1_5x"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_user_image" />
+
+    <ImageView
+        android:id="@+id/edit_user_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/pet_profile_placeholder"
+        android:layout_marginTop="@dimen/margin_1_5x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+         />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <TextView
+        android:id="@+id/label_edit_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원 정보 수정"
+        android:layout_marginStart="@dimen/margin_1_5x"
+        android:layout_marginBottom="@dimen/margin_1_5x"
+        style="@style/phTitle"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_user_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:hint="전화번호"
+        android:layout_marginEnd="@dimen/margin_1_5x"
+        android:layout_marginTop="@dimen/margin_1x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/edit_user_email"
+        app:layout_constraintTop_toBottomOf="@+id/edit_user_email" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_1_5x"
+        android:layout_marginEnd="@dimen/margin_1_5x"
+        android:layout_marginTop="@dimen/margin_1_5x"
+        android:text="정보 수정 완료"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_pw_check" />
+
+    <EditText
+        android:id="@+id/edit_pw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="비밀번호"
+        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_marginStart="@dimen/margin_1_5x"
+        android:layout_marginEnd="@dimen/margin_1_5x"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_user_phone" />
+
+    <EditText
+        android:id="@+id/edit_pw_check"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_1_5x"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="@dimen/margin_1_5x"
+        android:ems="10"
+        android:hint="비밀번호 확인"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_pw" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

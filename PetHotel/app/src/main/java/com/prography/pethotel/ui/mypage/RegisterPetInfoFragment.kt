@@ -64,11 +64,17 @@ class RegisterPetInfoFragment : BaseFragment() {
         view.btn_register_full_info_done.setOnClickListener{
             registerPetInfoToUser(petList)
             registerViewModel.getRegisterPetResponse().observe(viewLifecycleOwner, Observer {
-                if(it.status == "success"){
-                    Toast.makeText(requireContext(), "펫 등록 성공!", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_registerPetInfoFragment_to_petInfoFragment)
-                }else{
-                    Toast.makeText(requireContext(), "펫 등록 실패!", Toast.LENGTH_SHORT).show()
+                when {
+                    it == null -> {
+                        Log.d(TAG, "onCreateView: 펫 등록 결과가 null 입니다")
+                    }
+                    it.status == "success" -> {
+                        Toast.makeText(requireContext(), "펫 등록 성공!", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_registerPetInfoFragment_to_petInfoFragment)
+                    }
+                    else -> {
+                        Toast.makeText(requireContext(), "펫 등록 실패!", Toast.LENGTH_SHORT).show()
+                    }
                 }
             })
         }
@@ -203,27 +209,33 @@ class RegisterPetInfoFragment : BaseFragment() {
                 )
                 registerViewModel.getRegisterPetResponse().observe(viewLifecycleOwner, Observer {
                     petResponse ->
-                    if(petResponse.message == "success"){
-                        Log.d(TAG, "registerPetInfoToUser: 펫 등록 성공")
-                        Log.d(TAG, "registerPetInfoToUser: ${petResponse.data[0].breed}")
-                        petResponse.data.forEach {
-                            petData ->
-                            accountPropertiesViewModel.insertPetToDb(
-                                Pet(
-                                    petId = petData.id,
-                                    petName = petData.name,
-                                    petBirthYear = petData.year,
-                                    dogRegisterNo = petData.registerNum,
-                                    rfidCardNo = petData.rfidCode,
-                                    gender = petData.gender,
-                                    kind = petData.breed,
-                                    isNeutered = petData.isNeutered,
-                                    ownerId = userResponse.id
-                                )
-                            )
+
+                    when {
+                        petResponse == null -> {
+                            Log.d(TAG, "registerPetInfoToUser: REGISTER FAILED")
                         }
-                    }else{
-                        Log.d(TAG, "registerPetInfoToUser: 펫 등록 실패")
+                        petResponse.message == "success" -> {
+                            Log.d(TAG, "registerPetInfoToUser: 펫 등록 성공")
+                            Log.d(TAG, "registerPetInfoToUser: ${petResponse.data[0].breed}")
+                            petResponse.data.forEach { petData ->
+                                accountPropertiesViewModel.insertPetToDb(
+                                    Pet(
+                                        petId = petData.id,
+                                        petName = petData.name,
+                                        petBirthYear = petData.year,
+                                        dogRegisterNo = petData.registerNum,
+                                        rfidCardNo = petData.rfidCode,
+                                        gender = petData.gender,
+                                        kind = petData.breed,
+                                        isNeutered = petData.isNeutered,
+                                        ownerId = userResponse.id
+                                    )
+                                )
+                            }
+                        }
+                        else -> {
+                            Log.d(TAG, "registerPetInfoToUser: REGISTER FAILED 2")
+                        }
                     }
                 })
             }else{

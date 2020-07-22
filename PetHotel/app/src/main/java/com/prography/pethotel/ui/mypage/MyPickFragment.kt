@@ -13,8 +13,6 @@ import kotlinx.android.synthetic.main.my_page_my_pick_fragment.*
 
 class MyPickFragment : Fragment() {
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

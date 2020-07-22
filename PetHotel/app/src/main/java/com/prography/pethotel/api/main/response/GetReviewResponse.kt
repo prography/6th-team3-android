@@ -1,17 +1,21 @@
 package com.prography.pethotel.api.main.response
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 
+@Parcelize
 data class GetReviewResponse(
     val `data`: List<HotelReviewData>,
     val message: String,
     val status: Int
-)
+) : Parcelable
 
 @Entity(tableName = "hotel_review")
+@Parcelize
 data class HotelReviewData(
     @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = false) val id: Int,
     @ColumnInfo(name = "userId") val userId: Int,
@@ -20,7 +24,7 @@ data class HotelReviewData(
     @ColumnInfo(name = "rating") val rating: Int,
     @ColumnInfo(name = "createdAt") val createdAt: String,
     @ColumnInfo(name = "updatedAt") val updatedAt: String
-)
+) : Parcelable
 
 //{"status":201,"message":"Success reviews get",
 // "data":[

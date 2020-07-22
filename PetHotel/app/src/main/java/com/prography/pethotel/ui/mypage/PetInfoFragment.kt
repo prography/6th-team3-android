@@ -17,7 +17,9 @@ class PetInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pet_info, container, false)
+        val view = inflater.inflate(R.layout.fragment_pet_info, container, false)
+        //TODO 만약 펫 정보가 있다면 없음 화면 대신 카드 리스트를 띄워주기
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

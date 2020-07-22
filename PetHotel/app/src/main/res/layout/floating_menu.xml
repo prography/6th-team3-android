@@ -69,7 +69,15 @@
             app:fab_title="저장 및 단골등록"
             app:fab_colorPressed="@color/half_black" />
 
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_write_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_icon="@drawable/ic_baseline_edit_24"
+            app:fab_colorNormal="@color/colorWhite"
+            app:fab_title="후기작성"
+            app:fab_colorPressed="@color/half_black" />
 
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </RelativeLayout>

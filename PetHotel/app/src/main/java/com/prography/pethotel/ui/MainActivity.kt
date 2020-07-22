@@ -89,7 +89,8 @@ class MainActivity : AppCompatActivity(){
                             userId = it.id,
                             userName = it.name,
                             profileImage = it.profileImage,
-                            phoneNumber = it.phoneNumber
+                            phoneNumber = it.phoneNumber,
+                            userToken = token
                         )
                     )
                     Log.d(TAG, "onCreate: 데이터베이스에 유저 정보 저장!")

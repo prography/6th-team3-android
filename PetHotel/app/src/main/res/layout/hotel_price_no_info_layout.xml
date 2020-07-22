@@ -2,27 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding_large_16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/img_no_info"
         android:src="@drawable/mily_sleepy"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias=".9"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="80dp"
         android:layout_height="80dp"/>
 
     <TextView
         android:id="@+id/tv_no_info"
         android:text="가격 정보가 없습니다."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_no_info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/img_no_info"
-        app:layout_constraintTop_toTopOf="parent"
+        android:padding="@dimen/padding_small_4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

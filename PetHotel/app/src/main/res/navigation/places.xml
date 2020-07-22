@@ -25,7 +25,14 @@
             app:argType="com.prography.pethotel.api.main.response.HotelData" />
         <action
             android:id="@+id/action_placeInfoDetailsFragment_to_reservationFragment2"
-            app:destination="@id/reservationFragment2" />
+            app:destination="@id/reservationFragment2"
+            app:enterAnim="@anim/nav_default_pop_enter_anim" />
+        <action
+            android:id="@+id/action_placeInfoDetailsFragment_to_writeReviewFragment"
+            app:destination="@id/writeReviewFragment" />
+        <action
+            android:id="@+id/action_placeInfoDetailsFragment_to_moreReviewFragment"
+            app:destination="@id/moreReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/reservationFragment2"
@@ -37,7 +44,8 @@
             app:argType="com.prography.pethotel.api.main.response.HotelData" />
         <action
             android:id="@+id/action_reservationFragment2_to_reservationDetailFragment2"
-            app:destination="@id/reservationDetailFragment2" />
+            app:destination="@id/reservationDetailFragment2"
+            app:enterAnim="@anim/nav_default_pop_enter_anim" />
     </fragment>
     <fragment
         android:id="@+id/reservationDetailFragment2"
@@ -46,11 +54,36 @@
         tools:layout="@layout/fragment_reservation_detail" >
         <action
             android:id="@+id/action_reservationDetailFragment2_to_reservationDoneFragment2"
-            app:destination="@id/reservationDoneFragment2" />
+            app:destination="@id/reservationDoneFragment2"
+            app:enterAnim="@anim/nav_default_pop_enter_anim" />
     </fragment>
     <fragment
         android:id="@+id/reservationDoneFragment2"
         android:name="com.prography.pethotel.ui.reservation.ReservationDoneFragment"
         android:label="fragment_reservation_done"
-        tools:layout="@layout/fragment_reservation_done" />
+        tools:layout="@layout/fragment_reservation_done" >
+        <action
+            android:id="@+id/action_reservationDoneFragment2_to_placeInfoFragment"
+            app:destination="@id/placeInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeReviewFragment"
+        android:name="com.prography.pethotel.ui.places.WriteReviewFragment"
+        android:label="fragment_write_review"
+        tools:layout="@layout/fragment_write_review" >
+        <action
+            android:id="@+id/action_writeReviewFragment_to_placeInfoDetailsFragment"
+            app:destination="@id/placeInfoDetailsFragment" />
+        <argument
+            android:name="hotel"
+            app:argType="com.prography.pethotel.api.main.response.HotelData" />
+    </fragment>
+    <fragment
+        android:id="@+id/moreReviewFragment"
+        android:name="com.prography.pethotel.ui.places.MoreReviewFragment"
+        android:label="fragment_more_review"
+        tools:layout="@layout/fragment_more_review" >
+        <argument android:name="reviews"
+            app:argType="com.prography.pethotel.api.main.response.HotelReviewData[]" />
+    </fragment>
 </navigation>

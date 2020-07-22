@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.prography.pethotel.api.auth.response.UserToken
 import com.prography.pethotel.room.entities.Pet
 import com.prography.pethotel.room.entities.User
 import com.prography.pethotel.room.entities.UserAndAllPets
@@ -44,9 +45,9 @@ class AccountPropertiesViewModel(
     }
 
     /* 유저 정보를 테이블에서 불러온다 */
-    fun fetchUser(userId : Int){
+    fun fetchUser(userToken: String){
         coroutineScope.launch {
-            val result = getUserInfoFromDb(userId)
+            val result = getUserInfoFromDb(userToken)
             userProperty.value = result
         }
     }
@@ -59,18 +60,18 @@ class AccountPropertiesViewModel(
         }
     }
 
-    fun deleteUserProperties(userId : Int){
+    fun deleteUserProperties(userToken: String){
         coroutineScope.launch {
             val result = withContext(Dispatchers.IO){
-                accountPropertiesDao.deleteUserInfo(userId)
+                accountPropertiesDao.deleteUserInfo(userToken)
             }
             Log.d(TAG, "deleteUserProperties: DELETE User info result => $result")
         }
     }
 
-    private suspend fun getUserInfoFromDb(userId : Int) =
+    private suspend fun getUserInfoFromDb(userToken: String) =
         withContext(Dispatchers.IO){
-            accountPropertiesDao.getUserInfo(userId)
+            accountPropertiesDao.getUserInfo(userToken)
         }
 
     private suspend fun getUserAndPetsFromDb() =

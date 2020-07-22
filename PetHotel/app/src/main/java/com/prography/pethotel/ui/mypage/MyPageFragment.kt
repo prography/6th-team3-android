@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.prography.pethotel.R
+import com.prography.pethotel.room.auth.AccountPropertiesViewModel
 import com.prography.pethotel.ui.authentication.LoginRegisterActivity
 import com.prography.pethotel.utils.AuthTokenViewModel
 import com.prography.pethotel.utils.TokenState
@@ -21,7 +22,8 @@ private const val TAG = "MyPageFragment"
 class MyPageFragment : Fragment() {
 
     private var myPageView : View? = null
-    private val loginStateViewModel: AuthTokenViewModel by activityViewModels()
+    private val authTokenViewModel: AuthTokenViewModel by activityViewModels()
+    private val accountPropertiesViewModel : AccountPropertiesViewModel by activityViewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +37,7 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        if(loginStateViewModel.isTokenValid(requireActivity())){
+        if(authTokenViewModel.isTokenValid(requireActivity())){
             myPageView = inflater.inflate(R.layout.new_my_page_logged_in_layout, container, false)
         }else{
             myPageView = inflater.inflate(R.layout.new_my_page_not_logged_in_layout, container, false)
@@ -46,7 +48,7 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loginStateViewModel.userTokenState.observe(viewLifecycleOwner, Observer {
+        authTokenViewModel.userTokenState.observe(viewLifecycleOwner, Observer {
             when(it){
                 TokenState.STORED -> myPageView?.let { v -> setLoggedInView(v) }
                 TokenState.REMOVED -> {
@@ -87,7 +89,7 @@ class MyPageFragment : Fragment() {
 
         view.mypage_edit_user_pet_info.setOnClickListener {
             //내 정보 수정 페이지로 이동한다.
-//            findNavController().navigate(R.id.action_myPageFragment_to_userInfoEditFragment)
+            findNavController().navigate(R.id.action_myPageFragment_to_userInfoEditFragment)
         }
 
         view.mypage_my_favorites.setOnClickListener {
@@ -105,7 +107,9 @@ class MyPageFragment : Fragment() {
             findNavController().navigate(R.id.action_myPageFragment_to_settingsFragment)
         }
         view.btn_mypage_logout.setOnClickListener {
-            loginStateViewModel.removeUserToken(requireActivity())
+            val token = authTokenViewModel.getUserToken(requireActivity())
+            authTokenViewModel.removeUserToken(requireActivity())
+            accountPropertiesViewModel.deleteUserProperties(token)
 
             Log.d(TAG, "setLoggedInView: 로그아웃 클릭")
         }
