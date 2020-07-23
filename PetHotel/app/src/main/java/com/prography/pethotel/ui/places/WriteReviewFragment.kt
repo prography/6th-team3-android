@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.prography.pethotel.R
 import com.prography.pethotel.api.main.MainApi
@@ -29,8 +30,8 @@ private const val TAG = "WriteReviewFragment"
 class WriteReviewFragment : Fragment() {
 
 
-    lateinit var authTokenViewModel: AuthTokenViewModel
-    lateinit var accountPropertiesViewModel: AccountPropertiesViewModel
+    private val authTokenViewModel: AuthTokenViewModel by activityViewModels()
+    val accountPropertiesViewModel: AccountPropertiesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,16 +44,6 @@ class WriteReviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val database = AppDatabase.getInstance(requireContext())
-        val accountDao = database.accountPropertiesDao
-
-        accountPropertiesViewModel = ViewModelProvider(
-            requireActivity(),
-            AccountPropViewModelFactory(accountDao, requireActivity().application)
-        )[AccountPropertiesViewModel::class.java]
-
-        authTokenViewModel = ViewModelProvider(requireActivity(), AuthTokenViewModelFactory())
-            .get(AuthTokenViewModel::class.java)
 
         val token = authTokenViewModel.getUserToken(requireActivity())
         accountPropertiesViewModel.fetchUser(token)

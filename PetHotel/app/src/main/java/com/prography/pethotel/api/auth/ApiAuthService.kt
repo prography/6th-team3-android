@@ -1,13 +1,7 @@
 package com.prography.pethotel.api.auth
 
-import com.prography.pethotel.api.auth.request.KakaoRegisterBody
-import com.prography.pethotel.api.auth.request.LoginInfoBody
-import com.prography.pethotel.api.auth.request.RegisterPetBody
-import com.prography.pethotel.api.auth.request.RegisterUserInfo
-import com.prography.pethotel.api.auth.response.GeneralLoginResponse
-import com.prography.pethotel.api.auth.response.PetNumResponse
-import com.prography.pethotel.api.auth.response.PostPetResponse
-import com.prography.pethotel.api.auth.response.RegistrationResponse
+import com.prography.pethotel.api.auth.request.*
+import com.prography.pethotel.api.auth.response.*
 import com.prography.pethotel.api.main.response.UserInfoResponse
 import com.prography.pethotel.utils.ANIMAL_NUM_BASE_URL
 import com.prography.pethotel.utils.BASE_URL
@@ -18,6 +12,8 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.Header
 
 
 //GET https://api.mypetmily.net/hotels
@@ -61,6 +57,9 @@ interface  AuthApiService{
 
     @GET("user")
     fun getUser(@Header("Authorization") token : String) : Call<UserInfoResponse> //GET 마이페이지
+
+    @POST("pet/check")
+    fun checkPet(@Body checkPetBody: CheckPetBody) : Call<CheckPetResponse>
 
     @POST("pet")
     fun registerPet(@Header("Authorization") token : String,

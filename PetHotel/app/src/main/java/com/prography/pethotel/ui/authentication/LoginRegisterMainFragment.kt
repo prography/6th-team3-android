@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,23 +13,24 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
 import com.kakao.util.exception.KakaoException
-
 import com.prography.pethotel.R
 import com.prography.pethotel.api.auth.request.LoginInfoBody
 import com.prography.pethotel.api.auth.response.UserToken
+import com.prography.pethotel.room.auth.AccountPropertiesViewModel
 import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.authentication.kakao.KakaoLoginActivity
-import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModel
-import com.prography.pethotel.ui.authentication.login.LoginViewModelFactory
+import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.utils.AuthTokenViewModel
 import kotlinx.android.synthetic.main.login_register_fragment.*
+import com.prography.pethotel.room.entities.User
 
 class LoginRegisterMainFragment : Fragment() {
 
@@ -41,11 +41,10 @@ class LoginRegisterMainFragment : Fragment() {
         private const val TAG = "LoginRegisterMainFragment"
     }
 
-    private lateinit var registerViewModel: RegisterViewModel
-
-    private lateinit var loginViewModel : LoginViewModel
-
-    private lateinit var loginStateViewModel: AuthTokenViewModel
+    private val registerViewModel: RegisterViewModel by activityViewModels()
+    private val loginViewModel : LoginViewModel by activityViewModels()
+    private val authTokenViewModel: AuthTokenViewModel by activityViewModels()
+    private val accountPropertiesViewModel : AccountPropertiesViewModel by activityViewModels()
 
     private lateinit var userToken : UserToken
 
@@ -74,14 +73,6 @@ class LoginRegisterMainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        loginStateViewModel = ViewModelProvider(requireActivity()).get(AuthTokenViewModel::class.java)
-
-        registerViewModel = ViewModelProvider(requireActivity()).get(RegisterViewModel::class.java)
-
-        loginViewModel = ViewModelProvider(requireActivity(),
-            LoginViewModelFactory()
-        ).get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner, Observer {
             val loginState = it ?: return@Observer
@@ -231,16 +222,27 @@ class LoginRegisterMainFragment : Fragment() {
     /*로그인이 성공적이면 UI를 유저 정보를 활용해 업데이트 한다. */
     private fun updateUiWithUser(userToken: String) {
         Log.d(TAG, "updateUiWithUser: $userToken")
-        val welcome = "(일반로그인 성공) 환영합니다!"
+        val welcome = "일반로그인 성공!"
         Toast.makeText(
             requireContext(),
             welcome,
             Toast.LENGTH_LONG
         ).show()
 
-        loginStateViewModel.setUserToken(requireActivity(), userToken)
-//        val pref = requireActivity().getSharedPreferences(USER_TOKEN, MODE_PRIVATE)
-//        pref.edit().putString(USER_TOKEN, userToken).apply()
+        authTokenViewModel.setUserToken(requireActivity(), userToken)
+        registerViewModel.getUser(userToken)
+
+        registerViewModel.getUserInfoResponse().observe(viewLifecycleOwner, Observer {
+            accountPropertiesViewModel.insertUserToDb(
+                User(
+                    userId = it.id,
+                    userName = it.name,
+                    phoneNumber = it.phoneNumber,
+                    profileImage = it.profileImage,
+                    userToken = userToken
+                )
+            )
+        })
 
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)

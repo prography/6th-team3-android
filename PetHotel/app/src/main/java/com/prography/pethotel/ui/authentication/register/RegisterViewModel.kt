@@ -6,7 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kakao.usermgmt.response.UserResponse
+import com.prography.pethotel.api.auth.request.CheckPetBody
 import com.prography.pethotel.api.auth.request.KakaoRegisterBody
+import com.prography.pethotel.api.auth.request.RegisterPetBody
+import com.prography.pethotel.api.auth.response.CheckPetResponseData
 import com.prography.pethotel.api.auth.response.PetNumResponse
 import com.prography.pethotel.api.auth.response.PostPetResponse
 import com.prography.pethotel.api.auth.response.UserToken
@@ -53,6 +56,10 @@ class RegisterViewModel : ViewModel() {
         return RegisterRepository.registerStatus
     }
 
+    fun getCheckPetResponse() : LiveData<CheckPetResponseData>{
+        return RegisterRepository.checkPetResponse
+    }
+
     fun getUserToken() : LiveData<UserToken>{
         return RegisterRepository.userToken
     }
@@ -69,12 +76,12 @@ class RegisterViewModel : ViewModel() {
         RegisterRepository.generalRegister(generalUserInfo)
     }
 
-    fun checkPetNumber(dogRegNo : String){
-        RegisterRepository.checkPetNumber(dogRegNo)
+    fun checkPetNumber(checkPetBody: CheckPetBody){
+        RegisterRepository.checkPet(checkPetBody)
     }
 
-    fun registerPetToUser(userToken: String, userId : Int, petList : ArrayList<PetInfo>){
-        RegisterRepository.registerPetInfo(userToken, userId, petList)
+    fun registerPetToUser(token: String, registerPetBody: RegisterPetBody){
+        RegisterRepository.registerPetInfo(token, registerPetBody)
     }
 
     /*이미 회원가입 된 사용자의 정보를 리턴한다.

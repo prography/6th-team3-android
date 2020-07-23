@@ -66,6 +66,9 @@ class AccountPropertiesViewModel(
                 accountPropertiesDao.deleteUserInfo(userToken)
             }
             Log.d(TAG, "deleteUserProperties: DELETE User info result => $result")
+            if(result > 0){
+                userProperty.value = null
+            }
         }
     }
 

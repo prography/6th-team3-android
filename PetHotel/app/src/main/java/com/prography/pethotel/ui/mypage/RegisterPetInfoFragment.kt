@@ -1,33 +1,25 @@
 package com.prography.pethotel.ui.mypage
 
-import android.content.Context.MODE_PRIVATE
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
 import com.prography.pethotel.R
-import com.prography.pethotel.api.auth.response.PetNumResponse
-import com.prography.pethotel.models.PetInfo
-import com.prography.pethotel.room.AppDatabase
-import com.prography.pethotel.room.auth.AccountPropViewModelFactory
+import com.prography.pethotel.api.auth.request.CheckPetBody
+import com.prography.pethotel.api.auth.request.PetData
+import com.prography.pethotel.api.auth.request.RegisterPetBody
 import com.prography.pethotel.room.auth.AccountPropertiesViewModel
 import com.prography.pethotel.room.entities.Pet
-import com.prography.pethotel.ui.MainActivity
-import com.prography.pethotel.ui.authentication.login.LoginViewModel
 import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.ui.authentication.utils.BaseFragment
 import com.prography.pethotel.utils.AuthTokenViewModel
-import com.prography.pethotel.utils.AuthTokenViewModelFactory
 import com.prography.pethotel.utils.TAG_PET_DETAIL
-import com.prography.pethotel.utils.USER_TOKEN
 import kotlinx.android.synthetic.main.fragment_register_pet_info.view.*
 import kotlinx.android.synthetic.main.pet_detail_layout.view.*
 import kotlinx.android.synthetic.main.pet_detail_layout.view.btn_erase_pet_card
@@ -42,11 +34,14 @@ class RegisterPetInfoFragment : BaseFragment() {
         const val LAYOUT_ID_ : String = "layout_id_"
     }
 
-    lateinit var registerViewModel : RegisterViewModel
-    lateinit var accountPropertiesViewModel: AccountPropertiesViewModel
-    lateinit var authTokenViewModel: AuthTokenViewModel
+    private val registerViewModel : RegisterViewModel by activityViewModels()
+    private val accountPropertiesViewModel: AccountPropertiesViewModel by activityViewModels()
+    private val authTokenViewModel: AuthTokenViewModel by activityViewModels()
 
-    private val petList : ArrayList<PetInfo> = ArrayList()
+    private val checkedPetList : ArrayList<PetData> = ArrayList()
+    private var token : String = ""
+    var name : String = ""
+    var birthYear : Int = 2005
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,23 +56,13 @@ class RegisterPetInfoFragment : BaseFragment() {
             view.pet_info_input_layout.addView(createPetInfoInputFieldLayout(container))
         }
 
-        view.btn_register_full_info_done.setOnClickListener{
-            registerPetInfoToUser(petList)
-            registerViewModel.getRegisterPetResponse().observe(viewLifecycleOwner, Observer {
-                when {
-                    it == null -> {
-                        Log.d(TAG, "onCreateView: 펫 등록 결과가 null 입니다")
-                    }
-                    it.status == "success" -> {
-                        Toast.makeText(requireContext(), "펫 등록 성공!", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_registerPetInfoFragment_to_petInfoFragment)
-                    }
-                    else -> {
-                        Toast.makeText(requireContext(), "펫 등록 실패!", Toast.LENGTH_SHORT).show()
-                    }
+           view.btn_register_full_info_done.setOnClickListener{
+                if(token != "" && !checkedPetList.isNullOrEmpty()) {
+                    registerPetInfoToUser(token, checkedPetList)
+                }else{
+                    Log.d(TAG, "onCreateView: token or pet list is empty")
                 }
-            })
-        }
+            }
         return view
     }
 
@@ -85,19 +70,44 @@ class RegisterPetInfoFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        registerViewModel = ViewModelProvider(requireActivity())[RegisterViewModel::class.java]
+        token = authTokenViewModel.getUserToken(requireActivity())
+        accountPropertiesViewModel.fetchUser(token)
 
-        /* 계정 정보 관련 뷰모델 초기화 */
-        val database = AppDatabase.getInstance(requireContext())
-        val accountDao = database.accountPropertiesDao
-        accountPropertiesViewModel = ViewModelProvider(requireActivity(),
-        AccountPropViewModelFactory(
-            accountPropertiesDao = accountDao,
-            application = requireActivity().application
-        ))[AccountPropertiesViewModel::class.java]
+        registerViewModel.getRegisterPetResponse().observe(viewLifecycleOwner, Observer {
+            when {
+                it == null -> {
+                    Log.d(TAG, "onCreateView: 펫 등록 결과가 null 입니다")
+                    Toast.makeText(requireContext(), "펫 등록 실패! (서버 에러)", Toast.LENGTH_SHORT).show()
+                }
+                it.status == "success" -> {
+                    Toast.makeText(requireContext(), "펫 등록 성공!", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_registerPetInfoFragment_to_petInfoFragment)
+                }
+                else -> {
+                    Toast.makeText(requireContext(), "펫 등록 실패! (status ${it.status})", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
 
-        authTokenViewModel = ViewModelProvider(requireActivity()
-            , AuthTokenViewModelFactory())[AuthTokenViewModel::class.java]
+        registerViewModel.getCheckPetResponse().observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "setOnClickListenerOnPetCard: onChanged... ")
+            Log.d(TAG, "onActivityCreated: $it")
+
+            if(it != null){
+                Log.d(TAG, "setOnClickListenerOnPetCard: $it")
+                checkedPetList.add(
+                    PetData(
+                        petName = name,
+                        registerNumber = it.registerNumber,
+                        year = birthYear,
+                        breed = it.breed,
+                        isNeutered = it.isNeutered,
+                        gender = it.gender,
+                        rfidCode = it.registerNumber
+                    ) //TODO 사진도 추가하면 이 부분 필드 수정할 것
+                )
+            }
+        })
     }
 
     /* pet 카드를 하나 증가시킨다. 타이틀을 +1하고, 해당 뷰에 클릭 리스너를 달아준다. */
@@ -113,47 +123,29 @@ class RegisterPetInfoFragment : BaseFragment() {
     private fun setOnClickListenerOnPetCard(view : View){
         Log.d(TAG_PET_DETAIL, "setting click listeners on ${view.tag}")
         view.apply {
+
+            /* 등록번호확인 버튼을 눌렀을 때 */
             check_register_pet_number.setOnClickListener {
 
                 /* 해당 뷰에 있는 Edit Text 를 찾아준다 */
                 val num = view.et_register_pet_number.text.toString()
-                val name = view.et_register_pet_name.text.toString()
-                val birthYear = view.et_register_pet_birth_year.text.toString()
+                name = view.et_register_pet_name.text.toString()
+                birthYear = view.et_register_pet_birth_year.text.toString().toInt()
 
                 /*필드 중 하나라도 비어있으면 정보 입력 하세요 토스트 */
                 if(name.isEmpty() ||
                         num.isEmpty() ||
-                        birthYear.isEmpty()){
+                        birthYear < 2000){
                     Toast.makeText(requireContext(), getString(R.string.enter_info_msg), Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    /* 하나의 카드에서 저장해둔 내용들 */
-                    val petInfo = PetInfo(name = name, registrationNum = num, birthYear = birthYear)
-
-                    /* 동물등록번호 요청하고 응답 기다리기 */
-                    registerViewModel.checkPetNumber(dogRegNo = num)
-                    registerViewModel.getPetNumberResponse().observe(viewLifecycleOwner, Observer {
-
-                        Log.d(TAG, "checkPetNumber: $it")
-
-                        /* 동물등록번호 확인이 성공적인 경우 00 코드를 반환한다. */
-                        if(it.header?.resultCode == "00"){
-                            /* in memory cache */
-                            savePetInfo(petInfo, it)
-
-                            register_pet_number_checked.visibility = View.VISIBLE
-                            Toast.makeText(requireContext(), "환영해요 ${name}!❤", Toast.LENGTH_SHORT)
-                                .show()
-
-                        /* 동물등록번호 확인이 실패하면 토스트 */
-                        }else{
-                            Toast.makeText(
-                                requireContext(),
-                                context.getString(R.string.animal_num_check_fail_msg),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    })
+                   registerViewModel.checkPetNumber(
+                       CheckPetBody(
+                           petName = name,
+                           registerNumber = num,
+                           birthYear = birthYear
+                       )
+                    )
                 }
             }
 
@@ -167,46 +159,39 @@ class RegisterPetInfoFragment : BaseFragment() {
 //                takePhoto(view= this)
 //            }
 
-            /*유저가 펫카드를 지우는 경우의 메서드.
-            * 뷰그룹에서 카드를 remove 하고,
-            * Pet 의 마리수를 줄이고 해당 Pet을 List 에서 삭제한다.
-            * 유저 모델에서도 지워진 펫에대한 업데이트를 진행한다.
-            */
+            /*유저가 펫카드를 지우는 경우 */
             btn_erase_pet_card.setOnClickListener {
-                numPets -= 1
-                val viewGroup = view.parent as ViewGroup
-                viewGroup.removeView(view)
-                /* pet list 에 대한 내용을 유저에게 업데이트 */
-                registerViewModel.setPetInfoToUser(petList)
-
+                if(numPets > 1){
+                    checkedPetList.remove(checkedPetList[--numPets])
+                    val viewGroup = view.parent as ViewGroup
+                    viewGroup.removeView(view)
+                }
+                else{
+                    Toast.makeText(requireContext(),
+                        "마지막 카드는 지울 수 없습니다!",
+                        Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
 
-    /* 원래 유저가 입력한 정보와 동물등록번호 API 에서 받아오 정보들을
-    * 합쳐서 펫 리스트에 저장한다. 유저 모델에도 해당 정보를 업데이트 한다. */
-    private fun savePetInfo(petInfo: PetInfo, petNumResponse: PetNumResponse){
-        petInfo.neuterYn = petNumResponse.body?.item?.neuterYn
-        petInfo.sexNm = petNumResponse.body?.item?.sexNm
-        petInfo.kindNm = petNumResponse.body?.item?.kindNm
-        petInfo.orgNm = petNumResponse.body?.item?.orgNm
-        petInfo.officeTel = petNumResponse.body?.item?.officeTel
-        petInfo.aprGbNm = petNumResponse.body?.item?.aprGbNm
 
-        petList.add(petInfo)
-    }
+    private fun registerPetInfoToUser(token : String, checkedPetList : ArrayList<PetData>){
+        Log.d(TAG, "registerPetInfoToUser: $token $checkedPetList")
 
-    private fun registerPetInfoToUser(petList: ArrayList<PetInfo>){
-        val token = authTokenViewModel.getUserToken(requireActivity())
-        registerViewModel.getUser(token)
-        registerViewModel.getUserInfoResponse().observe(viewLifecycleOwner, Observer {
+        accountPropertiesViewModel.userProperty.observe(viewLifecycleOwner, Observer {
             userResponse ->
-            if(userResponse.id != 0){
+            Log.d(TAG, "registerPetInfoToUser: $userResponse")
+
+            if(userResponse.userId != 0){
                 registerViewModel.registerPetToUser(
-                    userToken = token,
-                    userId = userResponse.id,
-                    petList = petList
-                )
+                    token = token,
+                    registerPetBody = RegisterPetBody(
+                                    data = checkedPetList
+                                )
+                    )// 펫들을 등록하고
+
+                //결과를 관찰한다.
                 registerViewModel.getRegisterPetResponse().observe(viewLifecycleOwner, Observer {
                     petResponse ->
 
@@ -214,7 +199,7 @@ class RegisterPetInfoFragment : BaseFragment() {
                         petResponse == null -> {
                             Log.d(TAG, "registerPetInfoToUser: REGISTER FAILED")
                         }
-                        petResponse.message == "success" -> {
+                        petResponse.status == "success" -> {
                             Log.d(TAG, "registerPetInfoToUser: 펫 등록 성공")
                             Log.d(TAG, "registerPetInfoToUser: ${petResponse.data[0].breed}")
                             petResponse.data.forEach { petData ->
@@ -228,7 +213,7 @@ class RegisterPetInfoFragment : BaseFragment() {
                                         gender = petData.gender,
                                         kind = petData.breed,
                                         isNeutered = petData.isNeutered,
-                                        ownerId = userResponse.id
+                                        ownerId = userResponse.userId
                                     )
                                 )
                             }

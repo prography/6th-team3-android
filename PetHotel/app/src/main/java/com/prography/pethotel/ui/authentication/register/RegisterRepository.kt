@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.kakao.usermgmt.response.model.User
 import com.prography.pethotel.api.auth.PetmilyAuthApi
 import com.prography.pethotel.api.auth.request.*
-import com.prography.pethotel.api.auth.response.PetNumResponse
-import com.prography.pethotel.api.auth.response.PostPetResponse
-import com.prography.pethotel.api.auth.response.RegistrationResponse
-import com.prography.pethotel.api.auth.response.UserToken
+import com.prography.pethotel.api.auth.response.*
 import com.prography.pethotel.api.main.response.UserInfoResponse
 import com.prography.pethotel.models.GeneralUserInfo
 import com.prography.pethotel.models.PetInfo
@@ -57,48 +54,45 @@ object RegisterRepository{
     val registerPetResponse : LiveData<PostPetResponse>
         get() = _registerPetResponse
 
+    private val _checkPetResponse : MutableLiveData<CheckPetResponseData> = MutableLiveData()
+    val checkPetResponse : LiveData<CheckPetResponseData>
+        get() = _checkPetResponse
 
-    /*공공 API 에서 유효한 동물등록 번호인지를 확인하는 메서드 */
-    fun checkPetNumber(dogNum : String){
-        val response = PetmilyAuthApi.publicApiRetrofitService.getAnimalCheckResponse(
-            dog_reg_no = dogNum,
-            serviceKey = SERVICE_KEY,
-            rfid_cd = dogNum
-        )
-        response.enqueue(object : Callback<PetNumResponse> {
-            override fun onFailure(call: Call<PetNumResponse>, t: Throwable) {
+
+    fun checkPet(checkPetBody: CheckPetBody){
+        val call = PetmilyAuthApi.authApiRetrofitService.checkPet(checkPetBody)
+        val callback = object : Callback<CheckPetResponse>{
+            override fun onFailure(call: Call<CheckPetResponse>, t: Throwable) {
                 Log.d(TAG, "onFailure: ${t.message}")
+                _checkPetResponse.value = null
             }
 
-            override fun onResponse(call: Call<PetNumResponse>, response: Response<PetNumResponse>) {
-                Log.d(TAG, "onResponse: ${response.raw()}")
-                _petInfo.value = response.body()
+            override fun onResponse(
+                call: Call<CheckPetResponse>,
+                response: Response<CheckPetResponse>
+            ) {
+                Log.d(TAG, "onResponse: ${response.body()}")
+                if(response.body() != null) {
+                    if(response.body()!!.status == "success"){
+                        _checkPetResponse.value = response.body()!!.data
+                    }else{
+                        _checkPetResponse.value = null
+                    }
+                }
             }
-        })
+        }
+        call.enqueue(callback)
     }
 
-    fun registerPetInfo(userToken: String, userId : Int, petInfoList: ArrayList<PetInfo>){
-        val petDataList = ArrayList<PetData>()
-        petInfoList.forEach {
-            petDataList.add(
-                PetData(
-                petName = it.name!!,
-                registerNumber = it.registrationNum!!,
-                birthYear = it.birthYear?.toInt()!!)
-            )
-        }
+    fun registerPetInfo(token : String, registerPetBody: RegisterPetBody){
 
-        val registerPetBody = RegisterPetBody(
-            userId = userId,
-            data = petDataList as List<PetData>
-        )
         val call = PetmilyAuthApi.authApiRetrofitService.registerPet(
-            userToken, registerPetBody
+            token = token,
+            registerPetBody = registerPetBody
         )
-        val callback = object : Callback<PostPetResponse>{
+        val callback = object :Callback<PostPetResponse>{
             override fun onFailure(call: Call<PostPetResponse>, t: Throwable) {
                 Log.d(TAG, "onFailure: ${t.message}")
-                _registerPetResponse.value = null
             }
 
             override fun onResponse(
@@ -106,7 +100,6 @@ object RegisterRepository{
                 response: Response<PostPetResponse>
             ) {
                 Log.d(TAG, "onResponse: ${response.body()}")
-                _registerPetResponse.value = response.body()
             }
         }
         call.enqueue(callback)

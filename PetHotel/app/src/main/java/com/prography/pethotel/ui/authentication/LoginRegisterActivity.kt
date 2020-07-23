@@ -2,9 +2,13 @@ package com.prography.pethotel.ui.authentication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.prography.pethotel.R
+import com.prography.pethotel.room.AppDatabase
+import com.prography.pethotel.room.auth.AccountPropViewModelFactory
+import com.prography.pethotel.room.auth.AccountPropertiesViewModel
 import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModel
 import com.prography.pethotel.ui.authentication.login.LoginViewModelFactory
@@ -19,6 +23,8 @@ class LoginRegisterActivity : AppCompatActivity() {
     private lateinit var loginViewModel: LoginViewModel
 
     private lateinit var authTokenViewModel: AuthTokenViewModel
+
+    private lateinit var accountPropertiesViewModel: AccountPropertiesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,5 +41,16 @@ class LoginRegisterActivity : AppCompatActivity() {
             LoginViewModelFactory()
         )[LoginViewModel::class.java]
 
+
+        val database = AppDatabase.getInstance(this)
+        val accountDao = database.accountPropertiesDao
+
+        accountPropertiesViewModel = ViewModelProvider(
+            this,
+            AccountPropViewModelFactory(accountDao, application)
+        )[AccountPropertiesViewModel::class.java]
+
+        authTokenViewModel = ViewModelProvider(this, AuthTokenViewModelFactory())
+            .get(AuthTokenViewModel::class.java)
     }
 }
