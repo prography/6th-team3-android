@@ -68,6 +68,8 @@ interface  AuthApiService{
     @POST("user")
     suspend fun kakaoRegister(@Body kakaoRegisterBody: KakaoRegisterBody) : RegistrationResponse
 
+//    @POST("/photo/user")
+//    fun uploadUserProfileImage(@Body formData : FormData)
 }
 
 

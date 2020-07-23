@@ -20,24 +20,9 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:text="호텔 이름"
-        style="@style/phBody2"
-        android:layout_marginBottom="@dimen/margin_0_5x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
         android:text="멍멍 애견호텔"
         android:layout_marginTop="@dimen/margin_0_5x"
         android:layout_marginBottom="@dimen/margin_0_5x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:text="호텔 위치"
-        style="@style/phBody2"
-        android:layout_marginBottom="@dimen/margin_0_5x"
-        android:layout_marginTop="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -48,20 +33,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <TextView
-        android:text="예약 일시"
-        style="@style/phBody2"
-        android:layout_marginBottom="@dimen/margin_0_5x"
-        android:layout_marginTop="@dimen/margin_1x"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="213dp">
+        android:layout_marginTop="@dimen/margin_1x"
+        >
 
         <TextView
             android:id="@+id/tv_enter"

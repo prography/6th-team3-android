@@ -30,61 +30,33 @@
         android:layout_height="wrap_content"
         />
 
-    <TextView
-        android:id="@+id/tv_reservation_detail_user_name"
-        android:text="성함"
-        style="@style/phBody2"
-        android:layout_marginStart="@dimen/margin_0_5x"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
 
     <EditText
         style="@style/phEditText"
         android:id="@+id/et_reservation_detail_user_name"
-        android:hint="예) 털실맘"
+        android:hint="예약자명"
         android:ems="10"
         android:inputType="textPersonName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/tv_reservation_detail_user_email"
-        android:text="이메일"
-        style="@style/phBody2"
-        android:layout_marginTop="@dimen/margin_1x"
-        android:layout_marginStart="@dimen/margin_0_5x"
-        android:textStyle="bold"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
 
     <EditText
         style="@style/phEditText"
         android:id="@+id/et_reservation_detail_user_email"
-        android:hint="예) OOO@gmail.com"
+        android:hint="이메일 주소"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/tv_reservation_detail_user_phone"
-        android:text="전화번호"
-        style="@style/phBody2"
-        android:layout_marginTop="@dimen/margin_1x"
-        android:layout_marginStart="@dimen/margin_0_5x"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
 
     <EditText
         style="@style/phEditText"
         android:id="@+id/et_reservation_detail_user_phone"
-        android:hint="예) 01012341234"
+        android:hint="휴대전화번호 (- 생략)"
         android:ems="10"
         android:inputType="phone"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -2,9 +2,7 @@
 
 package com.prography.pethotel.api.main
 
-import androidx.room.Delete
-import com.prography.pethotel.api.main.request.ReviewDeleteBody
-import com.prography.pethotel.api.main.request.ReviewPostBody
+import com.prography.pethotel.api.main.request.*
 import com.prography.pethotel.api.main.response.*
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -31,6 +29,7 @@ private val petHotelImageSearchRetrofit
 
 interface HotelsApiService{
 
+    /* 호텔 정보 관련 API */
     @GET("hotels")
     suspend fun getHotelList() : HotelListResponse
 
@@ -59,12 +58,34 @@ interface HotelsApiService{
     fun getHotelReviews(@Path("hotelId") hotelId: Int) : Call<GetReviewResponse>
 
     @PUT("reviews/{hotelId}/{reviewId}")
-    fun updateHotelReviewById(@Path("hotelId") hotelId: Int, @Path("reviewId") reviewId : Int
-                              , @Body reviewPostBody: ReviewPostBody) : Call<UpdateReviewResponse>
+    fun updateHotelReviewById(@Path("hotelId") hotelId: Int,
+                              @Path("reviewId") reviewId : Int,
+                              @Body reviewPostBody: ReviewPostBody) : Call<UpdateReviewResponse>
 
     @DELETE("reviews/{hotelId}/{reviewId}")
-    fun deleteHotelReviewById(@Path("hotelId") hotelId: Int, @Path("reviewId") reviewId: Int,
+    fun deleteHotelReviewById(@Path("hotelId") hotelId: Int,
+                              @Path("reviewId") reviewId: Int,
                               @Body reviewDeleteBody: ReviewDeleteBody) : Call<DeleteReviewResponse>
+
+    /* 애견호텔 예약 관련 API */
+    @POST("reservations/{hotelId}")
+    fun postReservation(@Path("hotelId") hotelId: Int,
+                        @Body reservationPostBody : ReservationPostBody) : Call<ReservationPostResponse>
+
+    @GET("reservations/{hotelId}")
+    fun getReservation(@Path("hotelId") hotelId: Int)
+
+    @PUT("reservations/{hotelId}/{reservationId}")
+    fun updateReservation(@Path("hotelId") hotelId: Int,
+                          @Path("reservationId") reservationId : Int,
+                          @Body updateReservationBody : UpdateReservationBody
+    )
+
+    @DELETE("reservations/{hotelId}/{reservationId}")
+    fun deleteReservation(@Path("hotelId") hotelId: Int,
+                          @Path("reservationId") reservationId: Int,
+                          @Body deleteReservationBody : DeleteReservationBody
+    )
 
 }
 
