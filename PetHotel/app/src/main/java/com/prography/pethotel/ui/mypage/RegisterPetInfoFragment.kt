@@ -1,5 +1,8 @@
 package com.prography.pethotel.ui.mypage
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,11 +12,11 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 
 import com.prography.pethotel.R
 import com.prography.pethotel.api.auth.request.CheckPetBody
 import com.prography.pethotel.api.auth.request.PetData
-import com.prography.pethotel.api.auth.request.RegisterPetBody
 import com.prography.pethotel.room.auth.AccountPropertiesViewModel
 import com.prography.pethotel.room.entities.Pet
 import com.prography.pethotel.ui.authentication.register.RegisterViewModel
@@ -23,6 +26,11 @@ import com.prography.pethotel.utils.TAG_PET_DETAIL
 import kotlinx.android.synthetic.main.fragment_register_pet_info.view.*
 import kotlinx.android.synthetic.main.pet_detail_layout.view.*
 import kotlinx.android.synthetic.main.pet_detail_layout.view.btn_erase_pet_card
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 
 
 private const val TAG = "RegisterPetInfoFragment"
@@ -42,6 +50,7 @@ class RegisterPetInfoFragment : BaseFragment() {
     private var token : String = ""
     var name : String = ""
     var birthYear : Int = 2005
+    var petPhotoFile : MultipartBody.Part? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +67,7 @@ class RegisterPetInfoFragment : BaseFragment() {
 
            view.btn_register_full_info_done.setOnClickListener{
                 if(token != "" && !checkedPetList.isNullOrEmpty()) {
-                    registerPetInfoToUser(token, checkedPetList)
+//                    registerPetInfoToUser(token, checkedPetList)
                 }else{
                     Log.d(TAG, "onCreateView: token or pet list is empty")
                 }
@@ -69,6 +78,8 @@ class RegisterPetInfoFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        checkPermission()
 
         token = authTokenViewModel.getUserToken(requireActivity())
         accountPropertiesViewModel.fetchUser(token)
@@ -81,7 +92,7 @@ class RegisterPetInfoFragment : BaseFragment() {
                 }
                 it.status == "success" -> {
                     Toast.makeText(requireContext(), "펫 등록 성공!", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_registerPetInfoFragment_to_petInfoFragment)
+                    //findNavController().navigate(R.id.action_registerPetInfoFragment_to_petInfoFragment)
                 }
                 else -> {
                     Toast.makeText(requireContext(), "펫 등록 실패! (status ${it.status})", Toast.LENGTH_SHORT).show()
@@ -94,18 +105,22 @@ class RegisterPetInfoFragment : BaseFragment() {
             Log.d(TAG, "onActivityCreated: $it")
 
             if(it != null){
-                Log.d(TAG, "setOnClickListenerOnPetCard: $it")
-                checkedPetList.add(
-                    PetData(
-                        petName = name,
-                        registerNumber = it.registerNumber,
-                        year = birthYear,
-                        breed = it.breed,
-                        isNeutered = it.isNeutered,
-                        gender = it.gender,
-                        rfidCode = it.registerNumber
-                    ) //TODO 사진도 추가하면 이 부분 필드 수정할 것
-                )
+                //register pet right away
+
+                //registerPetInfoToUser()
+
+//                Log.d(TAG, "setOnClickListenerOnPetCard: $it")
+//                checkedPetList.add(
+//                    PetData(
+//                        petName = name,
+//                        registerNumber = it.registerNumber,
+//                        birthYear = birthYear,
+//                        breed = it.breed,
+//                        isNeutered = it.isNeutered,
+//                        gender = it.gender,
+//                        rfidCode = it.registerNumber
+//                    )
+//                )
             }
         })
     }
@@ -149,15 +164,9 @@ class RegisterPetInfoFragment : BaseFragment() {
                 }
             }
 
-//            btn_upload_pet_image.setOnClickListener {
-//                Log.d(TAG_PHOTO, "${this.tag}")
-//                getAlbum(view= this)
-//            }
-//
-//            btn_take_pet_photo.setOnClickListener {
-//                Log.d(TAG_PHOTO, "${this.tag}")
-//                takePhoto(view= this)
-//            }
+            img_register_pet_image.setOnClickListener {
+                getAlbum(view = it)
+            }
 
             /*유저가 펫카드를 지우는 경우 */
             btn_erase_pet_card.setOnClickListener {
@@ -176,7 +185,7 @@ class RegisterPetInfoFragment : BaseFragment() {
     }
 
 
-    private fun registerPetInfoToUser(token : String, checkedPetList : ArrayList<PetData>){
+    private fun registerPetInfoToUser(token : String, checkedPet : PetData){
         Log.d(TAG, "registerPetInfoToUser: $token $checkedPetList")
 
         accountPropertiesViewModel.userProperty.observe(viewLifecycleOwner, Observer {
@@ -184,12 +193,29 @@ class RegisterPetInfoFragment : BaseFragment() {
             Log.d(TAG, "registerPetInfoToUser: $userResponse")
 
             if(userResponse.userId != 0){
+                val map = HashMap<String, RequestBody>()
+                map["data[petName]"] = checkedPet.petName
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+                map["data[registerNumber]"] = checkedPet.registerNumber
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+                map["data[year]"] = checkedPet.birthYear.toString()
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+                map["data[breed]"] = checkedPet.breed
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+                map["data[isNeutered]"] = checkedPet.isNeutered.toString()
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+                map["data[gender]"] = checkedPet.gender
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+                map["data[rfidCode]"] = checkedPet.rfidCode
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+
+                //map["photo"] = petPhotoFile
+
                 registerViewModel.registerPetToUser(
                     token = token,
-                    registerPetBody = RegisterPetBody(
-                                    data = checkedPetList
-                                )
-                    )// 펫들을 등록하고
+                    registerPetParts = map,
+                    petProfileUrl = null
+                )
 
                 //결과를 관찰한다.
                 registerViewModel.getRegisterPetResponse().observe(viewLifecycleOwner, Observer {
@@ -200,23 +226,23 @@ class RegisterPetInfoFragment : BaseFragment() {
                             Log.d(TAG, "registerPetInfoToUser: REGISTER FAILED")
                         }
                         petResponse.status == "success" -> {
-                            Log.d(TAG, "registerPetInfoToUser: 펫 등록 성공")
-                            Log.d(TAG, "registerPetInfoToUser: ${petResponse.data[0].breed}")
-                            petResponse.data.forEach { petData ->
-                                accountPropertiesViewModel.insertPetToDb(
-                                    Pet(
-                                        petId = petData.id,
-                                        petName = petData.name,
-                                        petBirthYear = petData.year,
-                                        dogRegisterNo = petData.registerNum,
-                                        rfidCardNo = petData.rfidCode,
-                                        gender = petData.gender,
-                                        kind = petData.breed,
-                                        isNeutered = petData.isNeutered,
-                                        ownerId = userResponse.userId
-                                    )
-                                )
-                            }
+//                            Log.d(TAG, "registerPetInfoToUser: 펫 등록 성공")
+//                            Log.d(TAG, "registerPetInfoToUser: ${petResponse.data[0].breed}")
+//                            petResponse.data.forEach { petData ->
+//                                accountPropertiesViewModel.insertPetToDb(
+//                                    Pet(
+//                                        petId = petData.id,
+//                                        petName = petData.name,
+//                                        petBirthYear = petData.year,
+//                                        dogRegisterNo = petData.registerNum,
+//                                        rfidCardNo = petData.rfidCode,
+//                                        gender = petData.gender,
+//                                        kind = petData.breed,
+//                                        isNeutered = petData.isNeutered,
+//                                        ownerId = userResponse.userId
+//                                    )
+//                                )
+//                            }
                         }
                         else -> {
                             Log.d(TAG, "registerPetInfoToUser: REGISTER FAILED 2")
@@ -230,30 +256,31 @@ class RegisterPetInfoFragment : BaseFragment() {
     }
     //Returns True if the number is registered
 
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 //
-//        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
-//            myView = pet_info_input_layout.findViewWithTag<LinearLayout>(myViewTag)
-//            (myView as LinearLayout?)?.img_register_pet_image?.setImageURI(
-//                Uri.parse(
-//                    currentPhotoPath
-//                )
-//            )
-//
-//        } else if (requestCode == REQUEST_TAKE_ALBUM && resultCode == Activity.RESULT_OK) {
-//            myView = pet_info_input_layout.findViewWithTag<LinearLayout>(myViewTag)
+//        if (requestCode == REQUEST_TAKE_ALBUM && resultCode == Activity.RESULT_OK) {
 //            if (data != null) {
 //                currentPhotoPath = data.data.toString()
+//                Log.d(TAG, "onActivityResult: $currentPhotoPath")
 //
-//                (myView as LinearLayout?)?.img_register_pet_image?.let {
+//                if(data.data != null){
 //                    Glide.with(requireContext())
 //                        .load(Uri.parse(currentPhotoPath))
-//                        .into(it)
+//                        .into(userImage)
+//
+//                    val uri = data.data
+//                    val realPath = getRealPathFromUri(uri!!)
+//                    if(!realPath.isNullOrEmpty()){
+//                        val file = File(realPath)
+//                        Log.d(com.prography.pethotel.ui.authentication.register.TAG, "onActivityResult: $file")
+//                        ///storage/emulated/0/DCIM/Camera/IMG_20200601_223652.jpg
+//                        if(file != null){
+//                            profileImageFile = file
+//                        }
+//                    }
 //                }
 //            }
 //        }
-//    }
-
+    }
 }

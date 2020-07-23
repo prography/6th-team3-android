@@ -3,17 +3,16 @@ package com.prography.pethotel.ui.authentication.register
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.kakao.usermgmt.response.model.User
 import com.prography.pethotel.api.auth.PetmilyAuthApi
 import com.prography.pethotel.api.auth.request.*
 import com.prography.pethotel.api.auth.response.*
 import com.prography.pethotel.api.main.response.UserInfoResponse
 import com.prography.pethotel.models.GeneralUserInfo
-import com.prography.pethotel.models.PetInfo
-import com.prography.pethotel.utils.SERVICE_KEY
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -84,11 +83,43 @@ object RegisterRepository{
         call.enqueue(callback)
     }
 
-    fun registerPetInfo(token : String, registerPetBody: RegisterPetBody){
+//    fun registerPetInfo(token : String, registerPetBody: RegisterPetBody){
+//
+//        val call = PetmilyAuthApi.authApiRetrofitService.registerPet(
+//            token = token,
+//            registerPetBody = registerPetBody
+//        )
+//        val callback = object :Callback<PostPetResponse>{
+//            override fun onFailure(call: Call<PostPetResponse>, t: Throwable) {
+//                Log.d(TAG, "onFailure: ${t.message}")
+//            }
+//
+//            override fun onResponse(
+//                call: Call<PostPetResponse>,
+//                response: Response<PostPetResponse>
+//            ) {
+//                Log.d(TAG, "onResponse: ${response.body()}")
+//            }
+//        }
+//        call.enqueue(callback)
+//    }
 
-        val call = PetmilyAuthApi.authApiRetrofitService.registerPet(
+    fun registerPetForm(token : String, registerPetParts : HashMap<String, RequestBody>, petProfileUrl : MultipartBody.Part?){
+
+//        val petData = registerPetBody.data
+//        val map : HashMap<String, List<PetData>> = HashMap()
+//        map["data"] = petData
+
+        val call = PetmilyAuthApi.authApiRetrofitService.registerPetForm(
             token = token,
-            registerPetBody = registerPetBody
+            petName = registerPetParts["data[petName]"]!!,
+            registerNumber = registerPetParts["data[registerNumber]"]!!,
+            birthYear = registerPetParts["data[year]"]!!,
+            petProfileMultipart = petProfileUrl,
+            breed = registerPetParts["data[breed]"]!!,
+            isNeutered = registerPetParts["data[isNeutered]"]!!,
+            gender = registerPetParts["data[gender]"]!!,
+            rfidCode = registerPetParts["data[rfidCode]"]!!
         )
         val callback = object :Callback<PostPetResponse>{
             override fun onFailure(call: Call<PostPetResponse>, t: Throwable) {
@@ -105,6 +136,43 @@ object RegisterRepository{
         call.enqueue(callback)
     }
 
+    fun generalRegisterForm(
+        registerUserInfo: HashMap<String, RequestBody>,
+        photoUrl: MultipartBody.Part?
+    ){
+        val call
+        = PetmilyAuthApi.authApiRetrofitService.generalRegisterForm(
+            nickName = registerUserInfo["data[nickname]"]!!,
+            phoneNumber = registerUserInfo["data[phoneNumber]"]!!,
+            email = registerUserInfo["data[email]"]!!,
+            password = registerUserInfo["data[password]"]!!,
+            photoUrl = photoUrl
+        )
+        val callback = object : Callback<RegistrationResponse>{
+            override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+                Log.d(TAG, "onFailure: ${t.printStackTrace()}")
+                _registerStatus.value = false
+                _userToken.value = UserToken("")
+            }
+
+            override fun onResponse(
+                call: Call<RegistrationResponse>,
+                response: Response<RegistrationResponse>
+            ) {
+                Log.d(TAG, "onResponse: 회원가입 성공")
+                Log.d(TAG, "onResponse: ${response.body()}")
+                if(response.body() == null || !response.isSuccessful){
+                    _registerStatus.value = false
+                    _userToken.value = UserToken("")
+                }else{
+                    _registerStatus.value = response.body()!!.status == "success"
+                    _userToken.value = response.body()!!.userToken
+                }
+            }
+        }
+        call.enqueue(callback)
+    }
 
     /*일반 회원가입. 유저의 이름, 이메일, 비밀번호, 전화번호를 서버로 전송한다. 응답은 토큰이고,
     * 이 토큰을 저장해 두었다가 다른 요청때 헤더로 넣어서 전송한다. */
@@ -185,5 +253,36 @@ object RegisterRepository{
             }
         }
         getUserCall.enqueue(callback)
+    }
+
+    fun kakaoRegisterForm(
+        token: String,
+        kakaoRegisterData: HashMap<String, RequestBody?>
+    ) {
+        val call = PetmilyAuthApi.authApiRetrofitService.kakaoRegisterForm(
+            token = token,
+            userId = kakaoRegisterData["userId"],
+            nickname = kakaoRegisterData["data[nickname]"],
+            phoneNumber = kakaoRegisterData["data[phoneNumber]"],
+            profileImageUrl = kakaoRegisterData["data[profileImage]"]
+        )
+        val callback = object : Callback<RegistrationResponse>{
+            override fun onFailure(call: Call<RegistrationResponse>, t: Throwable) {
+                Log.d(TAG, "onFailure: form data kakao register 실패")
+                Log.d(TAG, "onFailure: ${t.message}")
+                _kakaoRegisterResponse.value = null
+            }
+
+            override fun onResponse(
+                call: Call<RegistrationResponse>,
+                response: Response<RegistrationResponse>
+            ) {
+                Log.d(TAG, "onResponse: form data kakao register 성공")
+                if(response != null){
+                    _kakaoRegisterResponse.value = response.body()
+                }
+            }
+        }
+        call.enqueue(callback)
     }
 }

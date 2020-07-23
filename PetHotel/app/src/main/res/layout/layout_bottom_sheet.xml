@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bottom_sheet_background"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:id="@+id/bottom_sheet_background"
+    android:paddingStart="@dimen/padding_medium_24dp"
+    android:paddingEnd="@dimen/padding_medium_24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="정보를 확인해 주세요"
+        android:textColor="@color/petHotelPrimaryDark"
+        style="@style/phTitle"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/petHotelLightGrey"/>
+
+    <TextView
+        android:id="@+id/check_pet_name"
+        android:text="@string/checkname"
+        android:padding="@dimen/padding_small_4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/check_pet_breed"
+        android:text="@string/checkbreed"
+        android:padding="@dimen/padding_small_4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/check_pet_gender"
+        android:text="@string/checkgender"
+        android:padding="@dimen/padding_small_4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/check_pet_birth_year"
+        android:text="@string/checkyear"
+        android:padding="@dimen/padding_small_4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/check_pet_neutered"
+        android:text="@string/checkneuter"
+        android:padding="@dimen/padding_small_4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/check_pet_num"
+        android:text="@string/checknumber"
+        android:padding="@dimen/padding_small_4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:layout_marginTop="@dimen/margin_1x"
+        android:id="@+id/check_pet_user_ok"
+        android:text="정보가 정확합니다"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:id="@+id/check_pet_user_no"
+        android:text="정보가 틀렸습니다"
+        android:textColor="@color/petHotelError"
+        style="@style/phOutlinedButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>

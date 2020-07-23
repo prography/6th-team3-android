@@ -3,7 +3,10 @@ package com.prography.pethotel.api.main.response
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.prography.pethotel.room.entities.Hotel
+import com.prography.pethotel.room.entities.User
 import kotlinx.android.parcel.Parcelize
 
 
@@ -14,7 +17,20 @@ data class GetReviewResponse(
     val status: Int
 ) : Parcelable
 
-@Entity(tableName = "hotel_review")
+@Entity(tableName = "hotel_review",
+    foreignKeys = [
+    ForeignKey(
+        entity = User::class,
+        parentColumns = ["id"],
+        childColumns = ["userId"]
+    ),
+    ForeignKey(
+        entity = Hotel::class,
+        parentColumns = ["id"],
+        childColumns = ["hotelId"]
+    )
+    ]
+)
 @Parcelize
 data class HotelReviewData(
     @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = false) val id: Int,

@@ -1,7 +1,7 @@
 package com.prography.pethotel.api.auth.response
 
 data class PostPetResponse(
-    val `data`: List<PostPetResponseData>,
+    val `data`: PostPetResponseData,
     val message: String,
     val status: String
 )

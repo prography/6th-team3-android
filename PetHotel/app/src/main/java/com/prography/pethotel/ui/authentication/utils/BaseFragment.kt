@@ -115,7 +115,6 @@ open class BaseFragment : Fragment(){
                     }
                 }
             }//end of my_permission_camera
-
         }
     }
 
@@ -126,6 +125,12 @@ open class BaseFragment : Fragment(){
                     it,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
                 )
+            } != PackageManager.PERMISSION_GRANTED &&
+            context?.let {
+                ContextCompat.checkSelfPermission(
+                    it,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
             } != PackageManager.PERMISSION_GRANTED
         ) {
             // 처음 호출시엔 if()안의 부분은 false로 리턴 됨 -> else{..}의 요청으로 넘어감
@@ -135,7 +140,7 @@ open class BaseFragment : Fragment(){
                 ) ||
                 ActivityCompat.shouldShowRequestPermissionRationale(
                     requireActivity(),
-                    Manifest.permission.CAMERA
+                    Manifest.permission.READ_EXTERNAL_STORAGE
                 )
             ) {
                 context?.let {
@@ -162,7 +167,7 @@ open class BaseFragment : Fragment(){
                     requireActivity(),
                     arrayOf(
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA
+                        Manifest.permission.READ_EXTERNAL_STORAGE
                     ),
                     MY_PERMISSION_CAMERA
                 )

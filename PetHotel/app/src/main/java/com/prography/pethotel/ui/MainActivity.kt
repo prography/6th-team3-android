@@ -20,6 +20,8 @@ import com.prography.pethotel.room.AppDatabase
 import com.prography.pethotel.room.auth.AccountPropViewModelFactory
 import com.prography.pethotel.room.auth.AccountPropertiesViewModel
 import com.prography.pethotel.room.entities.User
+import com.prography.pethotel.room.main.MainDbViewModel
+import com.prography.pethotel.room.main.MainDbViewModelFactory
 import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.utils.AuthTokenViewModel
 import com.prography.pethotel.utils.TokenState
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity(){
     private lateinit var authTokenViewModel: AuthTokenViewModel
     private lateinit var accountPropertiesViewModel: AccountPropertiesViewModel
     private lateinit var registerViewModel : RegisterViewModel
+    private lateinit var mainDbViewModel: MainDbViewModel
 
     private var currentNavController: LiveData<NavController>? = null
 
@@ -122,6 +125,12 @@ class MainActivity : AppCompatActivity(){
         placeInfoViewModel.hotelList.observe(this, Observer {
             placeInfoViewModel.setDistanceToHotelList(lat!!.toDouble(), long!!.toDouble())
         })
+
+        val mainDao = database.mainDao
+        mainDbViewModel = ViewModelProvider(this, MainDbViewModelFactory(
+            mainDao,
+            application
+        ))[MainDbViewModel::class.java]
     }
 
     override fun onStart() {

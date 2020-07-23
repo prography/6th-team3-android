@@ -12,21 +12,22 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.prography.pethotel.R
-import com.prography.pethotel.api.auth.request.KakaoRegisterBody
-import com.prography.pethotel.api.auth.request.KakaoRegisterData
 import com.prography.pethotel.api.auth.response.KakaoRegistrationResponse
 import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.authentication.afterTextChanged
 import com.prography.pethotel.utils.AuthTokenViewModel
 import com.prography.pethotel.utils.AuthTokenViewModelFactory
 import kotlinx.android.synthetic.main.fragment_kakao_register.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 
 private const val TAG = "KakaoRegisterFragment"
 class KakaoRegisterFragment : Fragment() {
 
     private lateinit var kakaoRegisterViewModel: KakaoRegisterViewModel
-    private lateinit var loginStateViewModel: AuthTokenViewModel
+    private lateinit var authTokenViewModel: AuthTokenViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +40,7 @@ class KakaoRegisterFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         kakaoRegisterViewModel = ViewModelProvider(requireActivity())[KakaoRegisterViewModel::class.java]
-        loginStateViewModel = ViewModelProvider(requireActivity(), AuthTokenViewModelFactory())
+        authTokenViewModel = ViewModelProvider(requireActivity(), AuthTokenViewModelFactory())
             .get(AuthTokenViewModel::class.java)
 
         kakaoRegisterViewModel.kakaoRegisterUserData.observe(viewLifecycleOwner, Observer {
@@ -75,6 +76,7 @@ class KakaoRegisterFragment : Fragment() {
         * 클릭하면, 입력된 필드들로 login 요청을 날리고, 유저 정보를 서버에 보낸다.
         * */
         btn_kakao_register_complete.setOnClickListener {
+
             val userId = kakaoRegisterViewModel
                 .kakaoRegisterUserData.value?.data?.userId
 
@@ -82,18 +84,28 @@ class KakaoRegisterFragment : Fragment() {
                 .kakaoRegisterUserData.value?.data?.information?.profileImage
 
             if(userId != null){
-                val kakaoRegisterBody =
-                    KakaoRegisterBody(
-                        userId = userId,
-                        data = KakaoRegisterData(
-                            nickname = kakao_nickname_edit_text_field.text.toString(),
-                            phoneNumber = kakao_phone_edit_text_field.text.toString(),
-                            profileImage = profileImage ?: ""
-                        )
-                    )
-                kakaoRegisterViewModel.registerUserKakao(
-                    kakaoRegisterBody = kakaoRegisterBody
+
+                val bUserId : RequestBody = userId.toString()
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+
+                val bProfileImage = profileImage?.toRequestBody(
+                    "text/plain".toMediaTypeOrNull()
                 )
+                val phoneNumber = kakao_phone_edit_text_field.text.toString()
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+                val nickname = kakao_nickname_edit_text_field.text.toString()
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+
+                val map = HashMap<String, RequestBody?>()
+                map["data[nickname]"] = nickname
+                map["data[phoneNumber]"] = phoneNumber
+                map["data[profileImage]"] = bProfileImage
+                map["userId"] = bUserId
+
+                    kakaoRegisterViewModel.registerUserKakaoForm(
+                        token = "token", //TODO fix this part
+                        kakaoRegisterData = map
+                    )
             }else{
                 Toast.makeText(requireContext(), "카카오 인증 실패", Toast.LENGTH_SHORT).show()
             }
@@ -103,27 +115,26 @@ class KakaoRegisterFragment : Fragment() {
         * 상태 메시지에 따라서 성공 실패 토스트를띄워준다. */
         kakaoRegisterViewModel.getRegisterStatus().observe(viewLifecycleOwner, Observer {
             response ->
-                if(response.status == "success"){
-                    Toast.makeText(requireContext(), "회원가입 성공", Toast.LENGTH_SHORT).show()
+                if(response != null) {
+                    if (response.status == "success") {
+                        Toast.makeText(requireContext(), "회원가입 성공", Toast.LENGTH_SHORT).show()
 
-                    loginStateViewModel.setUserToken(
-                        requireActivity(),
-                        response.userToken.token
-                    )
+                        authTokenViewModel.setUserToken(
+                            requireActivity(),
+                            response.userToken.token
+                        )
 
-                    val intent = Intent(requireActivity(), MainActivity::class.java)
-                    requireActivity().startActivity(intent)
-                    requireActivity().finish()
+                        val intent = Intent(requireActivity(), MainActivity::class.java)
+                        requireActivity().startActivity(intent)
+                        requireActivity().finish()
 
+                    } else {
+                        Toast.makeText(requireContext(), "회원가입 실패", Toast.LENGTH_SHORT).show()
+                    }
                 }else{
-                    Toast.makeText(requireContext(), "회원가입 실패", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "서버 오류", Toast.LENGTH_SHORT).show()
                 }
         })
-
-
-        /*펫 정보 입력 버튼은 API 고쳐질때까지 disable */
-//        btn_kakao_register_pet_info.isEnabled = false
-        //TODO 펫 정보 입력하는거 고치기
     }
 
     private fun setRegistrationData(kakaoRegistrationResponse: KakaoRegistrationResponse){
@@ -197,11 +208,5 @@ class KakaoRegisterFragment : Fragment() {
                 )
             }
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            KakaoRegisterFragment()
     }
 }

@@ -7,9 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.prography.pethotel.api.auth.request.KakaoRegisterBody
 import com.prography.pethotel.api.auth.response.KakaoRegistrationResponse
 import com.prography.pethotel.api.auth.response.RegistrationResponse
-import com.prography.pethotel.api.auth.response.UserToken
-import com.prography.pethotel.ui.authentication.login.LoginFormState
 import com.prography.pethotel.ui.authentication.register.RegisterRepository
+import okhttp3.RequestBody
 
 class KakaoRegisterViewModel : ViewModel(){
 
@@ -27,8 +26,16 @@ class KakaoRegisterViewModel : ViewModel(){
         _kakaoRegisterUserData.value = kakaoRegistrationResponse
     }
 
-    fun registerUserKakao(kakaoRegisterBody: KakaoRegisterBody){
-        RegisterRepository.kakaoRegister(kakaoRegisterBody)
+//    fun registerUserKakao(kakaoRegisterBody: KakaoRegisterBody){
+//        RegisterRepository.kakaoRegister(kakaoRegisterBody)
+//    }
+
+    fun registerUserKakaoForm(token : String,
+        kakaoRegisterData : HashMap<String, RequestBody?>){
+        RegisterRepository.kakaoRegisterForm(
+            token,
+            kakaoRegisterData
+        )
     }
 
     fun getRegisterStatus() : LiveData<RegistrationResponse>{

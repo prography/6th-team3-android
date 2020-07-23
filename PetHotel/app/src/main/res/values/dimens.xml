@@ -28,4 +28,5 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="text_size_rating">16sp</dimen>
     <dimen name="margin_1_5x">24dp</dimen>
+    <dimen name="profile_image_size">100dp</dimen>
 </resources>

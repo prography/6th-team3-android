@@ -23,7 +23,6 @@ class PopularPlaceAdapter(
 ) : ListAdapter<HotelData, PopularPlaceAdapter.PopularPlaceViewHolder>(
     HotelDiffUtilCallback()
 ){
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularPlaceViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.place_info_view_holder_v3, parent, false)
 
@@ -44,6 +43,14 @@ class PopularPlaceAdapter(
         holder.itemView.setOnClickListener {
             val bundle = bundleOf("hotel" to hotel)
             it.findNavController().navigate(R.id.action_placeInfoFragment_to_placeInfoDetailsFragment, bundle)
+        }
+
+        holder.itemView.btn_place_info_like.setOnClickListener {
+            //데이터베이스에 저장되어 있는지 확인 후
+
+            //만약 저장되어 있지 않으면 insert => 모양 변경하기
+
+            //저장되어 있으면 delete => 모양 변경하기
         }
     }
 

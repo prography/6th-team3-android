@@ -6,7 +6,9 @@ import com.prography.pethotel.api.main.response.UserInfoResponse
 import com.prography.pethotel.utils.ANIMAL_NUM_BASE_URL
 import com.prography.pethotel.utils.BASE_URL
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -55,21 +57,52 @@ interface  AuthApiService{
     @POST("user")
     fun generalRegister(@Body registerUserInfo : RegisterUserInfo) : Call<RegistrationResponse>
 
+    @Multipart
+    @POST("user")
+    fun generalRegisterForm(
+        @Part("data[nickname]") nickName : RequestBody,
+        @Part("data[phoneNumber]") phoneNumber : RequestBody,
+        @Part("data[email]") email : RequestBody,
+        @Part("data[password]") password : RequestBody,
+        @Part photoUrl: MultipartBody.Part?
+     ): Call<RegistrationResponse>
+
     @GET("user")
     fun getUser(@Header("Authorization") token : String) : Call<UserInfoResponse> //GET 마이페이지
 
     @POST("pet/check")
     fun checkPet(@Body checkPetBody: CheckPetBody) : Call<CheckPetResponse>
 
+//    @POST("pet")
+//    fun registerPet(@Header("Authorization") token : String,
+//                            @Body registerPetBody: RegisterPetBody) : Call<PostPetResponse>
+
+    @Multipart
     @POST("pet")
-    fun registerPet(@Header("Authorization") token : String,
-                            @Body registerPetBody: RegisterPetBody) : Call<PostPetResponse>
+    fun registerPetForm(@Header("Authorization") token: String,
+                        @Part("data[petName]") petName: RequestBody,
+                        @Part("data[registerNumber]") registerNumber: RequestBody,
+                        @Part("data[year]") birthYear: RequestBody,
+                        @Part petProfileMultipart: MultipartBody.Part?,
+                        @Part("data[breed]") breed: RequestBody,
+                        @Part("data[isNeutered]") isNeutered: RequestBody,
+                        @Part("data[gender]") gender: RequestBody,
+                        @Part("data[rfidCode]") rfidCode: RequestBody
+            ) : Call<PostPetResponse>
 
     @POST("user")
     suspend fun kakaoRegister(@Body kakaoRegisterBody: KakaoRegisterBody) : RegistrationResponse
 
-//    @POST("/photo/user")
-//    fun uploadUserProfileImage(@Body formData : FormData)
+    @Multipart
+    @POST("user")
+    fun kakaoRegisterForm(
+        @Header("Authorization") token: String,
+        @Part("userId") userId : RequestBody?,
+        @Part("data[nickname]") nickname: RequestBody?,
+        @Part("data[phoneNumber]") phoneNumber: RequestBody?,
+        @Part("data[profileImage]") profileImageUrl: RequestBody?
+    ) : Call<RegistrationResponse>
+
 }
 
 

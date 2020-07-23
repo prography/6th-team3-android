@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.prography.pethotel.R
 import com.prography.pethotel.api.main.response.HotelData
+import com.prography.pethotel.room.main.MainDbViewModel
 import com.prography.pethotel.ui.places.adapters.PopularPlaceAdapter
 import com.prography.pethotel.utils.DummyData
 import kotlinx.android.synthetic.main.fragment_popular_place.*
@@ -19,6 +21,7 @@ class PopularPlaceFragment : Fragment() {
 
 
     private lateinit var placeInfoViewModel: PlaceInfoViewModel
+    private val mainDbViewModel : MainDbViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +40,12 @@ class PopularPlaceFragment : Fragment() {
             ViewModelProviders.of(it).get(PlaceInfoViewModel::class.java)
         }
 
+
         placeInfoViewModel.hotelList.observe(viewLifecycleOwner, Observer {list ->
             val subList = ArrayList(list)
             //TODO rating 으로 필터링 해야하는데, 호텔 객체에 rate 필드가 없음
             initList(hotelList = subList)
+
         })
     }
 
@@ -53,9 +58,4 @@ class PopularPlaceFragment : Fragment() {
         }
     }
 
-    companion object {
-           @JvmStatic
-        fun newInstance() =
-            PopularPlaceFragment()
-    }
 }

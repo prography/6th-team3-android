@@ -1,30 +1,35 @@
 package com.prography.pethotel.ui.authentication.register
 
+import android.app.Activity
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.loader.content.CursorLoader
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.prography.pethotel.R
 import com.prography.pethotel.models.GeneralUserInfo
 import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.authentication.afterTextChanged
 import com.prography.pethotel.ui.authentication.utils.BaseFragment
-import com.prography.pethotel.ui.authentication.kakao.KakaoRegisterViewModel
-import com.prography.pethotel.utils.AuthTokenViewModel
-import com.prography.pethotel.utils.ENTER_PET
-import com.prography.pethotel.utils.NO_PET
 import com.prography.pethotel.utils.USER_TOKEN
-import kotlinx.android.synthetic.main.fragment_kakao_register.*
 import kotlinx.android.synthetic.main.register_user_info_fragment.*
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 
 
 private const val TAG = "RegisterUserInfoFragment"
@@ -43,6 +48,7 @@ class RegisterUserInfoFragment : BaseFragment() {
 //    private var currentPhotoPath = ""
     private var generalUserInfo : GeneralUserInfo = GeneralUserInfo()
     private lateinit var userImage : ImageView
+    private var profileImageFile : File? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,9 +60,15 @@ class RegisterUserInfoFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        checkPermission()
+
         registerViewModel = ViewModelProvider(requireActivity())[RegisterViewModel::class.java]
 
         userImage = img_register_user_image
+
+        img_register_user_image.setOnClickListener {
+            getAlbum()
+        }
 
         /*다시 입력 화면으로 돌아왔을 때 정보가 남아있도록 한다.*/
         observeUserInfo()
@@ -185,6 +197,62 @@ class RegisterUserInfoFragment : BaseFragment() {
     }
 
     private fun registerUser(){
+
+        if(profileImageFile != null){
+            val requestImageFile
+                    = RequestBody.create("image/jpeg".toMediaTypeOrNull(), profileImageFile!!)
+            Log.d(TAG, "registerUser: 이미지 파일=>  $requestImageFile")
+            val multipartBody = MultipartBody.Part.createFormData(
+                "profileImage",
+                "profile.Image.jpg",
+                requestImageFile
+            )
+            Log.d(TAG, "registerUser: 멀티파트 바디 => $multipartBody")
+
+            generalUserInfo = GeneralUserInfo(
+                nickName = nickname_edit_text_field.text.toString(),
+                email = email_edit_text_field.text.toString(),
+                phoneNumber = phone_edit_text_field.text.toString(),
+                password = password_edit_text_field.text.toString(),
+                userImagePart = multipartBody
+            )
+
+            registerViewModel.setUserInfo(generalUserInfo)
+
+            val map = HashMap<String, RequestBody>()
+            val nickName : RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                generalUserInfo.nickName.toString()
+            )
+
+            val phoneNumber : RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                generalUserInfo.phoneNumber.toString()
+            )
+
+            val email : RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                generalUserInfo.email.toString()
+            )
+
+            val password : RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                generalUserInfo.password.toString()
+            )
+
+            map["data[nickname]"] = nickName
+            map["data[phoneNumber]"] = phoneNumber
+            map["data[email]"] = email
+            map["data[password]"] = password
+
+            Log.d(TAG, "registerUser: 이미지 있음 => $generalUserInfo")
+
+            registerViewModel.registerUserGeneralForm(
+                registerUserInfo = map,
+                photoUrl = multipartBody
+            )
+        }else{
+
             generalUserInfo = GeneralUserInfo(
                 nickName = nickname_edit_text_field.text.toString(),
                 email = email_edit_text_field.text.toString(),
@@ -194,35 +262,68 @@ class RegisterUserInfoFragment : BaseFragment() {
 
             registerViewModel.setUserInfo(generalUserInfo)
 
-            registerViewModel.registerUserGeneral(generalUserInfo)
+            val map = HashMap<String, RequestBody>()
+            val nickName : RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                generalUserInfo.nickName.toString()
+            )
 
-            registerViewModel.getRegisterStatus().observe(viewLifecycleOwner, Observer {
-                Log.d(TAG, "onActivityCreated: register status = $it")
+            val phoneNumber : RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                generalUserInfo.phoneNumber.toString()
+            )
 
-                if(it == true){
-                    Log.d(TAG, "registerUser: 회원가입 성공")
-                    registerViewModel.getUserToken().observe(viewLifecycleOwner, Observer {
-                            userToken ->
-                        Log.d(TAG, "onActivityCreated: $userToken")
+            val email : RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                generalUserInfo.email.toString()
+            )
 
-                        val pref = requireActivity().getSharedPreferences(USER_TOKEN, MODE_PRIVATE)
-                        val editor = pref.edit()
-                        editor.putString(USER_TOKEN, userToken.token)
-                        val e = editor.commit()
-                        Log.d(TAG, "onActivityCreated: $e")
-                    })
-                    //different redirection based on register type
-                    redirectToMainActivity()
-                }else{
-                    //FAIL REGISTRATION
-                    Log.d(TAG, "registerUser: 회원가입 실패")
-                    Toast.makeText(requireContext(),
-                        getString(R.string.registration_fail_msg),
-                        Toast.LENGTH_SHORT).show()
-                    /* TODO toast 말고 다른 메커니즘으로 변경하기
-                    *   성공시에도 오류 토스트가 뜨는 희안한 상황...  */
-                }
-            })
+            val password : RequestBody = RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                generalUserInfo.password.toString()
+            )
+
+            map["data[nickname]"] = nickName
+            map["data[phoneNumber]"] = phoneNumber
+            map["data[email]"] = email
+            map["data[password]"] = password
+
+            Log.d(TAG, "registerUser: 이미지 없음 => $generalUserInfo")
+            registerViewModel.registerUserGeneralForm(
+                registerUserInfo = map,
+                photoUrl = null
+            )
+        }
+
+//        registerViewModel.setUserInfo(generalUserInfo)
+
+//        registerViewModel.registerUserGeneral(generalUserInfo)
+
+        registerViewModel.getRegisterStatus().observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "onActivityCreated: register status = $it")
+
+            if(it == true){
+                Log.d(TAG, "registerUser: 회원가입 성공")
+                registerViewModel.getUserToken().observe(viewLifecycleOwner, Observer {
+                        userToken ->
+                    Log.d(TAG, "onActivityCreated: $userToken")
+
+                    val pref = requireActivity().getSharedPreferences(USER_TOKEN, MODE_PRIVATE)
+                    val editor = pref.edit()
+                    editor.putString(USER_TOKEN, userToken.token)
+                    val e = editor.commit()
+                    Log.d(TAG, "onActivityCreated: $e")
+                })
+                //different redirection based on register type
+                redirectToMainActivity()
+            }else{
+                //FAIL REGISTRATION
+                Log.d(TAG, "registerUser: 회원가입 실패")
+                Toast.makeText(requireContext(),
+                    getString(R.string.registration_fail_msg),
+                    Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun redirectToMainActivity(){
@@ -231,28 +332,46 @@ class RegisterUserInfoFragment : BaseFragment() {
         requireActivity().finish()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
+        if (requestCode == REQUEST_TAKE_ALBUM && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                currentPhotoPath = data.data.toString()
+                Log.d(TAG, "onActivityResult: $currentPhotoPath")
+//content://com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F25/ORIGINAL/NONE/image%2Fjpeg/1310826614
+                if(data.data != null){
+                    Glide.with(requireContext())
+                    .load(Uri.parse(currentPhotoPath))
+                    .into(userImage)
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
-//
-//            Log.d(TAG_PHOTO, "${currentPhotoPath}")
-////            Glide.with(requireContext())
-////                .load(Uri.parse(currentPhotoPath))
-////                .into(userImage)
-//            userImage.setImageURI(Uri.parse(currentPhotoPath))
-//
-//        } else if (requestCode == REQUEST_TAKE_ALBUM && resultCode == Activity.RESULT_OK) {
-//            if (data != null) {
-//                currentPhotoPath = data.data.toString()
-//
-//                Glide.with(requireContext())
-//                    .load(Uri.parse(currentPhotoPath))
-//                    .into(userImage)
-//            }
-//
-//        }
-//    }
+                    val uri = data.data
+                    val realPath = getRealPathFromUri(uri!!)
+                    if(!realPath.isNullOrEmpty()){
+                        val file = File(realPath)
+                        Log.d(TAG, "onActivityResult: $file")
+                        ///storage/emulated/0/DCIM/Camera/IMG_20200601_223652.jpg
+                        if(file != null){
+                            profileImageFile = file
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    private fun getRealPathFromUri(contentUri: Uri): String? {
+        val proj = arrayOf(MediaStore.Images.Media.DATA)
+        val loader = CursorLoader(requireContext(), contentUri, proj, null, null, null)
+        val cursor: Cursor? = loader.loadInBackground()
+        val column_index =
+            cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor?.moveToFirst()
+        val result = column_index?.let { cursor?.getString(it) }
+        cursor?.close()
+        return result
+    }
+//2020-07-23 18:24:52.309 10676-10767/com.prography.pethotel D/OkHttp:
+// {"id":134,"name":"\"withI7\"","email":"\"withImage7@naver.com\"","phoneNumber":"\"01022229999\"",
+// "profileImage":"https://mypetmily-photo.s3.ap-northeast-2.amazonaws.com/user/20200723092452"}
 }

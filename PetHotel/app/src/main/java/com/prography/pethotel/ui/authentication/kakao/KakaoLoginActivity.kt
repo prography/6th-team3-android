@@ -78,10 +78,10 @@ class KakaoLoginActivity : AppCompatActivity() {
         loginViewModel.kakaoRegistrationResponse.observe(this, Observer {
             if(it.status =="success"){
                 registerViewModel.setUserInfo(
-                    GeneralUserInfo(
+                        GeneralUserInfo(
                         nickName = it.data.information.nickname,
                         email = it.data.information.email,
-                        userImagePath = it.data.information.profileImage
+                        userImageUrl = it.data.information.profileImage
                     )
                 )
                 val intent = Intent(this, KakaoRegisterActivity::class.java)

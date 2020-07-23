@@ -147,6 +147,12 @@
     <string name="reservation_hotel_name">%s 예약을 진행합니다.</string>
     <string name="forgot_password_msg">비밀번호를 잊으셨나요?</string>
     <string name="hotel_review_title">%s 리뷰를 작성합니다.</string>
+    <string name="checkname">이름 : %s</string>
+    <string name="checkbreed">견종 : %s</string>
+    <string name="checkgender">성별 : %s</string>
+    <string name="checkyear">출생년도 : %d</string>
+    <string name="checkneuter">중성화 : %s</string>
+    <string name="checknumber">동물등록번호 : %s</string>
 
 
 </resources>

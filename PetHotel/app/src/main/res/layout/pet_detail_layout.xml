@@ -28,37 +28,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-<!--    visibility GONE, NO PHOTO API -->
-    <ImageView
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/img_register_pet_image"
-        android:visibility="gone"
-        android:layout_width="@dimen/default_image_size"
-        android:layout_height="@dimen/default_image_size"
+        app:riv_corner_radius="12dp"
+        android:background="@color/petHotelLightGrey"
+        android:layout_marginBottom="@dimen/margin_1x"
+        android:layout_width="@dimen/profile_image_size"
+        android:layout_height="@dimen/profile_image_size"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/pet_profile_placeholder" />
+        />
 
-<!--    visibility GONE, NO PHOTO API -->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/btn_upload_pet_image"
-            android:src="@drawable/ic_file_upload_black_24dp"
-            android:padding="@dimen/default_padding_8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <ImageView
-            android:id="@+id/btn_take_pet_photo"
-            android:padding="@dimen/default_padding_8dp"
-            android:src="@drawable/ic_photo_camera_black_24dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
 
 <!--    <TextView-->
 <!--        android:id="@+id/tv_register_pet_name_title"-->

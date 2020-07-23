@@ -5,10 +5,7 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kakao.usermgmt.response.UserResponse
 import com.prography.pethotel.api.auth.request.CheckPetBody
-import com.prography.pethotel.api.auth.request.KakaoRegisterBody
-import com.prography.pethotel.api.auth.request.RegisterPetBody
 import com.prography.pethotel.api.auth.response.CheckPetResponseData
 import com.prography.pethotel.api.auth.response.PetNumResponse
 import com.prography.pethotel.api.auth.response.PostPetResponse
@@ -20,6 +17,8 @@ import com.prography.pethotel.ui.authentication.kakao.RegisterFormState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 
 private const val TAG = "RegisterViewModel"
@@ -76,12 +75,23 @@ class RegisterViewModel : ViewModel() {
         RegisterRepository.generalRegister(generalUserInfo)
     }
 
+    fun registerUserGeneralForm(
+        registerUserInfo: HashMap<String, RequestBody>,
+        photoUrl: MultipartBody.Part?
+    ){
+        RegisterRepository.generalRegisterForm(
+            registerUserInfo,
+            photoUrl
+        )
+    }
+
     fun checkPetNumber(checkPetBody: CheckPetBody){
         RegisterRepository.checkPet(checkPetBody)
     }
 
-    fun registerPetToUser(token: String, registerPetBody: RegisterPetBody){
-        RegisterRepository.registerPetInfo(token, registerPetBody)
+    fun registerPetToUser(token: String, registerPetParts: HashMap<String, RequestBody>, petProfileUrl : MultipartBody.Part?){
+        //RegisterRepository.registerPetInfo(token, registerPetBody)
+        RegisterRepository.registerPetForm(token, registerPetParts,  petProfileUrl)
     }
 
     /*이미 회원가입 된 사용자의 정보를 리턴한다.

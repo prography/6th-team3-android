@@ -16,6 +16,7 @@ interface AccountPropertiesDao {
     @Query("SELECT * FROM user")
     suspend fun getUserAndAllPets() : List<UserAndAllPets>
 
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user : User) : Long
 

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.mypage.RegisterPetFragment">
+
+
+    <TextView
+        android:id="@+id/label_main"
+        android:text="반려견 등록하기"
+        style="@style/phTitle"
+        android:layout_marginStart="@dimen/margin_1_5x"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/margin_0_5x"
+        app:layout_constraintBottom_toTopOf="@id/label_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/label_sub"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="*정보 입력 후 반드시 등록번호 확인을 눌러주세요"
+        app:layout_constraintBottom_toTopOf="@id/gl_title"
+        android:layout_marginStart="@dimen/margin_1_5x"
+        android:textColor="@color/petHotelSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <LinearLayout
+        android:id="@+id/pet_container"
+        app:layout_constraintTop_toBottomOf="@id/gl_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_1_5x"
+        android:padding="@dimen/padding_large_16dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_register_pet_image"
+            app:riv_corner_radius="12dp"
+            android:background="@color/petHotelLightGrey"
+            android:layout_marginBottom="@dimen/margin_1x"
+            android:layout_width="@dimen/profile_image_size"
+            android:layout_height="@dimen/profile_image_size"
+            android:scaleType="centerCrop"
+            />
+
+
+        <!--    <TextView-->
+        <!--        android:id="@+id/tv_register_pet_name_title"-->
+        <!--        style="@style/phBody2"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:text="반려견이름"-->
+        <!--        android:layout_marginTop="@dimen/margin_1x"-->
+        <!--        />-->
+
+        <EditText
+            android:id="@+id/et_register_pet_name"
+            style="@style/phEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="이름"
+            android:inputType="textPersonName"
+            />
+
+        <!--    <TextView-->
+        <!--        android:id="@+id/tv_register_pet_birth_year"-->
+        <!--        style="@style/phBody2"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:text="태어난 년도"-->
+        <!--        android:layout_marginTop="@dimen/margin_1x"-->
+        <!--        />-->
+
+        <EditText
+            android:id="@+id/et_register_pet_birth_year"
+            style="@style/phEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="출생년도 예)2020"
+            android:inputType="date" />
+
+
+        <!--    <TextView-->
+        <!--        android:id="@+id/tv_register_pet_number_title"-->
+        <!--        style="@style/phBody2"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:text="동물등록번호"-->
+        <!--        android:layout_marginTop="@dimen/margin_1x"-->
+        <!--        />-->
+
+
+        <EditText
+            android:id="@+id/et_register_pet_number"
+            style="@style/phEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="13"
+            android:hint="동물등록번호 13자리"
+            android:inputType="number" />
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/check_register_pet_number"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:text="등록번호 확인"/>
+
+
+            <ImageButton
+                android:id="@+id/register_pet_number_checked"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/check_register_pet_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_1x"
+                android:visibility="invisible"
+                android:background="@color/colorTransparent"
+                android:src="@drawable/ic_check_circle_black_24dp"
+                />
+            <!--   동물 등록 번호가 확인되면 체크 박스가 나타나도록 한다. -->
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_title"
+        app:layout_constraintGuide_percent=".15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

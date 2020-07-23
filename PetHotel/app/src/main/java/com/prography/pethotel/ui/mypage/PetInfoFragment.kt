@@ -26,7 +26,7 @@ class PetInfoFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         fab_add_pet.setOnClickListener {
-            findNavController().navigate(R.id.action_petInfoFragment_to_registerPetInfoFragment)
+            findNavController().navigate(R.id.action_petInfoFragment_to_registerPetFragment)
         }
 
     }

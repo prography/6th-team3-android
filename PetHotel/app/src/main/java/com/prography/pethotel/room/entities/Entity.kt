@@ -105,6 +105,22 @@ data class Pet(
     @ColumnInfo(name = "ownerId", index = true) val ownerId : Int
  )
 
+@Entity(
+    tableName = "reivew",
+    foreignKeys = [
+    ForeignKey(entity = User::class,
+        parentColumns = ["id"],
+        childColumns = ["userId"],
+        onDelete = CASCADE
+    ),
+    ForeignKey(
+        entity = Hotel::class,
+        parentColumns = ["id"],
+        childColumns = ["hotelId"],
+        onDelete = CASCADE
+    )
+    ]
+)
 
 class UserAndAllPets{
     @Embedded

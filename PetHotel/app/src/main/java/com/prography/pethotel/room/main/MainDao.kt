@@ -1,6 +1,7 @@
 package com.prography.pethotel.room.main
 
 import androidx.room.*
+import com.prography.pethotel.api.main.response.HotelReviewData
 import com.prography.pethotel.room.entities.Hotel
 import com.prography.pethotel.room.entities.HotelLike
 
@@ -23,9 +24,12 @@ interface MainDao {
     @Query("DELETE FROM hotelLike WHERE id = :hotelId")
     suspend fun deleteFavoriteHotelById(hotelId : Int) : Int
 
-    @Query("SELECT * FROM hotel WHERE id = :hotelId")
-    suspend fun getAllLikedHotels(hotelId: Int) : List<Hotel>
+    @Query("SELECT * FROM hotel INNER JOIN hotelLike ON hotel.id = hotelLike.id")
+    suspend fun getAllLikedHotels() : List<Hotel>
 
     @Query("SELECT * FROM hotelLike")
     suspend fun getAllLikedHotelsId() : List<HotelLike>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertHotelReview(hotelReviewData: HotelReviewData) : Long
 }
