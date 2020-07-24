@@ -345,15 +345,15 @@ class RegisterUserInfoFragment : BaseFragment() {
                     .load(Uri.parse(currentPhotoPath))
                     .into(userImage)
 
+                    upload_icon.visibility = View.GONE
+
                     val uri = data.data
                     val realPath = getRealPathFromUri(uri!!)
                     if(!realPath.isNullOrEmpty()){
                         val file = File(realPath)
                         Log.d(TAG, "onActivityResult: $file")
                         ///storage/emulated/0/DCIM/Camera/IMG_20200601_223652.jpg
-                        if(file != null){
-                            profileImageFile = file
-                        }
+                        profileImageFile = file
                     }
                 }
             }

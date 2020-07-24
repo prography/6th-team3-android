@@ -83,32 +83,10 @@ object RegisterRepository{
         call.enqueue(callback)
     }
 
-//    fun registerPetInfo(token : String, registerPetBody: RegisterPetBody){
-//
-//        val call = PetmilyAuthApi.authApiRetrofitService.registerPet(
-//            token = token,
-//            registerPetBody = registerPetBody
-//        )
-//        val callback = object :Callback<PostPetResponse>{
-//            override fun onFailure(call: Call<PostPetResponse>, t: Throwable) {
-//                Log.d(TAG, "onFailure: ${t.message}")
-//            }
-//
-//            override fun onResponse(
-//                call: Call<PostPetResponse>,
-//                response: Response<PostPetResponse>
-//            ) {
-//                Log.d(TAG, "onResponse: ${response.body()}")
-//            }
-//        }
-//        call.enqueue(callback)
-//    }
 
-    fun registerPetForm(token : String, registerPetParts : HashMap<String, RequestBody>, petProfileUrl : MultipartBody.Part?){
-
-//        val petData = registerPetBody.data
-//        val map : HashMap<String, List<PetData>> = HashMap()
-//        map["data"] = petData
+    fun registerPetForm(token : String,
+                        registerPetParts : HashMap<String, RequestBody>,
+                        petProfileUrl : MultipartBody.Part?){
 
         val call = PetmilyAuthApi.authApiRetrofitService.registerPetForm(
             token = token,
@@ -124,6 +102,7 @@ object RegisterRepository{
         val callback = object :Callback<PostPetResponse>{
             override fun onFailure(call: Call<PostPetResponse>, t: Throwable) {
                 Log.d(TAG, "onFailure: ${t.message}")
+                _registerPetResponse.value = null
             }
 
             override fun onResponse(
@@ -131,6 +110,7 @@ object RegisterRepository{
                 response: Response<PostPetResponse>
             ) {
                 Log.d(TAG, "onResponse: ${response.body()}")
+                _registerPetResponse.value = response.body()
             }
         }
         call.enqueue(callback)
@@ -256,11 +236,9 @@ object RegisterRepository{
     }
 
     fun kakaoRegisterForm(
-        token: String,
         kakaoRegisterData: HashMap<String, RequestBody?>
     ) {
         val call = PetmilyAuthApi.authApiRetrofitService.kakaoRegisterForm(
-            token = token,
             userId = kakaoRegisterData["userId"],
             nickname = kakaoRegisterData["data[nickname]"],
             phoneNumber = kakaoRegisterData["data[phoneNumber]"],

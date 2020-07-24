@@ -16,9 +16,13 @@ interface AccountPropertiesDao {
     @Query("SELECT * FROM user")
     suspend fun getUserAndAllPets() : List<UserAndAllPets>
 
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    /* REPLACE 하면 pet table 이 같이 삭제되므로
+    유저는 반드시 한 번 만 insert 되어야 한다. */
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertUser(user : User) : Long
+
+    @Query("SELECT * FROM pet WHERE ownerId = :userId")
+    suspend fun getPetByUserId(userId : Int) : List<Pet>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPetToUser(pet : Pet) : Long

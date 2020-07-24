@@ -70,7 +70,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
-
     //Room Persistence Library
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
@@ -132,10 +131,15 @@ dependencies {
     //location service
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
+    //Image Compression
+    implementation 'id.zelory:compressor:3.0.0'
+    
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
     // Setting
     implementation "androidx.preference:preference:1.1.0-alpha04"

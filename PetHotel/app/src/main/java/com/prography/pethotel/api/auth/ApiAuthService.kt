@@ -96,7 +96,6 @@ interface  AuthApiService{
     @Multipart
     @POST("user")
     fun kakaoRegisterForm(
-        @Header("Authorization") token: String,
         @Part("userId") userId : RequestBody?,
         @Part("data[nickname]") nickname: RequestBody?,
         @Part("data[phoneNumber]") phoneNumber: RequestBody?,

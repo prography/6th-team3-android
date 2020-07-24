@@ -21,7 +21,6 @@ public class GlobalApplication extends Application {
         super.onCreate();
         instance = this;
         KakaoSDK.init(new KakaoSDKAdapter());
-
     }
 
     @Override

@@ -113,12 +113,6 @@ class PlaceInfoDetailsFragment : Fragment() {
         }
         call.enqueue(callback)
 
-//        tv_load_more_reviews.setOnClickListener {
-//            val reviewArray = reviews.toArray()
-//            val bundle = bundleOf("reviews" to reviewArray)
-//            findNavController().navigate(R.id.action_placeInfoDetailsFragment_to_moreReviewFragment, bundle)
-//        }
-
         /* FAB 초기화 하기 (누르면 여러개 나오는 FAB)*/
         initFloatingActionButtonMenu()
 
@@ -145,8 +139,6 @@ class PlaceInfoDetailsFragment : Fragment() {
             findNavController().navigate(R.id.action_placeInfoDetailsFragment_to_reservationFragment2, bundle)
             multiple_actions_menu.collapse()
         }
-
-        /*리뷰 관련 기능은 일시적으로 커맨트 처리 */
 
         action_write_review.setOnClickListener {
             val bundle = bundleOf("hotel" to hotel)

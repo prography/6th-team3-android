@@ -30,12 +30,8 @@ class KakaoRegisterViewModel : ViewModel(){
 //        RegisterRepository.kakaoRegister(kakaoRegisterBody)
 //    }
 
-    fun registerUserKakaoForm(token : String,
-        kakaoRegisterData : HashMap<String, RequestBody?>){
-        RegisterRepository.kakaoRegisterForm(
-            token,
-            kakaoRegisterData
-        )
+    fun registerUserKakaoForm(kakaoRegisterData : HashMap<String, RequestBody?>){
+        RegisterRepository.kakaoRegisterForm(kakaoRegisterData)
     }
 
     fun getRegisterStatus() : LiveData<RegistrationResponse>{

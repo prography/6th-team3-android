@@ -129,6 +129,7 @@
 
 
             <TextView
+                android:id="@+id/upload_icon"
                 android:drawableTop="@drawable/ic_file_upload_black_24dp"
                 android:drawablePadding="@dimen/padding_small_4dp"
                 android:gravity="center"

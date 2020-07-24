@@ -51,14 +51,6 @@ class LoginRegisterMainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        val pref = requireActivity().getSharedPreferences(USER_TOKEN, MODE_PRIVATE)
-//        val token = pref.getString(USER_TOKEN, "")
-//        if(token == ""){
-//
-//        }else{
-////            userToken = UserToken(token!!)
-//        }
-        Session.getCurrentSession().addCallback(sessionCallback)
     }
 
     override fun onCreateView(
@@ -152,28 +144,12 @@ class LoginRegisterMainFragment : Fragment() {
             )
         }
 
-        /* 카카오 세션을 오픈한다 */
+        /* 카카오 인증 API 호출  */
         btn_kakao_login.setOnClickListener {
-//            val session = Session.getCurrentSession()
-//            session.addCallback(sessionCallback)
-//            session.open(AuthType.KAKAO_LOGIN_ALL, requireActivity())
-
-//            loginViewModel.kakaoLogin()
-
             val intent = Intent(requireActivity(), KakaoLoginActivity::class.java)
-//            intent.putExtra(KAKAO_LOGIN_HTML_DATA_KEY, webViewData)
-//            startActivityForResult(intent, 1010)
             startActivity(intent)
         }
 
-//        loginViewModel.kakaoLoginResponse.observe(viewLifecycleOwner, Observer {
-//            Log.d(TAG, "onActivityCreated: KAKAO RESPONSE \n$it")
-//
-//            loginStateViewModel.setUserToken(requireActivity(), it.token)
-//            val intent = Intent(requireActivity(), MainActivity::class.java)
-//            startActivity(intent)
-//            requireActivity().finish()
-//        })
 
         btn_login_user_register.setOnClickListener {
             //회원가입 화면으로 이동한다.
@@ -181,25 +157,6 @@ class LoginRegisterMainFragment : Fragment() {
         }
     }
 
-    private val sessionCallback = object : ISessionCallback{
-        override fun onSessionOpenFailed(exception: KakaoException?) {
-            Log.d(TAG, "onSessionOpenFailed: Kakao Login Failed!\n$exception")
-        }
-
-        override fun onSessionOpened() {
-            Log.d(TAG, "onSessionOpened: Kakko Login Success!")
-            //로그인 성공시 액세스 토큰, 리프레시 토큰 두 종류의 사용자 토큰을 받는다.
-            //카카오 SDK가 토큰을 관리하는 기능을 갖고 있음.
-            //Android 카카오 SDK는 토큰 관리를 위한 별도 설정이 필요하지 않아.
-
-        }
-    }
-
-    /*카카오톡 콜백 세션을 삭제한다. */
-    override fun onDestroy() {
-        super.onDestroy()
-        Session.getCurrentSession().removeCallback(sessionCallback)
-    }
 
     /*카카오톡 간편로그인 실행 결과를 SDK 로 전달한다 */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -230,18 +187,22 @@ class LoginRegisterMainFragment : Fragment() {
         ).show()
 
         authTokenViewModel.setUserToken(requireActivity(), userToken)
+
         registerViewModel.getUser(userToken)
 
         registerViewModel.getUserInfoResponse().observe(viewLifecycleOwner, Observer {
-            accountPropertiesViewModel.insertUserToDb(
-                User(
-                    userId = it.id,
-                    userName = it.name,
-                    phoneNumber = it.phoneNumber,
-                    profileImage = it.profileImage,
-                    userToken = userToken
+            if(it != null) {
+                accountPropertiesViewModel.insertUserToDb(
+                    User(
+                        userId = it.id,
+                        userName = it.name,
+                        phoneNumber = it.phoneNumber,
+                        profileImage = it.profileImage,
+                        userToken = userToken,
+                        email = et_login_username.text.toString()
+                    )
                 )
-            )
+            }
         })
 
         val intent = Intent(requireContext(), MainActivity::class.java)

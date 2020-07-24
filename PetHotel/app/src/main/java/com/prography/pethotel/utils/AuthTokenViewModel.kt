@@ -7,6 +7,7 @@ import android.content.Context.MODE_PRIVATE
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import kotlin.math.acos
 
 
 enum class TokenState{
@@ -46,6 +47,18 @@ class AuthTokenViewModel (application: Application) :AndroidViewModel(applicatio
             token = pref.getString(USER_TOKEN, "")!!
         }
         return token
+    }
+
+    fun setUserId(activity: Activity, userId : Int){
+        Log.d(TAG, "setUserId: 유저 아이디 셋")
+        val pref = activity.getSharedPreferences("USER_ID", MODE_PRIVATE)
+        pref.edit().putInt("USER_ID", userId).apply()
+    }
+
+    fun getUserId(activity: Activity): Int {
+        Log.d(TAG, "getUserId: 유저 아이디 GET")
+        val pref = activity.getSharedPreferences("USER_ID", MODE_PRIVATE)
+        return pref.getInt("USER_ID", -1)
     }
 
     fun updateTokenState(tokenState: TokenState){

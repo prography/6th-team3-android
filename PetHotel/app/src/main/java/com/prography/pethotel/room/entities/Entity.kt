@@ -75,9 +75,11 @@ data class HotelLike(
 
 @Entity(tableName = "user")
 data class User(
-    @PrimaryKey(autoGenerate = false) @ColumnInfo(name= "id")  val userId : Int,
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name= "id")  val userId : Int,
     @ColumnInfo(name = "name") val userName : String,
     @ColumnInfo(name = "phoneNumber") val phoneNumber : String,
+    @ColumnInfo(name = "email") val email : String?= null,
     @ColumnInfo(name = "profileImage") val profileImage : String,
     @ColumnInfo(name = "userToken") val userToken : String
 )
@@ -94,7 +96,8 @@ data class User(
 ]
 )
 data class Pet(
-    @PrimaryKey(autoGenerate = false) @ColumnInfo(name= "id") val petId : Int,
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name= "id") val petId : Int,
     @ColumnInfo(name = "name") val petName : String,
     @ColumnInfo(name = "year") val petBirthYear : Int?= null,
     @ColumnInfo(name = "dog_reg_no") val dogRegisterNo : String?= null, //String?
@@ -102,7 +105,8 @@ data class Pet(
     @ColumnInfo(name = "gender") val gender : String,
     @ColumnInfo(name = "kind") val kind : String,
     @ColumnInfo(name = "is_neutered") val isNeutered : Boolean,
-    @ColumnInfo(name = "ownerId", index = true) val ownerId : Int
+    @ColumnInfo(name = "ownerId", index = true) val ownerId : Int,
+    @ColumnInfo(name = "profile_path") val profileImagePath : String?= null
  )
 
 @Entity(

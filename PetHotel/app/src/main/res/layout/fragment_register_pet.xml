@@ -44,17 +44,6 @@
         >
 
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/img_register_pet_image"
-            app:riv_corner_radius="12dp"
-            android:background="@color/petHotelLightGrey"
-            android:layout_marginBottom="@dimen/margin_1x"
-            android:layout_width="@dimen/profile_image_size"
-            android:layout_height="@dimen/profile_image_size"
-            android:scaleType="centerCrop"
-            />
-
-
         <!--    <TextView-->
         <!--        android:id="@+id/tv_register_pet_name_title"-->
         <!--        style="@style/phBody2"-->
@@ -63,6 +52,41 @@
         <!--        android:text="반려견이름"-->
         <!--        android:layout_marginTop="@dimen/margin_1x"-->
         <!--        />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginBottom="@dimen/margin_1x"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_register_pet_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="@dimen/profile_image_size"
+            android:layout_height="@dimen/profile_image_size"
+            android:src="@color/petHotelLightGrey"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="12dp" />
+
+            <TextView
+                android:id="@+id/upload_icon"
+                android:drawableTop="@drawable/ic_file_upload_black_24dp"
+                android:drawablePadding="@dimen/padding_small_4dp"
+                android:gravity="center"
+                android:text="사진업로드"
+                app:layout_constraintTop_toTopOf="@id/img_register_pet_image"
+                app:layout_constraintStart_toStartOf="@id/img_register_pet_image"
+                app:layout_constraintEnd_toEndOf="@id/img_register_pet_image"
+                app:layout_constraintBottom_toBottomOf="@id/img_register_pet_image"
+                android:textColor="@color/petHotelSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <EditText
             android:id="@+id/et_register_pet_name"
@@ -116,13 +140,14 @@
 
 
         <RelativeLayout
+            android:layout_marginTop="@dimen/margin_1x"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/check_register_pet_number"
                 style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"

@@ -8,11 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.prography.pethotel.R
 import com.prography.pethotel.api.auth.response.KakaoRegistrationResponse
+import com.prography.pethotel.room.auth.AccountPropertiesViewModel
 import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.authentication.afterTextChanged
 import com.prography.pethotel.utils.AuthTokenViewModel
@@ -28,6 +30,7 @@ class KakaoRegisterFragment : Fragment() {
 
     private lateinit var kakaoRegisterViewModel: KakaoRegisterViewModel
     private lateinit var authTokenViewModel: AuthTokenViewModel
+    private val accountPropertiesViewModel: AccountPropertiesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,7 +106,6 @@ class KakaoRegisterFragment : Fragment() {
                 map["userId"] = bUserId
 
                     kakaoRegisterViewModel.registerUserKakaoForm(
-                        token = "token", //TODO fix this part
                         kakaoRegisterData = map
                     )
             }else{

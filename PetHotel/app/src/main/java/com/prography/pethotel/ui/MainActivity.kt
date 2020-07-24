@@ -84,19 +84,29 @@ class MainActivity : AppCompatActivity(){
             registerViewModel.getUser(token)
 
             registerViewModel.getUserInfoResponse().observe(this, Observer {
-                if(it == null){
+                userinfo ->
+                if(userinfo == null){
                     Toast.makeText(this, "사용자 정보 불러오기 실패", Toast.LENGTH_SHORT).show()
                 }else{
-                    accountPropertiesViewModel.insertUserToDb(
-                        User(
-                            userId = it.id,
-                            userName = it.name,
-                            profileImage = it.profileImage,
-                            phoneNumber = it.phoneNumber,
-                            userToken = token
-                        )
-                    )
-                    Log.d(TAG, "onCreate: 데이터베이스에 유저 정보 저장!")
+                    //DB 에 저장되어 있는지 확인한 후, 없으면 넣고 있으면 넣지 않는다.
+                    accountPropertiesViewModel.fetchUser(token)
+
+                    accountPropertiesViewModel.userProperty.observe(this, Observer {
+                        if(it == null){
+                            Log.d(TAG, "onCreate: MainActivity 에서 유저 정보 확인 => 유저 정보 없음")
+                            accountPropertiesViewModel.insertUserToDb(
+                                User(
+                                    userId = userinfo.id,
+                                    userName = userinfo.name,
+                                    profileImage = userinfo.profileImage,
+                                    phoneNumber = userinfo.phoneNumber,
+                                    userToken = token
+                                )
+                            )
+                            Log.d(TAG, "onCreate: 데이터베이스에 유저 정보 저장!")
+                        }
+                    })
+                    authTokenViewModel.setUserId(this, userinfo.id)
                 }
             })
         }else{
@@ -244,21 +254,7 @@ class MainActivity : AppCompatActivity(){
                     getLocation()
 
                     var location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-//                    if(location == null){
-//                        val fusedLocationClient
-//                            = LocationServices.getFusedLocationProviderClient(this)
-//                        fusedLocationClient.lastLocation
-//                            .addOnSuccessListener {
-//                                if(it == null){
-//                                    Log.d(TAG, "onRequestPermissionsResult: google service Api 실패")
-//                                }else{
-//                                    location = it
-//                                }
-//                            }
-//                            .addOnFailureListener {
-//                                Log.d(TAG, "onRequestPermissionsResult: 실패 $it")
-//                            }
-//                    }
+
                     Log.d(TAG, "onRequestPermissionsResult: $location")
                     //위도, 경도 -> double 타입
                         if(location != null) {

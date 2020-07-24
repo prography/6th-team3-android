@@ -9,10 +9,8 @@ import com.prography.pethotel.api.auth.response.UserToken
 import com.prography.pethotel.room.entities.Pet
 import com.prography.pethotel.room.entities.User
 import com.prography.pethotel.room.entities.UserAndAllPets
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import okhttp3.internal.wait
 
 
 private const val TAG = "AccountPropertiesViewMo"
@@ -26,7 +24,7 @@ class AccountPropertiesViewModel(
 
     val userProperty = MutableLiveData<User>()
     val userAndPetProperty = MutableLiveData<List<UserAndAllPets>>()
-
+    val petListResult = MutableLiveData<List<Pet>>()
 
     /* 유저 정보를 데이터베이스에 저장한다. */
     fun insertUserToDb(user : User){
@@ -49,6 +47,13 @@ class AccountPropertiesViewModel(
         coroutineScope.launch {
             val result = getUserInfoFromDb(userToken)
             userProperty.value = result
+        }
+    }
+
+    fun fetchPetByUserId(userId : Int){
+        coroutineScope.launch {
+            val result = getPetList(userId)
+            petListResult.value = result
         }
     }
 
@@ -80,5 +85,10 @@ class AccountPropertiesViewModel(
     private suspend fun getUserAndPetsFromDb() =
         withContext(Dispatchers.IO){
             accountPropertiesDao.getUserAndAllPets()
+        }
+
+    private suspend fun getPetList(userId : Int) =
+        withContext(Dispatchers.IO){
+            accountPropertiesDao.getPetByUserId(userId)
         }
 }
