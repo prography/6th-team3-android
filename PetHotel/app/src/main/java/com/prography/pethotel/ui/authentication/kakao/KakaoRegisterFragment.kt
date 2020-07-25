@@ -121,15 +121,12 @@ class KakaoRegisterFragment : Fragment() {
                     if (response.status == "success") {
                         Toast.makeText(requireContext(), "회원가입 성공", Toast.LENGTH_SHORT).show()
 
+                        // TODO: 7/24/2020 카카오 회원가입 성공 set token => Main Activity
                         authTokenViewModel.setUserToken(
                             requireActivity(),
                             response.userToken.token
                         )
-
-                        val intent = Intent(requireActivity(), MainActivity::class.java)
-                        requireActivity().startActivity(intent)
-                        requireActivity().finish()
-
+                        redirectToMainActivity()
                     } else {
                         Toast.makeText(requireContext(), "회원가입 실패", Toast.LENGTH_SHORT).show()
                     }
@@ -137,6 +134,12 @@ class KakaoRegisterFragment : Fragment() {
                     Toast.makeText(requireContext(), "서버 오류", Toast.LENGTH_SHORT).show()
                 }
         })
+    }
+
+    private fun redirectToMainActivity(){
+        val intent = Intent(requireActivity(), MainActivity::class.java)
+        requireActivity().startActivity(intent)
+        requireActivity().finish()
     }
 
     private fun setRegistrationData(kakaoRegistrationResponse: KakaoRegistrationResponse){

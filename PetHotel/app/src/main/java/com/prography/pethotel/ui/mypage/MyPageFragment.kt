@@ -68,19 +68,6 @@ class MyPageFragment : Fragment() {
 
     }
 
-//    private fun setLoggedOutView(view : View){
-//        view.btn_login_mypage.setOnClickListener {
-//            //TODO 마이페이지에서 로그인으로 넘어가기
-//        }
-//        view.btn_register_mypage.setOnClickListener {
-//            //TODO 마이페이지에서 회원가입으로 넘어가기
-//        }
-//        view.btn_kakao_login_mypage.setOnClickListener {
-//            val intent = Intent(requireActivity(), KakaoLoginActivity::class.java)
-//            startActivity(intent)
-//        }
-//    }
-
     private fun setLoggedInView(view : View){
 
         view.mypage_register_pet.setOnClickListener {
@@ -107,9 +94,7 @@ class MyPageFragment : Fragment() {
             findNavController().navigate(R.id.action_myPageFragment_to_settingsFragment)
         }
         view.btn_mypage_logout.setOnClickListener {
-            val token = authTokenViewModel.getUserToken(requireActivity())
             authTokenViewModel.removeUserToken(requireActivity())
-            accountPropertiesViewModel.deleteUserProperties(token)
 
             Log.d(TAG, "setLoggedInView: 로그아웃 클릭")
         }

@@ -4,6 +4,7 @@ import androidx.room.*
 import com.prography.pethotel.api.main.response.HotelReviewData
 import com.prography.pethotel.room.entities.Hotel
 import com.prography.pethotel.room.entities.HotelLike
+import com.prography.pethotel.room.entities.Reservation
 
 
 @Dao
@@ -32,4 +33,11 @@ interface MainDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHotelReview(hotelReviewData: HotelReviewData) : Long
+
+    @Query("SELECT * FROM hotel_review WHERE userId = :userId")
+    suspend fun getHotelReviewByUserId(userId : Int) : List<HotelReviewData>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertReservation(reservation: Reservation) : Long
+
 }

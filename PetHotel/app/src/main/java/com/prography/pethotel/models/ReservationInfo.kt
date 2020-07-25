@@ -1,18 +1,11 @@
 package com.prography.pethotel.models
 
 import com.prography.pethotel.api.main.response.HotelData
+import com.prography.pethotel.room.entities.Pet
 
 data class ReservationInfo(
-    var hotel : HotelData,
-    var userInfo : GeneralUserInfo,
-    var petList : ArrayList<PetInfo>,
-    var deliverMsg : ArrayList<DeliverMsg> ?= ArrayList(),
-    var checkInDateTime : String,
-    var checkOutDateTime : String
-)
-
-data class DeliverMsg(
-    val petName : String,
-    val petKind : String? = "",
-    val msg : String? = ""
+    var hotel : HotelData ?= null,
+    var deliverMsg : String ?= null,
+    var checkInDateTime : String ?= null,
+    var checkOutDateTime : String ?= null
 )

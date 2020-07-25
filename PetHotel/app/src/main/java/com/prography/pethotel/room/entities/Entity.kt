@@ -1,5 +1,6 @@
 package com.prography.pethotel.room.entities
 
+import androidx.annotation.ColorInt
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 import com.google.gson.Gson
@@ -77,10 +78,10 @@ data class HotelLike(
 data class User(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name= "id")  val userId : Int,
-    @ColumnInfo(name = "name") val userName : String,
-    @ColumnInfo(name = "phoneNumber") val phoneNumber : String,
+    @ColumnInfo(name = "name") val userName : String?= null,
+    @ColumnInfo(name = "phoneNumber") val phoneNumber : String?=null,
     @ColumnInfo(name = "email") val email : String?= null,
-    @ColumnInfo(name = "profileImage") val profileImage : String,
+    @ColumnInfo(name = "profileImage") val profileImage : String?=null,
     @ColumnInfo(name = "userToken") val userToken : String
 )
 
@@ -109,22 +110,55 @@ data class Pet(
     @ColumnInfo(name = "profile_path") val profileImagePath : String?= null
  )
 
+
 @Entity(
-    tableName = "reivew",
+    tableName = "reservation",
     foreignKeys = [
-    ForeignKey(entity = User::class,
-        parentColumns = ["id"],
-        childColumns = ["userId"],
-        onDelete = CASCADE
+    ForeignKey(entity = Pet::class,
+    parentColumns = ["id"],
+    childColumns = ["petId"]
     ),
     ForeignKey(
-        entity = Hotel::class,
+        entity = User::class,
         parentColumns = ["id"],
-        childColumns = ["hotelId"],
-        onDelete = CASCADE
+        childColumns = ["userId"]
     )
     ]
 )
+data class Reservation(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id") val reservationId : Int,
+
+    @ColumnInfo(name = "petId")
+    val petId : Int,
+
+    @ColumnInfo(name = "userId", index = true)
+    val userId : Int,
+    //호텔 테이블이 비어있어서 외래 키 오류가 계속 나므로
+    //임시적으로 호텔 아이디가 아니라, 호텔 이름과 주소를
+    //명시한다.
+    @ColumnInfo(name =  "hotelName")
+    val hotelName : String,
+
+    @ColumnInfo(name = "hotelAddress")
+    val hotelAddress : String,
+
+    @ColumnInfo(name = "checkInTime")
+    val checkInTime : String,
+
+    @ColumnInfo(name = "checkInDate")
+    val checkInDate : String,
+
+    @ColumnInfo(name = "checkOutTime")
+    val checkOutTime : String,
+
+    @ColumnInfo(name = "checkOutDate")
+    val checkOutDate : String,
+
+    @ColumnInfo(name = "request")
+    val request : String
+)
+
 
 class UserAndAllPets{
     @Embedded

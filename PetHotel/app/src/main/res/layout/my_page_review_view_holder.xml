@@ -8,6 +8,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/margin_1x"
+        android:id="@+id/review_hotel_name"
+        style="@style/phTitle"
+        android:text="호텔 이름"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/review_created_at"
@@ -22,9 +31,9 @@
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_1x"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/margin_0_5x"
+        app:layout_constraintTop_toBottomOf="@id/review_hotel_name"
+        app:layout_constraintStart_toStartOf="@id/review_hotel_name"
         />
 
     <TextView

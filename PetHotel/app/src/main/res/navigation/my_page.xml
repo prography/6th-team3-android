@@ -66,6 +66,7 @@
         tools:layout="@layout/fragment_register_pet" >
         <action
             android:id="@+id/action_registerPetFragment_to_petInfoFragment"
-            app:destination="@id/petInfoFragment" />
+            app:destination="@id/petInfoFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

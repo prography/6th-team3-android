@@ -15,20 +15,10 @@
     <TextView
         android:text="예약자 정보 확인"
         style="@style/phTitle"
+        android:layout_marginStart="@dimen/margin_0_5x"
+        android:layout_marginBottom="@dimen/margin_1x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
-    <CheckBox
-        android:id="@+id/check_if_using_user_info"
-        android:text="기존 회원 정보 사용 "
-        style="@style/phBody2"
-        android:textColor="@color/petHotelSecondaryDark"
-        android:layout_gravity="end"
-        android:layoutDirection="rtl"
-        android:textAlignment="textEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
 
 
     <EditText

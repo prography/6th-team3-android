@@ -1,6 +1,7 @@
 package com.prography.pethotel.room.auth
 
 import android.app.Application
+import android.database.sqlite.SQLiteConstraintException
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +12,7 @@ import com.prography.pethotel.room.entities.User
 import com.prography.pethotel.room.entities.UserAndAllPets
 import kotlinx.coroutines.*
 import okhttp3.internal.wait
+import java.lang.Exception
 
 
 private const val TAG = "AccountPropertiesViewMo"
@@ -25,12 +27,24 @@ class AccountPropertiesViewModel(
     val userProperty = MutableLiveData<User>()
     val userAndPetProperty = MutableLiveData<List<UserAndAllPets>>()
     val petListResult = MutableLiveData<List<Pet>>()
+    val insertUserResponse = MutableLiveData<String>()
 
     /* 유저 정보를 데이터베이스에 저장한다. */
     fun insertUserToDb(user : User){
-        CoroutineScope(Dispatchers.IO).launch{
-            val result = accountPropertiesDao.insertUser(user)
-            Log.d(TAG, "insertUserToDb: $result")
+        CoroutineScope(Dispatchers.Main).launch{
+            try{
+                val result = withContext(Dispatchers.IO){
+                    accountPropertiesDao.insertUser(user)
+                }
+                Log.d(TAG, "insertUserToDb: $result")
+                insertUserResponse.value = "success"
+            }catch (e: SQLiteConstraintException){
+                Log.d(TAG, "insertUserToDb: ${e.printStackTrace()}")
+                insertUserResponse.value = "constraint_failed"
+            }
+            catch (e : Exception){
+                insertUserResponse.value = "exception"
+            }
         }
     }
 

@@ -52,7 +52,7 @@ interface AnimalNumberApiService{
 interface  AuthApiService{
 
     @POST("auth/login")
-    suspend fun generalLogin(@Body loginInfo : LoginInfoBody) : GeneralLoginResponse
+    fun generalLogin(@Body loginInfo : LoginInfoBody) : Call<GeneralLoginResponse>
 
     @POST("user")
     fun generalRegister(@Body registerUserInfo : RegisterUserInfo) : Call<RegistrationResponse>

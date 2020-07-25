@@ -11,12 +11,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.prography.pethotel.R
 import com.prography.pethotel.api.main.response.HotelData
+import com.prography.pethotel.models.ReservationInfo
+import com.prography.pethotel.room.auth.AccountPropertiesViewModel
+import com.prography.pethotel.utils.AuthTokenViewModel
 import kotlinx.android.synthetic.main.fragment_reservation_main_v2.*
 
 
@@ -24,12 +24,10 @@ private const val TAG = "ReservationFragment"
 class ReservationFragment : Fragment() {
 
     /* Activity 가 갖고 있는 뷰 모델을 Fragment 에서 사용한다 */
-    private val reservationViewModel: ReservationViewModel by activityViewModels{
-        object : ViewModelProvider.Factory{
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T
-            = ReservationViewModel() as T
-        }
-    }
+    private val reservationViewModel: ReservationViewModel by activityViewModels()
+
+    val authTokenViewModel : AuthTokenViewModel by activityViewModels()
+    val accountPropertiesViewModel : AccountPropertiesViewModel by activityViewModels()
 
     private var checkInDateTime : String? = ""
     private var checkOutDateTime : String? = ""
@@ -65,10 +63,23 @@ class ReservationFragment : Fragment() {
             Log.d(TAG, "onActivityCreated: 예약화면으로 호텔 정보 불러오기 실패")
         }
 
+        /* 호텔 정보를 예약 뷰모델에 저장 */
+
+
         /* 날짜와 시간을 선택한 후 다음 화면으로 넘어간다. */
         proceed_reservation_from_main.setOnClickListener {
             if(isDateTimeValid(inDate, inTime, outDate, outTime)){
-                setDateTimeToViewModel(inDate, inTime, outDate, outTime)
+                checkInDateTime = "$inDate $inTime"
+                checkOutDateTime = "$outDate $outTime"
+
+                reservationViewModel.updateReservationInfo(
+                    reservationInfo =
+                ReservationInfo(
+                    hotel = hotel,
+                    checkInDateTime = checkInDateTime,
+                    checkOutDateTime = checkOutDateTime
+                ))
+//                setDateTimeToViewModel(inDate, inTime, outDate, outTime)
                 findNavController().navigate(R.id.action_reservationFragment2_to_reservationDetailFragment2)
             }else {
                 Toast.makeText(requireContext(), "날짜와 시간을 정확히 입력해 주세요.", Toast.LENGTH_SHORT).show()
@@ -149,8 +160,8 @@ class ReservationFragment : Fragment() {
 
     private fun initDateTimeText() {
         val cal = Calendar.getInstance()
-        checkin_date.text = "${cal.get(Calendar.YEAR)}/${cal.get(Calendar.MONTH)}/${cal.get(Calendar.DAY_OF_MONTH)}"
-        checkout_date.text = "${cal.get(Calendar.YEAR)}/${cal.get(Calendar.MONTH)}/${cal.get(Calendar.DAY_OF_MONTH)}"
+        checkin_date.text = "${cal.get(Calendar.YEAR)}/${cal.get(Calendar.MONTH) + 1}/${cal.get(Calendar.DAY_OF_MONTH)}"
+        checkout_date.text = "${cal.get(Calendar.YEAR)}/${cal.get(Calendar.MONTH) + 1}/${cal.get(Calendar.DAY_OF_MONTH)}"
 
         checkin_time.text = "${cal.get(Calendar.HOUR_OF_DAY)}:${cal.get(Calendar.MINUTE)}"
         checkout_time.text = "${cal.get(Calendar.HOUR_OF_DAY)}:${cal.get(Calendar.MINUTE)}"
@@ -165,16 +176,16 @@ class ReservationFragment : Fragment() {
                 !outTime.isNullOrEmpty()
     }
 
-    private fun setDateTimeToViewModel(
-        inDate: String?, inTime: String?,
-        outDate: String?, outTime: String?
-    ) {
-        checkInDateTime = "$inDate $inTime"
-        checkOutDateTime = "$outDate $outTime"
-
-        reservationViewModel.setReservationDateTime(
-            checkInDateTime!!, checkOutDateTime!!
-        )
-    }
+//    private fun setDateTimeToViewModel(
+//        inDate: String?, inTime: String?,
+//        outDate: String?, outTime: String?
+//    ) {
+//        checkInDateTime = "$inDate $inTime"
+//        checkOutDateTime = "$outDate $outTime"
+//
+//        reservationViewModel.setReservationDateTime(
+//            checkInDateTime!!, checkOutDateTime!!
+//        )
+//    }
 
 }

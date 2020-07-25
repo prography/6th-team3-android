@@ -12,8 +12,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import retrofit2.Call
+import retrofit2.Response
 import java.io.IOException
 import java.lang.Exception
+import javax.security.auth.callback.Callback
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -50,54 +53,22 @@ class LoginRepository() {
     }
 
 
-//    fun login(loginInfoBody: LoginInfoBody): Result<GeneralLoginResponse> {
-//        // handle login
-//        Log.d(TAG, "login: 레포에서 로그인 중")
-//        val result = generalLogin(loginInfoBody = loginInfoBody)
-//        if (result is Result.Success) {
-//            val userToken = result.data.data.token
-//            setLoggedInUser(userToken)
-//        }else{
-//            Log.d(TAG, "login: 로그인 실패")
-//        }
-//        return result
-//    }
-
-    private fun setLoggedInUser(userToken: String) {
-        Log.d(TAG, "setLoggedInUser: $userToken Login 성공!")
-        //this.user = loginInfoBody
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
-    }
-
-//    fun kakaoLogin(){
-//        try {
-//            coroutineScope.launch {
-//                val response =
-//                    PetmilyAuthApi.kakaoApiRetrofitService.kakaoLogin()
-//                Log.d(TAG, "카카오 로그인 테스트 kakaoRegister: $response")
-//                _kakaoLoginResponse.value = response
-//
-//            }
-//        }catch (e : Exception){
-//            Log.d(TAG, "kakaoRegister: ${e.printStackTrace()}")
-//        }
-//    }
-
     fun generalLogin(loginInfoBody: LoginInfoBody){
-        var response: GeneralLoginResponse?
-
-        try {
-            coroutineScope.launch {
-                response =
-                    PetmilyAuthApi.authApiRetrofitService.generalLogin(
-                        loginInfoBody
-                    )
-                _loginResponse.value = response
+        val call
+                = PetmilyAuthApi.authApiRetrofitService.generalLogin(loginInfoBody)
+        val callback = object : retrofit2.Callback<GeneralLoginResponse>{
+            override fun onFailure(call: Call<GeneralLoginResponse>, t: Throwable) {
+                _loginResponse.value = null
             }
-        }catch (e : Exception){
-            Log.d(TAG, "generalLogin: ${e.printStackTrace()}")
+
+            override fun onResponse(
+                call: Call<GeneralLoginResponse>,
+                response: Response<GeneralLoginResponse>
+            ) {
+                _loginResponse.value = response.body()
+            }
         }
+        call.enqueue(callback)
     }
 
 }

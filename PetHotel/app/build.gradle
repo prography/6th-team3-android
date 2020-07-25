@@ -110,15 +110,9 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
-    // Leak Canary (detecting memory leaks)
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
-
 
     // Login - Kakao
     implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.29.0'
-
-    //Image Cropper
-    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
 
     implementation "com.makeramen:roundedimageview:2.3.0"
 
@@ -137,9 +131,6 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
-
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
     // Setting
     implementation "androidx.preference:preference:1.1.0-alpha04"

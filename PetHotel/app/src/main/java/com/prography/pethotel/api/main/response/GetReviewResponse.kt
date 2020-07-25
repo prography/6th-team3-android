@@ -23,11 +23,6 @@ data class GetReviewResponse(
         entity = User::class,
         parentColumns = ["id"],
         childColumns = ["userId"]
-    ),
-    ForeignKey(
-        entity = Hotel::class,
-        parentColumns = ["id"],
-        childColumns = ["hotelId"]
     )
     ]
 )
@@ -35,7 +30,7 @@ data class GetReviewResponse(
 data class HotelReviewData(
     @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = false) val id: Int,
     @ColumnInfo(name = "userId") val userId: Int,
-    @ColumnInfo(name = "hotelId") val hotelId: Int,
+    @ColumnInfo(name= "hotelName") val hotelName : String,
     @ColumnInfo(name = "content") val content: String?= null,
     @ColumnInfo(name = "rating") val rating: Int,
     @ColumnInfo(name = "createdAt") val createdAt: String,

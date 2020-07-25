@@ -23,17 +23,6 @@
         app:layout_constraintStart_toEndOf="@id/gl_start"
          />
 
-
-    <!--    <com.google.android.gms.common.SignInButton-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:buttonSize="standard"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/btn_kakao_login" />-->
-
-
     <TextView
         android:id="@+id/tv_login_register_title"
         style="@style/phTitle"
@@ -120,13 +109,6 @@
         app:layout_constraintStart_toEndOf="@id/gl_start"
         android:layout_marginTop="@dimen/margin_0_5x"
         android:text="일반회원가입" />
-
-    <!--   <ImageButton-->
-<!--       android:layout_margin="@dimen/margin_1x"-->
-<!--       android:src="@drawable/kakao_login_btn_simple_medium"-->
-<!--       android:background="@android:color/transparent"-->
-<!--       android:layout_width="wrap_content"-->
-<!--       android:layout_height="wrap_content"/>-->
 
 
     <View

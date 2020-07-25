@@ -1,7 +1,6 @@
 package com.prography.pethotel.ui.authentication.register
 
 import android.app.Activity
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
@@ -13,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.loader.content.CursorLoader
@@ -23,9 +23,14 @@ import com.prography.pethotel.models.GeneralUserInfo
 import com.prography.pethotel.ui.MainActivity
 import com.prography.pethotel.ui.authentication.afterTextChanged
 import com.prography.pethotel.ui.authentication.utils.BaseFragment
-import com.prography.pethotel.utils.USER_TOKEN
+import com.prography.pethotel.utils.AuthTokenViewModel
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.size
 import kotlinx.android.synthetic.main.register_user_info_fragment.*
-import okhttp3.MediaType
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -38,14 +43,9 @@ private const val TAG = "RegisterUserInfoFragment"
 @Suppress("DEPRECATION")
 class RegisterUserInfoFragment : BaseFragment() {
 
-    companion object {
-        fun newInstance() =
-            RegisterUserInfoFragment()
-
-    }
     private lateinit var registerViewModel: RegisterViewModel
+    private val authTokenViewModel : AuthTokenViewModel by activityViewModels()
 
-//    private var currentPhotoPath = ""
     private var generalUserInfo : GeneralUserInfo = GeneralUserInfo()
     private lateinit var userImage : ImageView
     private var profileImageFile : File? = null
@@ -72,14 +72,6 @@ class RegisterUserInfoFragment : BaseFragment() {
 
         /*다시 입력 화면으로 돌아왔을 때 정보가 남아있도록 한다.*/
         observeUserInfo()
-
-//        btn_upload_user_image.setOnClickListener {
-//            getAlbum()
-//        }
-//
-//        btn_take_user_photo.setOnClickListener {
-//            takePhoto()
-//        }
 
         /* 정확한 정보 입력을 감지한다. */
         setListenersToFields()
@@ -295,10 +287,6 @@ class RegisterUserInfoFragment : BaseFragment() {
             )
         }
 
-//        registerViewModel.setUserInfo(generalUserInfo)
-
-//        registerViewModel.registerUserGeneral(generalUserInfo)
-
         registerViewModel.getRegisterStatus().observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "onActivityCreated: register status = $it")
 
@@ -308,11 +296,8 @@ class RegisterUserInfoFragment : BaseFragment() {
                         userToken ->
                     Log.d(TAG, "onActivityCreated: $userToken")
 
-                    val pref = requireActivity().getSharedPreferences(USER_TOKEN, MODE_PRIVATE)
-                    val editor = pref.edit()
-                    editor.putString(USER_TOKEN, userToken.token)
-                    val e = editor.commit()
-                    Log.d(TAG, "onActivityCreated: $e")
+                    // TODO: 7/24/2020 회원가입 성공하면 set token => Main Activity
+                    authTokenViewModel.setUserToken(requireActivity(), userToken.token)
                 })
                 //different redirection based on register type
                 redirectToMainActivity()
@@ -339,7 +324,7 @@ class RegisterUserInfoFragment : BaseFragment() {
             if (data != null) {
                 currentPhotoPath = data.data.toString()
                 Log.d(TAG, "onActivityResult: $currentPhotoPath")
-//content://com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F25/ORIGINAL/NONE/image%2Fjpeg/1310826614
+
                 if(data.data != null){
                     Glide.with(requireContext())
                     .load(Uri.parse(currentPhotoPath))
@@ -350,24 +335,37 @@ class RegisterUserInfoFragment : BaseFragment() {
                     val uri = data.data
                     val realPath = getRealPathFromUri(uri!!)
                     if(!realPath.isNullOrEmpty()){
-                        val file = File(realPath)
-                        Log.d(TAG, "onActivityResult: $file")
-                        ///storage/emulated/0/DCIM/Camera/IMG_20200601_223652.jpg
-                        profileImageFile = file
+                        /* 원본 사진을 가져온다 */
+                        val sourceFile = File(realPath)
+                        Log.d(TAG, "onActivityResult: $sourceFile")
+
+                        // TODO: 7/24/2020 회원 사진 올리는 것 테스트하기
+                        GlobalScope.launch {
+                            val result = compressImage(sourceFile)
+                            profileImageFile = result
+                            Log.d(TAG, "onActivityResult: Compression => $profileImageFile")
+                        }
                     }
                 }
             }
         }
     }
 
+    private suspend fun compressImage(sourceFile : File) =
+        withContext(Dispatchers.Default) {
+            Compressor.compress(requireContext(), sourceFile){
+                size( 1_000_000)
+            }
+        }
+
     private fun getRealPathFromUri(contentUri: Uri): String? {
         val proj = arrayOf(MediaStore.Images.Media.DATA)
         val loader = CursorLoader(requireContext(), contentUri, proj, null, null, null)
         val cursor: Cursor? = loader.loadInBackground()
-        val column_index =
+        val columnIndex =
             cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         cursor?.moveToFirst()
-        val result = column_index?.let { cursor?.getString(it) }
+        val result = columnIndex?.let { cursor.getString(it) }
         cursor?.close()
         return result
     }

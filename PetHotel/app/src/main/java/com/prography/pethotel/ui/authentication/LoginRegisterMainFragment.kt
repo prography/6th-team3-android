@@ -82,19 +82,22 @@ class LoginRegisterMainFragment : Fragment() {
         })
 
         loginViewModel.getLoginResponse().observe(viewLifecycleOwner, Observer {
-            val loginResult = it.status
+            if(it == null){
+                Toast.makeText(requireContext(), "이메일 혹은 비밀번호가 잘못되었습니다!", Toast.LENGTH_SHORT).show()
+            }else {
+                val loginResult = it.status
 
-            loading.visibility = View.GONE
+                loading.visibility = View.GONE
 
-            if (loginResult == "success") {
-                updateUiWithUser(it.data.token)
+                if (loginResult == "success") {
+                    updateUiWithUser(it.data.token)
+                } else {
+                    showLoginFailed(R.string.login_failed)
+                }
+                requireActivity().setResult(RESULT_OK)
+                //Complete and destroy login activity once successful
+                requireActivity().finish()
             }
-            else{
-                showLoginFailed(R.string.login_failed)
-            }
-            requireActivity().setResult(RESULT_OK)
-            //Complete and destroy login activity once successful
-            requireActivity().finish()
         })
 
 
@@ -186,24 +189,8 @@ class LoginRegisterMainFragment : Fragment() {
             Toast.LENGTH_LONG
         ).show()
 
+        // TODO: 7/24/2020 로그인 성공하면 set token => Main 으로 넘어감
         authTokenViewModel.setUserToken(requireActivity(), userToken)
-
-        registerViewModel.getUser(userToken)
-
-        registerViewModel.getUserInfoResponse().observe(viewLifecycleOwner, Observer {
-            if(it != null) {
-                accountPropertiesViewModel.insertUserToDb(
-                    User(
-                        userId = it.id,
-                        userName = it.name,
-                        phoneNumber = it.phoneNumber,
-                        profileImage = it.profileImage,
-                        userToken = userToken,
-                        email = et_login_username.text.toString()
-                    )
-                )
-            }
-        })
 
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)

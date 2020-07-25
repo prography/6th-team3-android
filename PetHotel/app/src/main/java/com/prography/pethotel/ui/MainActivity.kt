@@ -26,6 +26,7 @@ import com.prography.pethotel.ui.authentication.register.RegisterViewModel
 import com.prography.pethotel.utils.AuthTokenViewModel
 import com.prography.pethotel.utils.TokenState
 import com.prography.pethotel.ui.places.PlaceInfoViewModel
+import com.prography.pethotel.ui.reservation.ReservationViewModel
 import com.prography.pethotel.utils.*
 
 
@@ -40,6 +41,8 @@ class MainActivity : AppCompatActivity(){
     private lateinit var accountPropertiesViewModel: AccountPropertiesViewModel
     private lateinit var registerViewModel : RegisterViewModel
     private lateinit var mainDbViewModel: MainDbViewModel
+    private lateinit var reservationViewModel: ReservationViewModel
+
 
     private var currentNavController: LiveData<NavController>? = null
 
@@ -71,15 +74,18 @@ class MainActivity : AppCompatActivity(){
         /* register 할 때 필요한 작업들 및 정보들을 갖고 있는 뷰모델 */
         registerViewModel = ViewModelProviders.of(this).get(RegisterViewModel::class.java)
 
+        reservationViewModel = ViewModelProviders.of(this).get(ReservationViewModel::class.java)
+
+        /*
+* 1. 유저가 토큰을 갖고 있다면
+* 2. 해당 토큰으로 GET user 를 한다.
+* 3. 받아온 정보를 확인하고
+* 4. 올바른 정보라면 테이블에 정보를 저장한다.
+* 5. 로그아웃 되면 테이블에서 삭제되도록 하는 것도 구현하기! */
         if(authTokenViewModel.isTokenValid(this)){
             authTokenViewModel.updateTokenState(TokenState.STORED)
             Toast.makeText(this, "환영합니다!", Toast.LENGTH_SHORT).show()
-            /*
-            * 1. 유저가 토큰을 갖고 있다면
-            * 2. 해당 토큰으로 GET user 를 한다.
-            * 3. 받아온 정보를 확인하고
-            * 4. 올바른 정보라면 테이블에 정보를 저장한다.
-            * 5. 로그아웃 되면 테이블에서 삭제되도록 하는 것도 구현하기! */
+
             val token = authTokenViewModel.getUserToken(this)
             registerViewModel.getUser(token)
 
@@ -104,6 +110,8 @@ class MainActivity : AppCompatActivity(){
                                 )
                             )
                             Log.d(TAG, "onCreate: 데이터베이스에 유저 정보 저장!")
+                        }else{
+                            Log.d(TAG, "onCreate: 데이터베이스에 이미 있음")
                         }
                     })
                     authTokenViewModel.setUserId(this, userinfo.id)
@@ -111,7 +119,7 @@ class MainActivity : AppCompatActivity(){
             })
         }else{
             authTokenViewModel.updateTokenState(TokenState.REMOVED)
-            val toast = Toast.makeText(this, "토큰없음!", Toast.LENGTH_SHORT)
+            val toast = Toast.makeText(this, "토큰값이 올바르지 않습니다!", Toast.LENGTH_SHORT)
             toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
         }

@@ -9,22 +9,26 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.prography.pethotel.R
 import com.prography.pethotel.api.main.response.HotelReviewData
-import kotlinx.android.synthetic.main.hotel_review_view_holder.view.*
+import kotlinx.android.synthetic.main.my_page_review_view_holder.view.*
+import kotlinx.android.synthetic.main.place_detail_review_view_holder.view.*
+import kotlinx.android.synthetic.main.place_detail_review_view_holder.view.review_created_at
+import kotlinx.android.synthetic.main.place_detail_review_view_holder.view.tv_user_review
+import kotlinx.android.synthetic.main.place_detail_review_view_holder.view.user_rating
 
-class MyReviewAdapter(
+class MyPageReviewAdapter(
     private val context: Context,
     private val hotelReviewList : ArrayList<HotelReviewData>
-) : ListAdapter<HotelReviewData, MyReviewAdapter.MyReviewViewHolder>(
+) : ListAdapter<HotelReviewData, MyPageReviewAdapter.MyReviewViewHolder>(
     MyReviewDiffUtilCallback()
 ){
-
 
     override fun getItemCount(): Int {
         return hotelReviewList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyReviewViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.hotel_review_view_holder, parent, false)
+        val view = LayoutInflater.from(context)
+            .inflate(R.layout.my_page_review_view_holder, parent, false)
         return MyReviewViewHolder(
             view
         )
@@ -45,18 +49,15 @@ class MyReviewAdapter(
 
     }
 
-
     class MyReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(hotelReview : HotelReviewData){
+        fun bind(hotelReviewData : HotelReviewData){
+            itemView.tv_user_review.text = hotelReviewData.content
+            itemView.user_rating.rating = hotelReviewData.rating.toFloat()
 
-            //TODO 호텔 이름이랑 유저 이름 가져오기
-//            itemView.tv_review_hotel_name.text =
-
-//            itemView.tv_review_username.text =
-
-            itemView.tv_review_content.text = hotelReview.content
-
+            val date = hotelReviewData.createdAt.split("T")[0]
+            itemView.review_created_at.text = date
+            itemView.review_hotel_name.text = hotelReviewData.hotelName
         }
     }
 }

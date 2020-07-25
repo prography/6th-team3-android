@@ -62,6 +62,7 @@ class KakaoLoginActivity : AppCompatActivity() {
         loginViewModel.kakaoLoginResponse.observe(this, Observer {
             Log.d(TAG, "onActivityCreated: KAKAO RESPONSE \n$it")
 
+            // TODO: 7/24/2020 카카오 로그인 성공 set token => Main Activity
             if(it.status =="success"){
                 authTokenViewModel.setUserToken(this, it.token)
                 val intent = Intent(this, MainActivity::class.java)
